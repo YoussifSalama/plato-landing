@@ -1,0 +1,243 @@
+You are an expert senior frontend engineer + product designer.
+
+Build a production-quality bilingual marketing website for a recruiting product called "Plato".
+The site’s goal is:
+1) Convert EMPLOYERS to subscribe/book a demo (primary).
+2) Send JOB SEEKERS to sign up and upload their resume (secondary).
+We already have a job seeker portal at: https://applicant.platohiring.com
+We may have an employer portal currently on the root domain (sometimes 502). Build the marketing site in a way that can work whether the employer portal remains on the root or moves to a subdomain later.
+
+TECH + CONSTRAINTS
+- Framework: Next.js (App Router)
+- Styling: TailwindCSS
+- Static hosting compatibility: MUST support static export for AWS S3 + CloudFront.
+  - Avoid server-only dependencies.
+  - Do not require a database for the website to render.
+- Internationalization:
+  - English: default at "/"
+  - Arabic: at "/ar"
+  - Language switcher button in header: "EN / AR"
+  - Arabic pages must be full RTL layout (dir="rtl"), but logo/brand must not be mirrored.
+- Design: Match a clean modern startup look, blue-based palette:
+  - Primary blue: #057ABE
+  - Secondary blue: #689AB9
+  - Light background blue: #E0EEF3
+  - Neutral gray: #AEB9C1
+  - White background: #FFFFFF
+  - Rounded cards, lots of whitespace, subtle shadows, smooth hover states.
+
+DOMAIN / ROUTING ASSUMPTIONS (CONFIGURABLE)
+- Marketing site: platohiring.com (public)
+- Job seeker app: applicant.platohiring.com (existing)
+- Employer app: unknown/stable later. Create configurable env var:
+  - NEXT_PUBLIC_EMPLOYER_APP_URL (default: "https://platohiring.com" for now)
+- Job seeker app url env var:
+  - NEXT_PUBLIC_APPLICANT_APP_URL default: "https://applicant.platohiring.com"
+- Demo booking link (Google Calendar) env var:
+  - NEXT_PUBLIC_DEMO_BOOKING_URL default: "" (empty)
+- Fallback email (until booking link exists) env var:
+  - NEXT_PUBLIC_DEMO_EMAIL_FALLBACK default: "hello@platohiring.com"
+
+PRIMARY CTAs (CONSISTENT ACROSS SITE)
+- Employers: "Hire Talent" (goes to employer flow) + "Book a Demo"
+- Job seekers: "Find Jobs" + "Upload Resume" (goes to applicant portal)
+- Add a header "Login" button that goes to a chooser page.
+
+SITE STRUCTURE (PAGES) — MUST IMPLEMENT
+1) Home: "/" and "/ar"
+2) For Employers: "/employers" and "/ar/employers"
+3) For Job Seekers: "/job-seekers" and "/ar/job-seekers"
+4) How it Works: "/how-it-works" and "/ar/how-it-works"
+5) Blog index: "/blog" and "/ar/blog"
+6) Blog post page: "/blog/[slug]" and "/ar/blog/[slug]"
+   - Blog content stored as Markdown files in repo (no CMS). Use frontmatter for title/date/summary/tags/language.
+7) FAQ: "/faq" and "/ar/faq"
+8) Contact: "/contact" and "/ar/contact"
+   - Contact form fields for employers:
+     - Full name
+     - Work email
+     - Company
+     - Role/Title
+     - Hiring volume (dropdown: 1-5 / 6-20 / 21-50 / 50+)
+     - Message
+   - Store submissions to Supabase (client-side insert with RLS-safe anon insert).
+   - Must work even if Supabase env vars missing: show a friendly message and fall back to mailto.
+9) Security & Privacy: "/security" and "/ar/security"
+   - General statements only; do NOT claim certifications (SOC2/ISO) because we don’t have them.
+10) Legal:
+   - Privacy Policy: "/privacy" and "/ar/privacy"
+   - Terms of Service: "/terms" and "/ar/terms"
+   - Use simple, non-fake, non-claimy placeholder legal text and clearly label it as "Template — replace before launch".
+11) Pricing placeholder:
+   - "/pricing" and "/ar/pricing" with "Coming Soon" but still strong CTA to Book a Demo.
+12) Login chooser:
+   - "/login" and "/ar/login"
+   - Two big buttons:
+     - "Employer Login" -> NEXT_PUBLIC_EMPLOYER_APP_URL (or /employers if unavailable)
+     - "Job Seeker Login" -> NEXT_PUBLIC_APPLICANT_APP_URL
+
+NAVIGATION (BEST PRACTICE)
+Header nav items (in this order):
+- For Employers
+- For Job Seekers
+- How it Works
+- Blog
+- FAQ
+- Contact
+Right side:
+- Login
+- Language switcher (EN/AR)
+- Primary CTA button: "Book a Demo"
+In Arabic, mirror navigation order visually (RTL) but keep brand/logo normal.
+
+FOOTER (BEST PRACTICE)
+Include:
+- © Plato {current year}
+- Links: Privacy, Terms, Security & Privacy, Contact
+- Optional social placeholders: LinkedIn (no URL needed; allow config constants later)
+- Language switcher not required in footer (header only is fine)
+
+HOME PAGE CONTENT (EN) — WRITE REAL COPY, NOT LOREM IPSUM
+Hero:
+- Headline (lead with speed): "Hire faster with end-to-end screening and interview automation."
+- Subheadline: "Plato turns resumes into a shortlist you can trust — with outreach, interviews, and structured reports built in."
+Buttons:
+- Primary: Hire Talent (employer flow)
+- Secondary: Find Jobs (job seeker portal)
+- Tertiary link: Upload Resume (job seeker portal)
+
+Below hero: Trusted by section
+- Show a row/grid of company logos (placeholders).
+- Make the component accept local image files later: /public/logos/*.svg|png
+- For now: use clean placeholder logo blocks with company name text.
+
+Section: “For Employers” (summary)
+- 3 benefit cards (NO unverifiable stats):
+  1) Faster shortlisting: "Go from resumes to a ranked shortlist in hours, not weeks."
+  2) Less HR effort: "Automate the busywork: screening, outreach, reminders, and interview scheduling."
+  3) Better matches: "Structured evaluation and explainable fit signals — not guesswork."
+CTA: "Book a Demo" + "Hire Talent"
+
+Section: “For Job Seekers” (summary)
+- 3 cards:
+  1) "Upload once, apply smarter"
+  2) "Get matched to roles that fit"
+  3) "Stand out with structured interviews"
+CTA: "Upload Resume" (to applicant portal) + "Find Jobs"
+
+Section: How it Works (visual pipeline)
+Employer flow (must match this exact wording order):
+- Resume screening
+- Shortlist top candidates
+- Email / call outreach
+- Automated interview
+- Generate a structured report
+Job seeker flow:
+- Upload resume
+- Create profile
+- Get matched
+- Interview
+- Get shortlisted
+Use a stepper/timeline UI with icons.
+
+Section: Security & Privacy (high trust, general)
+- Bullet points:
+  - "We minimize data collection to what’s needed to deliver the service."
+  - "Access controls and least-privilege practices."
+  - "Encryption in transit (HTTPS)."
+  - "You can request data deletion."
+CTA: "Read Security & Privacy"
+
+Section: Final CTA band
+- Employers: "Ready to hire faster?" -> Book a Demo
+- Job seekers: "Ready to upload your resume?" -> Upload Resume
+
+ARABIC COPY REQUIREMENTS (FUSHA)
+Provide Arabic equivalents for all headings/subheadlines/body copy.
+Arabic must read naturally in Modern Standard Arabic, not slang.
+Keep tone modern and professional.
+Use short sentences.
+
+COMPONENT REQUIREMENTS
+- Create a consistent design system:
+  - Button variants: primary, secondary, ghost
+  - Card component
+  - Section container
+  - Badge / tag
+- Responsive design: mobile-first, looks premium.
+- Micro-interactions: subtle hover, focus rings.
+- Accessibility: semantic HTML, aria labels, keyboard nav, proper contrast.
+- No heavy animation libraries. Keep it light with CSS transitions.
+
+BLOG REQUIREMENTS (MARKDOWN)
+- Store posts under /content/blog/en and /content/blog/ar
+- Each post has frontmatter:
+  - title
+  - date (YYYY-MM-DD)
+  - summary
+  - tags
+  - author (optional)
+- Create at least 3 English sample posts and 2 Arabic sample posts:
+  - English:
+    1) "Plato Product Update: What We’re Building Next"
+    2) "How to Shortlist Candidates Faster Without Compromising Quality"
+    3) "From Resume to Report: A Better Hiring Workflow"
+  - Arabic:
+    1) "تحديثات منتج Plato: ما الذي نبنيه بعد ذلك"
+    2) "كيف تُنشئ قائمة مختصرة للمرشحين بسرعة دون التضحية بالجودة"
+- Blog index should support filtering by tag and searching titles (client-side).
+- Blog post page: clean typography, reading time estimate, share buttons (copy link).
+
+CONTACT FORM STORAGE (SUPABASE) — MUST BE OPTIONAL
+- Use env vars:
+  - NEXT_PUBLIC_SUPABASE_URL
+  - NEXT_PUBLIC_SUPABASE_ANON_KEY
+- Create a minimal Supabase table schema in README:
+  - table: contact_leads
+  - columns: id (uuid), created_at, name, email, company, role, hiring_volume, message, source_page, language
+- In code: if Supabase env vars missing:
+  - Disable submit
+  - Show "Form not configured yet — email us at hello@platohiring.com"
+  - Provide mailto button.
+
+BOOK A DEMO
+- If NEXT_PUBLIC_DEMO_BOOKING_URL exists:
+  - "Book a Demo" opens that link (same tab)
+- If missing:
+  - "Book a Demo" opens mailto to NEXT_PUBLIC_DEMO_EMAIL_FALLBACK with subject "Plato Demo Request"
+
+SEO REQUIREMENTS
+- Per-page meta title/description in both languages.
+- OpenGraph tags
+- JSON-LD Organization schema (basic, no fake claims)
+- Generate sitemap.xml and robots.txt for static export.
+- Clean URLs, canonical links.
+
+BUILD OUTPUT / FILE STRUCTURE
+- Use Next.js App Router with route groups for language:
+  - /app/(en)/...
+  - /app/ar/...
+OR an equivalent clean approach that produces / and /ar.
+- Put shared components in /components
+- Put translations/copy in /lib/i18n or /messages
+- Put constants in /lib/config.ts with env var fallbacks
+- Put blog loader utilities in /lib/blog
+
+DEPLOYMENT README (AWS S3 + CLOUDFRONT)
+Create a README that explains:
+- local dev: npm install, npm run dev
+- static build/export: npm run build && npm run export (or Next.js export-compatible command)
+- upload out/ to S3
+- set CloudFront behavior
+- cache invalidation tips
+Also include notes about adding real logos and replacing legal template text.
+
+QUALITY BAR
+- No placeholder lorem ipsum except where explicitly labeled as template (legal).
+- No fake certification claims.
+- Avoid making up client names; logos should be placeholders unless provided.
+- Code must run without missing imports; keep dependencies minimal.
+- Provide a polished UI that matches the provided blue theme.
+
+DELIVERABLE
+- A complete working Next.js project with all routes, bilingual content, RTL support, blog system, contact form (optional Supabase), SEO assets, and AWS static-export instructions.
