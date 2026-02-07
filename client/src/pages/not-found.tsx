@@ -1,21 +1,29 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { Link } from "wouter";
+import { useI18n } from "@/lib/i18n";
+import { Button } from "@/components/ui/button";
+import Section from "@/components/shared/Section";
+import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
-  return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
-          </div>
+  const { localePath } = useI18n();
 
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
-          </p>
-        </CardContent>
-      </Card>
-    </div>
+  return (
+    <Section className="pt-20 sm:pt-28 lg:pt-32">
+      <div className="max-w-lg mx-auto text-center">
+        <p className="text-6xl font-bold text-[#057ABE] mb-4">404</p>
+        <h1 className="text-2xl font-bold mb-3" data-testid="text-404-title">
+          Page Not Found
+        </h1>
+        <p className="text-muted-foreground mb-8">
+          The page you're looking for doesn't exist or has been moved.
+        </p>
+        <Link href={localePath("/")}>
+          <Button data-testid="button-404-home">
+            <ArrowLeft className="w-4 h-4" />
+            Back to Home
+          </Button>
+        </Link>
+      </div>
+    </Section>
   );
 }
