@@ -35,7 +35,7 @@ export function getLangFromPath(pathname: string): Lang {
 export function I18nProvider({ children }: { children: React.ReactNode }) {
   const [location, setLocation] = useLocation();
   const lang = getLangFromPath(location);
-  const dir = lang === "ar" ? "rtl" : "ltr";
+  const dir: "ltr" | "rtl" = lang === "ar" ? "rtl" : "ltr";
   const t = translations[lang];
 
   const switchLang = useCallback(() => {

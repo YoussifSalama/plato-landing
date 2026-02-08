@@ -1,4 +1,5 @@
 import { useI18n } from "@/lib/i18n";
+import { useSEO } from "@/hooks/useSEO";
 import { config } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,6 +8,7 @@ import { Upload, Scale, Clock, Activity } from "lucide-react";
 
 export default function JobSeekers() {
   const { t } = useI18n();
+  useSEO({ title: t.meta.pages.jobSeekers.title, description: t.meta.pages.jobSeekers.description });
   const p = t.jobSeekersPage;
 
   const features = [

@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { useI18n } from "@/lib/i18n";
+import { useSEO } from "@/hooks/useSEO";
 import { getDemoLink, config } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -39,6 +40,7 @@ const placeholderLogos = [
 
 export default function Home() {
   const { t, localePath } = useI18n();
+  useSEO({ description: t.meta.pages.home.description });
 
   return (
     <>

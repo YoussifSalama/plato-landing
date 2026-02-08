@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { useI18n } from "@/lib/i18n";
+import { config } from "@/lib/config";
 import { SiLinkedin } from "react-icons/si";
 
 export default function Footer() {
@@ -48,14 +49,18 @@ export default function Footer() {
 
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-3">
-              <a
-                href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="LinkedIn"
-                data-testid="link-linkedin"
-              >
-                <SiLinkedin className="w-5 h-5" />
-              </a>
+              {config.linkedinUrl && (
+                <a
+                  href={config.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  aria-label="LinkedIn"
+                  data-testid="link-linkedin"
+                >
+                  <SiLinkedin className="w-5 h-5" />
+                </a>
+              )}
             </div>
           </div>
         </div>

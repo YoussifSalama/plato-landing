@@ -1,4 +1,5 @@
 import { useI18n } from "@/lib/i18n";
+import { useSEO } from "@/hooks/useSEO";
 import { getEmployerLoginUrl, getApplicantLoginUrl } from "@/lib/config";
 import { Card, CardContent } from "@/components/ui/card";
 import Section from "@/components/shared/Section";
@@ -6,6 +7,7 @@ import { Building2, User } from "lucide-react";
 
 export default function Login() {
   const { t } = useI18n();
+  useSEO({ title: t.meta.pages.login.title, description: t.meta.pages.login.description });
   const p = t.loginPage;
 
   return (

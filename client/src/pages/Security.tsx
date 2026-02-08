@@ -1,4 +1,5 @@
 import { useI18n } from "@/lib/i18n";
+import { useSEO } from "@/hooks/useSEO";
 import { Card, CardContent } from "@/components/ui/card";
 import Section from "@/components/shared/Section";
 import { Shield, Lock, UserCheck, Trash2, AlertTriangle, RefreshCw } from "lucide-react";
@@ -7,6 +8,7 @@ const icons = [Shield, Lock, UserCheck, Trash2, AlertTriangle, RefreshCw];
 
 export default function Security() {
   const { t } = useI18n();
+  useSEO({ title: t.meta.pages.security.title, description: t.meta.pages.security.description });
   const p = t.securityPage;
 
   return (

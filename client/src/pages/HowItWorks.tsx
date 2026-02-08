@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
+import { useSEO } from "@/hooks/useSEO";
 import { getDemoLink, config } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import Section from "@/components/shared/Section";
@@ -21,6 +22,7 @@ const seekerIcons = [Upload, UserPlus, UserCheck, Mic, Star];
 
 export default function HowItWorks() {
   const { t } = useI18n();
+  useSEO({ title: t.meta.pages.howItWorks.title, description: t.meta.pages.howItWorks.description });
   const p = t.howItWorksPage;
   const [activeTab, setActiveTab] = useState<"employer" | "seeker">("employer");
 

@@ -1,4 +1,5 @@
 import { useI18n } from "@/lib/i18n";
+import { useSEO } from "@/hooks/useSEO";
 import { getDemoLink, config } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,6 +8,7 @@ import { Sparkles } from "lucide-react";
 
 export default function Pricing() {
   const { t } = useI18n();
+  useSEO({ title: t.meta.pages.pricing.title, description: t.meta.pages.pricing.description });
   const p = t.pricingPage;
 
   return (

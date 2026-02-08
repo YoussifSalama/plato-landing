@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
+import { useSEO } from "@/hooks/useSEO";
 import { config } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,6 +19,7 @@ import { Mail, CheckCircle } from "lucide-react";
 
 export default function Contact() {
   const { t, lang } = useI18n();
+  useSEO({ title: t.meta.pages.contact.title, description: t.meta.pages.contact.description });
   const p = t.contactPage;
   const supabaseConfigured = !!(config.supabaseUrl && config.supabaseAnonKey);
 

@@ -2,6 +2,20 @@ export const en = {
   meta: {
     siteName: "Plato",
     siteTagline: "Hire faster with end-to-end screening and interview automation.",
+    pages: {
+      home: { title: "", description: "Plato automates resume screening, candidate outreach, interviews, and structured reporting. Hire faster and smarter." },
+      employers: { title: "For Employers", description: "Automate your hiring pipeline. Screen resumes, reach out to candidates, conduct structured interviews, and get detailed reports." },
+      jobSeekers: { title: "For Job Seekers", description: "Upload your resume once and get matched to relevant opportunities. Fair, transparent, structured interviews." },
+      howItWorks: { title: "How It Works", description: "See how Plato connects employers with the best candidates through automated screening, outreach, and interviews." },
+      blog: { title: "Blog", description: "Insights on hiring, recruiting, and building better teams from the Plato team." },
+      faq: { title: "FAQ", description: "Frequently asked questions about Plato's hiring automation platform for employers and job seekers." },
+      contact: { title: "Contact Us", description: "Get in touch with the Plato team. We'd love to hear from you." },
+      security: { title: "Security & Privacy", description: "Learn how Plato protects your data with encryption, access controls, and data minimization practices." },
+      privacy: { title: "Privacy Policy", description: "Plato's privacy policy — how we collect, use, and protect your information." },
+      terms: { title: "Terms of Service", description: "Terms of service governing the use of the Plato platform." },
+      pricing: { title: "Pricing", description: "Simple, transparent pricing for teams of all sizes. Book a demo to learn more." },
+      login: { title: "Login", description: "Log in to your Plato account — employers and job seekers." },
+    },
   },
   nav: {
     forEmployers: "For Employers",

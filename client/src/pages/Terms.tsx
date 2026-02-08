@@ -1,9 +1,11 @@
 import { useI18n } from "@/lib/i18n";
+import { useSEO } from "@/hooks/useSEO";
 import { Badge } from "@/components/ui/badge";
 import Section from "@/components/shared/Section";
 
 export default function Terms() {
   const { t } = useI18n();
+  useSEO({ title: t.meta.pages.terms.title, description: t.meta.pages.terms.description });
   const p = t.termsPage;
 
   return (

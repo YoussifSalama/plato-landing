@@ -1,0 +1,123 @@
+You are working inside an existing Next.js (App Router) marketing website project for "Plato".
+The current issue: clicking top navigation items causes the homepage to “switch” and hide everything except the clicked section (tab-like behavior). This is not desired.
+
+GOAL
+Refactor the site so navigation uses real routes (pages) and/or anchor scrolling, without hiding the rest of the homepage. The site must feel production-ready, bilingual (EN + AR), with Arabic full RTL (logo not mirrored), and the codebase must be developer-handoff friendly (README, docs, clear routes, DB schema docs).
+
+REFACTOR NAV (MOST IMPORTANT)
+1) Remove any “activeSection / selectedSection / tab state” logic that conditionally renders only one section.
+2) Implement real routes as pages:
+   - / (Home)
+   - /employers
+   - /job-seekers
+   - /how-it-works
+   - /blog
+   - /faq
+   - /contact
+   - /security
+   - /pricing (Coming Soon)
+   Arabic versions:
+   - /ar (Home)
+   - /ar/employers
+   - /ar/job-seekers
+   - /ar/how-it-works
+   - /ar/blog
+   - /ar/faq
+   - /ar/contact
+   - /ar/security
+   - /ar/pricing
+3) Home page MUST keep all sections visible (Hero + Trusted By + Employers + Job Seekers + How it Works + Security + Final CTA + Footer).
+4) Header navigation links must use Next.js <Link> and change URL properly.
+5) Add active link styling in the header based on current pathname.
+
+LANGUAGE SWITCHER (EN/AR)
+- Keep a header button switcher labeled “EN / AR”.
+- When switching languages, preserve the same page:
+  - /employers -> /ar/employers
+  - /ar/contact -> /contact
+- Arabic pages must use dir="rtl" and proper alignment.
+- Logo and brand remain LTR (not mirrored).
+
+UI POLISH
+- Keep the current clean modern style and blue theme.
+- Make the header sticky with subtle border/shadow.
+- Add a responsive mobile nav (hamburger) that includes all nav items and CTAs.
+- Ensure buttons look consistent:
+  - Primary: blue background (Book a Demo, Hire Talent, Upload Resume)
+  - Secondary: outlined (Find Jobs)
+- Add focus states and accessibility (keyboard nav, aria labels).
+
+CONFIGURATION (ONE SOURCE OF TRUTH)
+Create /lib/config.ts that reads env vars with defaults:
+- NEXT_PUBLIC_EMPLOYER_APP_URL (default: https://platohiring.com)
+- NEXT_PUBLIC_APPLICANT_APP_URL (default: https://applicant.platohiring.com)
+- NEXT_PUBLIC_DEMO_BOOKING_URL (default: "")
+- NEXT_PUBLIC_DEMO_EMAIL_FALLBACK (default: hello@platohiring.com)
+- NEXT_PUBLIC_LINKEDIN_URL (default: "")
+
+Buttons behavior:
+- "Hire Talent" -> EMPLOYER_APP_URL
+- "Find Jobs" + "Upload Resume" -> APPLICANT_APP_URL (direct to signup/upload path if exists, else root)
+- "Book a Demo":
+  - If DEMO_BOOKING_URL exists: open it
+  - Else: mailto DEMO_EMAIL_FALLBACK with subject "Plato Demo Request"
+
+BLOG
+- Keep blog as markdown-based.
+- Ensure /blog and /ar/blog work.
+- Add search + tag filter on blog index.
+- Add a clean post template.
+
+CONTACT FORM (SUPABASE OPTIONAL)
+- Use env vars:
+  - NEXT_PUBLIC_SUPABASE_URL
+  - NEXT_PUBLIC_SUPABASE_ANON_KEY
+- If set, submit form to Supabase table contact_leads.
+- If missing, disable submit and show fallback mailto CTA.
+
+DOCUMENTATION (MAKE HANDOFF EASY)
+Add these files:
+1) README.md
+   - Project overview
+   - Tech stack
+   - How to run locally
+   - Route map (list every route)
+   - Env vars (with .env.example)
+   - How to add blog posts
+   - How to replace placeholder logos with real ones
+   - How to build for static hosting (AWS S3 + CloudFront)
+2) docs/ARCHITECTURE.md
+   - Folder structure explanation
+   - i18n/RTL strategy
+   - Where config lives
+3) docs/DATABASE.md
+   - Supabase schema SQL for contact_leads
+   - RLS policy example that allows anonymous inserts only
+   - How to test inserts
+4) .env.example
+
+DATABASE SCHEMA (PUT IN docs/DATABASE.md)
+Provide SQL like:
+- contact_leads:
+  id uuid primary key default gen_random_uuid()
+  created_at timestamptz default now()
+  name text
+  email text
+  company text
+  role text
+  hiring_volume text
+  message text
+  source_page text
+  language text
+
+Add RLS notes. Do NOT claim certifications on Security page.
+
+SEO
+- Add per-page meta title/description in EN/AR.
+- Add sitemap.xml and robots.txt generation compatible with static export.
+
+ACCEPTANCE CRITERIA
+- Clicking top nav DOES NOT hide other homepage sections.
+- Pages are accessible via URL and back button works.
+- EN/AR switch preserves the same page.
+- Codebase has README + docs + .env.example and is easy for a developer to understand.

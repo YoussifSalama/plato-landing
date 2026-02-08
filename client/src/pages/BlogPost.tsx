@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useParams } from "wouter";
 import { useI18n } from "@/lib/i18n";
 import { getPostBySlug, estimateReadTime } from "@/lib/blog";
+import { useSEO } from "@/hooks/useSEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Section from "@/components/shared/Section";
@@ -94,6 +95,10 @@ export default function BlogPost() {
   const p = t.blogPage;
   const post = getPostBySlug(slug || "", lang);
   const [copied, setCopied] = useState(false);
+  useSEO({
+    title: post ? post.title : "Post Not Found",
+    description: post ? post.summary : undefined,
+  });
 
   if (!post) {
     return (

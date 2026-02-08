@@ -1,4 +1,5 @@
 import { useI18n } from "@/lib/i18n";
+import { useSEO } from "@/hooks/useSEO";
 import Section from "@/components/shared/Section";
 import {
   Accordion,
@@ -9,6 +10,7 @@ import {
 
 export default function FAQ() {
   const { t } = useI18n();
+  useSEO({ title: t.meta.pages.faq.title, description: t.meta.pages.faq.description });
   const p = t.faqPage;
 
   return (

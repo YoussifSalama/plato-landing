@@ -62,9 +62,16 @@ Configurable via Vite env vars (prefixed with `VITE_`):
 - `VITE_APPLICANT_APP_URL` — Job seeker portal URL (default: `https://applicant.platohiring.com`)
 - `VITE_DEMO_BOOKING_URL` — Demo booking link (default: empty, falls back to email)
 - `VITE_DEMO_EMAIL_FALLBACK` — Fallback email (default: `hello@platohiring.com`)
+- `VITE_LINKEDIN_URL` — LinkedIn company page URL (shown in footer when set)
 - `VITE_SUPABASE_URL` — Supabase URL for contact form submissions
 - `VITE_SUPABASE_ANON_KEY` — Supabase anonymous key
 - `DATABASE_URL` — PostgreSQL connection string for Drizzle
+
+### SEO
+- Per-page `document.title` and `<meta name="description">` via `useSEO` hook
+- Translation keys for page meta in `t.meta.pages.*`
+- Server-generated `/sitemap.xml` with hreflang alternates for EN/AR
+- Server-generated `/robots.txt` pointing to sitemap
 
 ### Design System
 - Blue-based color palette: Primary `#057ABE`, Secondary `#689AB9`, Light background `#E0EEF3`
@@ -82,3 +89,9 @@ Configurable via Vite env vars (prefixed with `VITE_`):
 - **TanStack React Query**: Server state management
 - **Lucide React + React Icons**: Icon libraries
 - **Replit plugins**: Dev-only Vite plugins for error overlay, cartographer, and dev banner
+
+## Documentation
+- `README.md` — Project overview, quick start, route map, env vars, how to add blog posts
+- `docs/ARCHITECTURE.md` — Folder structure, i18n/RTL strategy, config location
+- `docs/DATABASE.md` — Supabase contact_leads schema SQL, RLS policies, testing
+- `.env.example` — All configurable environment variables with defaults

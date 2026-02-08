@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { useI18n } from "@/lib/i18n";
+import { useSEO } from "@/hooks/useSEO";
 import { getAllPosts, getAllTags, estimateReadTime } from "@/lib/blog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,6 +12,7 @@ import { Search, Calendar, Clock } from "lucide-react";
 
 export default function Blog() {
   const { t, lang, localePath } = useI18n();
+  useSEO({ title: t.meta.pages.blog.title, description: t.meta.pages.blog.description });
   const p = t.blogPage;
   const allPosts = getAllPosts(lang);
   const allTags = getAllTags(lang);

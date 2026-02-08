@@ -1,4 +1,5 @@
 import { useI18n } from "@/lib/i18n";
+import { useSEO } from "@/hooks/useSEO";
 import { getDemoLink, config } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,6 +8,7 @@ import { FileSearch, CalendarCheck, MessageSquare, BarChart3 } from "lucide-reac
 
 export default function Employers() {
   const { t } = useI18n();
+  useSEO({ title: t.meta.pages.employers.title, description: t.meta.pages.employers.description });
   const p = t.employersPage;
 
   const features = [

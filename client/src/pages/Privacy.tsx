@@ -1,9 +1,11 @@
 import { useI18n } from "@/lib/i18n";
+import { useSEO } from "@/hooks/useSEO";
 import { Badge } from "@/components/ui/badge";
 import Section from "@/components/shared/Section";
 
 export default function Privacy() {
   const { t } = useI18n();
+  useSEO({ title: t.meta.pages.privacy.title, description: t.meta.pages.privacy.description });
   const p = t.privacyPage;
 
   return (
