@@ -31,13 +31,38 @@ import {
   HelpCircle,
 } from "lucide-react";
 
-const placeholderLogos = [
-  "TechVentures",
-  "GrowthCo",
-  "AlphaHR",
-  "NovaTalent",
-  "PeakHire",
-  "SwiftTeam",
+import logoAccentia from "@/assets/logos/accentia.png";
+import logoImplex from "@/assets/logos/implex.png";
+import logoAicansell from "@/assets/logos/aicansell.png";
+import logoIaugmentor from "@/assets/logos/iaugmentor.png";
+import logoSkillcreds from "@/assets/logos/skillcreds.png";
+import logoNeuroespitalia from "@/assets/logos/neuroespitalia.png";
+import logoPolygonPharma from "@/assets/logos/polygon-pharma.png";
+import logoGrove from "@/assets/logos/grove.png";
+import logoMelanite from "@/assets/logos/melanite.png";
+import logoBenchmark from "@/assets/logos/benchmark.png";
+import logoQuanta from "@/assets/logos/quanta.png";
+import logoEslsca from "@/assets/logos/eslsca.png";
+import logoMisrCement from "@/assets/logos/misr-cement.png";
+import logoVenezia from "@/assets/logos/venezia.png";
+import logoIkon from "@/assets/logos/ikon.png";
+
+const clientLogos = [
+  { src: logoAccentia, alt: "Accentia Middle East" },
+  { src: logoImplex, alt: "Implex" },
+  { src: logoAicansell, alt: "AiCanSell" },
+  { src: logoIaugmentor, alt: "iAugmentor" },
+  { src: logoSkillcreds, alt: "SkillCreds" },
+  { src: logoNeuroespitalia, alt: "NeuroEspitalia" },
+  { src: logoPolygonPharma, alt: "Polygon Pharma" },
+  { src: logoGrove, alt: "Grove" },
+  { src: logoMelanite, alt: "Melanite" },
+  { src: logoBenchmark, alt: "Benchmark Engineering" },
+  { src: logoQuanta, alt: "Quanta" },
+  { src: logoEslsca, alt: "ESLSCA University" },
+  { src: logoMisrCement, alt: "Misr Beni Suef Cement" },
+  { src: logoVenezia, alt: "Ceramica Venezia" },
+  { src: logoIkon, alt: "Ikon Industries" },
 ];
 
 export default function Home() {
@@ -82,19 +107,19 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section bg="light" className="py-10 sm:py-12">
-        <p className="text-center text-sm font-medium text-muted-foreground mb-8" data-testid="text-trusted-by">
+      <Section bg="light" className="py-10 sm:py-14">
+        <p className="text-center text-sm font-medium text-muted-foreground mb-10" data-testid="text-trusted-by">
           {t.trustedBy.title}
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12">
-          {placeholderLogos.map((name) => (
-            <div
-              key={name}
-              className="px-4 py-2 text-sm font-semibold text-muted-foreground/50 tracking-wide uppercase select-none"
-              data-testid={`logo-${name.toLowerCase()}`}
-            >
-              {name}
-            </div>
+        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-10 md:gap-12">
+          {clientLogos.map((logo) => (
+            <img
+              key={logo.alt}
+              src={logo.src}
+              alt={logo.alt}
+              className="h-8 sm:h-10 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
+              data-testid={`logo-${logo.alt.toLowerCase().replace(/\s+/g, "-")}`}
+            />
           ))}
         </div>
       </Section>
