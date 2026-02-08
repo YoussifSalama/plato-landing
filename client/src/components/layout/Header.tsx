@@ -5,7 +5,7 @@ import { getDemoLink } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import SmartHashLink from "@/components/shared/SmartHashLink";
 import { Menu, X } from "lucide-react";
-import platoLogo from "@assets/image_1770549516838.png";
+import platoLogo from "@/assets/plato-logo.png";
 
 type NavItem =
   | { label: string; path: string; type: "route" }
@@ -76,8 +76,8 @@ export default function Header() {
             <img
               src={platoLogo}
               alt="Plato"
-              className="h-8 dark:brightness-[1.15]"
-              style={{ direction: "ltr", mixBlendMode: "multiply" }}
+              className="h-8"
+              style={{ direction: "ltr" }}
               data-testid="img-logo"
             />
           </Link>
