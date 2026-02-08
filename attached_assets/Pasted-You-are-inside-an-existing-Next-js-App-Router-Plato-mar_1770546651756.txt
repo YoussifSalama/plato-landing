@@ -1,0 +1,70 @@
+You are inside an existing Next.js (App Router) Plato marketing website.
+
+PROBLEM
+Top header buttons behave like tabs: clicking them hides the rest of the homepage and only shows the selected section. This is caused by state-based conditional rendering (activeTab/selectedSection). This must be removed.
+
+GOAL
+- The homepage must NEVER hide other sections.
+- Header buttons should smooth-scroll to homepage sections using URL hashes (/#employers, /#job-seekers, etc.).
+- Keep separate full pages as real routes for SEO (/employers, /job-seekers, /how-it-works, /security, etc.).
+- Add smooth transitions:
+  1) smooth scroll for section navigation
+  2) subtle fade-in on page navigation
+
+TASK 1 — REMOVE TAB LOGIC COMPLETELY
+- Search the codebase for:
+  - activeTab, selectedTab, activeSection, setActiveTab, setSelectedSection, tab, sectionState, etc.
+- Remove ALL logic that conditionally renders only one section of the homepage.
+- The Home page must render ALL sections in order:
+  Hero -> Trusted By -> Employers -> Job Seekers -> How it Works -> Security & Privacy -> Final CTA -> Footer
+
+TASK 2 — SECTION ANCHORS + SMOOTH SCROLL
+- Add ids to the homepage sections:
+  - Employers section: id="employers"
+  - Job seekers section: id="job-seekers"
+  - How it works section: id="how-it-works"
+  - Security section: id="security"
+- Update header links so these items link to hashes:
+  - For Employers -> "/#employers"
+  - For Job Seekers -> "/#job-seekers"
+  - How it Works -> "/#how-it-works"
+  - (Optional) Security -> "/#security"
+- Blog, FAQ, Contact should remain real routes: /blog, /faq, /contact
+
+TASK 3 — MAKE HASH LINKS WORK EVEN WHEN YOU’RE NOT ON HOME
+- Create a small client component <SmartHashLink href="/#employers"> that:
+  - If user is already on "/" (or "/ar"), it calls scrollIntoView({behavior:"smooth"}) and updates the URL hash.
+  - If user is on another page, it navigates to "/" (or "/ar") with the hash, and on mount it auto-scrolls to that section smoothly.
+- Also support Arabic home: "/ar#employers" (Arabic page should have the same ids on /ar)
+
+TASK 4 — FIX STICKY HEADER OFFSET
+- If you have a sticky header, add scroll margin so sections don’t hide under it:
+  - In globals.css:
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    section[id] { scroll-margin-top: 96px; }  // adjust to header height
+
+TASK 5 — SMOOTH PAGE TRANSITION (SUBTLE FADE)
+- Add a lightweight fade-in transition on route changes:
+  - Create a client wrapper component PageTransition that uses usePathname() and wraps children in a div with a CSS animation.
+  - Key the wrapper by pathname so it re-mounts on navigation.
+  - Add CSS:
+    @keyframes pageFade { from { opacity: 0; transform: translateY(4px);} to {opacity: 1; transform: translateY(0);} }
+    .page-fade { animation: pageFade 220ms ease-out; }
+    @media (prefers-reduced-motion: reduce) { .page-fade { animation: none; } }
+- Apply PageTransition in the main layout around the page content.
+
+TASK 6 — CLEAN HANDOFF FOR DEVELOPERS
+- Add/Update:
+  - README.md with: route map, i18n strategy, how section anchors work, env vars, blog adding instructions, build/export steps.
+  - .env.example
+  - docs/ARCHITECTURE.md (folder structure + routing + components)
+  - docs/DATABASE.md (Supabase contact schema + RLS notes) if you already have the contact form.
+
+ACCEPTANCE TEST
+- Clicking header nav DOES NOT remove any sections.
+- Header nav smoothly scrolls to the section.
+- URL updates with hash (#employers).
+- Back button works.
+- Switching pages has a subtle fade-in.
+- Respects prefers-reduced-motion.

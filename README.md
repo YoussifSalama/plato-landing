@@ -66,6 +66,21 @@ Additional server routes:
 - `/robots.txt` — Crawl directives
 - `/sitemap.xml` — XML sitemap with hreflang alternates
 
+## Section Anchors (Smooth Scroll)
+
+The header navigation for "For Employers", "For Job Seekers", and "How it Works" uses hash-based links that smooth-scroll to the corresponding section on the homepage:
+
+| Link | Target |
+|------|--------|
+| `/#employers` | Employers section on homepage |
+| `/#job-seekers` | Job seekers section on homepage |
+| `/#how-it-works` | How it works section on homepage |
+| `/#security` | Security section on homepage |
+
+These links work from any page — if you're not on the homepage, clicking them navigates home first, then scrolls to the section. The `SmartHashLink` component (`client/src/components/shared/SmartHashLink.tsx`) handles this logic.
+
+A `scroll-margin-top` of 80px is applied to all sections with IDs to account for the sticky header. Page transitions use a subtle 220ms fade-in animation that respects `prefers-reduced-motion`.
+
 ## How to Add Blog Posts
 
 Blog posts are stored as in-memory TypeScript objects in:

@@ -73,6 +73,13 @@ Configurable via Vite env vars (prefixed with `VITE_`):
 - Server-generated `/sitemap.xml` with hreflang alternates for EN/AR
 - Server-generated `/robots.txt` pointing to sitemap
 
+### Navigation & Transitions
+- Header nav for "For Employers", "For Job Seekers", "How it Works" uses hash links (`/#employers`, `/#job-seekers`, `/#how-it-works`) that smooth-scroll to homepage sections
+- `SmartHashLink` component handles cross-page hash navigation (navigates to home first if needed, then scrolls)
+- Blog, FAQ, Contact remain real routes (`/blog`, `/faq`, `/contact`)
+- `PageTransition` wrapper adds a subtle 220ms fade-in on route changes (respects `prefers-reduced-motion`)
+- `scroll-margin-top: 80px` applied to sections with IDs to offset sticky header
+
 ### Design System
 - Blue-based color palette: Primary `#057ABE`, Secondary `#689AB9`, Light background `#E0EEF3`
 - CSS variables for all colors defined in `client/src/index.css`

@@ -96,7 +96,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section>
+      <Section id="employers">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold" data-testid="text-employer-section-title">
             {t.employerSection.title}
@@ -130,7 +130,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section bg="light">
+      <Section bg="light" id="job-seekers">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold" data-testid="text-seeker-section-title">
             {t.jobSeekerSection.title}
@@ -164,7 +164,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section>
+      <Section id="how-it-works">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold" data-testid="text-hiw-section-title">
             {t.howItWorksSection.title}
@@ -233,7 +233,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section bg="light">
+      <Section bg="light" id="security">
         <div className="text-center mb-10">
           <h2 className="text-3xl sm:text-4xl font-bold" data-testid="text-security-section-title">
             {t.securitySection.title}

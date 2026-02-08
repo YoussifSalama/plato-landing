@@ -1,27 +1,67 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation } from "wouter";
 import { useI18n } from "@/lib/i18n";
 import { getDemoLink } from "@/lib/config";
 import { Button } from "@/components/ui/button";
+import SmartHashLink from "@/components/shared/SmartHashLink";
 import { Menu, X } from "lucide-react";
+
+type NavItem =
+  | { label: string; path: string; type: "route" }
+  | { label: string; hash: string; type: "hash" };
 
 export default function Header() {
   const { t, lang, dir, switchLang, localePath } = useI18n();
   const [location] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeHash, setActiveHash] = useState("");
 
-  const navItems = [
-    { label: t.nav.forEmployers, path: "/employers" },
-    { label: t.nav.forJobSeekers, path: "/job-seekers" },
-    { label: t.nav.howItWorks, path: "/how-it-works" },
-    { label: t.nav.blog, path: "/blog" },
-    { label: t.nav.faq, path: "/faq" },
-    { label: t.nav.contact, path: "/contact" },
+  const navItems: NavItem[] = [
+    { label: t.nav.forEmployers, hash: "employers", type: "hash" },
+    { label: t.nav.forJobSeekers, hash: "job-seekers", type: "hash" },
+    { label: t.nav.howItWorks, hash: "how-it-works", type: "hash" },
+    { label: t.nav.blog, path: "/blog", type: "route" },
+    { label: t.nav.faq, path: "/faq", type: "route" },
+    { label: t.nav.contact, path: "/contact", type: "route" },
   ];
 
   const isActive = (path: string) => {
     const full = localePath(path);
     return location === full;
+  };
+
+  const isHome = location === "/" || location === "/ar";
+
+  const updateActiveHash = useCallback(() => {
+    setActiveHash(window.location.hash.slice(1));
+  }, []);
+
+  useEffect(() => {
+    updateActiveHash();
+    window.addEventListener("hashchange", updateActiveHash);
+    return () => window.removeEventListener("hashchange", updateActiveHash);
+  }, [updateActiveHash]);
+
+  useEffect(() => {
+    if (!isHome) {
+      setActiveHash("");
+    }
+  }, [location, isHome]);
+
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 150);
+    }
+  }, [location]);
+
+  const isHashActive = (hash: string) => {
+    return isHome && activeHash === hash;
   };
 
   return (
@@ -45,20 +85,38 @@ export default function Header() {
             className="hidden lg:flex items-center gap-1"
             aria-label="Main navigation"
           >
-            {navItems.map((item) => (
-              <Link key={item.path} href={localePath(item.path)}>
-                <span
-                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${
-                    isActive(item.path)
-                      ? "text-[#057ABE] bg-[#E0EEF3] dark:bg-[#057ABE]/10"
-                      : "text-foreground/70 hover:text-foreground hover:bg-muted"
-                  }`}
-                  data-testid={`link-nav-${item.path.slice(1)}`}
-                >
-                  {item.label}
-                </span>
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              if (item.type === "hash") {
+                return (
+                  <SmartHashLink
+                    key={item.hash}
+                    hash={item.hash}
+                    className={`px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${
+                      isHashActive(item.hash)
+                        ? "text-[#057ABE] bg-[#E0EEF3] dark:bg-[#057ABE]/10"
+                        : "text-foreground/70 hover:text-foreground hover:bg-muted"
+                    }`}
+                    data-testid={`link-nav-${item.hash}`}
+                  >
+                    {item.label}
+                  </SmartHashLink>
+                );
+              }
+              return (
+                <Link key={item.path} href={localePath(item.path)}>
+                  <span
+                    className={`px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${
+                      isActive(item.path)
+                        ? "text-[#057ABE] bg-[#E0EEF3] dark:bg-[#057ABE]/10"
+                        : "text-foreground/70 hover:text-foreground hover:bg-muted"
+                    }`}
+                    data-testid={`link-nav-${item.path.slice(1)}`}
+                  >
+                    {item.label}
+                  </span>
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="hidden lg:flex items-center gap-2">
@@ -94,20 +152,38 @@ export default function Header() {
       {mobileOpen && (
         <div className="lg:hidden border-t border-border bg-background" dir={dir}>
           <div className="px-4 py-4 space-y-1">
-            {navItems.map((item) => (
-              <Link key={item.path} href={localePath(item.path)}>
-                <span
-                  onClick={() => setMobileOpen(false)}
-                  className={`block px-3 py-2 text-sm font-medium rounded-md cursor-pointer ${
-                    isActive(item.path)
-                      ? "text-[#057ABE] bg-[#E0EEF3] dark:bg-[#057ABE]/10"
-                      : "text-foreground/70 hover:text-foreground hover:bg-muted"
-                  }`}
-                >
-                  {item.label}
-                </span>
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              if (item.type === "hash") {
+                return (
+                  <SmartHashLink
+                    key={item.hash}
+                    hash={item.hash}
+                    onClick={() => setMobileOpen(false)}
+                    className={`block px-3 py-2 text-sm font-medium rounded-md cursor-pointer ${
+                      isHashActive(item.hash)
+                        ? "text-[#057ABE] bg-[#E0EEF3] dark:bg-[#057ABE]/10"
+                        : "text-foreground/70 hover:text-foreground hover:bg-muted"
+                    }`}
+                  >
+                    {item.label}
+                  </SmartHashLink>
+                );
+              }
+              return (
+                <Link key={item.path} href={localePath(item.path)}>
+                  <span
+                    onClick={() => setMobileOpen(false)}
+                    className={`block px-3 py-2 text-sm font-medium rounded-md cursor-pointer ${
+                      isActive(item.path)
+                        ? "text-[#057ABE] bg-[#E0EEF3] dark:bg-[#057ABE]/10"
+                        : "text-foreground/70 hover:text-foreground hover:bg-muted"
+                    }`}
+                  >
+                    {item.label}
+                  </span>
+                </Link>
+              );
+            })}
             <div className="pt-3 border-t border-border flex flex-col gap-2">
               <Link href={localePath("/login")}>
                 <Button
