@@ -117,7 +117,7 @@ export default function Home() {
               key={logo.alt}
               src={logo.src}
               alt={logo.alt}
-              className="h-8 sm:h-10 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
+              className="h-8 sm:h-10 w-auto object-contain"
               data-testid={`logo-${logo.alt.toLowerCase().replace(/\s+/g, "-")}`}
             />
           ))}
