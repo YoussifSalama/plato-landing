@@ -22,8 +22,8 @@ export default function Footer() {
             <img
               src={platoLogo}
               alt="Plato"
-              className="h-8"
-              style={{ direction: "ltr" }}
+              className="h-8 dark:brightness-[1.15]"
+              style={{ direction: "ltr", mixBlendMode: "multiply" }}
               data-testid="img-footer-logo"
             />
             <p className="mt-2 text-sm text-muted-foreground">

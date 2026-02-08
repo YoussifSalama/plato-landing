@@ -76,8 +76,8 @@ export default function Header() {
             <img
               src={platoLogo}
               alt="Plato"
-              className="h-8"
-              style={{ direction: "ltr" }}
+              className="h-8 dark:brightness-[1.15]"
+              style={{ direction: "ltr", mixBlendMode: "multiply" }}
               data-testid="img-logo"
             />
           </Link>
