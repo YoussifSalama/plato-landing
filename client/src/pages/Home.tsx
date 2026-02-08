@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { useI18n } from "@/lib/i18n";
 import { useSEO } from "@/hooks/useSEO";
 import { getDemoLink, config } from "@/lib/config";
+import { getAllPosts, estimateReadTime } from "@/lib/blog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Section from "@/components/shared/Section";
@@ -27,6 +28,7 @@ import {
   Eye,
   Trash2,
   ArrowRight,
+  HelpCircle,
 } from "lucide-react";
 
 const placeholderLogos = [
@@ -39,8 +41,9 @@ const placeholderLogos = [
 ];
 
 export default function Home() {
-  const { t, localePath } = useI18n();
+  const { t, lang, localePath } = useI18n();
   useSEO({ description: t.meta.pages.home.description });
+  const recentPosts = getAllPosts(lang).slice(0, 3);
 
   return (
     <>
@@ -261,6 +264,80 @@ export default function Home() {
               </Button>
             </Link>
           </div>
+        </div>
+      </Section>
+
+      {recentPosts.length > 0 && (
+        <Section>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold" data-testid="text-blog-preview-title">
+              {t.blogPreview.title}
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {recentPosts.map((post) => (
+              <Link key={post.slug} href={localePath(`/blog/${post.slug}`)}>
+                <Card className="hover-elevate overflow-visible h-full cursor-pointer">
+                  <CardContent className="p-6">
+                    <p className="text-xs text-muted-foreground mb-2">
+                      {post.date} &middot; {estimateReadTime(post.content)} {t.blogPage.minRead}
+                    </p>
+                    <h3 className="text-lg font-semibold mb-2 line-clamp-2" data-testid={`text-blog-preview-${post.slug}`}>
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground line-clamp-3">{post.summary}</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Link href={localePath("/blog")}>
+              <Button variant="outline" data-testid="button-blog-preview-cta">
+                {t.blogPreview.cta}
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
+        </Section>
+      )}
+
+      <Section bg="light">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl sm:text-4xl font-bold" data-testid="text-faq-preview-title">
+            {t.faqPreview.title}
+          </h2>
+        </div>
+        <div className="max-w-2xl mx-auto space-y-4">
+          {t.faqPage.items.slice(0, 5).map((item, i) => (
+            <div key={i} className="flex items-start gap-3">
+              <HelpCircle className="w-5 h-5 text-[#057ABE] flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-medium text-sm" data-testid={`text-faq-preview-q-${i}`}>{item.q}</p>
+                <p className="text-sm text-muted-foreground mt-1">{item.a}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-10 text-center">
+          <Link href={localePath("/faq")}>
+            <Button variant="outline" data-testid="button-faq-preview-cta">
+              {t.faqPreview.cta}
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          </Link>
+        </div>
+      </Section>
+
+      <Section>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+          <p className="text-lg font-medium" data-testid="text-contact-cta">{t.contactCta.text}</p>
+          <Link href={localePath("/contact")}>
+            <Button data-testid="button-contact-cta">
+              <Mail className="w-4 h-4" />
+              {t.contactCta.cta}
+            </Button>
+          </Link>
         </div>
       </Section>
 

@@ -92,6 +92,18 @@ export const en = {
     point4: "You can request data deletion.",
     readMore: "Read Security & Privacy",
   },
+  blogPreview: {
+    title: "Latest from the Blog",
+    cta: "Read the Blog",
+  },
+  faqPreview: {
+    title: "Common Questions",
+    cta: "View All FAQs",
+  },
+  contactCta: {
+    text: "Have questions or want to learn more?",
+    cta: "Contact Us",
+  },
   finalCta: {
     employerHeadline: "Ready to hire faster?",
     employerCta: "Book a Demo",

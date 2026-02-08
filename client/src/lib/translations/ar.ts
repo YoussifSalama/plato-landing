@@ -94,6 +94,18 @@ export const ar: typeof en = {
     point4: "يمكنك طلب حذف بياناتك.",
     readMore: "اقرأ عن الأمان والخصوصية",
   },
+  blogPreview: {
+    title: "آخر المقالات",
+    cta: "اقرأ المدونة",
+  },
+  faqPreview: {
+    title: "أسئلة شائعة",
+    cta: "عرض جميع الأسئلة",
+  },
+  contactCta: {
+    text: "لديك أسئلة أو تريد معرفة المزيد؟",
+    cta: "تواصل معنا",
+  },
   finalCta: {
     employerHeadline: "هل أنت مستعد للتوظيف بشكل أسرع؟",
     employerCta: "احجز عرضاً تجريبياً",

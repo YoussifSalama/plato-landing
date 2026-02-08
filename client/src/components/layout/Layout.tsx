@@ -2,6 +2,7 @@ import { useI18n } from "@/lib/i18n";
 import Header from "./Header";
 import Footer from "./Footer";
 import PageTransition from "@/components/shared/PageTransition";
+import ScrollManager from "@/components/shared/ScrollManager";
 import { useEffect } from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -14,6 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen flex flex-col" dir={dir}>
+      <ScrollManager />
       <Header />
       <main className="flex-1">
         <PageTransition>{children}</PageTransition>

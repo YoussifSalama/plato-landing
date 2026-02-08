@@ -1,0 +1,215 @@
+You are a senior Next.js engineer and product designer. You are working inside my existing Next.js (App Router) Plato marketing site repo.
+
+CURRENT PROBLEM
+Some navigation still feels like “tabs” / hard switches. I want the site to behave like a real marketing website:
+- Home sections should smoothly scroll (without hiding other sections)
+- Blog/FAQ/Contact should be real routes (separate pages)
+- Route changes should have smooth, subtle transitions (fade + slight movement)
+- The codebase must be clean, understandable, and documented for a developer handoff (routes, config, DB schema, README, etc.)
+
+GOALS (WHAT “DONE” MEANS)
+1) No tab-like conditional rendering that hides parts of the homepage.
+2) Smooth scrolling for homepage section navigation.
+3) Smooth transitions between pages (Blog/FAQ/Contact/etc.).
+4) Bilingual: English + Arabic (Fusha). Arabic pages are full RTL (dir="rtl") but logo/brand stays normal.
+5) Clear configuration: all URLs and env vars in one place.
+6) Clear documentation: README + docs with routes, architecture, and database schema.
+7) Production polish: mobile nav, active nav states, SEO basics, accessibility, and clean components.
+
+--------------------------------------------
+PART A — ROUTING + NAVIGATION (REMOVE “TABS”)
+--------------------------------------------
+1) Search the codebase and REMOVE any state-based “tabs” logic:
+   - activeTab, selectedTab, activeSection, setActive..., showSection, etc.
+   - Remove any conditional rendering where only one section/page is displayed based on nav state.
+   - Navigation must be based on Next.js routing (<Link>) and URL hashes.
+
+2) Define navigation behavior:
+   A) On HOME page:
+      - "For Employers" => "/#employers"
+      - "For Job Seekers" => "/#job-seekers"
+      - "How it Works" => "/#how-it-works"
+      - (Optional) "Security" => "/#security"
+      These must smooth-scroll and must NOT hide any other homepage sections.
+   B) Real routes:
+      - Blog => "/blog"
+      - FAQ => "/faq"
+      - Contact => "/contact"
+      These are separate pages and should navigate normally (URL changes, back button works).
+
+3) Make hash links work from ANY page:
+   - Implement a client component SmartHashLink:
+     - If already on "/" (or "/ar"), scrollIntoView({behavior:"smooth"}) and update hash.
+     - If on another route, navigate to "/" (or "/ar") with the hash and then scroll smoothly after mount.
+
+4) Add ids to homepage sections (English and Arabic home):
+   - Employers section: id="employers"
+   - Job seekers section: id="job-seekers"
+   - How it works section: id="how-it-works"
+   - Security section: id="security"
+
+5) Add sticky-header scroll offset:
+   - In globals.css add:
+     html { scroll-behavior: smooth; }
+     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+     section[id] { scroll-margin-top: 96px; }  // adjust to header height
+
+--------------------------------------------
+PART B — SMOOTH PAGE TRANSITIONS (BEST PRACTICE)
+--------------------------------------------
+Implement subtle page transitions for route changes:
+1) Create components/PageTransition.tsx (client component)
+   - Use usePathname()
+   - Wrap children in a div keyed by pathname
+   - Apply className "page-fade" for animation
+2) Add CSS in globals.css:
+   @keyframes pageFade {
+     from { opacity: 0; transform: translateY(6px); }
+     to { opacity: 1; transform: translateY(0); }
+   }
+   .page-fade { animation: pageFade 240ms ease-out; }
+   @media (prefers-reduced-motion: reduce) { .page-fade { animation: none; } }
+3) Add components/ScrollManager.tsx (client component)
+   - On pathname change:
+     - If URL has no hash: scroll to top (smooth if allowed)
+     - If hash exists: do nothing (hash logic handles scrolling)
+4) Use PageTransition + ScrollManager in the root layout so all pages benefit.
+
+--------------------------------------------
+PART C — BILINGUAL EN/AR + RTL (CLEAN IMPLEMENTATION)
+--------------------------------------------
+1) English routes:
+   /, /blog, /faq, /contact, /employers, /job-seekers, /how-it-works, /security, /pricing
+2) Arabic routes:
+   /ar, /ar/blog, /ar/faq, /ar/contact, /ar/employers, /ar/job-seekers, /ar/how-it-works, /ar/security, /ar/pricing
+3) Arabic pages must be true RTL:
+   - Set dir="rtl" and appropriate text alignment
+   - DO NOT mirror the logo or brand name
+4) Language switcher in header:
+   - Labels: EN / AR
+   - When switching, preserve the same page:
+     /blog <-> /ar/blog
+     /contact <-> /ar/contact
+     / <-> /ar
+     /employers <-> /ar/employers
+   - Implement a helper that maps current path to the other language path.
+
+--------------------------------------------
+PART D — HOMEPAGE SHOULD FEEL “COMPLETE”
+--------------------------------------------
+Keep Blog/FAQ/Contact as routes, but add homepage previews (BEST PRACTICE):
+1) Add “Latest from the Blog” section on Home:
+   - Show 3 newest posts
+   - CTA: “Read the Blog” -> /blog
+2) Add “FAQ Preview” section on Home:
+   - Show 4–6 questions
+   - CTA: “View all FAQs” -> /faq
+3) Add “Contact CTA strip”:
+   - One line + button “Contact Us” -> /contact
+These previews should exist on both English and Arabic home.
+
+--------------------------------------------
+PART E — CONFIGURATION (ONE SOURCE OF TRUTH)
+--------------------------------------------
+Create /lib/config.ts and put all external URLs + env fallbacks there:
+
+- NEXT_PUBLIC_EMPLOYER_APP_URL (default: "https://platohiring.com")
+- NEXT_PUBLIC_APPLICANT_APP_URL (default: "https://applicant.platohiring.com")
+- NEXT_PUBLIC_DEMO_BOOKING_URL (default: "")
+- NEXT_PUBLIC_DEMO_EMAIL_FALLBACK (default: "hello@platohiring.com")
+- NEXT_PUBLIC_LINKEDIN_URL (default: "")
+
+Behavior:
+- "Hire Talent" => EMPLOYER_APP_URL
+- "Find Jobs" + "Upload Resume" => APPLICANT_APP_URL
+- "Book a Demo":
+  - if DEMO_BOOKING_URL exists => open it
+  - else => mailto DEMO_EMAIL_FALLBACK with subject "Plato Demo Request"
+
+--------------------------------------------
+PART F — CONTACT FORM (OPTIONAL SUPABASE, WITH FALLBACK)
+--------------------------------------------
+If Supabase env vars exist, submit contact leads to Supabase; otherwise show mailto fallback:
+- NEXT_PUBLIC_SUPABASE_URL
+- NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+Form fields:
+- name, work email, company, role/title, hiring volume dropdown, message
+
+If not configured:
+- Show message “Form not configured yet — email us at hello@platohiring.com”
+- Provide Email Us button.
+
+--------------------------------------------
+PART G — POLISH / QUALITY / ACCESSIBILITY
+--------------------------------------------
+1) Make header sticky and responsive:
+   - Desktop: inline nav
+   - Mobile: hamburger menu with the same links + CTAs
+2) Active nav styling:
+   - Must be derived from pathname and/or hash, not local state tabs.
+3) Add 404 page and basic error boundary.
+4) Ensure buttons and cards are consistent (same padding, radius, hover/focus).
+5) Accessibility:
+   - keyboard navigation
+   - focus rings
+   - aria labels for icons and mobile menu
+   - respect prefers-reduced-motion
+
+--------------------------------------------
+PART H — SEO BASICS (DO NOT OVERCLAIM)
+--------------------------------------------
+1) Add unique meta title + description for key pages in both languages.
+2) OpenGraph tags (basic).
+3) robots.txt and sitemap.xml (static-friendly).
+4) Do NOT claim certifications on Security page.
+
+--------------------------------------------
+PART I — DEVELOPER HANDOFF DOCUMENTATION
+--------------------------------------------
+Create these files (MUST be clear and practical):
+
+1) README.md
+   - What this repo is
+   - Tech stack
+   - How to run locally (npm install, npm run dev)
+   - Route map (list every route EN + AR)
+   - Config / env vars (point to .env.example)
+   - How to add blog posts (markdown frontmatter format)
+   - How hash navigation works (SmartHashLink)
+   - How to deploy (static export for AWS S3 + CloudFront) + notes
+
+2) .env.example
+   - Include all env vars with placeholder values.
+
+3) docs/ARCHITECTURE.md
+   - Folder structure
+   - i18n + RTL approach
+   - Where config is stored
+   - Key reusable components
+
+4) docs/DATABASE.md
+   - Supabase schema SQL for table: contact_leads
+   - Suggested columns:
+     id uuid primary key default gen_random_uuid()
+     created_at timestamptz default now()
+     name text
+     email text
+     company text
+     role text
+     hiring_volume text
+     message text
+     source_page text
+     language text
+   - RLS guidance: allow anonymous inserts ONLY (no reads), with example policy.
+
+--------------------------------------------
+ACCEPTANCE CHECKLIST (MUST PASS)
+--------------------------------------------
+- Clicking “For Employers / For Job Seekers / How it Works” on Home smoothly scrolls and does NOT hide other sections.
+- Clicking Blog/FAQ/Contact navigates to a new route and transitions smoothly (fade).
+- Switching EN/AR preserves the current page.
+- Mobile nav works.
+- README + docs exist and clearly explain routes/config/db.
+- No fake certification claims. No misleading stats.
+- Code runs with minimal dependencies and no missing imports.

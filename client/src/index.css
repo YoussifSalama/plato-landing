@@ -182,7 +182,7 @@ section[id] {
 @keyframes pageFade {
   from {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
