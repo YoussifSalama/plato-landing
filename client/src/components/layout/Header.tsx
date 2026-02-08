@@ -5,6 +5,7 @@ import { getDemoLink } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import SmartHashLink from "@/components/shared/SmartHashLink";
 import { Menu, X } from "lucide-react";
+import platoLogo from "@assets/image_1770549516838.png";
 
 type NavItem =
   | { label: string; path: string; type: "route" }
@@ -72,13 +73,13 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-4">
           <Link href={localePath("/")} data-testid="link-home">
-            <span
-              className="text-xl font-bold tracking-tight"
+            <img
+              src={platoLogo}
+              alt="Plato"
+              className="h-8"
               style={{ direction: "ltr" }}
-              data-testid="text-logo"
-            >
-              <span className="text-[#057ABE]">Plato</span>
-            </span>
+              data-testid="img-logo"
+            />
           </Link>
 
           <nav
@@ -93,7 +94,7 @@ export default function Header() {
                     hash={item.hash}
                     className={`px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${
                       isHashActive(item.hash)
-                        ? "text-[#057ABE] bg-[#E0EEF3] dark:bg-[#057ABE]/10"
+                        ? "text-primary bg-accent dark:bg-primary/10"
                         : "text-foreground/70 hover:text-foreground hover:bg-muted"
                     }`}
                     data-testid={`link-nav-${item.hash}`}
@@ -107,7 +108,7 @@ export default function Header() {
                   <span
                     className={`px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${
                       isActive(item.path)
-                        ? "text-[#057ABE] bg-[#E0EEF3] dark:bg-[#057ABE]/10"
+                        ? "text-primary bg-accent dark:bg-primary/10"
                         : "text-foreground/70 hover:text-foreground hover:bg-muted"
                     }`}
                     data-testid={`link-nav-${item.path.slice(1)}`}
@@ -161,7 +162,7 @@ export default function Header() {
                     onClick={() => setMobileOpen(false)}
                     className={`block px-3 py-2 text-sm font-medium rounded-md cursor-pointer ${
                       isHashActive(item.hash)
-                        ? "text-[#057ABE] bg-[#E0EEF3] dark:bg-[#057ABE]/10"
+                        ? "text-primary bg-accent dark:bg-primary/10"
                         : "text-foreground/70 hover:text-foreground hover:bg-muted"
                     }`}
                   >
@@ -175,7 +176,7 @@ export default function Header() {
                     onClick={() => setMobileOpen(false)}
                     className={`block px-3 py-2 text-sm font-medium rounded-md cursor-pointer ${
                       isActive(item.path)
-                        ? "text-[#057ABE] bg-[#E0EEF3] dark:bg-[#057ABE]/10"
+                        ? "text-primary bg-accent dark:bg-primary/10"
                         : "text-foreground/70 hover:text-foreground hover:bg-muted"
                     }`}
                   >

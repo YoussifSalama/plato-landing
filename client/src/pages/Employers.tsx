@@ -48,8 +48,8 @@ export default function Employers() {
           {features.map((f, i) => (
             <Card key={i} className="hover-elevate overflow-visible">
               <CardContent className="p-6">
-                <div className="w-10 h-10 rounded-md bg-[#057ABE]/10 flex items-center justify-center mb-4">
-                  <f.icon className="w-5 h-5 text-[#057ABE]" />
+                <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center mb-4">
+                  <f.icon className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{f.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
@@ -59,7 +59,7 @@ export default function Employers() {
         </div>
       </Section>
 
-      <Section className="bg-[#057ABE] dark:bg-[#057ABE]/90">
+      <Section className="bg-gradient-to-r from-[var(--primary-gradient-from)] to-[var(--primary-gradient-to)]">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white">{p.ctaTitle}</h2>
           <p className="mt-3 text-white/80">{p.ctaSubtitle}</p>
@@ -68,7 +68,7 @@ export default function Employers() {
               <Button
                 variant="outline"
                 size="lg"
-                className="bg-white text-[#057ABE] border-white hover:bg-white/90 no-default-hover-elevate"
+                className="bg-white text-primary border-white hover:bg-white/90 no-default-hover-elevate"
               >
                 {t.nav.bookDemo}
               </Button>

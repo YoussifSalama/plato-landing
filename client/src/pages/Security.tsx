@@ -29,8 +29,8 @@ export default function Security() {
             return (
               <Card key={i} className="overflow-visible">
                 <CardContent className="p-6">
-                  <div className="w-9 h-9 rounded-md bg-[#057ABE]/10 flex items-center justify-center mb-3">
-                    <Icon className="w-4.5 h-4.5 text-[#057ABE]" />
+                  <div className="w-9 h-9 rounded-md bg-primary/10 flex items-center justify-center mb-3">
+                    <Icon className="w-4.5 h-4.5 text-primary" />
                   </div>
                   <h3 className="text-base font-semibold mb-2">{section.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{section.desc}</p>

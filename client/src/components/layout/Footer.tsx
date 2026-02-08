@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { useI18n } from "@/lib/i18n";
 import { config } from "@/lib/config";
 import { SiLinkedin } from "react-icons/si";
+import platoLogo from "@assets/image_1770549516838.png";
 
 export default function Footer() {
   const { t, dir, localePath } = useI18n();
@@ -18,13 +19,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <span
-              className="text-xl font-bold tracking-tight"
+            <img
+              src={platoLogo}
+              alt="Plato"
+              className="h-8"
               style={{ direction: "ltr" }}
-              data-testid="text-footer-logo"
-            >
-              <span className="text-[#057ABE]">Plato</span>
-            </span>
+              data-testid="img-footer-logo"
+            />
             <p className="mt-2 text-sm text-muted-foreground">
               {t.footer.tagline}
             </p>

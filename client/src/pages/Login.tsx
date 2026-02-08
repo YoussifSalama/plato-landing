@@ -22,8 +22,8 @@ export default function Login() {
           <a href={getEmployerLoginUrl()} data-testid="button-employer-login">
             <Card className="hover-elevate overflow-visible cursor-pointer">
               <CardContent className="p-6 flex items-start gap-4">
-                <div className="w-11 h-11 rounded-md bg-[#057ABE]/10 flex items-center justify-center flex-shrink-0">
-                  <Building2 className="w-5 h-5 text-[#057ABE]" />
+                <div className="w-11 h-11 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Building2 className="w-5 h-5 text-primary" />
                 </div>
                 <div className="text-start">
                   <h2 className="font-semibold text-base">{p.employerLogin}</h2>
@@ -36,8 +36,8 @@ export default function Login() {
           <a href={getApplicantLoginUrl()} data-testid="button-seeker-login">
             <Card className="hover-elevate overflow-visible cursor-pointer mt-4">
               <CardContent className="p-6 flex items-start gap-4">
-                <div className="w-11 h-11 rounded-md bg-[#689AB9]/10 flex items-center justify-center flex-shrink-0">
-                  <User className="w-5 h-5 text-[#689AB9]" />
+                <div className="w-11 h-11 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <User className="w-5 h-5" style={{ color: "var(--primary-gradient-to)" }} />
                 </div>
                 <div className="text-start">
                   <h2 className="font-semibold text-base">{p.seekerLogin}</h2>

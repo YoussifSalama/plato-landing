@@ -28,7 +28,7 @@ export default function HowItWorks() {
 
   const steps = activeTab === "employer" ? p.employerSteps : p.seekerSteps;
   const icons = activeTab === "employer" ? employerIcons : seekerIcons;
-  const color = activeTab === "employer" ? "#057ABE" : "#689AB9";
+  const color = activeTab === "employer" ? "var(--primary-gradient-from)" : "var(--primary-gradient-to)";
 
   return (
     <>

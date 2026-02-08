@@ -10,7 +10,7 @@ export default function NotFound() {
   return (
     <Section className="pt-20 sm:pt-28 lg:pt-32">
       <div className="max-w-lg mx-auto text-center">
-        <p className="text-6xl font-bold text-[#057ABE] mb-4">404</p>
+        <p className="text-6xl font-bold text-primary mb-4">404</p>
         <h1 className="text-2xl font-bold mb-3" data-testid="text-404-title">
           Page Not Found
         </h1>

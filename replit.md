@@ -81,7 +81,11 @@ Configurable via Vite env vars (prefixed with `VITE_`):
 - `scroll-margin-top: 80px` applied to sections with IDs to offset sticky header
 
 ### Design System
-- Blue-based color palette: Primary `#057ABE`, Secondary `#689AB9`, Light background `#E0EEF3`
+- Gradient blue palette matching the Plato logo: from `#0966A8` to `#1EA0E2` (light), `#0B5E96` to `#1A8FCC` (dark)
+- CSS custom properties `--primary-gradient-from` and `--primary-gradient-to` for gradient colors
+- Buttons use `bg-gradient-to-r` with the gradient vars for the default variant
+- CTA sections use gradient backgrounds instead of flat colors
+- Logo: `attached_assets/image_1770549516838.png` imported as image in Header and Footer
 - CSS variables for all colors defined in `client/src/index.css`
 - Components use shadcn/ui conventions with `cn()` utility for class merging
 - Layout: `Layout.tsx` wraps all pages with sticky Header and Footer

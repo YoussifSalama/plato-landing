@@ -72,7 +72,7 @@ export default function Home() {
             </a>
             <a
               href={config.applicantAppUrl}
-              className="text-sm font-medium text-[#057ABE] hover:underline flex items-center gap-1"
+              className="text-sm font-medium text-primary hover:underline flex items-center gap-1"
               data-testid="link-upload-resume-hero"
             >
               {t.hero.uploadResume}
@@ -114,8 +114,8 @@ export default function Home() {
           ].map((card, i) => (
             <Card key={i} className="hover-elevate overflow-visible">
               <CardContent className="p-6">
-                <div className="w-10 h-10 rounded-md bg-[#057ABE]/10 flex items-center justify-center mb-4">
-                  <card.icon className="w-5 h-5 text-[#057ABE]" />
+                <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center mb-4">
+                  <card.icon className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{card.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
@@ -148,8 +148,8 @@ export default function Home() {
           ].map((card, i) => (
             <Card key={i} className="hover-elevate overflow-visible">
               <CardContent className="p-6">
-                <div className="w-10 h-10 rounded-md bg-[#057ABE]/10 flex items-center justify-center mb-4">
-                  <card.icon className="w-5 h-5 text-[#057ABE]" />
+                <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center mb-4">
+                  <card.icon className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{card.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
@@ -176,7 +176,7 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
-            <h3 className="text-xl font-semibold mb-6 text-[#057ABE]">
+            <h3 className="text-xl font-semibold mb-6 text-primary">
               {t.howItWorksSection.employerFlow}
             </h3>
             <div className="space-y-4">
@@ -189,15 +189,15 @@ export default function Home() {
               ].map((step, i) => (
                 <div key={i} className="flex items-start gap-4">
                   <div className="flex-shrink-0 relative">
-                    <div className="w-9 h-9 rounded-full bg-[#057ABE] flex items-center justify-center text-white text-sm font-semibold">
+                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[var(--primary-gradient-from)] to-[var(--primary-gradient-to)] flex items-center justify-center text-white text-sm font-semibold">
                       {i + 1}
                     </div>
                     {i < 4 && (
-                      <div className="absolute top-9 left-1/2 -translate-x-1/2 w-px h-4 bg-[#057ABE]/20" />
+                      <div className="absolute top-9 left-1/2 -translate-x-1/2 w-px h-4 bg-primary/20" />
                     )}
                   </div>
                   <div className="flex items-center gap-2 pt-1.5">
-                    <step.icon className="w-4 h-4 text-[#689AB9] flex-shrink-0" />
+                    <step.icon className="w-4 h-4 text-primary/60 flex-shrink-0" />
                     <span className="text-sm font-medium">{step.label}</span>
                   </div>
                 </div>
@@ -205,7 +205,7 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <h3 className="text-xl font-semibold mb-6 text-[#689AB9]">
+            <h3 className="text-xl font-semibold mb-6" style={{ color: "var(--primary-gradient-to)" }}>
               {t.howItWorksSection.jobSeekerFlow}
             </h3>
             <div className="space-y-4">
@@ -218,15 +218,15 @@ export default function Home() {
               ].map((step, i) => (
                 <div key={i} className="flex items-start gap-4">
                   <div className="flex-shrink-0 relative">
-                    <div className="w-9 h-9 rounded-full bg-[#689AB9] flex items-center justify-center text-white text-sm font-semibold">
+                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[var(--primary-gradient-to)] to-[var(--primary-gradient-light)] flex items-center justify-center text-white text-sm font-semibold">
                       {i + 1}
                     </div>
                     {i < 4 && (
-                      <div className="absolute top-9 left-1/2 -translate-x-1/2 w-px h-4 bg-[#689AB9]/20" />
+                      <div className="absolute top-9 left-1/2 -translate-x-1/2 w-px h-4 bg-primary/15" />
                     )}
                   </div>
                   <div className="flex items-center gap-2 pt-1.5">
-                    <step.icon className="w-4 h-4 text-[#689AB9] flex-shrink-0" />
+                    <step.icon className="w-4 h-4 flex-shrink-0" style={{ color: "var(--primary-gradient-to)" }} />
                     <span className="text-sm font-medium">{step.label}</span>
                   </div>
                 </div>
@@ -252,7 +252,7 @@ export default function Home() {
               { icon: Trash2, text: t.securitySection.point4 },
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-3">
-                <item.icon className="w-5 h-5 text-[#057ABE] flex-shrink-0 mt-0.5" />
+                <item.icon className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                 <p className="text-sm text-muted-foreground">{item.text}</p>
               </div>
             ))}
@@ -311,7 +311,7 @@ export default function Home() {
         <div className="max-w-2xl mx-auto space-y-4">
           {t.faqPage.items.slice(0, 5).map((item, i) => (
             <div key={i} className="flex items-start gap-3">
-              <HelpCircle className="w-5 h-5 text-[#057ABE] flex-shrink-0 mt-0.5" />
+              <HelpCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
               <div>
                 <p className="font-medium text-sm" data-testid={`text-faq-preview-q-${i}`}>{item.q}</p>
                 <p className="text-sm text-muted-foreground mt-1">{item.a}</p>
@@ -341,7 +341,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section className="bg-[#057ABE] dark:bg-[#057ABE]/90">
+      <Section className="bg-gradient-to-r from-[var(--primary-gradient-from)] to-[var(--primary-gradient-to)]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-center">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white" data-testid="text-final-cta-employer">
@@ -352,7 +352,7 @@ export default function Home() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="bg-white text-[#057ABE] border-white hover:bg-white/90 no-default-hover-elevate"
+                  className="bg-white text-primary border-white hover:bg-white/90 no-default-hover-elevate"
                   data-testid="button-final-cta-demo"
                 >
                   {t.finalCta.employerCta}
@@ -369,7 +369,7 @@ export default function Home() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="bg-white text-[#057ABE] border-white hover:bg-white/90 no-default-hover-elevate"
+                  className="bg-white text-primary border-white hover:bg-white/90 no-default-hover-elevate"
                   data-testid="button-final-cta-upload"
                 >
                   {t.finalCta.seekerCta}

@@ -21,8 +21,8 @@ export default function Pricing() {
 
         <Card className="mt-12">
           <CardContent className="p-10 sm:p-14 text-center">
-            <div className="w-14 h-14 rounded-full bg-[#057ABE]/10 flex items-center justify-center mx-auto mb-6">
-              <Sparkles className="w-7 h-7 text-[#057ABE]" />
+            <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
+              <Sparkles className="w-7 h-7 text-primary" />
             </div>
             <h2 className="text-2xl font-bold mb-3" data-testid="text-coming-soon">
               {p.comingSoon}
@@ -37,7 +37,7 @@ export default function Pricing() {
               {p.contactUs}{" "}
               <a
                 href={`mailto:${config.demoEmailFallback}`}
-                className="text-[#057ABE] hover:underline"
+                className="text-primary hover:underline"
                 dir="ltr"
               >
                 {config.demoEmailFallback}
