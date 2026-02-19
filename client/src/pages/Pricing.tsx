@@ -14,7 +14,7 @@ export default function Pricing() {
   return (
     <Section className="pt-20 sm:pt-28 lg:pt-32">
       <div className="max-w-2xl mx-auto text-center">
-        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight" data-testid="text-pricing-title">
+        <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.1]" data-testid="text-pricing-title">
           {p.title}
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">{p.subtitle}</p>

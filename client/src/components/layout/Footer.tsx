@@ -15,29 +15,29 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="border-t border-border bg-card/50" dir={dir}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="border-t border-border/60" dir={dir}>
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
             <img
               src={platoLogo}
               alt="Plato"
-              className="h-8"
+              className="h-7"
               style={{ direction: "ltr" }}
               data-testid="img-footer-logo"
             />
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
               {t.footer.tagline}
             </p>
           </div>
 
           <div>
-            <ul className="space-y-2">
+            <ul className="space-y-2.5">
               {links.map((link) => (
                 <li key={link.path}>
                   <Link href={localePath(link.path)}>
                     <span
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                      className="text-[13px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                       data-testid={`link-footer-${link.path.slice(1)}`}
                     >
                       {link.label}
@@ -59,15 +59,15 @@ export default function Footer() {
                   aria-label="LinkedIn"
                   data-testid="link-linkedin"
                 >
-                  <SiLinkedin className="w-5 h-5" />
+                  <SiLinkedin className="w-4 h-4" />
                 </a>
               )}
             </div>
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-border">
-          <p className="text-sm text-muted-foreground" data-testid="text-copyright">
+        <div className="mt-12 pt-6 border-t border-border/60">
+          <p className="text-xs text-muted-foreground" data-testid="text-copyright">
             {t.footer.copyright}
           </p>
         </div>

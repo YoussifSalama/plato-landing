@@ -83,9 +83,12 @@ Configurable via Vite env vars (prefixed with `VITE_`):
 ### Design System
 - Gradient blue palette matching the Plato logo: from `#0966A8` to `#1EA0E2` (light), `#0B5E96` to `#1A8FCC` (dark)
 - CSS custom properties `--primary-gradient-from` and `--primary-gradient-to` for gradient colors
-- Buttons use `bg-gradient-to-r` with the gradient vars for the default variant
-- CTA sections use gradient backgrounds instead of flat colors
-- Logo: `attached_assets/image_1770549516838.png` imported as image in Header and Footer
+- Buttons use solid `bg-primary` (not gradient) for clean Apple-like aesthetic
+- CTA sections use solid `bg-primary` backgrounds
+- Logo: `client/src/assets/plato-logo.png` (transparent background) used in Header and Footer
+- Typography: Headings use `font-semibold tracking-tight leading-[1.1]` throughout
+- Header: h-14, backdrop-blur-xl, text-[13px] nav items, max-w-6xl container
+- Footer: max-w-6xl, text-[13px] links, text-xs copyright
 - CSS variables for all colors defined in `client/src/index.css`
 - Components use shadcn/ui conventions with `cn()` utility for class merging
 - Layout: `Layout.tsx` wraps all pages with sticky Header and Footer

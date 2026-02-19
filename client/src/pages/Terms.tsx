@@ -12,7 +12,7 @@ export default function Terms() {
     <Section className="pt-20 sm:pt-28 lg:pt-32">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-10">
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight" data-testid="text-terms-title">
+          <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.1]" data-testid="text-terms-title">
             {p.title}
           </h1>
           <div className="mt-4">

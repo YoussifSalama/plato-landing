@@ -35,7 +35,7 @@ export default function Blog() {
     <Section className="pt-20 sm:pt-28 lg:pt-32">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight" data-testid="text-blog-title">
+          <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.1]" data-testid="text-blog-title">
             {p.title}
           </h1>
           <p className="mt-4 text-lg text-muted-foreground">{p.subtitle}</p>

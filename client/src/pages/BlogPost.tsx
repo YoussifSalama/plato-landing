@@ -139,7 +139,7 @@ export default function BlogPost() {
           ))}
         </div>
 
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4" data-testid="text-blog-post-title">
+        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-4" data-testid="text-blog-post-title">
           {post.title}
         </h1>
 

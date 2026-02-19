@@ -22,7 +22,7 @@ export default function Employers() {
     <>
       <Section className="pt-20 sm:pt-28 lg:pt-32">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight" data-testid="text-employers-hero">
+          <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.1]" data-testid="text-employers-hero">
             {p.heroTitle}
           </h1>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
@@ -59,16 +59,16 @@ export default function Employers() {
         </div>
       </Section>
 
-      <Section className="bg-gradient-to-r from-[var(--primary-gradient-from)] to-[var(--primary-gradient-to)]">
+      <Section className="bg-primary">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">{p.ctaTitle}</h2>
-          <p className="mt-3 text-white/80">{p.ctaSubtitle}</p>
+          <h2 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight">{p.ctaTitle}</h2>
+          <p className="mt-4 text-white/80 leading-relaxed">{p.ctaSubtitle}</p>
           <div className="mt-8">
             <a href={getDemoLink()}>
               <Button
                 variant="outline"
                 size="lg"
-                className="bg-white text-primary border-white hover:bg-white/90 no-default-hover-elevate"
+                className="bg-white text-primary border-white no-default-hover-elevate"
               >
                 {t.nav.bookDemo}
               </Button>

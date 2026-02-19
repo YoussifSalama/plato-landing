@@ -72,10 +72,10 @@ export default function Home() {
 
   return (
     <>
-      <Section className="pt-20 sm:pt-28 lg:pt-36 pb-16">
-        <div className="max-w-4xl mx-auto text-center">
+      <Section className="pt-24 sm:pt-32 lg:pt-40 pb-20">
+        <div className="max-w-3xl mx-auto text-center">
           <h1
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.1]"
             data-testid="text-hero-headline"
           >
             {t.hero.headline}
@@ -86,7 +86,7 @@ export default function Home() {
           >
             {t.hero.subheadline}
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a href={config.employerAppUrl} data-testid="button-hire-talent-hero">
               <Button size="lg">{t.hero.hireTalent}</Button>
             </a>
@@ -95,29 +95,29 @@ export default function Home() {
                 {t.hero.findJobs}
               </Button>
             </a>
-            <a
-              href={config.applicantAppUrl}
-              className="text-sm font-medium text-primary hover:underline flex items-center gap-1"
-              data-testid="link-upload-resume-hero"
-            >
-              {t.hero.uploadResume}
-              <ArrowRight className="w-3.5 h-3.5" />
-            </a>
           </div>
+          <a
+            href={config.applicantAppUrl}
+            className="inline-flex items-center gap-1 mt-5 text-sm font-medium text-primary hover:underline"
+            data-testid="link-upload-resume-hero"
+          >
+            {t.hero.uploadResume}
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
         </div>
       </Section>
 
-      <Section bg="light" className="py-10 sm:py-14">
-        <p className="text-center text-sm font-medium text-muted-foreground mb-10" data-testid="text-trusted-by">
+      <Section bg="light" className="py-12 sm:py-16">
+        <p className="text-center text-xs font-medium uppercase tracking-widest text-muted-foreground mb-10" data-testid="text-trusted-by">
           {t.trustedBy.title}
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-10 md:gap-12">
+        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-14 md:gap-x-16">
           {clientLogos.map((logo) => (
             <img
               key={logo.alt}
               src={logo.src}
               alt={logo.alt}
-              className="h-8 sm:h-10 w-auto object-contain"
+              className="h-10 sm:h-12 w-auto max-w-[120px] sm:max-w-[140px] object-contain"
               data-testid={`logo-${logo.alt.toLowerCase().replace(/\s+/g, "-")}`}
             />
           ))}
@@ -125,11 +125,11 @@ export default function Home() {
       </Section>
 
       <Section id="employers">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold" data-testid="text-employer-section-title">
+        <div className="text-center mb-14">
+          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight" data-testid="text-employer-section-title">
             {t.employerSection.title}
           </h2>
-          <p className="mt-3 text-lg text-muted-foreground">{t.employerSection.subtitle}</p>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{t.employerSection.subtitle}</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
@@ -159,11 +159,11 @@ export default function Home() {
       </Section>
 
       <Section bg="light" id="job-seekers">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold" data-testid="text-seeker-section-title">
+        <div className="text-center mb-14">
+          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight" data-testid="text-seeker-section-title">
             {t.jobSeekerSection.title}
           </h2>
-          <p className="mt-3 text-lg text-muted-foreground">{t.jobSeekerSection.subtitle}</p>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{t.jobSeekerSection.subtitle}</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
@@ -193,11 +193,11 @@ export default function Home() {
       </Section>
 
       <Section id="how-it-works">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold" data-testid="text-hiw-section-title">
+        <div className="text-center mb-14">
+          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight" data-testid="text-hiw-section-title">
             {t.howItWorksSection.title}
           </h2>
-          <p className="mt-3 text-lg text-muted-foreground">{t.howItWorksSection.subtitle}</p>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{t.howItWorksSection.subtitle}</p>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
@@ -214,7 +214,7 @@ export default function Home() {
               ].map((step, i) => (
                 <div key={i} className="flex items-start gap-4">
                   <div className="flex-shrink-0 relative">
-                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[var(--primary-gradient-from)] to-[var(--primary-gradient-to)] flex items-center justify-center text-white text-sm font-semibold">
+                    <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white text-sm font-semibold">
                       {i + 1}
                     </div>
                     {i < 4 && (
@@ -222,7 +222,7 @@ export default function Home() {
                     )}
                   </div>
                   <div className="flex items-center gap-2 pt-1.5">
-                    <step.icon className="w-4 h-4 text-primary/60 flex-shrink-0" />
+                    <step.icon className="w-4 h-4 text-primary flex-shrink-0" />
                     <span className="text-sm font-medium">{step.label}</span>
                   </div>
                 </div>
@@ -230,7 +230,7 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <h3 className="text-xl font-semibold mb-6" style={{ color: "var(--primary-gradient-to)" }}>
+            <h3 className="text-xl font-semibold mb-6 text-primary">
               {t.howItWorksSection.jobSeekerFlow}
             </h3>
             <div className="space-y-4">
@@ -243,15 +243,15 @@ export default function Home() {
               ].map((step, i) => (
                 <div key={i} className="flex items-start gap-4">
                   <div className="flex-shrink-0 relative">
-                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[var(--primary-gradient-to)] to-[var(--primary-gradient-light)] flex items-center justify-center text-white text-sm font-semibold">
+                    <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white text-sm font-semibold">
                       {i + 1}
                     </div>
                     {i < 4 && (
-                      <div className="absolute top-9 left-1/2 -translate-x-1/2 w-px h-4 bg-primary/15" />
+                      <div className="absolute top-9 left-1/2 -translate-x-1/2 w-px h-4 bg-primary/20" />
                     )}
                   </div>
                   <div className="flex items-center gap-2 pt-1.5">
-                    <step.icon className="w-4 h-4 flex-shrink-0" style={{ color: "var(--primary-gradient-to)" }} />
+                    <step.icon className="w-4 h-4 text-primary flex-shrink-0" />
                     <span className="text-sm font-medium">{step.label}</span>
                   </div>
                 </div>
@@ -262,11 +262,11 @@ export default function Home() {
       </Section>
 
       <Section bg="light" id="security">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl sm:text-4xl font-bold" data-testid="text-security-section-title">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight" data-testid="text-security-section-title">
             {t.securitySection.title}
           </h2>
-          <p className="mt-3 text-lg text-muted-foreground">{t.securitySection.subtitle}</p>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{t.securitySection.subtitle}</p>
         </div>
         <div className="max-w-2xl mx-auto">
           <div className="space-y-4">
@@ -294,8 +294,8 @@ export default function Home() {
 
       {recentPosts.length > 0 && (
         <Section>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold" data-testid="text-blog-preview-title">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight" data-testid="text-blog-preview-title">
               {t.blogPreview.title}
             </h2>
           </div>
@@ -328,8 +328,8 @@ export default function Home() {
       )}
 
       <Section bg="light">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl sm:text-4xl font-bold" data-testid="text-faq-preview-title">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight" data-testid="text-faq-preview-title">
             {t.faqPreview.title}
           </h2>
         </div>
@@ -366,18 +366,18 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section className="bg-gradient-to-r from-[var(--primary-gradient-from)] to-[var(--primary-gradient-to)]">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-center">
+      <Section className="bg-primary">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-center">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white" data-testid="text-final-cta-employer">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight" data-testid="text-final-cta-employer">
               {t.finalCta.employerHeadline}
             </h2>
-            <div className="mt-6">
+            <div className="mt-8">
               <a href={getDemoLink()}>
                 <Button
                   variant="outline"
                   size="lg"
-                  className="bg-white text-primary border-white hover:bg-white/90 no-default-hover-elevate"
+                  className="bg-white text-primary border-white no-default-hover-elevate"
                   data-testid="button-final-cta-demo"
                 >
                   {t.finalCta.employerCta}
@@ -386,15 +386,15 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white" data-testid="text-final-cta-seeker">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight" data-testid="text-final-cta-seeker">
               {t.finalCta.seekerHeadline}
             </h2>
-            <div className="mt-6">
+            <div className="mt-8">
               <a href={config.applicantAppUrl}>
                 <Button
                   variant="outline"
                   size="lg"
-                  className="bg-white text-primary border-white hover:bg-white/90 no-default-hover-elevate"
+                  className="bg-white text-primary border-white no-default-hover-elevate"
                   data-testid="button-final-cta-upload"
                 >
                   {t.finalCta.seekerCta}

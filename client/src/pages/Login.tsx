@@ -13,7 +13,7 @@ export default function Login() {
   return (
     <Section className="pt-20 sm:pt-28 lg:pt-32">
       <div className="max-w-lg mx-auto text-center">
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight" data-testid="text-login-title">
+        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight leading-[1.1]" data-testid="text-login-title">
           {p.title}
         </h1>
         <p className="mt-3 text-muted-foreground">{p.subtitle}</p>
@@ -37,7 +37,7 @@ export default function Login() {
             <Card className="hover-elevate overflow-visible cursor-pointer mt-4">
               <CardContent className="p-6 flex items-start gap-4">
                 <div className="w-11 h-11 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <User className="w-5 h-5" style={{ color: "var(--primary-gradient-to)" }} />
+                  <User className="w-5 h-5 text-primary" />
                 </div>
                 <div className="text-start">
                   <h2 className="font-semibold text-base">{p.seekerLogin}</h2>

@@ -16,8 +16,8 @@ export default function Section({ children, className, id, bg = "default" }: Sec
       : "";
 
   return (
-    <section id={id} className={cn("py-16 sm:py-20 lg:py-24", bgClass, className)}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">{children}</div>
+    <section id={id} className={cn("py-20 sm:py-24 lg:py-28", bgClass, className)}>
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">{children}</div>
     </section>
   );
 }

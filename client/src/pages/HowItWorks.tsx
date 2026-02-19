@@ -28,13 +28,13 @@ export default function HowItWorks() {
 
   const steps = activeTab === "employer" ? p.employerSteps : p.seekerSteps;
   const icons = activeTab === "employer" ? employerIcons : seekerIcons;
-  const color = activeTab === "employer" ? "var(--primary-gradient-from)" : "var(--primary-gradient-to)";
+  const color = "hsl(var(--primary))";
 
   return (
     <>
       <Section className="pt-20 sm:pt-28 lg:pt-32">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight" data-testid="text-hiw-hero">
+          <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.1]" data-testid="text-hiw-hero">
             {p.heroTitle}
           </h1>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
