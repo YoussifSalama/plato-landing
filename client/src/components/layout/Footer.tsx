@@ -26,7 +26,7 @@ export default function Footer() {
             <img
               src={platoLogo}
               alt="Plato"
-              className="h-7 dark:brightness-0 dark:invert"
+              className="h-7"
               style={{ direction: "ltr" }}
               data-testid="img-footer-logo"
             />

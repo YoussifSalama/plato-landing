@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
+import { useAppTheme } from "@/lib/theme";
 import { useSEO } from "@/hooks/useSEO";
 import { getDemoLink, config } from "@/lib/config";
 import { Button } from "@/components/ui/button";
@@ -8,12 +9,14 @@ import { SiLinkedin, SiInstagram } from "react-icons/si";
 import { FaCog } from "react-icons/fa";
 
 import platoLogo from "@/assets/plato-logo.png";
-import dashboardMockup from "@/assets/dashboard-mockup.png";
-import smartJobImg from "@/assets/features/smart-job-management.png";
-import candidateFilterImg from "@/assets/features/candidate-filtering.png";
-import cvAnalysisImg from "@/assets/features/cv-analysis.png";
-import notificationsImg from "@/assets/features/notifications.png";
-import saveTimeImg from "@/assets/features/save-time.png";
+import dashboardDark from "@assets/image_1771713723882.png";
+import dashboardLight from "@assets/image_1771713751182.png";
+import smartJobImg from "@assets/image_1771713786149.png";
+import featureCardsRow1 from "@assets/image_1771713808365.png";
+import featureCardsRow2 from "@assets/image_1771713825570.png";
+import timeComparisonImg from "@assets/image_1771713839557.png";
+import costComparisonImg from "@assets/image_1771713850652.png";
+import ctaImg from "@assets/image_1771713874383.png";
 
 import logoAccentia from "@/assets/logos/accentia.png";
 import logoImplex from "@/assets/logos/implex.png";
@@ -76,6 +79,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 
 export default function Home() {
   const { t, lang, localePath } = useI18n();
+  const { isDark } = useAppTheme();
   useSEO({ description: t.meta.pages.home.description });
 
   return (
@@ -103,7 +107,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="rounded-2xl overflow-hidden border border-border shadow-2xl">
             <img
-              src={dashboardMockup}
+              src={isDark ? dashboardDark : dashboardLight}
               alt="Plato Dashboard"
               className="w-full h-auto"
               data-testid="img-dashboard-mockup"
@@ -175,79 +179,24 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 2x2 Feature Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Advanced Candidate Filtering - accent blue */}
-            <div className="bg-accent rounded-2xl p-6 sm:p-8 border border-border">
-              <div className="rounded-xl overflow-hidden mb-6 border border-border">
-                <img
-                  src={candidateFilterImg}
-                  alt="Candidate Filtering"
-                  className="w-full h-auto"
-                  data-testid="img-candidate-filter"
-                />
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2" data-testid="text-feature-filtering">
-                {t.featuresSection.candidateFiltering}
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                {t.featuresSection.candidateFilteringDesc}
-              </p>
-            </div>
+          {/* Feature Cards Row 1: Candidate Filtering + CV Analysis */}
+          <div className="rounded-2xl overflow-hidden">
+            <img
+              src={featureCardsRow1}
+              alt="Advanced Candidate Filtering and AI CV Analysis"
+              className="w-full h-auto"
+              data-testid="img-feature-cards-row1"
+            />
+          </div>
 
-            {/* AI CV Analysis */}
-            <div className="bg-muted rounded-2xl p-6 sm:p-8 border border-border">
-              <h3 className="text-lg sm:text-xl font-bold mb-2 text-foreground" data-testid="text-feature-cv-analysis">
-                {t.featuresSection.cvAnalysis}
-              </h3>
-              <p className="text-sm text-muted-foreground mb-6">
-                {t.featuresSection.cvAnalysisDesc}
-              </p>
-              <div className="rounded-xl overflow-hidden border border-border">
-                <img
-                  src={cvAnalysisImg}
-                  alt="CV Analysis"
-                  className="w-full h-auto"
-                  data-testid="img-cv-analysis"
-                />
-              </div>
-            </div>
-
-            {/* Improve Hiring Quality */}
-            <div className="bg-muted rounded-2xl p-6 sm:p-8 border border-border">
-              <div className="rounded-xl overflow-hidden mb-6 border border-border">
-                <img
-                  src={notificationsImg}
-                  alt="Notifications"
-                  className="w-full h-auto"
-                  data-testid="img-notifications"
-                />
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold mb-2 text-foreground" data-testid="text-feature-hiring-quality">
-                {t.featuresSection.hiringQuality}
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                {t.featuresSection.hiringQualityDesc}
-              </p>
-            </div>
-
-            {/* Save Time - Green */}
-            <div className="bg-gradient-to-br from-emerald-500 to-green-400 dark:from-emerald-600 dark:to-green-500 rounded-2xl p-6 sm:p-8">
-              <h3 className="text-lg sm:text-xl font-bold text-white mb-2" data-testid="text-feature-save-time">
-                {t.featuresSection.saveTime}
-              </h3>
-              <p className="text-sm text-white/80 mb-6">
-                {t.featuresSection.saveTimeDesc}
-              </p>
-              <div className="rounded-xl overflow-hidden">
-                <img
-                  src={saveTimeImg}
-                  alt="Save Time"
-                  className="w-full h-auto"
-                  data-testid="img-save-time"
-                />
-              </div>
-            </div>
+          {/* Feature Cards Row 2: Hiring Quality + Save Time */}
+          <div className="rounded-2xl overflow-hidden">
+            <img
+              src={featureCardsRow2}
+              alt="Improve Hiring Quality and Save Time"
+              className="w-full h-auto"
+              data-testid="img-feature-cards-row2"
+            />
           </div>
         </div>
       </section>
@@ -262,27 +211,14 @@ export default function Home() {
             {t.comparisonSection.subtitle}
           </p>
 
-          {/* Time Comparison Card */}
-          <div className="bg-card rounded-2xl p-8 sm:p-10 border border-border mb-16 text-left">
-            <h3 className="text-xl sm:text-2xl font-bold mb-8 text-foreground" data-testid="text-time-comparison">
-              {t.comparisonSection.timeTitle}
-            </h3>
-            <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="bg-destructive/10 text-destructive text-sm font-medium px-4 py-2.5 rounded-lg whitespace-nowrap">
-                  {t.comparisonSection.withoutPlato}
-                </div>
-                <div className="flex-1 h-3 bg-destructive/20 rounded-full" />
-                <span className="text-muted-foreground text-sm font-medium whitespace-nowrap">{t.comparisonSection.timeBefore}</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="bg-primary text-primary-foreground text-sm font-medium px-4 py-2.5 rounded-lg whitespace-nowrap">
-                  {t.comparisonSection.withPlato}
-                </div>
-                <div className="w-12 h-3 bg-primary/30 rounded-full" />
-                <span className="text-foreground font-bold text-sm whitespace-nowrap">{t.comparisonSection.timeAfter}</span>
-              </div>
-            </div>
+          {/* Time Comparison */}
+          <div className="rounded-2xl overflow-hidden mb-16">
+            <img
+              src={timeComparisonImg}
+              alt="Hire the Best Talent / Time - without Plato AI: 7 days, with Plato AI: 2 mins"
+              className="w-full h-auto"
+              data-testid="img-time-comparison"
+            />
           </div>
 
           {/* Cut Costs */}
@@ -293,27 +229,14 @@ export default function Home() {
             {t.comparisonSection.costSubtitle}
           </p>
 
-          {/* Cost Comparison Card */}
-          <div className="bg-card rounded-2xl p-8 sm:p-10 border border-border text-left">
-            <h3 className="text-xl sm:text-2xl font-bold mb-8 text-foreground" data-testid="text-cost-comparison">
-              {t.comparisonSection.costCardTitle}
-            </h3>
-            <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="bg-destructive/10 text-destructive text-sm font-medium px-4 py-2.5 rounded-lg whitespace-nowrap">
-                  {t.comparisonSection.withoutPlato}
-                </div>
-                <div className="w-8 h-3 bg-destructive/20 rounded-full" />
-                <span className="text-muted-foreground text-sm font-medium whitespace-nowrap">{t.comparisonSection.costBefore}</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="bg-primary text-primary-foreground text-sm font-medium px-4 py-2.5 rounded-lg whitespace-nowrap">
-                  {t.comparisonSection.withPlato}
-                </div>
-                <div className="flex-1 h-3 bg-primary/30 rounded-full" />
-                <span className="text-foreground font-bold text-sm whitespace-nowrap">{t.comparisonSection.costAfter}</span>
-              </div>
-            </div>
+          {/* Cost Comparison */}
+          <div className="rounded-2xl overflow-hidden">
+            <img
+              src={costComparisonImg}
+              alt="Recruitment Expenses Cost - without Plato AI: 5% Cost Save, with Plato AI: 90% Cost Save"
+              className="w-full h-auto"
+              data-testid="img-cost-comparison"
+            />
           </div>
         </div>
       </section>
@@ -338,56 +261,15 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 sm:py-28 bg-accent relative overflow-hidden">
-        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight mb-8 text-foreground" data-testid="text-cta-title">
-                {t.ctaSection.title}{" "}
-                <span className="font-extrabold">{t.ctaSection.titleBold}</span>
-              </h2>
-              <div className="flex flex-wrap gap-4">
-                <a href={config.employerAppUrl} data-testid="button-start-trial">
-                  <Button
-                    size="lg"
-                    className="rounded-full px-8"
-                  >
-                    {t.ctaSection.startTrial}
-                  </Button>
-                </a>
-                <a href={getDemoLink()} data-testid="button-request-demo-cta">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="rounded-full px-8"
-                  >
-                    {t.ctaSection.requestDemo}
-                  </Button>
-                </a>
-              </div>
-            </div>
-            <div className="hidden lg:flex justify-end">
-              <div className="relative w-64 h-64 opacity-10 dark:opacity-20">
-                <svg viewBox="0 0 200 200" className="w-full h-full" stroke="currentColor" strokeWidth="0.5" fill="none">
-                  <circle cx="60" cy="60" r="8" />
-                  <circle cx="140" cy="60" r="8" />
-                  <circle cx="100" cy="140" r="8" />
-                  <circle cx="60" cy="140" r="8" />
-                  <circle cx="140" cy="140" r="8" />
-                  <line x1="60" y1="60" x2="140" y2="60" />
-                  <line x1="60" y1="60" x2="60" y2="140" />
-                  <line x1="140" y1="60" x2="140" y2="140" />
-                  <line x1="60" y1="140" x2="140" y2="140" />
-                  <line x1="60" y1="60" x2="100" y2="140" />
-                  <line x1="140" y1="60" x2="100" y2="140" />
-                  <polygon points="80,30 120,30 140,60 100,90 60,60" strokeWidth="1" />
-                  <polygon points="100,90 140,60 160,90 140,140 100,140" strokeWidth="1" />
-                  <polygon points="100,90 60,60 40,90 60,140 100,140" strokeWidth="1" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
+      <section className="relative overflow-hidden">
+        <a href={config.employerAppUrl} data-testid="button-start-trial" className="block">
+          <img
+            src={ctaImg}
+            alt="Ready to transform your hiring process? Start Free Trial or Request Demo"
+            className="w-full h-auto"
+            data-testid="img-cta-section"
+          />
+        </a>
       </section>
 
       {/* Footer */}

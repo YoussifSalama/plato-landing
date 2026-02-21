@@ -76,7 +76,7 @@ export default function Header() {
             <img
               src={platoLogo}
               alt="Plato"
-              className={`h-7 ${isDark ? "brightness-0 invert" : ""}`}
+              className="h-7"
               style={{ direction: "ltr" }}
               data-testid="img-logo"
             />
