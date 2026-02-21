@@ -326,4 +326,8 @@ section[id] {
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after {
     inset: -1px;
   }
+
+  .dark .dark-logo {
+    filter: brightness(1.8) contrast(0.9);
+  }
 }

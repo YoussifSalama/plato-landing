@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useI18n } from "@/lib/i18n";
 import { useAppTheme } from "@/lib/theme";
 import { useSEO } from "@/hooks/useSEO";
@@ -8,15 +8,6 @@ import { Plus, Minus } from "lucide-react";
 import { SiLinkedin, SiInstagram } from "react-icons/si";
 import { FaCog } from "react-icons/fa";
 
-import platoLogo from "@/assets/plato-logo.png";
-import dashboardDark from "@assets/image_1771713723882.png";
-import dashboardLight from "@assets/image_1771713751182.png";
-import smartJobImg from "@assets/image_1771713786149.png";
-import featureCardsRow1 from "@assets/image_1771713808365.png";
-import featureCardsRow2 from "@assets/image_1771713825570.png";
-import timeComparisonImg from "@assets/image_1771713839557.png";
-import costComparisonImg from "@assets/image_1771713850652.png";
-import ctaImg from "@assets/image_1771713874383.png";
 
 import logoAccentia from "@/assets/logos/accentia.png";
 import logoImplex from "@/assets/logos/implex.png";
@@ -82,6 +73,13 @@ export default function Home() {
   const { isDark } = useAppTheme();
   useSEO({ description: t.meta.pages.home.description });
 
+  useEffect(() => {
+    const preload = new Image();
+    preload.src = "/images/dashboard-dark.png";
+    const preload2 = new Image();
+    preload2.src = "/images/dashboard-light.png";
+  }, []);
+
   return (
     <div>
       {/* Hero Section */}
@@ -107,9 +105,10 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="rounded-2xl overflow-hidden border border-border shadow-2xl">
             <img
-              src={isDark ? dashboardDark : dashboardLight}
+              src={isDark ? "/images/dashboard-dark.png" : "/images/dashboard-light.png"}
               alt="Plato Dashboard"
               className="w-full h-auto"
+              style={{ imageRendering: "auto" }}
               data-testid="img-dashboard-mockup"
             />
           </div>
@@ -171,9 +170,10 @@ export default function Home() {
             </p>
             <div className="rounded-xl overflow-hidden border border-border">
               <img
-                src={smartJobImg}
+                src="/images/smart-job.png"
                 alt="Smart Job Management"
                 className="w-full h-auto"
+                style={{ imageRendering: "auto" }}
                 data-testid="img-smart-job"
               />
             </div>
@@ -182,9 +182,10 @@ export default function Home() {
           {/* Feature Cards Row 1: Candidate Filtering + CV Analysis */}
           <div className="rounded-2xl overflow-hidden">
             <img
-              src={featureCardsRow1}
+              src="/images/features-row1.png"
               alt="Advanced Candidate Filtering and AI CV Analysis"
               className="w-full h-auto"
+              style={{ imageRendering: "auto" }}
               data-testid="img-feature-cards-row1"
             />
           </div>
@@ -192,9 +193,10 @@ export default function Home() {
           {/* Feature Cards Row 2: Hiring Quality + Save Time */}
           <div className="rounded-2xl overflow-hidden">
             <img
-              src={featureCardsRow2}
+              src="/images/features-row2.png"
               alt="Improve Hiring Quality and Save Time"
               className="w-full h-auto"
+              style={{ imageRendering: "auto" }}
               data-testid="img-feature-cards-row2"
             />
           </div>
@@ -214,9 +216,10 @@ export default function Home() {
           {/* Time Comparison */}
           <div className="rounded-2xl overflow-hidden mb-16">
             <img
-              src={timeComparisonImg}
+              src="/images/time-comparison.png"
               alt="Hire the Best Talent / Time - without Plato AI: 7 days, with Plato AI: 2 mins"
               className="w-full h-auto"
+              style={{ imageRendering: "auto" }}
               data-testid="img-time-comparison"
             />
           </div>
@@ -232,9 +235,10 @@ export default function Home() {
           {/* Cost Comparison */}
           <div className="rounded-2xl overflow-hidden">
             <img
-              src={costComparisonImg}
+              src="/images/cost-comparison.png"
               alt="Recruitment Expenses Cost - without Plato AI: 5% Cost Save, with Plato AI: 90% Cost Save"
               className="w-full h-auto"
+              style={{ imageRendering: "auto" }}
               data-testid="img-cost-comparison"
             />
           </div>
@@ -264,9 +268,10 @@ export default function Home() {
       <section className="relative overflow-hidden">
         <a href={config.employerAppUrl} data-testid="button-start-trial" className="block">
           <img
-            src={ctaImg}
+            src="/images/cta-banner.png"
             alt="Ready to transform your hiring process? Start Free Trial or Request Demo"
             className="w-full h-auto"
+            style={{ imageRendering: "auto" }}
             data-testid="img-cta-section"
           />
         </a>

@@ -6,7 +6,6 @@ import { getDemoLink } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import SmartHashLink from "@/components/shared/SmartHashLink";
 import { Menu, X, Sun, Moon } from "lucide-react";
-import platoLogo from "@/assets/plato-logo.png";
 
 type NavItem =
   | { label: string; path: string; type: "route" }
@@ -74,9 +73,9 @@ export default function Header() {
         <div className="flex items-center justify-between h-14 gap-4">
           <Link href={localePath("/")} data-testid="link-home">
             <img
-              src={platoLogo}
+              src="/images/plato-logo.png"
               alt="Plato"
-              className="h-7"
+              className="h-9 sm:h-10 dark-logo"
               style={{ direction: "ltr" }}
               data-testid="img-logo"
             />

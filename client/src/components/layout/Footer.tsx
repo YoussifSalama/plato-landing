@@ -2,7 +2,6 @@ import { Link, useLocation } from "wouter";
 import { useI18n } from "@/lib/i18n";
 import { config } from "@/lib/config";
 import { SiLinkedin } from "react-icons/si";
-import platoLogo from "@/assets/plato-logo.png";
 
 export default function Footer() {
   const { t, dir, localePath } = useI18n();
@@ -24,9 +23,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
             <img
-              src={platoLogo}
+              src="/images/plato-logo.png"
               alt="Plato"
-              className="h-7"
+              className="h-9 sm:h-10 dark-logo"
               style={{ direction: "ltr" }}
               data-testid="img-footer-logo"
             />
