@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation } from "wouter";
 import { useI18n } from "@/lib/i18n";
+import { useAppTheme } from "@/lib/theme";
 import { getDemoLink } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import SmartHashLink from "@/components/shared/SmartHashLink";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import platoLogo from "@/assets/plato-logo.png";
 
 type NavItem =
@@ -13,6 +14,7 @@ type NavItem =
 
 export default function Header() {
   const { t, lang, dir, switchLang, localePath } = useI18n();
+  const { isDark, toggleTheme } = useAppTheme();
   const [location] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeHash, setActiveHash] = useState("");
@@ -65,7 +67,7 @@ export default function Header() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full bg-black/90 dark:bg-black/90 backdrop-blur-xl border-b border-white/5"
+      className="sticky top-0 z-50 w-full backdrop-blur-xl border-b bg-white/90 dark:bg-black/90 border-gray-200 dark:border-white/5"
       dir={dir}
     >
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
@@ -74,7 +76,7 @@ export default function Header() {
             <img
               src={platoLogo}
               alt="Plato"
-              className="h-7 brightness-0 invert"
+              className={`h-7 ${isDark ? "brightness-0 invert" : ""}`}
               style={{ direction: "ltr" }}
               data-testid="img-logo"
             />
@@ -92,8 +94,8 @@ export default function Header() {
                     hash={item.hash}
                     className={`px-4 py-1.5 text-[13px] font-medium rounded-md transition-colors cursor-pointer ${
                       isHashActive(item.hash)
-                        ? "text-white"
-                        : "text-white/60 hover:text-white"
+                        ? "text-foreground"
+                        : "text-muted-foreground hover:text-foreground"
                     }`}
                     data-testid={`link-nav-${item.hash}`}
                   >
@@ -106,8 +108,8 @@ export default function Header() {
                   <span
                     className={`px-4 py-1.5 text-[13px] font-medium rounded-md transition-colors cursor-pointer ${
                       isActive(item.path)
-                        ? "text-white"
-                        : "text-white/60 hover:text-white"
+                        ? "text-foreground"
+                        : "text-muted-foreground hover:text-foreground"
                     }`}
                     data-testid={`link-nav-${item.path.slice(1)}`}
                   >
@@ -119,10 +121,18 @@ export default function Header() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-md text-muted-foreground transition-colors"
+              aria-label="Toggle theme"
+              data-testid="button-theme-toggle"
+            >
+              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
             <Button
               variant="ghost"
               size="sm"
-              className="text-[13px] text-white/60 hover:text-white border-transparent"
+              className="text-[13px] text-muted-foreground hover:text-foreground border-transparent"
               onClick={switchLang}
               data-testid="button-lang-switch"
               style={{ direction: "ltr" } as React.CSSProperties}
@@ -130,25 +140,35 @@ export default function Header() {
               {t.nav.langSwitch}
             </Button>
             <a href={getDemoLink()} data-testid="button-book-demo-header">
-              <Button size="sm" className="rounded-full px-5 bg-primary hover:bg-primary/90 text-white">
+              <Button size="sm" className="rounded-full px-5">
                 {t.nav.bookDemo}
               </Button>
             </a>
           </div>
 
-          <button
-            className="lg:hidden p-2 rounded-md text-white hover:bg-white/10"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-            data-testid="button-mobile-menu"
-          >
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          <div className="lg:hidden flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-md text-muted-foreground transition-colors"
+              aria-label="Toggle theme"
+              data-testid="button-theme-toggle-mobile"
+            >
+              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+            <button
+              className="p-2 rounded-md text-foreground hover:bg-muted"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
+              data-testid="button-mobile-menu"
+            >
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden border-t border-white/10 bg-black/95" dir={dir}>
+        <div className="lg:hidden border-t border-border bg-background/95 backdrop-blur-xl" dir={dir}>
           <div className="px-4 py-4 space-y-1">
             {navItems.map((item) => {
               if (item.type === "hash") {
@@ -159,8 +179,8 @@ export default function Header() {
                     onClick={() => setMobileOpen(false)}
                     className={`block px-3 py-2 text-sm font-medium rounded-md cursor-pointer ${
                       isHashActive(item.hash)
-                        ? "text-white bg-white/10"
-                        : "text-white/60 hover:text-white hover:bg-white/5"
+                        ? "text-foreground bg-muted"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                     }`}
                   >
                     {item.label}
@@ -173,8 +193,8 @@ export default function Header() {
                     onClick={() => setMobileOpen(false)}
                     className={`block px-3 py-2 text-sm font-medium rounded-md cursor-pointer ${
                       isActive(item.path)
-                        ? "text-white bg-white/10"
-                        : "text-white/60 hover:text-white hover:bg-white/5"
+                        ? "text-foreground bg-muted"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                     }`}
                   >
                     {item.label}
@@ -182,13 +202,13 @@ export default function Header() {
                 </Link>
               );
             })}
-            <div className="pt-3 border-t border-white/10 flex flex-col gap-2">
+            <div className="pt-3 border-t border-border flex flex-col gap-2">
               <button
                 onClick={() => {
                   switchLang();
                   setMobileOpen(false);
                 }}
-                className="px-3 py-2 text-sm font-medium border border-white/20 rounded-md text-white/60 text-start"
+                className="px-3 py-2 text-sm font-medium border border-border rounded-md text-muted-foreground text-start"
                 style={{ direction: "ltr" }}
               >
                 {t.nav.langSwitch}

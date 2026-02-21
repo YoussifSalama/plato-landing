@@ -73,8 +73,15 @@ Configurable via Vite env vars (prefixed with `VITE_`):
 - Server-generated `/sitemap.xml` with hreflang alternates for EN/AR
 - Server-generated `/robots.txt` pointing to sitemap
 
+### Theme System
+- Light/dark mode support via `client/src/lib/theme.tsx` (ThemeProvider + useAppTheme hook)
+- Dark mode is the default, persisted to localStorage under "plato-theme"
+- Theme toggle (sun/moon icon) in the Header for both desktop and mobile
+- All components use semantic Tailwind tokens (bg-background, text-foreground, bg-card, bg-muted, border-border, text-muted-foreground) that auto-adapt to light/dark
+- Dark mode background is pure black (0 0% 0%)
+
 ### Navigation & Transitions
-- Header nav for "For Employers", "For Job Seekers", "How it Works" uses hash links (`/#employers`, `/#job-seekers`, `/#how-it-works`) that smooth-scroll to homepage sections
+- Header nav: About, Pricing, Use Cases, Blogs (simplified from previous structure)
 - `SmartHashLink` component handles cross-page hash navigation (navigates to home first if needed, then scrolls)
 - Blog, FAQ, Contact remain real routes (`/blog`, `/faq`, `/contact`)
 - `PageTransition` wrapper adds a subtle 220ms fade-in on route changes (respects `prefers-reduced-motion`)
@@ -83,15 +90,17 @@ Configurable via Vite env vars (prefixed with `VITE_`):
 ### Design System
 - Gradient blue palette matching the Plato logo: from `#0966A8` to `#1EA0E2` (light), `#0B5E96` to `#1A8FCC` (dark)
 - CSS custom properties `--primary-gradient-from` and `--primary-gradient-to` for gradient colors
-- Buttons use solid `bg-primary` (not gradient) for clean Apple-like aesthetic
-- CTA sections use solid `bg-primary` backgrounds
-- Logo: `client/src/assets/plato-logo.png` (transparent background) used in Header and Footer
-- Typography: Headings use `font-semibold tracking-tight leading-[1.1]` throughout
-- Header: h-14, backdrop-blur-xl, text-[13px] nav items, max-w-6xl container
+- Buttons use solid `bg-primary` (not gradient) for clean aesthetic
+- Logo: `client/src/assets/plato-logo.png` (transparent background) used in Header and Footer; inverted in dark mode
+- Typography: Headings use `font-semibold tracking-tight leading-[1.1]` or `font-bold` throughout
+- Header: h-14, backdrop-blur-xl, text-[13px] nav items, max-w-6xl container, rounded-full "Book a Demo" button
+- Homepage has an integrated multi-column footer; other pages use shared Footer component
 - Footer: max-w-6xl, text-[13px] links, text-xs copyright
 - CSS variables for all colors defined in `client/src/index.css`
 - Components use shadcn/ui conventions with `cn()` utility for class merging
-- Layout: `Layout.tsx` wraps all pages with sticky Header and Footer
+- Layout: `Layout.tsx` wraps all pages with ThemeProvider, sticky Header and Footer
+- Homepage sections: Hero, Dashboard Mockup, Trusted By logos, Statement, Features Grid (colored cards), Comparison Charts, FAQ Accordion, CTA, Footer
+- Generated feature images in `client/src/assets/features/` and dashboard mockup in `client/src/assets/dashboard-mockup.png`
 
 ## External Dependencies
 

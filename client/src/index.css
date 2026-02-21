@@ -96,7 +96,7 @@
   --opaque-button-border-intensity: 9;
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
-  --background: 210 8% 8%;
+  --background: 0 0% 0%;
   --foreground: 210 8% 95%;
   --border: 210 8% 18%;
   --card: 210 8% 10%;
@@ -209,10 +209,6 @@ section[id] {
 @layer base {
   * {
     @apply border-border;
-  }
-
-  html {
-    @apply dark;
   }
 
   body {

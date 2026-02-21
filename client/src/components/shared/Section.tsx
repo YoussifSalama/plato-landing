@@ -10,9 +10,9 @@ interface SectionProps {
 export default function Section({ children, className, id, bg = "default" }: SectionProps) {
   const bgClass =
     bg === "light"
-      ? "bg-white/[0.02]"
+      ? "bg-gray-50/50 dark:bg-white/[0.02]"
       : bg === "card"
-      ? "bg-white/[0.03]"
+      ? "bg-gray-100/50 dark:bg-white/[0.03]"
       : "";
 
   return (
