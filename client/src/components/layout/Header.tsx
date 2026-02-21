@@ -14,6 +14,7 @@ type NavItem =
 export default function Header() {
   const { t, lang, dir, switchLang, localePath } = useI18n();
   const { isDark, toggleTheme } = useAppTheme();
+  const logoSrc = isDark ? "/images/plato-logo-dark.png" : "/images/plato-logo-light.png";
   const [location] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeHash, setActiveHash] = useState("");
@@ -73,9 +74,9 @@ export default function Header() {
         <div className="flex items-center justify-between h-14 gap-4">
           <Link href={localePath("/")} data-testid="link-home">
             <img
-              src="/images/plato-logo.png"
+              src={logoSrc}
               alt="Plato"
-              className="h-9 sm:h-10 dark-logo"
+              className="h-9 sm:h-10"
               style={{ direction: "ltr" }}
               data-testid="img-logo"
             />

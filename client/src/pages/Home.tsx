@@ -74,10 +74,16 @@ export default function Home() {
   useSEO({ description: t.meta.pages.home.description });
 
   useEffect(() => {
-    const preload = new Image();
-    preload.src = "/images/dashboard-dark.png";
-    const preload2 = new Image();
-    preload2.src = "/images/dashboard-light.png";
+    const srcs = [
+      "/images/dashboard-dark.png",
+      "/images/dashboard-light.png",
+      "/images/plato-logo-dark.png",
+      "/images/plato-logo-light.png",
+    ];
+    srcs.forEach((s) => {
+      const img = new Image();
+      img.src = s;
+    });
   }, []);
 
   return (
@@ -108,7 +114,8 @@ export default function Home() {
               src={isDark ? "/images/dashboard-dark.png" : "/images/dashboard-light.png"}
               alt="Plato Dashboard"
               className="w-full h-auto"
-              style={{ imageRendering: "auto" }}
+              fetchPriority="high"
+              loading="eager"
               data-testid="img-dashboard-mockup"
             />
           </div>
@@ -173,7 +180,6 @@ export default function Home() {
                 src="/images/smart-job.png"
                 alt="Smart Job Management"
                 className="w-full h-auto"
-                style={{ imageRendering: "auto" }}
                 data-testid="img-smart-job"
               />
             </div>
@@ -185,7 +191,6 @@ export default function Home() {
               src="/images/features-row1.png"
               alt="Advanced Candidate Filtering and AI CV Analysis"
               className="w-full h-auto"
-              style={{ imageRendering: "auto" }}
               data-testid="img-feature-cards-row1"
             />
           </div>
@@ -196,7 +201,6 @@ export default function Home() {
               src="/images/features-row2.png"
               alt="Improve Hiring Quality and Save Time"
               className="w-full h-auto"
-              style={{ imageRendering: "auto" }}
               data-testid="img-feature-cards-row2"
             />
           </div>
@@ -219,7 +223,6 @@ export default function Home() {
               src="/images/time-comparison.png"
               alt="Hire the Best Talent / Time - without Plato AI: 7 days, with Plato AI: 2 mins"
               className="w-full h-auto"
-              style={{ imageRendering: "auto" }}
               data-testid="img-time-comparison"
             />
           </div>
@@ -238,7 +241,6 @@ export default function Home() {
               src="/images/cost-comparison.png"
               alt="Recruitment Expenses Cost - without Plato AI: 5% Cost Save, with Plato AI: 90% Cost Save"
               className="w-full h-auto"
-              style={{ imageRendering: "auto" }}
               data-testid="img-cost-comparison"
             />
           </div>
@@ -271,7 +273,6 @@ export default function Home() {
             src="/images/cta-banner.png"
             alt="Ready to transform your hiring process? Start Free Trial or Request Demo"
             className="w-full h-auto"
-            style={{ imageRendering: "auto" }}
             data-testid="img-cta-section"
           />
         </a>

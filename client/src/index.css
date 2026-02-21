@@ -327,7 +327,4 @@ section[id] {
     inset: -1px;
   }
 
-  .dark .dark-logo {
-    filter: brightness(1.8) contrast(0.9);
-  }
 }
