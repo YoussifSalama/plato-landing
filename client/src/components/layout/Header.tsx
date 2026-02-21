@@ -17,21 +17,19 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeHash, setActiveHash] = useState("");
 
+  const isHome = location === "/" || location === "/ar";
+
   const navItems: NavItem[] = [
-    { label: t.nav.forEmployers, hash: "employers", type: "hash" },
-    { label: t.nav.forJobSeekers, hash: "job-seekers", type: "hash" },
-    { label: t.nav.howItWorks, hash: "how-it-works", type: "hash" },
+    { label: t.nav.about, path: "/employers", type: "route" },
+    { label: t.nav.pricing, path: "/pricing", type: "route" },
+    { label: t.nav.useCases, path: "/how-it-works", type: "route" },
     { label: t.nav.blog, path: "/blog", type: "route" },
-    { label: t.nav.faq, path: "/faq", type: "route" },
-    { label: t.nav.contact, path: "/contact", type: "route" },
   ];
 
   const isActive = (path: string) => {
     const full = localePath(path);
     return location === full;
   };
-
-  const isHome = location === "/" || location === "/ar";
 
   const updateActiveHash = useCallback(() => {
     setActiveHash(window.location.hash.slice(1));
@@ -67,7 +65,7 @@ export default function Header() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-xl border-b border-border/60"
+      className="sticky top-0 z-50 w-full bg-black/90 dark:bg-black/90 backdrop-blur-xl border-b border-white/5"
       dir={dir}
     >
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
@@ -76,14 +74,14 @@ export default function Header() {
             <img
               src={platoLogo}
               alt="Plato"
-              className="h-8"
+              className="h-7 brightness-0 invert"
               style={{ direction: "ltr" }}
               data-testid="img-logo"
             />
           </Link>
 
           <nav
-            className="hidden lg:flex items-center gap-0.5"
+            className="hidden lg:flex items-center gap-1"
             aria-label="Main navigation"
           >
             {navItems.map((item) => {
@@ -92,10 +90,10 @@ export default function Header() {
                   <SmartHashLink
                     key={item.hash}
                     hash={item.hash}
-                    className={`px-3 py-1.5 text-[13px] font-medium rounded-md transition-colors cursor-pointer ${
+                    className={`px-4 py-1.5 text-[13px] font-medium rounded-md transition-colors cursor-pointer ${
                       isHashActive(item.hash)
-                        ? "text-foreground"
-                        : "text-muted-foreground hover:text-foreground"
+                        ? "text-white"
+                        : "text-white/60 hover:text-white"
                     }`}
                     data-testid={`link-nav-${item.hash}`}
                   >
@@ -106,10 +104,10 @@ export default function Header() {
               return (
                 <Link key={item.path} href={localePath(item.path)}>
                   <span
-                    className={`px-3 py-1.5 text-[13px] font-medium rounded-md transition-colors cursor-pointer ${
+                    className={`px-4 py-1.5 text-[13px] font-medium rounded-md transition-colors cursor-pointer ${
                       isActive(item.path)
-                        ? "text-foreground"
-                        : "text-muted-foreground hover:text-foreground"
+                        ? "text-white"
+                        : "text-white/60 hover:text-white"
                     }`}
                     data-testid={`link-nav-${item.path.slice(1)}`}
                   >
@@ -120,16 +118,11 @@ export default function Header() {
             })}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-2">
-            <Link href={localePath("/login")}>
-              <Button variant="ghost" size="sm" className="text-[13px]" data-testid="button-login">
-                {t.nav.login}
-              </Button>
-            </Link>
+          <div className="hidden lg:flex items-center gap-3">
             <Button
               variant="ghost"
               size="sm"
-              className="text-[13px]"
+              className="text-[13px] text-white/60 hover:text-white border-transparent"
               onClick={switchLang}
               data-testid="button-lang-switch"
               style={{ direction: "ltr" } as React.CSSProperties}
@@ -137,12 +130,14 @@ export default function Header() {
               {t.nav.langSwitch}
             </Button>
             <a href={getDemoLink()} data-testid="button-book-demo-header">
-              <Button size="sm">{t.nav.bookDemo}</Button>
+              <Button size="sm" className="rounded-full px-5 bg-primary hover:bg-primary/90 text-white">
+                {t.nav.bookDemo}
+              </Button>
             </a>
           </div>
 
           <button
-            className="lg:hidden p-2 rounded-md hover:bg-muted"
+            className="lg:hidden p-2 rounded-md text-white hover:bg-white/10"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
             data-testid="button-mobile-menu"
@@ -153,7 +148,7 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden border-t border-border bg-background" dir={dir}>
+        <div className="lg:hidden border-t border-white/10 bg-black/95" dir={dir}>
           <div className="px-4 py-4 space-y-1">
             {navItems.map((item) => {
               if (item.type === "hash") {
@@ -164,8 +159,8 @@ export default function Header() {
                     onClick={() => setMobileOpen(false)}
                     className={`block px-3 py-2 text-sm font-medium rounded-md cursor-pointer ${
                       isHashActive(item.hash)
-                        ? "text-primary bg-accent dark:bg-primary/10"
-                        : "text-foreground/70 hover:text-foreground hover:bg-muted"
+                        ? "text-white bg-white/10"
+                        : "text-white/60 hover:text-white hover:bg-white/5"
                     }`}
                   >
                     {item.label}
@@ -178,8 +173,8 @@ export default function Header() {
                     onClick={() => setMobileOpen(false)}
                     className={`block px-3 py-2 text-sm font-medium rounded-md cursor-pointer ${
                       isActive(item.path)
-                        ? "text-primary bg-accent dark:bg-primary/10"
-                        : "text-foreground/70 hover:text-foreground hover:bg-muted"
+                        ? "text-white bg-white/10"
+                        : "text-white/60 hover:text-white hover:bg-white/5"
                     }`}
                   >
                     {item.label}
@@ -187,28 +182,19 @@ export default function Header() {
                 </Link>
               );
             })}
-            <div className="pt-3 border-t border-border flex flex-col gap-2">
-              <Link href={localePath("/login")}>
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {t.nav.login}
-                </Button>
-              </Link>
+            <div className="pt-3 border-t border-white/10 flex flex-col gap-2">
               <button
                 onClick={() => {
                   switchLang();
                   setMobileOpen(false);
                 }}
-                className="px-3 py-2 text-sm font-medium border border-border rounded-md text-start"
+                className="px-3 py-2 text-sm font-medium border border-white/20 rounded-md text-white/60 text-start"
                 style={{ direction: "ltr" }}
               >
                 {t.nav.langSwitch}
               </button>
               <a href={getDemoLink()}>
-                <Button className="w-full" onClick={() => setMobileOpen(false)}>
+                <Button className="w-full rounded-full" onClick={() => setMobileOpen(false)}>
                   {t.nav.bookDemo}
                 </Button>
               </a>

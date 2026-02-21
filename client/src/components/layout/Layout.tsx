@@ -11,10 +11,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     document.documentElement.setAttribute("dir", dir);
     document.documentElement.setAttribute("lang", lang);
+    document.documentElement.classList.add("dark");
   }, [dir, lang]);
 
   return (
-    <div className="min-h-screen flex flex-col" dir={dir}>
+    <div className="min-h-screen flex flex-col bg-black text-white" dir={dir}>
       <ScrollManager />
       <Header />
       <main className="flex-1">

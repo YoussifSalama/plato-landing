@@ -1,35 +1,19 @@
-import { Link } from "wouter";
+import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import { useSEO } from "@/hooks/useSEO";
 import { getDemoLink, config } from "@/lib/config";
-import { getAllPosts, estimateReadTime } from "@/lib/blog";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import Section from "@/components/shared/Section";
-import {
-  Zap,
-  Clock,
-  Target,
-  Upload,
-  Users,
-  Award,
-  FileSearch,
-  ListChecks,
-  Mail,
-  MessageSquare,
-  FileText,
-  UserPlus,
-  UserCheck,
-  Handshake,
-  Mic,
-  Star,
-  Shield,
-  Lock,
-  Eye,
-  Trash2,
-  ArrowRight,
-  HelpCircle,
-} from "lucide-react";
+import { Plus, Minus } from "lucide-react";
+import { SiLinkedin, SiInstagram } from "react-icons/si";
+import { FaCog } from "react-icons/fa";
+
+import platoLogo from "@/assets/plato-logo.png";
+import dashboardMockup from "@/assets/dashboard-mockup.png";
+import smartJobImg from "@/assets/features/smart-job-management.png";
+import candidateFilterImg from "@/assets/features/candidate-filtering.png";
+import cvAnalysisImg from "@/assets/features/cv-analysis.png";
+import notificationsImg from "@/assets/features/notifications.png";
+import saveTimeImg from "@/assets/features/save-time.png";
 
 import logoAccentia from "@/assets/logos/accentia.png";
 import logoImplex from "@/assets/logos/implex.png";
@@ -65,345 +49,451 @@ const clientLogos = [
   { src: logoIkon, alt: "Ikon Industries" },
 ];
 
+function FAQItem({ question, answer }: { question: string; answer: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border-t border-white/10 dark:border-white/10 light:border-gray-200">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between py-5 text-left"
+        data-testid={`faq-item-${question.slice(0, 20).replace(/\s+/g, "-").toLowerCase()}`}
+      >
+        <span className="text-sm sm:text-base font-medium text-white dark:text-white">{question}</span>
+        {open ? (
+          <Minus className="w-5 h-5 text-white/60 flex-shrink-0 ml-4" />
+        ) : (
+          <Plus className="w-5 h-5 text-white/60 flex-shrink-0 ml-4" />
+        )}
+      </button>
+      {open && (
+        <div className="pb-5 text-sm text-white/60 dark:text-white/60 leading-relaxed">
+          {answer}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Home() {
   const { t, lang, localePath } = useI18n();
   useSEO({ description: t.meta.pages.home.description });
-  const recentPosts = getAllPosts(lang).slice(0, 3);
 
   return (
-    <>
-      <Section className="pt-24 sm:pt-32 lg:pt-40 pb-20">
-        <div className="max-w-3xl mx-auto text-center">
+    <div className="bg-black text-white dark:bg-black dark:text-white">
+      {/* Hero Section */}
+      <section className="pt-24 sm:pt-32 lg:pt-40 pb-16 sm:pb-20">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
           <h1
-            className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.1]"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]"
             data-testid="text-hero-headline"
           >
             {t.hero.headline}
           </h1>
           <p
-            className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+            className="mt-6 text-base sm:text-lg text-white/60 dark:text-white/60 max-w-3xl mx-auto leading-relaxed"
             data-testid="text-hero-subheadline"
           >
             {t.hero.subheadline}
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <a href={config.employerAppUrl} data-testid="button-hire-talent-hero">
-              <Button size="lg">{t.hero.hireTalent}</Button>
-            </a>
-            <a href={config.applicantAppUrl} data-testid="button-find-jobs-hero">
-              <Button variant="outline" size="lg">
-                {t.hero.findJobs}
-              </Button>
-            </a>
-          </div>
-          <a
-            href={config.applicantAppUrl}
-            className="inline-flex items-center gap-1 mt-5 text-sm font-medium text-primary hover:underline"
-            data-testid="link-upload-resume-hero"
-          >
-            {t.hero.uploadResume}
-            <ArrowRight className="w-3.5 h-3.5" />
-          </a>
         </div>
-      </Section>
+      </section>
 
-      <Section bg="light" className="py-12 sm:py-16">
-        <p className="text-center text-xs font-medium uppercase tracking-widest text-muted-foreground mb-10" data-testid="text-trusted-by">
-          {t.trustedBy.title}
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-14 md:gap-x-16">
-          {clientLogos.map((logo) => (
+      {/* Dashboard Mockup */}
+      <section className="pb-16 sm:pb-20">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
             <img
-              key={logo.alt}
-              src={logo.src}
-              alt={logo.alt}
-              className="h-10 sm:h-12 w-auto max-w-[120px] sm:max-w-[140px] object-contain"
-              data-testid={`logo-${logo.alt.toLowerCase().replace(/\s+/g, "-")}`}
+              src={dashboardMockup}
+              alt="Plato Dashboard"
+              className="w-full h-auto"
+              data-testid="img-dashboard-mockup"
             />
-          ))}
-        </div>
-      </Section>
-
-      <Section id="employers">
-        <div className="text-center mb-14">
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight" data-testid="text-employer-section-title">
-            {t.employerSection.title}
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{t.employerSection.subtitle}</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { icon: Zap, title: t.employerSection.card1Title, desc: t.employerSection.card1Desc },
-            { icon: Clock, title: t.employerSection.card2Title, desc: t.employerSection.card2Desc },
-            { icon: Target, title: t.employerSection.card3Title, desc: t.employerSection.card3Desc },
-          ].map((card, i) => (
-            <Card key={i} className="hover-elevate overflow-visible">
-              <CardContent className="p-6">
-                <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center mb-4">
-                  <card.icon className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">{card.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <a href={getDemoLink()} data-testid="button-book-demo-employer-section">
-            <Button>{t.employerSection.bookDemo}</Button>
-          </a>
-          <a href={config.employerAppUrl}>
-            <Button variant="outline">{t.employerSection.hireTalent}</Button>
-          </a>
-        </div>
-      </Section>
-
-      <Section bg="light" id="job-seekers">
-        <div className="text-center mb-14">
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight" data-testid="text-seeker-section-title">
-            {t.jobSeekerSection.title}
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{t.jobSeekerSection.subtitle}</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { icon: Upload, title: t.jobSeekerSection.card1Title, desc: t.jobSeekerSection.card1Desc },
-            { icon: Users, title: t.jobSeekerSection.card2Title, desc: t.jobSeekerSection.card2Desc },
-            { icon: Award, title: t.jobSeekerSection.card3Title, desc: t.jobSeekerSection.card3Desc },
-          ].map((card, i) => (
-            <Card key={i} className="hover-elevate overflow-visible">
-              <CardContent className="p-6">
-                <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center mb-4">
-                  <card.icon className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">{card.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <a href={config.applicantAppUrl} data-testid="button-upload-resume-seeker-section">
-            <Button>{t.jobSeekerSection.uploadResume}</Button>
-          </a>
-          <a href={config.applicantAppUrl}>
-            <Button variant="outline">{t.jobSeekerSection.findJobs}</Button>
-          </a>
-        </div>
-      </Section>
-
-      <Section id="how-it-works">
-        <div className="text-center mb-14">
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight" data-testid="text-hiw-section-title">
-            {t.howItWorksSection.title}
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{t.howItWorksSection.subtitle}</p>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div>
-            <h3 className="text-xl font-semibold mb-6 text-primary">
-              {t.howItWorksSection.employerFlow}
-            </h3>
-            <div className="space-y-4">
-              {[
-                { icon: FileSearch, label: t.howItWorksSection.employer.step1 },
-                { icon: ListChecks, label: t.howItWorksSection.employer.step2 },
-                { icon: Mail, label: t.howItWorksSection.employer.step3 },
-                { icon: MessageSquare, label: t.howItWorksSection.employer.step4 },
-                { icon: FileText, label: t.howItWorksSection.employer.step5 },
-              ].map((step, i) => (
-                <div key={i} className="flex items-start gap-4">
-                  <div className="flex-shrink-0 relative">
-                    <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white text-sm font-semibold">
-                      {i + 1}
-                    </div>
-                    {i < 4 && (
-                      <div className="absolute top-9 left-1/2 -translate-x-1/2 w-px h-4 bg-primary/20" />
-                    )}
-                  </div>
-                  <div className="flex items-center gap-2 pt-1.5">
-                    <step.icon className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className="text-sm font-medium">{step.label}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-6 text-primary">
-              {t.howItWorksSection.jobSeekerFlow}
-            </h3>
-            <div className="space-y-4">
-              {[
-                { icon: Upload, label: t.howItWorksSection.jobSeeker.step1 },
-                { icon: UserPlus, label: t.howItWorksSection.jobSeeker.step2 },
-                { icon: UserCheck, label: t.howItWorksSection.jobSeeker.step3 },
-                { icon: Mic, label: t.howItWorksSection.jobSeeker.step4 },
-                { icon: Star, label: t.howItWorksSection.jobSeeker.step5 },
-              ].map((step, i) => (
-                <div key={i} className="flex items-start gap-4">
-                  <div className="flex-shrink-0 relative">
-                    <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white text-sm font-semibold">
-                      {i + 1}
-                    </div>
-                    {i < 4 && (
-                      <div className="absolute top-9 left-1/2 -translate-x-1/2 w-px h-4 bg-primary/20" />
-                    )}
-                  </div>
-                  <div className="flex items-center gap-2 pt-1.5">
-                    <step.icon className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className="text-sm font-medium">{step.label}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
-      </Section>
+      </section>
 
-      <Section bg="light" id="security">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight" data-testid="text-security-section-title">
-            {t.securitySection.title}
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{t.securitySection.subtitle}</p>
-        </div>
-        <div className="max-w-2xl mx-auto">
-          <div className="space-y-4">
-            {[
-              { icon: Eye, text: t.securitySection.point1 },
-              { icon: Shield, text: t.securitySection.point2 },
-              { icon: Lock, text: t.securitySection.point3 },
-              { icon: Trash2, text: t.securitySection.point4 },
-            ].map((item, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <item.icon className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-muted-foreground">{item.text}</p>
-              </div>
+      {/* Trusted By */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+          <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-10" data-testid="text-trusted-by">
+            {t.trustedBy.title}
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 sm:gap-x-12">
+            {clientLogos.map((logo) => (
+              <img
+                key={logo.alt}
+                src={logo.src}
+                alt={logo.alt}
+                className="h-8 sm:h-10 w-auto max-w-[100px] sm:max-w-[120px] object-contain brightness-0 invert opacity-70"
+                data-testid={`logo-${logo.alt.toLowerCase().replace(/\s+/g, "-")}`}
+              />
             ))}
           </div>
-          <div className="mt-8 text-center">
-            <Link href={localePath("/security")}>
-              <Button variant="outline" data-testid="button-read-security">
-                {t.securitySection.readMore}
-              </Button>
-            </Link>
+        </div>
+      </section>
+
+      {/* Statement Section */}
+      <section className="py-20 sm:py-28 lg:py-36">
+        <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="space-y-2">
+            <p className="text-2xl sm:text-3xl lg:text-4xl font-medium text-white/80 leading-snug" data-testid="text-statement-1">
+              {t.statementSection.line1}
+            </p>
+            <p className="text-2xl sm:text-3xl lg:text-4xl font-medium text-white leading-snug" data-testid="text-statement-2">
+              {t.statementSection.line2}
+            </p>
+          </div>
+          <div className="mt-8 space-y-1">
+            <p className="text-xl sm:text-2xl lg:text-3xl text-white/50 leading-snug" data-testid="text-statement-3">
+              {t.statementSection.line3}
+            </p>
+            <p className="text-xl sm:text-2xl lg:text-3xl text-white/40 leading-snug" data-testid="text-statement-4">
+              {t.statementSection.line4}
+            </p>
           </div>
         </div>
-      </Section>
+      </section>
 
-      {recentPosts.length > 0 && (
-        <Section>
-          <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight" data-testid="text-blog-preview-title">
-              {t.blogPreview.title}
-            </h2>
+      {/* Features Section */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 space-y-6">
+          {/* Smart Job Management - Full Width */}
+          <div className="bg-[#1a1a2e] dark:bg-[#1a1a2e] rounded-2xl p-8 sm:p-10 border border-white/5">
+            <h3 className="text-xl sm:text-2xl font-bold mb-2" data-testid="text-feature-smart-job">
+              {t.featuresSection.smartJobManagement}
+            </h3>
+            <p className="text-sm text-white/50 mb-6">
+              {t.featuresSection.smartJobManagementDesc}
+            </p>
+            <div className="rounded-xl overflow-hidden border border-white/10">
+              <img
+                src={smartJobImg}
+                alt="Smart Job Management"
+                className="w-full h-auto"
+                data-testid="img-smart-job"
+              />
+            </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {recentPosts.map((post) => (
-              <Link key={post.slug} href={localePath(`/blog/${post.slug}`)}>
-                <Card className="hover-elevate overflow-visible h-full cursor-pointer">
-                  <CardContent className="p-6">
-                    <p className="text-xs text-muted-foreground mb-2">
-                      {post.date} &middot; {estimateReadTime(post.content)} {t.blogPage.minRead}
-                    </p>
-                    <h3 className="text-lg font-semibold mb-2 line-clamp-2" data-testid={`text-blog-preview-${post.slug}`}>
-                      {post.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground line-clamp-3">{post.summary}</p>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-          <div className="mt-10 text-center">
-            <Link href={localePath("/blog")}>
-              <Button variant="outline" data-testid="button-blog-preview-cta">
-                {t.blogPreview.cta}
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-            </Link>
-          </div>
-        </Section>
-      )}
 
-      <Section bg="light">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight" data-testid="text-faq-preview-title">
-            {t.faqPreview.title}
-          </h2>
-        </div>
-        <div className="max-w-2xl mx-auto space-y-4">
-          {t.faqPage.items.slice(0, 5).map((item, i) => (
-            <div key={i} className="flex items-start gap-3">
-              <HelpCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="font-medium text-sm" data-testid={`text-faq-preview-q-${i}`}>{item.q}</p>
-                <p className="text-sm text-muted-foreground mt-1">{item.a}</p>
+          {/* 2x2 Feature Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Advanced Candidate Filtering - Light blue */}
+            <div className="bg-gradient-to-br from-sky-100 to-blue-50 dark:from-sky-900/30 dark:to-blue-900/20 rounded-2xl p-6 sm:p-8 border border-sky-200/30 dark:border-white/5">
+              <div className="rounded-xl overflow-hidden mb-6 border border-white/20">
+                <img
+                  src={candidateFilterImg}
+                  alt="Candidate Filtering"
+                  className="w-full h-auto"
+                  data-testid="img-candidate-filter"
+                />
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2" data-testid="text-feature-filtering">
+                {t.featuresSection.candidateFiltering}
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-white/50">
+                {t.featuresSection.candidateFilteringDesc}
+              </p>
+            </div>
+
+            {/* AI CV Analysis - Dark */}
+            <div className="bg-[#1a1a2e] dark:bg-[#1a1a2e] rounded-2xl p-6 sm:p-8 border border-white/5">
+              <h3 className="text-lg sm:text-xl font-bold mb-2" data-testid="text-feature-cv-analysis">
+                {t.featuresSection.cvAnalysis}
+              </h3>
+              <p className="text-sm text-white/50 mb-6">
+                {t.featuresSection.cvAnalysisDesc}
+              </p>
+              <div className="rounded-xl overflow-hidden border border-white/10">
+                <img
+                  src={cvAnalysisImg}
+                  alt="CV Analysis"
+                  className="w-full h-auto"
+                  data-testid="img-cv-analysis"
+                />
               </div>
             </div>
-          ))}
-        </div>
-        <div className="mt-10 text-center">
-          <Link href={localePath("/faq")}>
-            <Button variant="outline" data-testid="button-faq-preview-cta">
-              {t.faqPreview.cta}
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
-        </div>
-      </Section>
 
-      <Section>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-          <p className="text-lg font-medium" data-testid="text-contact-cta">{t.contactCta.text}</p>
-          <Link href={localePath("/contact")}>
-            <Button data-testid="button-contact-cta">
-              <Mail className="w-4 h-4" />
-              {t.contactCta.cta}
-            </Button>
-          </Link>
-        </div>
-      </Section>
-
-      <Section className="bg-primary">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-center">
-          <div>
-            <h2 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight" data-testid="text-final-cta-employer">
-              {t.finalCta.employerHeadline}
-            </h2>
-            <div className="mt-8">
-              <a href={getDemoLink()}>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="bg-white text-primary border-white no-default-hover-elevate"
-                  data-testid="button-final-cta-demo"
-                >
-                  {t.finalCta.employerCta}
-                </Button>
-              </a>
+            {/* Improve Hiring Quality - Dark */}
+            <div className="bg-[#1a1a2e] dark:bg-[#1a1a2e] rounded-2xl p-6 sm:p-8 border border-white/5">
+              <div className="rounded-xl overflow-hidden mb-6 border border-white/10">
+                <img
+                  src={notificationsImg}
+                  alt="Notifications"
+                  className="w-full h-auto"
+                  data-testid="img-notifications"
+                />
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold mb-2" data-testid="text-feature-hiring-quality">
+                {t.featuresSection.hiringQuality}
+              </h3>
+              <p className="text-sm text-white/50">
+                {t.featuresSection.hiringQualityDesc}
+              </p>
             </div>
-          </div>
-          <div>
-            <h2 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight" data-testid="text-final-cta-seeker">
-              {t.finalCta.seekerHeadline}
-            </h2>
-            <div className="mt-8">
-              <a href={config.applicantAppUrl}>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="bg-white text-primary border-white no-default-hover-elevate"
-                  data-testid="button-final-cta-upload"
-                >
-                  {t.finalCta.seekerCta}
-                </Button>
-              </a>
+
+            {/* Save Time - Green */}
+            <div className="bg-gradient-to-br from-emerald-500 to-green-400 dark:from-emerald-600 dark:to-green-500 rounded-2xl p-6 sm:p-8">
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-2" data-testid="text-feature-save-time">
+                {t.featuresSection.saveTime}
+              </h3>
+              <p className="text-sm text-white/80 mb-6">
+                {t.featuresSection.saveTimeDesc}
+              </p>
+              <div className="rounded-xl overflow-hidden">
+                <img
+                  src={saveTimeImg}
+                  alt="Save Time"
+                  className="w-full h-auto"
+                  data-testid="img-save-time"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </Section>
-    </>
+      </section>
+
+      {/* Comparison Section - "Let Plato AI Analyze Candidates" */}
+      <section className="py-20 sm:py-28">
+        <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4" data-testid="text-comparison-title">
+            {t.comparisonSection.title}
+          </h2>
+          <p className="text-white/50 text-base sm:text-lg mb-16" data-testid="text-comparison-subtitle">
+            {t.comparisonSection.subtitle}
+          </p>
+
+          {/* Time Comparison Card */}
+          <div className="bg-[#0d0d1a] dark:bg-[#0d0d1a] rounded-2xl p-8 sm:p-10 border border-white/10 mb-16 text-left">
+            <h3 className="text-xl sm:text-2xl font-bold mb-8" data-testid="text-time-comparison">
+              {t.comparisonSection.timeTitle}
+            </h3>
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="bg-red-900/60 text-white text-sm font-medium px-4 py-2.5 rounded-lg whitespace-nowrap">
+                  {t.comparisonSection.withoutPlato}
+                </div>
+                <div className="flex-1 h-3 bg-red-800/40 rounded-full" />
+                <span className="text-white/60 text-sm font-medium whitespace-nowrap">{t.comparisonSection.timeBefore}</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="bg-blue-600 text-white text-sm font-medium px-4 py-2.5 rounded-lg whitespace-nowrap">
+                  {t.comparisonSection.withPlato}
+                </div>
+                <div className="w-12 h-3 bg-blue-500/40 rounded-full" />
+                <span className="text-white font-bold text-sm whitespace-nowrap">{t.comparisonSection.timeAfter}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Cut Costs */}
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4" data-testid="text-cost-title">
+            {t.comparisonSection.costTitle}
+          </h2>
+          <p className="text-white/50 text-base sm:text-lg mb-12">
+            {t.comparisonSection.costSubtitle}
+          </p>
+
+          {/* Cost Comparison Card */}
+          <div className="bg-[#0d0d1a] dark:bg-[#0d0d1a] rounded-2xl p-8 sm:p-10 border border-white/10 text-left">
+            <h3 className="text-xl sm:text-2xl font-bold mb-8" data-testid="text-cost-comparison">
+              {t.comparisonSection.costCardTitle}
+            </h3>
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="bg-red-900/60 text-white text-sm font-medium px-4 py-2.5 rounded-lg whitespace-nowrap">
+                  {t.comparisonSection.withoutPlato}
+                </div>
+                <div className="w-8 h-3 bg-red-800/40 rounded-full" />
+                <span className="text-white/60 text-sm font-medium whitespace-nowrap">{t.comparisonSection.costBefore}</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="bg-blue-600 text-white text-sm font-medium px-4 py-2.5 rounded-lg whitespace-nowrap">
+                  {t.comparisonSection.withPlato}
+                </div>
+                <div className="flex-1 h-3 bg-blue-500/40 rounded-full" />
+                <span className="text-white font-bold text-sm whitespace-nowrap">{t.comparisonSection.costAfter}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 sm:py-28 bg-[#0a0a1a] dark:bg-[#0a0a1a]">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight" data-testid="text-faq-title">
+              {t.faqSection.title}
+            </h2>
+            <p className="text-white/50 text-base lg:pt-2" data-testid="text-faq-subtitle">
+              {t.faqSection.subtitle}
+            </p>
+          </div>
+          <div>
+            {t.faqSection.items.map((item, i) => (
+              <FAQItem key={i} question={item.q} answer={item.a} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 sm:py-28 bg-[#0a1628] dark:bg-[#0a1628] relative overflow-hidden">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight mb-8" data-testid="text-cta-title">
+                {t.ctaSection.title}{" "}
+                <span className="font-extrabold">{t.ctaSection.titleBold}</span>
+              </h2>
+              <div className="flex flex-wrap gap-4">
+                <a href={config.employerAppUrl} data-testid="button-start-trial">
+                  <Button
+                    size="lg"
+                    className="rounded-full bg-white text-black hover:bg-white/90 border-0 px-8 no-default-hover-elevate"
+                  >
+                    {t.ctaSection.startTrial}
+                  </Button>
+                </a>
+                <a href={getDemoLink()} data-testid="button-request-demo-cta">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="rounded-full border-white/20 text-white hover:bg-white/10 px-8 no-default-hover-elevate"
+                  >
+                    {t.ctaSection.requestDemo}
+                  </Button>
+                </a>
+              </div>
+            </div>
+            <div className="hidden lg:flex justify-end">
+              {/* Wireframe logo graphic */}
+              <div className="relative w-64 h-64 opacity-20">
+                <svg viewBox="0 0 200 200" className="w-full h-full" stroke="white" strokeWidth="0.5" fill="none">
+                  <circle cx="60" cy="60" r="8" />
+                  <circle cx="140" cy="60" r="8" />
+                  <circle cx="100" cy="140" r="8" />
+                  <circle cx="60" cy="140" r="8" />
+                  <circle cx="140" cy="140" r="8" />
+                  <line x1="60" y1="60" x2="140" y2="60" />
+                  <line x1="60" y1="60" x2="60" y2="140" />
+                  <line x1="140" y1="60" x2="140" y2="140" />
+                  <line x1="60" y1="140" x2="140" y2="140" />
+                  <line x1="60" y1="60" x2="100" y2="140" />
+                  <line x1="140" y1="60" x2="100" y2="140" />
+                  <polygon points="80,30 120,30 140,60 100,90 60,60" strokeWidth="1" />
+                  <polygon points="100,90 140,60 160,90 140,140 100,140" strokeWidth="1" />
+                  <polygon points="100,90 60,60 40,90 60,140 100,140" strokeWidth="1" />
+                </svg>
+                <div className="absolute top-4 right-4 flex gap-2">
+                  <div className="w-2 h-2 rounded-full bg-white/40" />
+                  <div className="w-2 h-2 rounded-full bg-white/40" />
+                  <div className="w-2 h-2 rounded-full bg-white/40" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#0a0a0f] dark:bg-[#0a0a0f] pt-16 pb-8">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
+            {/* Product */}
+            <div>
+              <h4 className="text-sm font-semibold mb-4">{t.footerSection.product}</h4>
+              <ul className="space-y-2.5">
+                <li><span className="text-xs text-white/50 hover:text-white/80 transition-colors cursor-pointer">{t.footerSection.changelog}</span></li>
+                <li><span className="text-xs text-white/50 hover:text-white/80 transition-colors cursor-pointer">{t.footerSection.customerStories}</span></li>
+                <li><a href={localePath("/security")} className="text-xs text-white/50 hover:text-white/80 transition-colors">{t.footerSection.security}</a></li>
+                <li><span className="text-xs text-white/50 hover:text-white/80 transition-colors cursor-pointer">{t.footerSection.chromeExtension} ↗</span></li>
+                <li><span className="text-xs text-white/50 hover:text-white/80 transition-colors cursor-pointer">{t.footerSection.iosApp} ↗</span></li>
+                <li><span className="text-xs text-white/50 hover:text-white/80 transition-colors cursor-pointer">{t.footerSection.androidApp} ↗</span></li>
+                <li><span className="text-xs text-white/50 hover:text-white/80 transition-colors cursor-pointer">{t.footerSection.zapier} ↗</span></li>
+                <li><span className="text-xs text-white/50 hover:text-white/80 transition-colors cursor-pointer">{t.footerSection.integromat} ↗</span></li>
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div>
+              <h4 className="text-sm font-semibold mb-4">{t.footerSection.company}</h4>
+              <ul className="space-y-2.5">
+                <li><span className="text-xs text-white/50 hover:text-white/80 transition-colors cursor-pointer">{t.footerSection.about}</span></li>
+                <li><span className="text-xs text-white/50 hover:text-white/80 transition-colors cursor-pointer">{t.footerSection.careers}</span></li>
+                <li><a href={localePath("/blog")} className="text-xs text-white/50 hover:text-white/80 transition-colors">{t.footerSection.blog}</a></li>
+                <li><span className="text-xs text-white/50 hover:text-white/80 transition-colors cursor-pointer">{t.footerSection.startupProgram}</span></li>
+              </ul>
+            </div>
+
+            {/* Plato for */}
+            <div>
+              <h4 className="text-sm font-semibold mb-4">{t.footerSection.platoFor}</h4>
+              <ul className="space-y-2.5">
+                <li><span className="text-xs text-white/50 hover:text-white/80 transition-colors cursor-pointer">{t.footerSection.startups}</span></li>
+                <li><span className="text-xs text-white/50 hover:text-white/80 transition-colors cursor-pointer">{t.footerSection.agencies}</span></li>
+              </ul>
+            </div>
+
+            {/* Support */}
+            <div>
+              <h4 className="text-sm font-semibold mb-4">{t.footerSection.support}</h4>
+              <ul className="space-y-2.5">
+                <li><span className="text-xs text-white/50 hover:text-white/80 transition-colors cursor-pointer">{t.footerSection.helpCenter}</span></li>
+                <li><a href={localePath("/contact")} className="text-xs text-white/50 hover:text-white/80 transition-colors">{t.footerSection.talkToSupport}</a></li>
+                <li><span className="text-xs text-white/50 hover:text-white/80 transition-colors cursor-pointer">{t.footerSection.apiDocs} ↗</span></li>
+                <li><span className="text-xs text-white/50 hover:text-white/80 transition-colors cursor-pointer">{t.footerSection.systemStatus} ↗</span></li>
+              </ul>
+            </div>
+
+            {/* Ready to build CTA */}
+            <div className="col-span-2">
+              <h4 className="text-sm font-semibold mb-4">{t.footerSection.readyToBuild}</h4>
+              <div className="flex flex-col gap-3">
+                <a href={config.employerAppUrl} data-testid="button-footer-start-free">
+                  <Button className="w-full rounded-full bg-primary hover:bg-primary/90 text-white" size="lg">
+                    {t.footerSection.startForFree}
+                  </Button>
+                </a>
+                <a href={getDemoLink()} data-testid="button-footer-request-demo">
+                  <Button variant="outline" className="w-full rounded-full border-white/20 text-white hover:bg-white/10 no-default-hover-elevate" size="lg">
+                    {t.footerSection.requestDemo}
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom bar */}
+          <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-xs text-white/40" data-testid="text-copyright">
+              {t.footerSection.copyright}
+            </p>
+            <div className="flex items-center gap-4">
+              <a href={localePath("/terms")} className="text-xs text-white/40 hover:text-white/60 transition-colors" data-testid="link-footer-terms">
+                {t.footerSection.termsAndConditions}
+              </a>
+              <span className="text-white/20">·</span>
+              <a href={localePath("/privacy")} className="text-xs text-white/40 hover:text-white/60 transition-colors" data-testid="link-footer-privacy">
+                {t.footerSection.privacyPolicy}
+              </a>
+            </div>
+            <div className="flex items-center gap-3">
+              {config.linkedinUrl && (
+                <a href={config.linkedinUrl} target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white/60 transition-colors" aria-label="LinkedIn" data-testid="link-linkedin">
+                  <SiLinkedin className="w-4 h-4" />
+                </a>
+              )}
+              <span className="text-white/40 hover:text-white/60 transition-colors cursor-pointer" aria-label="Settings">
+                <FaCog className="w-4 h-4" />
+              </span>
+              <span className="text-white/40 hover:text-white/60 transition-colors cursor-pointer" aria-label="Instagram">
+                <SiInstagram className="w-4 h-4" />
+              </span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 }
