@@ -19,16 +19,16 @@ export default function FeatureCardsSection() {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
 
-    const cards = cardsContainerRef.current.querySelectorAll<HTMLElement>("[data-feature-card]");
-    if (!cards.length) return;
+    const rows = cardsContainerRef.current.querySelectorAll<HTMLElement>("[data-feature-row]");
+    if (!rows.length) return;
 
     const ctx = gsap.context(() => {
-      gsap.set(cards, {
-        y: (i: number) => -i * 20,
-        scale: (i: number) => 1 - i * 0.02,
-        opacity: (i: number) => i === 0 ? 1 : 0.4,
-        rotateX: (i: number) => i * 2,
-        zIndex: (i: number) => cards.length - i,
+      gsap.set(rows, {
+        y: (i: number) => -i * 30,
+        scale: (i: number) => 1 - i * 0.03,
+        opacity: (i: number) => i === 0 ? 1 : 0.35,
+        rotateX: (i: number) => i * 3,
+        zIndex: (i: number) => rows.length - i,
       });
 
       const scatterTl = gsap.timeline({
@@ -40,25 +40,25 @@ export default function FeatureCardsSection() {
         },
       });
 
-      scatterTl.to(cards, {
+      scatterTl.to(rows, {
         y: 0,
         scale: 1,
         opacity: 1,
         rotateX: 0,
-        stagger: 0.05,
+        stagger: 0.1,
         duration: 1,
         ease: "power2.out",
       });
 
-      cards.forEach((card) => {
+      rows.forEach((row) => {
         ScrollTrigger.create({
-          trigger: card,
+          trigger: row,
           start: "top 60%",
           end: "bottom 40%",
-          onEnter: () => highlightCard(card, cards),
-          onEnterBack: () => highlightCard(card, cards),
-          onLeave: () => resetCards(cards),
-          onLeaveBack: () => resetCards(cards),
+          onEnter: () => highlightRow(row, rows),
+          onEnterBack: () => highlightRow(row, rows),
+          onLeave: () => resetRows(rows),
+          onLeaveBack: () => resetRows(rows),
         });
       });
 
@@ -67,23 +67,23 @@ export default function FeatureCardsSection() {
     return () => ctx.revert();
   }, []);
 
-  function highlightCard(active: HTMLElement, all: NodeListOf<HTMLElement>) {
-    all.forEach((card) => {
-      if (card === active) {
-        gsap.to(card, {
-          scale: 1.02,
+  function highlightRow(active: HTMLElement, all: NodeListOf<HTMLElement>) {
+    all.forEach((row) => {
+      if (row === active) {
+        gsap.to(row, {
+          scale: 1.01,
           y: -4,
           opacity: 1,
-          boxShadow: "0 20px 60px rgba(0,0,0,0.15)",
+          boxShadow: "0 20px 60px rgba(0,0,0,0.12)",
           duration: 0.4,
           ease: "power2.out",
           overwrite: true,
         });
       } else {
-        gsap.to(card, {
+        gsap.to(row, {
           scale: 0.98,
           y: 0,
-          opacity: 0.5,
+          opacity: 0.45,
           boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
           duration: 0.4,
           ease: "power2.out",
@@ -93,9 +93,9 @@ export default function FeatureCardsSection() {
     });
   }
 
-  function resetCards(all: NodeListOf<HTMLElement>) {
-    all.forEach((card) => {
-      gsap.to(card, {
+  function resetRows(all: NodeListOf<HTMLElement>) {
+    all.forEach((row) => {
+      gsap.to(row, {
         scale: 1,
         y: 0,
         opacity: 1,
@@ -113,9 +113,8 @@ export default function FeatureCardsSection() {
         ref={cardsContainerRef}
         className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 space-y-6"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6" data-testid="feature-cards-row1">
+        <div data-feature-row className="grid grid-cols-1 md:grid-cols-2 gap-6 rounded-2xl" data-testid="feature-cards-row1">
           <div
-            data-feature-card
             className="bg-muted rounded-2xl p-6 sm:p-8 border border-border transition-shadow space-y-4"
             data-testid="feature-card-candidate-filtering"
           >
@@ -131,7 +130,6 @@ export default function FeatureCardsSection() {
           </div>
 
           <div
-            data-feature-card
             className="bg-primary/5 dark:bg-primary/10 rounded-2xl p-6 sm:p-8 border border-border transition-shadow"
             data-testid="feature-card-cv-analysis"
           >
@@ -145,9 +143,8 @@ export default function FeatureCardsSection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6" data-testid="feature-cards-row2">
+        <div data-feature-row className="grid grid-cols-1 md:grid-cols-2 gap-6 rounded-2xl" data-testid="feature-cards-row2">
           <div
-            data-feature-card
             className="bg-muted rounded-2xl p-6 sm:p-8 border border-border transition-shadow space-y-4"
             data-testid="feature-card-hiring-quality"
           >
@@ -163,7 +160,6 @@ export default function FeatureCardsSection() {
           </div>
 
           <div
-            data-feature-card
             className="bg-emerald-500 dark:bg-emerald-600 rounded-2xl p-6 sm:p-8 border border-border transition-shadow"
             data-testid="feature-card-save-time"
           >

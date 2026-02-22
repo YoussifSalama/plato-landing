@@ -85,30 +85,30 @@ export default function ComparisonBar({
   }, [withoutWidth, withWidth]);
 
   return (
-    <div ref={containerRef} className="rounded-2xl bg-[#0a0e1a] dark:bg-[#0a0e1a] p-6 sm:p-8" style={{ fontSize: "14px" }}>
-      <h3 data-comp-title className="text-lg sm:text-xl font-bold text-gray-300 mb-6">{title}</h3>
+    <div ref={containerRef} className="rounded-2xl bg-gray-100 dark:bg-[#0a0e1a] p-6 sm:p-8 border border-border" style={{ fontSize: "14px" }}>
+      <h3 data-comp-title className="text-lg sm:text-xl font-bold text-foreground mb-6">{title}</h3>
 
       <div className="space-y-4">
         <div className="flex items-center gap-4">
           <div
             data-bar-without
-            className="h-12 sm:h-14 rounded-lg bg-gradient-to-r from-red-800/80 to-red-700/60 border border-red-500/40 flex items-center px-4"
+            className="h-12 sm:h-14 rounded-lg bg-gradient-to-r from-red-700 to-red-600 dark:from-red-800/80 dark:to-red-700/60 border border-red-400/40 dark:border-red-500/40 flex items-center px-4"
             style={{ width: "0%" }}
           >
             <span data-bar-label className="text-white font-semibold text-sm sm:text-base whitespace-nowrap">{withoutLabel}</span>
           </div>
-          <span data-bar-value className="text-gray-400 font-bold text-base sm:text-lg whitespace-nowrap">{withoutValue}</span>
+          <span data-bar-value className="text-gray-600 dark:text-gray-400 font-bold text-base sm:text-lg whitespace-nowrap">{withoutValue}</span>
         </div>
 
         <div className="flex items-center gap-4">
           <div
             data-bar-with
-            className="h-12 sm:h-14 rounded-lg bg-gradient-to-r from-blue-700 to-blue-600 border border-blue-400/40 flex items-center px-4"
+            className="h-12 sm:h-14 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-700 dark:to-blue-600 border border-blue-300/40 dark:border-blue-400/40 flex items-center px-4"
             style={{ width: "0%" }}
           >
             <span data-bar-label className="text-white font-semibold text-sm sm:text-base whitespace-nowrap">{withLabel}</span>
           </div>
-          <span data-bar-value className="text-gray-400 font-bold text-base sm:text-lg whitespace-nowrap">{withValue}</span>
+          <span data-bar-value className="text-gray-600 dark:text-gray-400 font-bold text-base sm:text-lg whitespace-nowrap">{withValue}</span>
         </div>
       </div>
     </div>

@@ -22,52 +22,63 @@ export default function SaveTimeMockup() {
       if (prefersReduced) return;
 
       const stackCards = containerRef.current!.querySelectorAll("[data-stack-card]");
+      const totalCards = stackCards.length;
 
-      gsap.set(stackCards, (i: number) => ({
-        y: 80 + i * 20,
-        x: i * 10,
-        opacity: 0,
-        scale: 0.85,
-        rotation: -5 + i * 3,
-      }));
+      gsap.set(stackCards, {
+        y: 0,
+        x: 0,
+        opacity: (i: number) => i === 0 ? 1 : 0.9 - i * 0.1,
+        scale: (i: number) => 1 - i * 0.03,
+        rotation: 0,
+        zIndex: (i: number) => totalCards - i,
+      });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 80%",
-          end: "bottom 15%",
-          toggleActions: "play reverse play reverse",
+          end: "top 30%",
+          scrub: 0.6,
         },
       });
 
       stackCards.forEach((card, i) => {
         tl.to(card, {
-          y: i * 8,
+          y: i * 55,
           x: i * 12,
           opacity: 1,
           scale: 1,
           rotation: 0,
-          duration: 0.7,
-          ease: "back.out(1.4)",
-        }, 0.1 * i);
+          duration: 1,
+          ease: "power2.out",
+        }, 0.08 * i);
+      });
+
+      const countTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 70%",
+          end: "bottom 15%",
+          toggleActions: "play reverse play reverse",
+        },
       });
 
       const numEls = containerRef.current!.querySelectorAll("[data-count-up]");
       numEls.forEach((el, i) => {
         const target = parseInt(el.getAttribute("data-count-up") || "0");
         const obj = { val: 0 };
-        tl.to(obj, {
+        countTl.to(obj, {
           val: target, duration: 1, ease: "power3.out",
           onUpdate: () => { (el as HTMLElement).textContent = String(Math.round(obj.val)); },
-        }, 0.2 + i * 0.1);
+        }, 0.3 + i * 0.1);
       });
 
       const badges = containerRef.current!.querySelectorAll("[data-badge]");
       gsap.set(badges, { scale: 0 });
-      tl.to(badges, {
+      countTl.to(badges, {
         scale: 1, duration: 0.4, stagger: 0.1,
         ease: "back.out(3)",
-      }, 0.6);
+      }, 0.5);
 
     }, containerRef);
     return () => ctx.revert();
@@ -82,10 +93,10 @@ export default function SaveTimeMockup() {
             data-stack-card
             className={`absolute left-0 right-0 ${card.color} rounded-2xl p-5 shadow-xl`}
             style={{
-              top: `${i * 55}px`,
+              top: "0px",
               zIndex: cards.length - i,
-              marginLeft: `${i * 12}px`,
-              marginRight: `${(cards.length - i) * 4}px`,
+              marginLeft: "0px",
+              marginRight: "0px",
             }}
           >
             <div className="flex items-center justify-between mb-3">

@@ -90,8 +90,12 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="pt-24 sm:pt-32 lg:pt-40 pb-16 sm:pb-20">
-        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
+      <section className="relative pt-24 sm:pt-32 lg:pt-40 pb-16 sm:pb-20 overflow-hidden">
+        <div className="absolute inset-0 hidden dark:block pointer-events-none" aria-hidden="true">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-[600px] bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(9,102,168,0.45),rgba(30,160,226,0.15)_40%,transparent_70%)]" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[400px] bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(14,80,140,0.35),transparent_65%)]" />
+        </div>
+        <div className="relative max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
           <ScrollReveal animation="fade-up">
             <h1
               className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] text-foreground"
@@ -133,7 +137,7 @@ export default function Home() {
                   key={`${logo.alt}-${i}`}
                   src={logo.src}
                   alt={logo.alt}
-                  className="h-8 sm:h-10 w-auto max-w-[100px] sm:max-w-[120px] object-contain opacity-60 dark:brightness-0 dark:invert grayscale mx-6 sm:mx-10 flex-shrink-0"
+                  className="h-8 sm:h-10 w-auto max-w-[100px] sm:max-w-[120px] object-contain opacity-70 grayscale brightness-0 dark:brightness-0 dark:invert mx-6 sm:mx-10 flex-shrink-0"
                   data-testid={i < clientLogos.length ? `logo-${logo.alt.toLowerCase().replace(/\s+/g, "-")}` : undefined}
                 />
               ))}
