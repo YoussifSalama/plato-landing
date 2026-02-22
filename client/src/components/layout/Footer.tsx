@@ -1,12 +1,10 @@
 import { Link, useLocation } from "wouter";
 import { useI18n } from "@/lib/i18n";
-import { useAppTheme } from "@/lib/theme";
 import { config } from "@/lib/config";
 import { SiLinkedin } from "react-icons/si";
 
 export default function Footer() {
   const { t, dir, localePath } = useI18n();
-  const { isDark } = useAppTheme();
   const [location] = useLocation();
 
   const isHome = location === "/" || location === "/ar";
@@ -25,7 +23,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
             <img
-              src={isDark ? "/images/plato-logo-dark.png" : "/images/plato-logo-light.png"}
+              src="/images/plato-logo.png"
               alt="Plato"
               className="h-9 sm:h-10"
               style={{ direction: "ltr" }}

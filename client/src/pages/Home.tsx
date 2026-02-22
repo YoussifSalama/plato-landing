@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Plus, Minus } from "lucide-react";
 import { SiLinkedin, SiInstagram } from "react-icons/si";
 import { FaCog } from "react-icons/fa";
-
+import ScrollReveal from "@/components/shared/ScrollReveal";
 
 import logoAccentia from "@/assets/logos/accentia.png";
 import logoImplex from "@/assets/logos/implex.png";
@@ -74,13 +74,7 @@ export default function Home() {
   useSEO({ description: t.meta.pages.home.description });
 
   useEffect(() => {
-    const srcs = [
-      "/images/dashboard-dark.png",
-      "/images/dashboard-light.png",
-      "/images/plato-logo-dark.png",
-      "/images/plato-logo-light.png",
-    ];
-    srcs.forEach((s) => {
+    ["/images/dashboard-dark.png", "/images/dashboard-light.png"].forEach((s) => {
       const img = new Image();
       img.src = s;
     });
@@ -91,262 +85,284 @@ export default function Home() {
       {/* Hero Section */}
       <section className="pt-24 sm:pt-32 lg:pt-40 pb-16 sm:pb-20">
         <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
-          <h1
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] text-foreground"
-            data-testid="text-hero-headline"
-          >
-            {t.hero.headline}
-          </h1>
-          <p
-            className="mt-6 text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed"
-            data-testid="text-hero-subheadline"
-          >
-            {t.hero.subheadline}
-          </p>
+          <ScrollReveal animation="fade-up">
+            <h1
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] text-foreground"
+              data-testid="text-hero-headline"
+            >
+              {t.hero.headline}
+            </h1>
+          </ScrollReveal>
+          <ScrollReveal animation="fade-up" delay={2}>
+            <p
+              className="mt-6 text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed"
+              data-testid="text-hero-subheadline"
+            >
+              {t.hero.subheadline}
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Dashboard Mockup */}
       <section className="pb-16 sm:pb-20">
         <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="rounded-2xl overflow-hidden border border-border shadow-2xl">
-            <img
-              src={isDark ? "/images/dashboard-dark.png" : "/images/dashboard-light.png"}
-              alt="Plato Dashboard"
-              className="w-full h-auto"
-              fetchPriority="high"
-              loading="eager"
-              data-testid="img-dashboard-mockup"
-            />
-          </div>
+          <ScrollReveal animation="scale-up">
+            <div className="rounded-2xl overflow-hidden border border-border shadow-2xl">
+              <img
+                src={isDark ? "/images/dashboard-dark.png" : "/images/dashboard-light.png"}
+                alt="Plato Dashboard"
+                className="w-full h-auto"
+                data-testid="img-dashboard-mockup"
+              />
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Trusted By */}
       <section className="py-12 sm:py-16">
         <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
-          <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground mb-10" data-testid="text-trusted-by">
-            {t.trustedBy.title}
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 sm:gap-x-12">
-            {clientLogos.map((logo) => (
-              <img
-                key={logo.alt}
-                src={logo.src}
-                alt={logo.alt}
-                className="h-8 sm:h-10 w-auto max-w-[100px] sm:max-w-[120px] object-contain opacity-70 dark:brightness-0 dark:invert grayscale"
-                data-testid={`logo-${logo.alt.toLowerCase().replace(/\s+/g, "-")}`}
-              />
-            ))}
-          </div>
+          <ScrollReveal animation="fade-in">
+            <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground mb-10" data-testid="text-trusted-by">
+              {t.trustedBy.title}
+            </p>
+          </ScrollReveal>
+          <ScrollReveal animation="fade-up" delay={1}>
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 sm:gap-x-12">
+              {clientLogos.map((logo) => (
+                <img
+                  key={logo.alt}
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="h-8 sm:h-10 w-auto max-w-[100px] sm:max-w-[120px] object-contain opacity-70 dark:brightness-0 dark:invert grayscale"
+                  data-testid={`logo-${logo.alt.toLowerCase().replace(/\s+/g, "-")}`}
+                />
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Statement Section */}
       <section className="py-20 sm:py-28 lg:py-36">
         <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="space-y-2">
-            <p className="text-2xl sm:text-3xl lg:text-4xl font-medium text-foreground/80 leading-snug" data-testid="text-statement-1">
-              {t.statementSection.line1}
-            </p>
-            <p className="text-2xl sm:text-3xl lg:text-4xl font-medium text-foreground leading-snug" data-testid="text-statement-2">
-              {t.statementSection.line2}
-            </p>
-          </div>
-          <div className="mt-8 space-y-1">
-            <p className="text-xl sm:text-2xl lg:text-3xl text-muted-foreground leading-snug" data-testid="text-statement-3">
-              {t.statementSection.line3}
-            </p>
-            <p className="text-xl sm:text-2xl lg:text-3xl text-muted-foreground/70 leading-snug" data-testid="text-statement-4">
-              {t.statementSection.line4}
-            </p>
-          </div>
+          <ScrollReveal animation="fade-left">
+            <div className="space-y-2">
+              <p className="text-2xl sm:text-3xl lg:text-4xl font-medium text-foreground/80 leading-snug" data-testid="text-statement-1">
+                {t.statementSection.line1}
+              </p>
+              <p className="text-2xl sm:text-3xl lg:text-4xl font-medium text-foreground leading-snug" data-testid="text-statement-2">
+                {t.statementSection.line2}
+              </p>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal animation="fade-right" delay={2}>
+            <div className="mt-8 space-y-1">
+              <p className="text-xl sm:text-2xl lg:text-3xl text-muted-foreground leading-snug" data-testid="text-statement-3">
+                {t.statementSection.line3}
+              </p>
+              <p className="text-xl sm:text-2xl lg:text-3xl text-muted-foreground/70 leading-snug" data-testid="text-statement-4">
+                {t.statementSection.line4}
+              </p>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Features Section */}
       <section className="py-12 sm:py-16">
         <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 space-y-6">
-          {/* Smart Job Management - Full Width */}
-          <div className="bg-muted rounded-2xl p-8 sm:p-10 border border-border">
-            <h3 className="text-xl sm:text-2xl font-bold mb-2 text-foreground" data-testid="text-feature-smart-job">
-              {t.featuresSection.smartJobManagement}
-            </h3>
-            <p className="text-sm text-muted-foreground mb-6">
-              {t.featuresSection.smartJobManagementDesc}
-            </p>
-            <div className="rounded-xl overflow-hidden border border-border">
+          <ScrollReveal animation="fade-up">
+            <div className="bg-muted rounded-2xl p-8 sm:p-10 border border-border">
+              <h3 className="text-xl sm:text-2xl font-bold mb-2 text-foreground" data-testid="text-feature-smart-job">
+                {t.featuresSection.smartJobManagement}
+              </h3>
+              <p className="text-sm text-muted-foreground mb-6">
+                {t.featuresSection.smartJobManagementDesc}
+              </p>
+              <div className="rounded-xl overflow-hidden border border-border">
+                <img
+                  src="/images/smart-job.png"
+                  alt="Smart Job Management"
+                  className="w-full h-auto"
+                  data-testid="img-smart-job"
+                />
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal animation="fade-left" delay={1}>
+            <div className="rounded-2xl overflow-hidden">
               <img
-                src="/images/smart-job.png"
-                alt="Smart Job Management"
+                src="/images/features-row1.png"
+                alt="Advanced Candidate Filtering and AI CV Analysis"
                 className="w-full h-auto"
-                data-testid="img-smart-job"
+                data-testid="img-feature-cards-row1"
               />
             </div>
-          </div>
+          </ScrollReveal>
 
-          {/* Feature Cards Row 1: Candidate Filtering + CV Analysis */}
-          <div className="rounded-2xl overflow-hidden">
-            <img
-              src="/images/features-row1.png"
-              alt="Advanced Candidate Filtering and AI CV Analysis"
-              className="w-full h-auto"
-              data-testid="img-feature-cards-row1"
-            />
-          </div>
-
-          {/* Feature Cards Row 2: Hiring Quality + Save Time */}
-          <div className="rounded-2xl overflow-hidden">
-            <img
-              src="/images/features-row2.png"
-              alt="Improve Hiring Quality and Save Time"
-              className="w-full h-auto"
-              data-testid="img-feature-cards-row2"
-            />
-          </div>
+          <ScrollReveal animation="fade-right" delay={1}>
+            <div className="rounded-2xl overflow-hidden">
+              <img
+                src="/images/features-row2.png"
+                alt="Improve Hiring Quality and Save Time"
+                className="w-full h-auto"
+                data-testid="img-feature-cards-row2"
+              />
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Comparison Section */}
       <section className="py-20 sm:py-28">
         <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4 text-foreground" data-testid="text-comparison-title">
-            {t.comparisonSection.title}
-          </h2>
-          <p className="text-muted-foreground text-base sm:text-lg mb-16" data-testid="text-comparison-subtitle">
-            {t.comparisonSection.subtitle}
-          </p>
+          <ScrollReveal animation="fade-up">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4 text-foreground" data-testid="text-comparison-title">
+              {t.comparisonSection.title}
+            </h2>
+            <p className="text-muted-foreground text-base sm:text-lg mb-16" data-testid="text-comparison-subtitle">
+              {t.comparisonSection.subtitle}
+            </p>
+          </ScrollReveal>
 
-          {/* Time Comparison */}
-          <div className="rounded-2xl overflow-hidden mb-16">
-            <img
-              src="/images/time-comparison.png"
-              alt="Hire the Best Talent / Time - without Plato AI: 7 days, with Plato AI: 2 mins"
-              className="w-full h-auto"
-              data-testid="img-time-comparison"
-            />
-          </div>
+          <ScrollReveal animation="fade-left" delay={2}>
+            <div className="rounded-2xl overflow-hidden mb-16">
+              <img
+                src="/images/time-comparison.png"
+                alt="Hire the Best Talent / Time - without Plato AI: 7 days, with Plato AI: 2 mins"
+                className="w-full h-auto"
+                data-testid="img-time-comparison"
+              />
+            </div>
+          </ScrollReveal>
 
-          {/* Cut Costs */}
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4 text-foreground" data-testid="text-cost-title">
-            {t.comparisonSection.costTitle}
-          </h2>
-          <p className="text-muted-foreground text-base sm:text-lg mb-12">
-            {t.comparisonSection.costSubtitle}
-          </p>
+          <ScrollReveal animation="fade-up">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4 text-foreground" data-testid="text-cost-title">
+              {t.comparisonSection.costTitle}
+            </h2>
+            <p className="text-muted-foreground text-base sm:text-lg mb-12">
+              {t.comparisonSection.costSubtitle}
+            </p>
+          </ScrollReveal>
 
-          {/* Cost Comparison */}
-          <div className="rounded-2xl overflow-hidden">
-            <img
-              src="/images/cost-comparison.png"
-              alt="Recruitment Expenses Cost - without Plato AI: 5% Cost Save, with Plato AI: 90% Cost Save"
-              className="w-full h-auto"
-              data-testid="img-cost-comparison"
-            />
-          </div>
+          <ScrollReveal animation="fade-right" delay={2}>
+            <div className="rounded-2xl overflow-hidden">
+              <img
+                src="/images/cost-comparison.png"
+                alt="Recruitment Expenses Cost - without Plato AI: 5% Cost Save, with Plato AI: 90% Cost Save"
+                className="w-full h-auto"
+                data-testid="img-cost-comparison"
+              />
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="py-20 sm:py-28 bg-muted">
         <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-foreground" data-testid="text-faq-title">
-              {t.faqSection.title}
-            </h2>
-            <p className="text-muted-foreground text-base lg:pt-2" data-testid="text-faq-subtitle">
-              {t.faqSection.subtitle}
-            </p>
-          </div>
-          <div>
-            {t.faqSection.items.map((item, i) => (
-              <FAQItem key={i} question={item.q} answer={item.a} />
-            ))}
-          </div>
+          <ScrollReveal animation="fade-up">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-foreground" data-testid="text-faq-title">
+                {t.faqSection.title}
+              </h2>
+              <p className="text-muted-foreground text-base lg:pt-2" data-testid="text-faq-subtitle">
+                {t.faqSection.subtitle}
+              </p>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal animation="fade-up" delay={1}>
+            <div>
+              {t.faqSection.items.map((item, i) => (
+                <FAQItem key={i} question={item.q} answer={item.a} />
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="relative overflow-hidden">
-        <a href={config.employerAppUrl} data-testid="button-start-trial" className="block">
-          <img
-            src="/images/cta-banner.png"
-            alt="Ready to transform your hiring process? Start Free Trial or Request Demo"
-            className="w-full h-auto"
-            data-testid="img-cta-section"
-          />
-        </a>
-      </section>
+      <ScrollReveal animation="scale-up">
+        <section className="relative overflow-hidden">
+          <a href={config.employerAppUrl} data-testid="button-start-trial" className="block">
+            <img
+              src="/images/cta-banner.png"
+              alt="Ready to transform your hiring process? Start Free Trial or Request Demo"
+              className="w-full h-auto"
+              data-testid="img-cta-section"
+            />
+          </a>
+        </section>
+      </ScrollReveal>
 
       {/* Footer */}
       <footer className="bg-card border-t border-border pt-16 pb-8">
         <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
-            {/* Product */}
-            <div>
-              <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.product}</h4>
-              <ul className="space-y-2.5">
-                <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-changelog">{t.footerSection.changelog}</span></li>
-                <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-customer-stories">{t.footerSection.customerStories}</span></li>
-                <li><a href={localePath("/security")} className="text-xs text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-security">{t.footerSection.security}</a></li>
-                <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-chrome">{t.footerSection.chromeExtension} ↗</span></li>
-                <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-ios">{t.footerSection.iosApp} ↗</span></li>
-                <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-android">{t.footerSection.androidApp} ↗</span></li>
-                <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-zapier">{t.footerSection.zapier} ↗</span></li>
-                <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-integromat">{t.footerSection.integromat} ↗</span></li>
-              </ul>
-            </div>
+          <ScrollReveal animation="fade-up">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
+              <div>
+                <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.product}</h4>
+                <ul className="space-y-2.5">
+                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-changelog">{t.footerSection.changelog}</span></li>
+                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-customer-stories">{t.footerSection.customerStories}</span></li>
+                  <li><a href={localePath("/security")} className="text-xs text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-security">{t.footerSection.security}</a></li>
+                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-chrome">{t.footerSection.chromeExtension} ↗</span></li>
+                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-ios">{t.footerSection.iosApp} ↗</span></li>
+                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-android">{t.footerSection.androidApp} ↗</span></li>
+                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-zapier">{t.footerSection.zapier} ↗</span></li>
+                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-integromat">{t.footerSection.integromat} ↗</span></li>
+                </ul>
+              </div>
 
-            {/* Company */}
-            <div>
-              <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.company}</h4>
-              <ul className="space-y-2.5">
-                <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-about">{t.footerSection.about}</span></li>
-                <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-careers">{t.footerSection.careers}</span></li>
-                <li><a href={localePath("/blog")} className="text-xs text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-blog">{t.footerSection.blog}</a></li>
-                <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-startup-program">{t.footerSection.startupProgram}</span></li>
-              </ul>
-            </div>
+              <div>
+                <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.company}</h4>
+                <ul className="space-y-2.5">
+                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-about">{t.footerSection.about}</span></li>
+                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-careers">{t.footerSection.careers}</span></li>
+                  <li><a href={localePath("/blog")} className="text-xs text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-blog">{t.footerSection.blog}</a></li>
+                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-startup-program">{t.footerSection.startupProgram}</span></li>
+                </ul>
+              </div>
 
-            {/* Plato for */}
-            <div>
-              <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.platoFor}</h4>
-              <ul className="space-y-2.5">
-                <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-startups">{t.footerSection.startups}</span></li>
-                <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-agencies">{t.footerSection.agencies}</span></li>
-              </ul>
-            </div>
+              <div>
+                <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.platoFor}</h4>
+                <ul className="space-y-2.5">
+                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-startups">{t.footerSection.startups}</span></li>
+                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-agencies">{t.footerSection.agencies}</span></li>
+                </ul>
+              </div>
 
-            {/* Support */}
-            <div>
-              <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.support}</h4>
-              <ul className="space-y-2.5">
-                <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-help">{t.footerSection.helpCenter}</span></li>
-                <li><a href={localePath("/contact")} className="text-xs text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-support">{t.footerSection.talkToSupport}</a></li>
-                <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-api-docs">{t.footerSection.apiDocs} ↗</span></li>
-                <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-system-status">{t.footerSection.systemStatus} ↗</span></li>
-              </ul>
-            </div>
+              <div>
+                <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.support}</h4>
+                <ul className="space-y-2.5">
+                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-help">{t.footerSection.helpCenter}</span></li>
+                  <li><a href={localePath("/contact")} className="text-xs text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-support">{t.footerSection.talkToSupport}</a></li>
+                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-api-docs">{t.footerSection.apiDocs} ↗</span></li>
+                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-system-status">{t.footerSection.systemStatus} ↗</span></li>
+                </ul>
+              </div>
 
-            {/* Ready to build CTA */}
-            <div className="col-span-2">
-              <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.readyToBuild}</h4>
-              <div className="flex flex-col gap-3">
-                <a href={config.employerAppUrl} data-testid="button-footer-start-free">
-                  <Button className="w-full rounded-full" size="lg">
-                    {t.footerSection.startForFree}
-                  </Button>
-                </a>
-                <a href={getDemoLink()} data-testid="button-footer-request-demo">
-                  <Button variant="outline" className="w-full rounded-full" size="lg">
-                    {t.footerSection.requestDemo}
-                  </Button>
-                </a>
+              <div className="col-span-2">
+                <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.readyToBuild}</h4>
+                <div className="flex flex-col gap-3">
+                  <a href={config.employerAppUrl} data-testid="button-footer-start-free">
+                    <Button className="w-full rounded-full" size="lg">
+                      {t.footerSection.startForFree}
+                    </Button>
+                  </a>
+                  <a href={getDemoLink()} data-testid="button-footer-request-demo">
+                    <Button variant="outline" className="w-full rounded-full" size="lg">
+                      {t.footerSection.requestDemo}
+                    </Button>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
-          {/* Bottom bar */}
           <div className="pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-xs text-muted-foreground/70" data-testid="text-copyright">
               {t.footerSection.copyright}
