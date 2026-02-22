@@ -88,13 +88,16 @@ export default function Home() {
 
 
   return (
-    <div>
+    <div className="relative overflow-x-hidden">
+      {/* Hero Gradient Glow — extends behind header */}
+      <div className="absolute top-0 left-0 right-0 hidden dark:block pointer-events-none z-0" aria-hidden="true" style={{ height: "700px" }}>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#071b2e] via-[#0a1628] to-transparent" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[130%] h-[600px] bg-[radial-gradient(ellipse_80%_50%_at_50%_-5%,rgba(9,102,168,0.55),rgba(30,160,226,0.18)_40%,transparent_70%)]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] h-[500px] bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(14,80,140,0.4),transparent_60%)]" />
+      </div>
+
       {/* Hero Section */}
-      <section className="relative pt-24 sm:pt-32 lg:pt-40 pb-16 sm:pb-20 overflow-hidden">
-        <div className="absolute inset-0 hidden dark:block pointer-events-none" aria-hidden="true">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-[600px] bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(9,102,168,0.45),rgba(30,160,226,0.15)_40%,transparent_70%)]" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[400px] bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(14,80,140,0.35),transparent_65%)]" />
-        </div>
+      <section className="relative pt-24 sm:pt-32 lg:pt-40 pb-16 sm:pb-20 z-[1]">
         <div className="relative max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
           <ScrollReveal animation="fade-up">
             <h1

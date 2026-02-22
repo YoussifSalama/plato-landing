@@ -66,7 +66,7 @@ export default function Header() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full backdrop-blur-xl border-b bg-white/90 dark:bg-black/90 border-gray-200 dark:border-white/5"
+      className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 dark:bg-black/60 border-b border-gray-200/50 dark:border-white/5"
       dir={dir}
     >
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
@@ -82,7 +82,7 @@ export default function Header() {
           </Link>
 
           <nav
-            className="hidden lg:flex items-center gap-1"
+            className="hidden lg:flex items-center bg-white/90 dark:bg-white/10 backdrop-blur-sm rounded-full px-1.5 py-1 border border-gray-200/60 dark:border-white/10 shadow-sm dark:shadow-none"
             aria-label="Main navigation"
           >
             {navItems.map((item) => {
@@ -91,10 +91,10 @@ export default function Header() {
                   <SmartHashLink
                     key={item.hash}
                     hash={item.hash}
-                    className={`px-4 py-1.5 text-[13px] font-medium rounded-md transition-colors cursor-pointer ${
+                    className={`px-4 py-1.5 text-[13px] font-medium rounded-full transition-colors cursor-pointer ${
                       isHashActive(item.hash)
-                        ? "text-foreground"
-                        : "text-muted-foreground hover:text-foreground"
+                        ? "text-foreground bg-gray-100 dark:bg-white/15"
+                        : "text-gray-600 dark:text-gray-300 hover:text-foreground"
                     }`}
                     data-testid={`link-nav-${item.hash}`}
                   >
@@ -105,10 +105,10 @@ export default function Header() {
               return (
                 <Link key={item.path} href={localePath(item.path)}>
                   <span
-                    className={`px-4 py-1.5 text-[13px] font-medium rounded-md transition-colors cursor-pointer ${
+                    className={`px-4 py-1.5 text-[13px] font-medium rounded-full transition-colors cursor-pointer ${
                       isActive(item.path)
-                        ? "text-foreground"
-                        : "text-muted-foreground hover:text-foreground"
+                        ? "text-foreground bg-gray-100 dark:bg-white/15"
+                        : "text-gray-600 dark:text-gray-300 hover:text-foreground"
                     }`}
                     data-testid={`link-nav-${item.path.slice(1)}`}
                   >
@@ -139,7 +139,7 @@ export default function Header() {
               {t.nav.langSwitch}
             </Button>
             <a href={getDemoLink()} data-testid="button-book-demo-header">
-              <Button size="sm" className="rounded-full px-5">
+              <Button size="sm" className="rounded-full px-5 shadow-md shadow-primary/20 dark:shadow-primary/30">
                 {t.nav.bookDemo}
               </Button>
             </a>
