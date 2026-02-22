@@ -174,12 +174,12 @@ export default function DashboardMockup() {
 
       const cards = statCardsRef.current?.children;
       if (cards) {
-        gsap.set(cards, { y: 15, opacity: 0, scale: 0.92 });
+        gsap.set(cards, { y: -40, opacity: 0, scale: 0.7 });
         tl1.to(cards, {
           y: 0, opacity: 1, scale: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "back.out(1.2)",
+          duration: 0.8,
+          stagger: 0.12,
+          ease: "elastic.out(1.2, 0.5)",
         }, 0.35);
       }
 

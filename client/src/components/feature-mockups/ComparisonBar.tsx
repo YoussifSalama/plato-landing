@@ -39,11 +39,8 @@ export default function ComparisonBar({
       gsap.set(barWithout, { width: "0%" });
       gsap.set(barWith, { width: "0%" });
 
-      const labels = containerRef.current!.querySelectorAll("[data-bar-label]");
-      gsap.set(labels, { opacity: 0, x: -20 });
-
-      const values = containerRef.current!.querySelectorAll("[data-bar-value]");
-      gsap.set(values, { opacity: 0, x: 20 });
+      const rows = containerRef.current!.querySelectorAll("[data-bar-row]");
+      gsap.set(rows, { opacity: 0, y: 15 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -56,29 +53,23 @@ export default function ComparisonBar({
 
       tl.to(heading, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0);
 
-      tl.to(barWithout, {
-        width: `${withoutWidth}%`,
-        duration: 1.2,
-        ease: "power3.out",
-      }, 0.3);
+      if (rows.length >= 2) {
+        tl.to(rows[0], { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.2);
 
-      tl.to(barWith, {
-        width: `${withWidth}%`,
-        duration: 0.8,
-        ease: "back.out(1.5)",
-      }, 0.5);
+        tl.to(barWithout, {
+          width: `${withoutWidth}%`,
+          duration: 1.2,
+          ease: "power3.out",
+        }, 0.4);
 
-      tl.to(labels, {
-        opacity: 1, x: 0,
-        duration: 0.4, stagger: 0.15,
-        ease: "power2.out",
-      }, 0.4);
+        tl.to(rows[1], { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.6);
 
-      tl.to(values, {
-        opacity: 1, x: 0,
-        duration: 0.4, stagger: 0.15,
-        ease: "power2.out",
-      }, 0.8);
+        tl.to(barWith, {
+          width: `${withWidth}%`,
+          duration: 0.8,
+          ease: "back.out(1.5)",
+        }, 0.8);
+      }
 
     }, containerRef);
     return () => ctx.revert();
@@ -86,29 +77,35 @@ export default function ComparisonBar({
 
   return (
     <div ref={containerRef} className="rounded-2xl bg-gray-100 dark:bg-[#0a0e1a] p-6 sm:p-8 border border-border" style={{ fontSize: "14px" }}>
-      <h3 data-comp-title className="text-lg sm:text-xl font-bold text-foreground mb-6">{title}</h3>
+      <h3 data-comp-title className="text-lg sm:text-xl font-bold text-foreground mb-6 text-left">{title}</h3>
 
-      <div className="space-y-4">
-        <div className="flex items-center gap-4">
-          <div
-            data-bar-without
-            className="h-12 sm:h-14 rounded-lg bg-gradient-to-r from-red-700 to-red-600 dark:from-red-800/80 dark:to-red-700/60 border border-red-400/40 dark:border-red-500/40 flex items-center px-4"
-            style={{ width: "0%" }}
-          >
-            <span data-bar-label className="text-white font-semibold text-sm sm:text-base whitespace-nowrap">{withoutLabel}</span>
+      <div className="space-y-5">
+        <div data-bar-row>
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-300">{withoutLabel}</span>
+            <span className="text-sm sm:text-base font-bold text-gray-600 dark:text-gray-400">{withoutValue}</span>
           </div>
-          <span data-bar-value className="text-gray-600 dark:text-gray-400 font-bold text-base sm:text-lg whitespace-nowrap">{withoutValue}</span>
+          <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-lg h-10 sm:h-12 overflow-hidden">
+            <div
+              data-bar-without
+              className="h-full rounded-lg bg-gradient-to-r from-red-700 to-red-500 dark:from-red-800/90 dark:to-red-600/80"
+              style={{ width: "0%" }}
+            />
+          </div>
         </div>
 
-        <div className="flex items-center gap-4">
-          <div
-            data-bar-with
-            className="h-12 sm:h-14 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-700 dark:to-blue-600 border border-blue-300/40 dark:border-blue-400/40 flex items-center px-4"
-            style={{ width: "0%" }}
-          >
-            <span data-bar-label className="text-white font-semibold text-sm sm:text-base whitespace-nowrap">{withLabel}</span>
+        <div data-bar-row>
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-300">{withLabel}</span>
+            <span className="text-sm sm:text-base font-bold text-blue-600 dark:text-blue-400">{withValue}</span>
           </div>
-          <span data-bar-value className="text-gray-600 dark:text-gray-400 font-bold text-base sm:text-lg whitespace-nowrap">{withValue}</span>
+          <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-lg h-10 sm:h-12 overflow-hidden">
+            <div
+              data-bar-with
+              className="h-full rounded-lg bg-gradient-to-r from-blue-600 to-blue-400 dark:from-blue-700 dark:to-blue-500"
+              style={{ width: "0%" }}
+            />
+          </div>
         </div>
       </div>
     </div>
