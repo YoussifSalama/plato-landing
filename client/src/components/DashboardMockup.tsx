@@ -1,6 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useLayoutEffect } from "react";
 import { useI18n } from "@/lib/i18n";
 import platoLogo from "@/assets/plato-logo.png";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   LayoutDashboard,
   Briefcase,
@@ -19,6 +21,8 @@ import {
   ChevronLeft,
 } from "lucide-react";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const sidebarNav = [
   { icon: LayoutDashboard, label: "Dashboard", active: true },
   { icon: Briefcase, label: "Jobs" },
@@ -36,10 +40,10 @@ const statCards = [
 ];
 
 const overviewStats = [
-  { label: "Total Jobs", numVal: 53, display: "53", change: "+5%" },
-  { label: "New Applicants", numVal: 2300, display: "2,300", change: "+95%" },
-  { label: "Interviews Scheduled", numVal: 2408, display: "2,408", change: "+8%" },
-  { label: "Hiring Success Rate", numVal: 87, display: "87%", change: "+6%", suffix: "%" },
+  { label: "Total Jobs", numVal: 53, change: "+5%" },
+  { label: "New Applicants", numVal: 2300, change: "+95%" },
+  { label: "Interviews Scheduled", numVal: 2408, change: "+8%" },
+  { label: "Hiring Success Rate", numVal: 87, change: "+6%", suffix: "%" },
 ];
 
 const hiringProgress = [
@@ -65,259 +69,381 @@ const donutSegments = [
   { label: "Rejected", pct: 5, color: "#ef4444" },
 ];
 
-function useSectionVisible(threshold = 0.3) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+function CountUpNumber({ target, suffix = "", triggerRef }: { target: number; suffix?: string; triggerRef: { current: HTMLDivElement | null } }) {
+  const numRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) { setVisible(true); return; }
-    const obs = new IntersectionObserver(
-      ([entry]) => { setVisible(entry.isIntersecting); },
-      { threshold, rootMargin: "0px 0px -20px 0px" }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [threshold]);
+    if (!numRef.current || !triggerRef.current) return;
+    const obj = { val: 0 };
+    const tween = gsap.to(obj, {
+      val: target,
+      duration: 1.6,
+      ease: "power3.out",
+      paused: true,
+      onUpdate: () => {
+        if (numRef.current) {
+          numRef.current.textContent = Math.round(obj.val).toLocaleString("en-US") + suffix;
+        }
+      },
+    });
 
-  return { ref, visible };
-}
+    const st = ScrollTrigger.create({
+      trigger: triggerRef.current,
+      start: "top 85%",
+      end: "bottom 15%",
+      onEnter: () => tween.restart(),
+      onEnterBack: () => tween.restart(),
+      onLeave: () => {
+        tween.pause(0);
+        if (numRef.current) numRef.current.textContent = "0" + suffix;
+      },
+      onLeaveBack: () => {
+        tween.pause(0);
+        if (numRef.current) numRef.current.textContent = "0" + suffix;
+      },
+    });
 
-function useCountUp(target: number, visible: boolean, duration = 1200) {
-  const [val, setVal] = useState(0);
+    return () => {
+      tween.kill();
+      st.kill();
+    };
+  }, [target, suffix, triggerRef]);
 
-  useEffect(() => {
-    if (!visible) { setVal(0); return; }
-    let start = 0;
-    const startTime = performance.now();
-    function tick(now: number) {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setVal(Math.round(eased * target));
-      if (progress < 1) start = requestAnimationFrame(tick);
-    }
-    start = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(start);
-  }, [visible, target, duration]);
-
-  return val;
-}
-
-function formatNum(n: number): string {
-  return n.toLocaleString("en-US");
-}
-
-function AnimatedNumber({ target, visible, suffix = "", duration = 1200 }: { target: number; visible: boolean; suffix?: string; duration?: number }) {
-  const val = useCountUp(target, visible, duration);
-  return <>{formatNum(val)}{suffix}</>;
-}
-
-function DonutChart({ visible }: { visible: boolean }) {
-  const radius = 40;
-  const circumference = 2 * Math.PI * radius;
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    if (!visible) { setProgress(0); return; }
-    let start = 0;
-    const startTime = performance.now();
-    function tick(now: number) {
-      const elapsed = now - startTime;
-      const p = Math.min(elapsed / 1400, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setProgress(eased);
-      if (p < 1) start = requestAnimationFrame(tick);
-    }
-    start = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(start);
-  }, [visible]);
-
-  let cumulative = 0;
-
-  return (
-    <div className="flex items-center gap-6">
-      <svg viewBox="0 0 100 100" className="w-28 h-28 flex-shrink-0">
-        {donutSegments.map((seg, i) => {
-          const offset = cumulative;
-          cumulative += seg.pct;
-          const fullDash = (seg.pct / 100) * circumference;
-          const dashLength = fullDash * progress;
-          const dashOffset = -(offset / 100) * circumference * progress;
-          return (
-            <circle
-              key={i}
-              cx="50"
-              cy="50"
-              r={radius}
-              fill="none"
-              stroke={seg.color}
-              strokeWidth="12"
-              strokeDasharray={`${dashLength} ${circumference - dashLength}`}
-              strokeDashoffset={dashOffset}
-              strokeLinecap="round"
-              transform="rotate(-90 50 50)"
-              style={{ transition: "none" }}
-            />
-          );
-        })}
-      </svg>
-      <div className="space-y-1.5 text-[9px]">
-        {donutSegments.map((seg, i) => (
-          <div key={i} className="flex items-center justify-between gap-4" style={{
-            opacity: visible ? 1 : 0,
-            transform: visible ? "translateX(0)" : "translateX(10px)",
-            transition: `opacity 400ms ${200 + i * 100}ms, transform 400ms ${200 + i * 100}ms`
-          }}>
-            <div className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: seg.color }} />
-              <span className="text-muted-foreground">{seg.label}</span>
-            </div>
-            <span className="font-semibold text-foreground">{seg.pct}%</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function MiniBarChart({ visible }: { visible: boolean }) {
-  const bars = [280, 380, 350, 420, 480, 450];
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
-  const maxVal = 600;
-
-  return (
-    <div className="flex items-end gap-2 h-24">
-      {bars.map((val, i) => (
-        <div key={i} className="flex flex-col items-center gap-1 flex-1">
-          <div
-            className="w-full rounded-t bg-gradient-to-t from-blue-600 to-blue-400 min-w-[12px]"
-            style={{
-              height: visible ? `${(val / maxVal) * 100}%` : "0%",
-              transition: `height 800ms cubic-bezier(0.34, 1.56, 0.64, 1) ${i * 120}ms`,
-            }}
-          />
-          <span className="text-[7px] text-muted-foreground">{months[i]}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function AreaChartMini({ visible }: { visible: boolean }) {
-  const appData = [30, 45, 35, 55, 60, 50, 40];
-  const intData = [15, 20, 25, 30, 25, 20, 15];
-  const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-  const w = 280;
-  const h = 100;
-  const pad = 10;
-
-  function toPath(data: number[], maxVal: number) {
-    const stepX = (w - pad * 2) / (data.length - 1);
-    return data
-      .map((v, i) => {
-        const x = pad + i * stepX;
-        const y = h - pad - (v / maxVal) * (h - pad * 2);
-        return `${i === 0 ? "M" : "L"}${x},${y}`;
-      })
-      .join(" ");
-  }
-
-  function toArea(data: number[], maxVal: number) {
-    const stepX = (w - pad * 2) / (data.length - 1);
-    const line = data
-      .map((v, i) => {
-        const x = pad + i * stepX;
-        const y = h - pad - (v / maxVal) * (h - pad * 2);
-        return `${x},${y}`;
-      })
-      .join(" L");
-    const lastX = pad + (data.length - 1) * stepX;
-    return `M${pad},${h - pad} L${line} L${lastX},${h - pad} Z`;
-  }
-
-  const maxVal = 80;
-  const appPath = toPath(appData, maxVal);
-  const intPath = toPath(intData, maxVal);
-  const pathLength = 500;
-
-  return (
-    <div>
-      <div className="flex items-center gap-4 mb-2 text-[8px]">
-        <div className="flex items-center gap-1">
-          <span className="w-2 h-2 rounded-full bg-blue-500" />
-          <span className="text-muted-foreground">Applications</span>
-        </div>
-        <div className="flex items-center gap-1">
-          <span className="w-2 h-2 rounded-full bg-emerald-500" />
-          <span className="text-muted-foreground">Interviews</span>
-        </div>
-      </div>
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-auto">
-        <path
-          d={toArea(appData, maxVal)}
-          fill="hsl(210 80% 60% / 0.15)"
-          style={{ opacity: visible ? 1 : 0, transition: "opacity 1000ms 400ms" }}
-        />
-        <path
-          d={appPath}
-          fill="none"
-          stroke="hsl(210 80% 55%)"
-          strokeWidth="2"
-          strokeDasharray={pathLength}
-          strokeDashoffset={visible ? 0 : pathLength}
-          style={{ transition: `stroke-dashoffset 1200ms cubic-bezier(0.4, 0, 0.2, 1)` }}
-        />
-        <path
-          d={toArea(intData, maxVal)}
-          fill="hsl(150 60% 50% / 0.12)"
-          style={{ opacity: visible ? 1 : 0, transition: "opacity 1000ms 600ms" }}
-        />
-        <path
-          d={intPath}
-          fill="none"
-          stroke="hsl(150 60% 45%)"
-          strokeWidth="2"
-          strokeDasharray={pathLength}
-          strokeDashoffset={visible ? 0 : pathLength}
-          style={{ transition: `stroke-dashoffset 1200ms 200ms cubic-bezier(0.4, 0, 0.2, 1)` }}
-        />
-        {days.map((d, i) => {
-          const x = pad + i * ((w - pad * 2) / (days.length - 1));
-          return (
-            <text key={i} x={x} y={h - 1} textAnchor="middle" className="fill-muted-foreground" style={{ fontSize: 7 }}>
-              {d}
-            </text>
-          );
-        })}
-      </svg>
-    </div>
-  );
+  return <span ref={numRef}>0{suffix}</span>;
 }
 
 export default function DashboardMockup() {
   const { lang } = useI18n();
   const isRtl = lang === "ar";
 
-  const sec1 = useSectionVisible(0.2);
-  const sec2 = useSectionVisible(0.2);
-  const sec3 = useSectionVisible(0.2);
-  const sec4 = useSectionVisible(0.2);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const topBarRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const statCardsRef = useRef<HTMLDivElement>(null);
+  const overviewRef = useRef<HTMLDivElement>(null);
+  const chartsRef = useRef<HTMLDivElement>(null);
+  const weeklyCardRef = useRef<HTMLDivElement>(null);
+  const donutCardRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const growthRef = useRef<HTMLDivElement>(null);
+  const activityRef = useRef<HTMLDivElement>(null);
+  const sec1Ref = useRef<HTMLDivElement>(null);
+  const sec2Ref = useRef<HTMLDivElement>(null);
+  const sec3Ref = useRef<HTMLDivElement>(null);
+  const sec4Ref = useRef<HTMLDivElement>(null);
+
+  const donutRef = useRef<SVGSVGElement>(null);
+  const areaPathRef1 = useRef<SVGPathElement>(null);
+  const areaPathRef2 = useRef<SVGPathElement>(null);
+  const areaFillRef1 = useRef<SVGPathElement>(null);
+  const areaFillRef2 = useRef<SVGPathElement>(null);
+
+  useLayoutEffect(() => {
+    if (!containerRef.current) return;
+    const ctx = gsap.context(() => {
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReduced) return;
+
+      gsap.set(sidebarRef.current, { x: isRtl ? 120 : -120, opacity: 0 });
+      gsap.set(topBarRef.current, { y: -50, opacity: 0 });
+      gsap.set(headerRef.current, { y: 40, opacity: 0, scale: 0.9 });
+
+      const tl1 = gsap.timeline({
+        scrollTrigger: {
+          trigger: sec1Ref.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse",
+        },
+      });
+
+      tl1.to(sidebarRef.current, {
+        x: 0, opacity: 1, duration: 0.8,
+        ease: "back.out(1.4)",
+      }, 0);
+
+      tl1.to(topBarRef.current, {
+        y: 0, opacity: 1, duration: 0.6,
+        ease: "power3.out",
+      }, 0.15);
+
+      tl1.to(headerRef.current, {
+        y: 0, opacity: 1, scale: 1, duration: 0.7,
+        ease: "back.out(1.7)",
+      }, 0.25);
+
+      const cards = statCardsRef.current?.children;
+      if (cards) {
+        gsap.set(cards, { y: 60, opacity: 0, scale: 0.7, rotateX: 25 });
+        tl1.to(cards, {
+          y: 0, opacity: 1, scale: 1, rotateX: 0,
+          duration: 0.7,
+          stagger: 0.12,
+          ease: "back.out(2)",
+        }, 0.35);
+      }
+
+      gsap.set(overviewRef.current, { y: 30, opacity: 0, scaleY: 0.8 });
+      tl1.to(overviewRef.current, {
+        y: 0, opacity: 1, scaleY: 1, duration: 0.6,
+        ease: "power3.out",
+      }, 0.7);
+
+      const overviewItems = overviewRef.current?.querySelectorAll("[data-overview-item]");
+      if (overviewItems) {
+        gsap.set(overviewItems, { y: 20, opacity: 0 });
+        tl1.to(overviewItems, {
+          y: 0, opacity: 1, duration: 0.5,
+          stagger: 0.1,
+          ease: "power2.out",
+        }, 0.85);
+      }
+
+      const tl2 = gsap.timeline({
+        scrollTrigger: {
+          trigger: sec2Ref.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse",
+        },
+      });
+
+      gsap.set(weeklyCardRef.current, { x: isRtl ? 80 : -80, opacity: 0, rotateY: isRtl ? -15 : 15, scale: 0.85 });
+      gsap.set(donutCardRef.current, { x: isRtl ? -80 : 80, opacity: 0, rotateY: isRtl ? 15 : -15, scale: 0.85 });
+
+      tl2.to(weeklyCardRef.current, {
+        x: 0, opacity: 1, rotateY: 0, scale: 1, duration: 0.9,
+        ease: "power3.out",
+      }, 0);
+
+      tl2.to(donutCardRef.current, {
+        x: 0, opacity: 1, rotateY: 0, scale: 1, duration: 0.9,
+        ease: "power3.out",
+      }, 0.15);
+
+      if (areaPathRef1.current) {
+        const len1 = areaPathRef1.current.getTotalLength?.() || 500;
+        gsap.set(areaPathRef1.current, { strokeDasharray: len1, strokeDashoffset: len1 });
+        gsap.set(areaFillRef1.current, { opacity: 0 });
+        tl2.to(areaPathRef1.current, { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut" }, 0.4);
+        tl2.to(areaFillRef1.current, { opacity: 1, duration: 0.8, ease: "power1.in" }, 0.8);
+      }
+      if (areaPathRef2.current) {
+        const len2 = areaPathRef2.current.getTotalLength?.() || 500;
+        gsap.set(areaPathRef2.current, { strokeDasharray: len2, strokeDashoffset: len2 });
+        gsap.set(areaFillRef2.current, { opacity: 0 });
+        tl2.to(areaPathRef2.current, { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut" }, 0.6);
+        tl2.to(areaFillRef2.current, { opacity: 1, duration: 0.8, ease: "power1.in" }, 1.0);
+      }
+
+      const donutCircles = donutRef.current?.querySelectorAll("circle");
+      if (donutCircles) {
+        donutCircles.forEach((c) => {
+          const radius = 40;
+          const circumference = 2 * Math.PI * radius;
+          gsap.set(c, { strokeDashoffset: circumference, attr: { "stroke-opacity": 0 } });
+        });
+
+        tl2.to(donutCircles, {
+          strokeDashoffset: 0,
+          attr: { "stroke-opacity": 1 },
+          duration: 1.4,
+          stagger: 0.15,
+          ease: "power2.out",
+        }, 0.5);
+
+        tl2.fromTo(donutRef.current, { rotation: -90, transformOrigin: "center center" },
+          { rotation: 0, duration: 1.5, ease: "power2.out" }, 0.3);
+      }
+
+      const donutLegend = donutCardRef.current?.querySelectorAll("[data-legend-item]");
+      if (donutLegend) {
+        gsap.set(donutLegend, { x: 20, opacity: 0 });
+        tl2.to(donutLegend, {
+          x: 0, opacity: 1, duration: 0.4,
+          stagger: 0.08,
+          ease: "power2.out",
+        }, 1.0);
+      }
+
+      const tl3 = gsap.timeline({
+        scrollTrigger: {
+          trigger: sec3Ref.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse",
+        },
+      });
+
+      gsap.set(progressRef.current, { y: 50, opacity: 0, scale: 0.9 });
+      gsap.set(growthRef.current, { y: 50, opacity: 0, scale: 0.9 });
+
+      tl3.to(progressRef.current, {
+        y: 0, opacity: 1, scale: 1, duration: 0.7,
+        ease: "back.out(1.4)",
+      }, 0);
+
+      tl3.to(growthRef.current, {
+        y: 0, opacity: 1, scale: 1, duration: 0.7,
+        ease: "back.out(1.4)",
+      }, 0.15);
+
+      const progressBars = progressRef.current?.querySelectorAll("[data-progress-fill]");
+      if (progressBars) {
+        gsap.set(progressBars, { width: "0%" });
+        progressBars.forEach((bar, i) => {
+          const targetWidth = bar.getAttribute("data-target-width") || "0%";
+          tl3.to(bar, {
+            width: targetWidth,
+            duration: 1.0,
+            delay: i * 0.15,
+            ease: "elastic.out(1, 0.5)",
+          }, 0.4);
+        });
+      }
+
+      const progressRows = progressRef.current?.querySelectorAll("[data-progress-row]");
+      if (progressRows) {
+        gsap.set(progressRows, { x: isRtl ? 30 : -30, opacity: 0 });
+        tl3.to(progressRows, {
+          x: 0, opacity: 1, duration: 0.5,
+          stagger: 0.12,
+          ease: "power2.out",
+        }, 0.3);
+      }
+
+      const barElements = growthRef.current?.querySelectorAll("[data-bar]");
+      if (barElements) {
+        gsap.set(barElements, { scaleY: 0, transformOrigin: "bottom center" });
+        tl3.to(barElements, {
+          scaleY: 1,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "elastic.out(1.2, 0.4)",
+        }, 0.5);
+      }
+
+      const tl4 = gsap.timeline({
+        scrollTrigger: {
+          trigger: sec4Ref.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse",
+        },
+      });
+
+      gsap.set(activityRef.current, { y: 40, opacity: 0 });
+      tl4.to(activityRef.current, {
+        y: 0, opacity: 1, duration: 0.6,
+        ease: "power3.out",
+      }, 0);
+
+      const actItems = activityRef.current?.querySelectorAll("[data-activity-item]");
+      if (actItems) {
+        gsap.set(actItems, { x: isRtl ? -40 : 40, opacity: 0, scale: 0.9 });
+        tl4.to(actItems, {
+          x: 0, opacity: 1, scale: 1,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "back.out(1.5)",
+        }, 0.25);
+      }
+
+      const navItems = sidebarRef.current?.querySelectorAll("[data-nav-item]");
+      if (navItems) {
+        gsap.set(navItems, { x: isRtl ? 20 : -20, opacity: 0 });
+        tl1.to(navItems, {
+          x: 0, opacity: 1, duration: 0.4,
+          stagger: 0.06,
+          ease: "power2.out",
+        }, 0.4);
+      }
+
+      const sidebarBottom = sidebarRef.current?.querySelectorAll("[data-sidebar-bottom]");
+      if (sidebarBottom) {
+        gsap.set(sidebarBottom, { y: 20, opacity: 0 });
+        tl1.to(sidebarBottom, {
+          y: 0, opacity: 1, duration: 0.5,
+          stagger: 0.1,
+          ease: "power2.out",
+        }, 0.7);
+      }
+
+      gsap.utils.toArray<HTMLElement>("[data-float]").forEach((el, i) => {
+        gsap.to(el, {
+          y: "random(-3, 3)",
+          duration: "random(2, 3.5)",
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: i * 0.3,
+        });
+      });
+
+      gsap.utils.toArray<HTMLElement>("[data-pulse]").forEach((el) => {
+        gsap.to(el, {
+          boxShadow: "0 0 8px 2px rgba(59, 130, 246, 0.3)",
+          duration: 1.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+      });
+
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [isRtl]);
 
   const cardBg = "bg-white dark:bg-[#1e293b]";
   const mainBg = "bg-gray-100 dark:bg-[#111827]";
 
+  const appData = [30, 45, 35, 55, 60, 50, 40];
+  const intData = [15, 20, 25, 30, 25, 20, 15];
+  const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const chartW = 280;
+  const chartH = 100;
+  const pad = 10;
+  const maxVal = 80;
+
+  function toPath(data: number[]) {
+    const stepX = (chartW - pad * 2) / (data.length - 1);
+    return data.map((v, i) => {
+      const x = pad + i * stepX;
+      const y = chartH - pad - (v / maxVal) * (chartH - pad * 2);
+      return `${i === 0 ? "M" : "L"}${x},${y}`;
+    }).join(" ");
+  }
+
+  function toArea(data: number[]) {
+    const stepX = (chartW - pad * 2) / (data.length - 1);
+    const line = data.map((v, i) => {
+      const x = pad + i * stepX;
+      const y = chartH - pad - (v / maxVal) * (chartH - pad * 2);
+      return `${x},${y}`;
+    }).join(" L");
+    const lastX = pad + (data.length - 1) * stepX;
+    return `M${pad},${chartH - pad} L${line} L${lastX},${chartH - pad} Z`;
+  }
+
+  const radius = 40;
+  const circumference = 2 * Math.PI * radius;
+  let cumulative = 0;
+
+  const bars = [280, 380, 350, 420, 480, 450];
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+  const maxBar = 600;
+
   return (
     <div
+      ref={containerRef}
       className={`select-none ${isRtl ? "direction-rtl" : ""}`}
-      style={{ fontSize: "11px", lineHeight: 1.4 }}
+      style={{ fontSize: "11px", lineHeight: 1.4, perspective: "1000px" }}
       data-testid="dashboard-mockup"
     >
       <div className="flex">
-        {/* Sidebar — sticky on the left, spans all sections */}
-        <div className="w-[120px] flex-shrink-0 bg-white dark:bg-[#0f172a] flex flex-col border-r border-border rounded-l-2xl">
+        <div ref={sidebarRef} className="w-[120px] flex-shrink-0 bg-white dark:bg-[#0f172a] flex flex-col border-r border-border rounded-l-2xl">
           <div className="px-3 py-4 flex items-center gap-2">
             <img src={platoLogo} alt="Plato" className="w-7 h-7 object-contain dark:invert" />
             <div className="flex-1 min-w-0">
@@ -331,10 +457,9 @@ export default function DashboardMockup() {
             {sidebarNav.map((item, i) => (
               <div
                 key={i}
+                data-nav-item
                 className={`flex items-center gap-2 px-2 py-1.5 rounded-md text-[10px] ${
-                  item.active
-                    ? "bg-blue-600 text-white font-medium"
-                    : "text-muted-foreground"
+                  item.active ? "bg-blue-600 text-white font-medium" : "text-muted-foreground"
                 }`}
               >
                 <item.icon className="w-3.5 h-3.5" />
@@ -349,19 +474,19 @@ export default function DashboardMockup() {
           </nav>
 
           <div className="px-2 pb-2 space-y-0.5 mt-auto">
-            <div className="flex items-center gap-2 px-2 py-1.5 rounded-md text-[10px] text-muted-foreground">
+            <div data-sidebar-bottom className="flex items-center gap-2 px-2 py-1.5 rounded-md text-[10px] text-muted-foreground">
               <Settings className="w-3.5 h-3.5" />
               <span>Settings</span>
             </div>
-            <div className="flex items-center gap-2 px-2 py-1.5 rounded-md text-[10px] text-muted-foreground">
+            <div data-sidebar-bottom className="flex items-center gap-2 px-2 py-1.5 rounded-md text-[10px] text-muted-foreground">
               <HelpCircle className="w-3.5 h-3.5" />
               <span>Help Center</span>
             </div>
           </div>
 
-          <div className="mx-2 mb-3 bg-blue-900/90 dark:bg-blue-900/80 rounded-lg p-2">
+          <div data-sidebar-bottom className="mx-2 mb-3 bg-blue-900/90 dark:bg-blue-900/80 rounded-lg p-2">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-[8px] font-bold text-white">HR</div>
+              <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-[8px] font-bold text-white" data-pulse>HR</div>
               <div>
                 <div className="text-[9px] font-semibold text-white">HR Manager</div>
                 <div className="text-[7px] text-blue-200">hr@company.com</div>
@@ -374,10 +499,8 @@ export default function DashboardMockup() {
           </div>
         </div>
 
-        {/* Main Content */}
         <div className="flex-1 min-w-0 rounded-r-2xl overflow-hidden">
-          {/* Top Bar — always visible */}
-          <div className="h-10 bg-white dark:bg-[#1e293b] border-b border-border flex items-center px-4 gap-3">
+          <div ref={topBarRef} className="h-10 bg-white dark:bg-[#1e293b] border-b border-border flex items-center px-4 gap-3">
             <div className="flex items-center gap-2 bg-gray-100 dark:bg-[#0f172a] rounded-lg px-3 py-1.5 flex-1 max-w-[300px]">
               <Search className="w-3 h-3 text-muted-foreground" />
               <span className="text-[9px] text-muted-foreground">Search jobs, candidates, or anything...</span>
@@ -385,6 +508,7 @@ export default function DashboardMockup() {
             <div className="ml-auto flex items-center gap-3">
               <div className="relative">
                 <Bell className="w-3.5 h-3.5 text-muted-foreground" />
+                <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-ping" />
                 <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full" />
               </div>
               <div className="flex items-center gap-1.5">
@@ -397,59 +521,47 @@ export default function DashboardMockup() {
           </div>
 
           {/* === SECTION 1: Header + Stat Cards + Overview === */}
-          <div ref={sec1.ref} className={`${mainBg} p-4 space-y-3`}>
-            <div className="flex items-start justify-between" style={{
-              opacity: sec1.visible ? 1 : 0,
-              transform: sec1.visible ? "translateY(0)" : "translateY(20px)",
-              transition: "opacity 600ms, transform 600ms"
-            }}>
+          <div ref={sec1Ref} className={`${mainBg} p-4 space-y-3`}>
+            <div ref={headerRef} className="flex items-start justify-between">
               <div>
                 <h2 className="text-[15px] font-bold text-foreground">Agency Dashboard</h2>
                 <p className="text-[9px] text-muted-foreground">Welcome back! Here's what's happening today.</p>
               </div>
-              <div className="flex items-center gap-1 bg-blue-600 text-white rounded-lg px-3 py-1.5 text-[9px] font-medium">
+              <div className="flex items-center gap-1 bg-blue-600 text-white rounded-lg px-3 py-1.5 text-[9px] font-medium" data-pulse>
                 <Plus className="w-3 h-3" />
                 Post New Job
               </div>
             </div>
 
-            <div className="grid grid-cols-4 gap-2">
+            <div ref={statCardsRef} className="grid grid-cols-4 gap-2">
               {statCards.map((card, i) => (
-                <div key={i} className={`${cardBg} rounded-xl p-3 border border-border`} style={{
-                  opacity: sec1.visible ? 1 : 0,
-                  transform: sec1.visible ? "translateY(0) scale(1)" : "translateY(24px) scale(0.95)",
-                  transition: `opacity 500ms ${150 + i * 100}ms, transform 500ms ${150 + i * 100}ms cubic-bezier(0.34, 1.56, 0.64, 1)`
-                }}>
+                <div key={i} className={`${cardBg} rounded-xl p-3 border border-border`} data-float>
                   <div className={`w-7 h-7 ${card.color} rounded-lg flex items-center justify-center mb-2`}>
                     <card.icon className="w-3.5 h-3.5 text-white" />
                   </div>
                   <div className="text-[8px] text-muted-foreground">{card.label}</div>
                   <div className="text-[16px] font-bold text-foreground leading-tight">
-                    <AnimatedNumber target={card.value} visible={sec1.visible} duration={1000} />
+                    <CountUpNumber target={card.value} triggerRef={sec1Ref} />
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className={`${cardBg} rounded-xl p-3 border border-border`} style={{
-              opacity: sec1.visible ? 1 : 0,
-              transform: sec1.visible ? "translateY(0)" : "translateY(16px)",
-              transition: "opacity 600ms 500ms, transform 600ms 500ms"
-            }}>
+            <div ref={overviewRef} className={`${cardBg} rounded-xl p-3 border border-border`}>
               <div className="flex items-center justify-between mb-2">
                 <h3 className="text-[11px] font-bold text-foreground">Overview Statistics</h3>
                 <span className="text-[8px] text-blue-500 font-medium">View All</span>
               </div>
               <div className="grid grid-cols-4 gap-3">
                 {overviewStats.map((stat, i) => (
-                  <div key={i}>
+                  <div key={i} data-overview-item>
                     <div className="flex items-center gap-1 text-[8px] text-muted-foreground mb-0.5">
                       {stat.label}
                       <TrendingUp className="w-2.5 h-2.5 text-emerald-500" />
                     </div>
                     <div className="flex items-baseline gap-1">
                       <span className="text-[14px] font-bold text-foreground">
-                        <AnimatedNumber target={stat.numVal} visible={sec1.visible} suffix={stat.suffix} duration={1400} />
+                        <CountUpNumber target={stat.numVal} suffix={stat.suffix || ""} triggerRef={sec1Ref} />
                       </span>
                       <span className="text-[7px] text-emerald-500 font-medium">{stat.change}</span>
                     </div>
@@ -460,60 +572,94 @@ export default function DashboardMockup() {
           </div>
 
           {/* === SECTION 2: Charts Row === */}
-          <div ref={sec2.ref} className={`${mainBg} px-4 pb-3 space-y-3`}>
+          <div ref={sec2Ref} className={`${mainBg} px-4 pb-3 space-y-3`}>
             <div className="grid grid-cols-2 gap-2">
-              <div className={`${cardBg} rounded-xl p-3 border border-border`} style={{
-                opacity: sec2.visible ? 1 : 0,
-                transform: sec2.visible ? "translateX(0)" : "translateX(-30px)",
-                transition: "opacity 700ms, transform 700ms cubic-bezier(0.16, 1, 0.3, 1)"
-              }}>
+              <div ref={weeklyCardRef} className={`${cardBg} rounded-xl p-3 border border-border`}>
                 <h3 className="text-[11px] font-bold text-foreground mb-0.5">Weekly Activity</h3>
                 <p className="text-[7px] text-muted-foreground mb-2">Applications, Interviews & Offers</p>
-                <AreaChartMini visible={sec2.visible} />
+                <div className="flex items-center gap-4 mb-2 text-[8px]">
+                  <div className="flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-blue-500" />
+                    <span className="text-muted-foreground">Applications</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                    <span className="text-muted-foreground">Interviews</span>
+                  </div>
+                </div>
+                <svg viewBox={`0 0 ${chartW} ${chartH}`} className="w-full h-auto">
+                  <path ref={areaFillRef1} d={toArea(appData)} fill="hsl(210 80% 60% / 0.15)" />
+                  <path ref={areaPathRef1} d={toPath(appData)} fill="none" stroke="hsl(210 80% 55%)" strokeWidth="2" />
+                  <path ref={areaFillRef2} d={toArea(intData)} fill="hsl(150 60% 50% / 0.12)" />
+                  <path ref={areaPathRef2} d={toPath(intData)} fill="none" stroke="hsl(150 60% 45%)" strokeWidth="2" />
+                  {days.map((d, i) => {
+                    const x = pad + i * ((chartW - pad * 2) / (days.length - 1));
+                    return (
+                      <text key={i} x={x} y={chartH - 1} textAnchor="middle" className="fill-muted-foreground" style={{ fontSize: 7 }}>{d}</text>
+                    );
+                  })}
+                </svg>
               </div>
-              <div className={`${cardBg} rounded-xl p-3 border border-border`} style={{
-                opacity: sec2.visible ? 1 : 0,
-                transform: sec2.visible ? "translateX(0)" : "translateX(30px)",
-                transition: "opacity 700ms 100ms, transform 700ms 100ms cubic-bezier(0.16, 1, 0.3, 1)"
-              }}>
+
+              <div ref={donutCardRef} className={`${cardBg} rounded-xl p-3 border border-border`}>
                 <h3 className="text-[11px] font-bold text-foreground mb-0.5">Application Status</h3>
                 <p className="text-[7px] text-muted-foreground mb-2">Current distribution by stage</p>
-                <DonutChart visible={sec2.visible} />
+                <div className="flex items-center gap-6">
+                  <svg ref={donutRef} viewBox="0 0 100 100" className="w-28 h-28 flex-shrink-0">
+                    {donutSegments.map((seg, i) => {
+                      const offset = cumulative;
+                      cumulative += seg.pct;
+                      const fullDash = (seg.pct / 100) * circumference;
+                      const dashOffset = -(offset / 100) * circumference;
+                      return (
+                        <circle
+                          key={i}
+                          cx="50" cy="50" r={radius}
+                          fill="none" stroke={seg.color} strokeWidth="12"
+                          strokeDasharray={`${fullDash} ${circumference - fullDash}`}
+                          strokeDashoffset={dashOffset}
+                          strokeLinecap="round"
+                          transform="rotate(-90 50 50)"
+                        />
+                      );
+                    })}
+                  </svg>
+                  <div className="space-y-1.5 text-[9px]">
+                    {donutSegments.map((seg, i) => (
+                      <div key={i} data-legend-item className="flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: seg.color }} />
+                          <span className="text-muted-foreground">{seg.label}</span>
+                        </div>
+                        <span className="font-semibold text-foreground">{seg.pct}%</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
           {/* === SECTION 3: Progress + Growth === */}
-          <div ref={sec3.ref} className={`${mainBg} px-4 pb-3 space-y-3`}>
+          <div ref={sec3Ref} className={`${mainBg} px-4 pb-3 space-y-3`}>
             <div className="grid grid-cols-2 gap-2">
-              <div className={`${cardBg} rounded-xl p-3 border border-border`} style={{
-                opacity: sec3.visible ? 1 : 0,
-                transform: sec3.visible ? "translateY(0)" : "translateY(24px)",
-                transition: "opacity 600ms, transform 600ms cubic-bezier(0.16, 1, 0.3, 1)"
-              }}>
+              <div ref={progressRef} className={`${cardBg} rounded-xl p-3 border border-border`}>
                 <h3 className="text-[11px] font-bold text-foreground mb-0.5">Department Hiring Progress</h3>
                 <p className="text-[7px] text-muted-foreground mb-2">Current vs Target</p>
                 <div className="space-y-2.5">
                   {hiringProgress.map((item, i) => (
-                    <div key={i} style={{
-                      opacity: sec3.visible ? 1 : 0,
-                      transform: sec3.visible ? "translateX(0)" : "translateX(-16px)",
-                      transition: `opacity 400ms ${200 + i * 120}ms, transform 400ms ${200 + i * 120}ms`
-                    }}>
+                    <div key={i} data-progress-row>
                       <div className="flex items-center justify-between mb-0.5">
                         <span className="text-[9px] font-semibold text-foreground">{item.dept}</span>
-                        <span className="text-[7px] text-muted-foreground">
-                          {item.current} / {item.target}
-                        </span>
+                        <span className="text-[7px] text-muted-foreground">{item.current} / {item.target}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                           <div
                             className={`h-full rounded-full ${item.color}`}
-                            style={{
-                              width: sec3.visible ? `${item.pct}%` : "0%",
-                              transition: `width 900ms ${300 + i * 150}ms cubic-bezier(0.34, 1.56, 0.64, 1)`,
-                            }}
+                            data-progress-fill
+                            data-target-width={`${item.pct}%`}
+                            style={{ width: "0%" }}
                           />
                         </div>
                         <span className="text-[8px] font-medium text-foreground w-7 text-right">{item.pct}%</span>
@@ -522,19 +668,27 @@ export default function DashboardMockup() {
                   ))}
                 </div>
               </div>
-              <div className={`${cardBg} rounded-xl p-3 border border-border`} style={{
-                opacity: sec3.visible ? 1 : 0,
-                transform: sec3.visible ? "translateY(0)" : "translateY(24px)",
-                transition: "opacity 600ms 100ms, transform 600ms 100ms cubic-bezier(0.16, 1, 0.3, 1)"
-              }}>
+
+              <div ref={growthRef} className={`${cardBg} rounded-xl p-3 border border-border`}>
                 <h3 className="text-[11px] font-bold text-foreground mb-0.5">Monthly Growth</h3>
                 <p className="text-[7px] text-muted-foreground mb-2">Application volume trend</p>
-                <MiniBarChart visible={sec3.visible} />
+                <div className="flex items-end gap-2 h-24">
+                  {bars.map((val, i) => (
+                    <div key={i} className="flex flex-col items-center gap-1 flex-1">
+                      <div
+                        data-bar
+                        className="w-full rounded-t bg-gradient-to-t from-blue-600 to-blue-400 min-w-[12px]"
+                        style={{ height: `${(val / maxBar) * 100}%` }}
+                      />
+                      <span className="text-[7px] text-muted-foreground">{months[i]}</span>
+                    </div>
+                  ))}
+                </div>
                 <div className="flex items-center justify-between mt-2 pt-2 border-t border-border">
                   <div>
                     <div className="text-[7px] text-muted-foreground uppercase">Current Month</div>
                     <div className="text-[14px] font-bold text-foreground">
-                      <AnimatedNumber target={797} visible={sec3.visible} duration={1200} />
+                      <CountUpNumber target={797} triggerRef={sec3Ref} />
                     </div>
                   </div>
                   <div className="flex items-center gap-1 text-[9px] text-emerald-500 font-medium">
@@ -547,12 +701,8 @@ export default function DashboardMockup() {
           </div>
 
           {/* === SECTION 4: Recent Activity === */}
-          <div ref={sec4.ref} className={`${mainBg} px-4 pb-4 rounded-br-2xl`}>
-            <div className={`${cardBg} rounded-xl p-3 border border-border`} style={{
-              opacity: sec4.visible ? 1 : 0,
-              transform: sec4.visible ? "translateY(0)" : "translateY(20px)",
-              transition: "opacity 600ms, transform 600ms"
-            }}>
+          <div ref={sec4Ref} className={`${mainBg} px-4 pb-4 rounded-br-2xl`}>
+            <div ref={activityRef} className={`${cardBg} rounded-xl p-3 border border-border`}>
               <div className="flex items-center justify-between mb-2">
                 <div>
                   <h3 className="text-[11px] font-bold text-foreground">Recent Activity</h3>
@@ -562,11 +712,7 @@ export default function DashboardMockup() {
               </div>
               <div className="space-y-2">
                 {activityItems.map((item, i) => (
-                  <div key={i} className="flex items-center gap-2" style={{
-                    opacity: sec4.visible ? 1 : 0,
-                    transform: sec4.visible ? "translateX(0)" : "translateX(-20px)",
-                    transition: `opacity 400ms ${200 + i * 120}ms, transform 400ms ${200 + i * 120}ms cubic-bezier(0.16, 1, 0.3, 1)`
-                  }}>
+                  <div key={i} data-activity-item className="flex items-center gap-2">
                     <span className={`w-2 h-2 rounded-full flex-shrink-0 ${item.dot}`} />
                     <div className="flex-1 min-w-0">
                       <div className="text-[9px] font-medium text-foreground truncate">{item.text}</div>
