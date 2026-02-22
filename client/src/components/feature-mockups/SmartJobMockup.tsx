@@ -1,6 +1,6 @@
 import { useEffect, useRef, useLayoutEffect } from "react";
 import { useI18n } from "@/lib/i18n";
-import platoLogo from "@/assets/plato-logo.png";
+import platoLogo from "@assets/plato-logo-full_1771725439762.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
@@ -17,7 +17,6 @@ import {
   Moon,
   Plus,
   TrendingUp,
-  ChevronLeft,
 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -151,12 +150,12 @@ export default function SmartJobMockup() {
 
       const cards = statCardsRef.current?.children;
       if (cards) {
-        gsap.set(cards, { y: 60, opacity: 0, scale: 0.7, rotateX: 25 });
+        gsap.set(cards, { y: 20, opacity: 0, scale: 0.85, rotateX: 8 });
         tl.to(cards, {
           y: 0, opacity: 1, scale: 1, rotateX: 0,
-          duration: 0.7,
-          stagger: 0.12,
-          ease: "back.out(2)",
+          duration: 0.6,
+          stagger: 0.08,
+          ease: "back.out(1.4)",
         }, 0.35);
       }
 
@@ -312,12 +311,7 @@ export default function SmartJobMockup() {
       <div className="flex flex-wrap">
         <div ref={sidebarRef} className="w-[120px] flex-shrink-0 bg-white dark:bg-[#0f172a] flex flex-col border-r border-border ltr:rounded-l-2xl rtl:rounded-r-2xl">
           <div className="px-3 py-4 flex flex-wrap items-center gap-2">
-            <img src={platoLogo} alt="Plato" className="w-7 h-7 object-contain dark:invert" />
-            <div className="flex-1 min-w-0">
-              <div className="font-bold text-[11px] text-foreground leading-none">Plato</div>
-              <div className="text-[7px] text-muted-foreground">Plato Agency</div>
-            </div>
-            <ChevronLeft className="w-3 h-3 text-muted-foreground flex-shrink-0 rtl:rotate-180" />
+            <img src={platoLogo} alt="Plato" className="w-full max-w-[90px] h-auto object-contain" />
           </div>
 
           <nav className="flex-1 px-2 space-y-0.5 mt-1">
