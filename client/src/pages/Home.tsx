@@ -179,7 +179,7 @@ export default function Home() {
       <section className="py-12 sm:py-16">
         <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
           <ScrollReveal animation="fade-up">
-            <div className="bg-muted rounded-2xl p-8 sm:p-10 border border-border">
+            <div className="bg-muted rounded-2xl p-5 sm:p-8 md:p-10 border border-border">
               <h3 className="text-xl sm:text-2xl font-bold mb-2 text-foreground" data-testid="text-feature-smart-job">
                 {t.featuresSection.smartJobManagement}
               </h3>

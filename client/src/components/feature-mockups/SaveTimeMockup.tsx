@@ -89,7 +89,7 @@ export default function SaveTimeMockup() {
 
   return (
     <div ref={containerRef} className="select-none py-4 px-2" style={{ fontSize: "12px" }}>
-      <div className="relative" style={{ height: "280px" }}>
+      <div className="relative" style={{ height: "clamp(220px, 60vw, 300px)" }}>
         {cards.map((card, i) => (
           <div
             key={i}
