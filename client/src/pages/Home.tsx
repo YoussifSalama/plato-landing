@@ -8,10 +8,8 @@ import { SiLinkedin, SiInstagram } from "react-icons/si";
 import { FaCog } from "react-icons/fa";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import DashboardMockup from "@/components/DashboardMockup";
-import CandidateFilteringMockup from "@/components/feature-mockups/CandidateFilteringMockup";
-import AICVAnalysisMockup from "@/components/feature-mockups/AICVAnalysisMockup";
-import NotificationsMockup from "@/components/feature-mockups/NotificationsMockup";
-import SaveTimeMockup from "@/components/feature-mockups/SaveTimeMockup";
+import SmartJobMockup from "@/components/feature-mockups/SmartJobMockup";
+import FeatureCardsSection from "@/components/FeatureCardsSection";
 import ComparisonBar from "@/components/feature-mockups/ComparisonBar";
 
 import logoAccentia from "@/assets/logos/accentia.png";
@@ -170,9 +168,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Smart Job Management */}
       <section className="py-12 sm:py-16">
-        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 space-y-6">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
           <ScrollReveal animation="fade-up">
             <div className="bg-muted rounded-2xl p-8 sm:p-10 border border-border">
               <h3 className="text-xl sm:text-2xl font-bold mb-2 text-foreground" data-testid="text-feature-smart-job">
@@ -181,68 +179,16 @@ export default function Home() {
               <p className="text-sm text-muted-foreground mb-6">
                 {t.featuresSection.smartJobManagementDesc}
               </p>
-              <div className="rounded-xl overflow-hidden border border-border">
-                <img
-                  src="/images/smart-job.png"
-                  alt="Smart Job Management"
-                  className="w-full h-auto"
-                  data-testid="img-smart-job"
-                />
+              <div className="rounded-xl overflow-hidden border border-border" data-testid="smart-job-live-mockup">
+                <SmartJobMockup />
               </div>
             </div>
           </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6" data-testid="feature-cards-row1">
-            <div className="space-y-4">
-              <CandidateFilteringMockup />
-              <div className="px-1">
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground" data-testid="text-feature-candidate-filtering">
-                  {t.featuresSection.candidateFiltering}
-                </h3>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {t.featuresSection.candidateFilteringDesc}
-                </p>
-              </div>
-            </div>
-            <div className="space-y-4">
-              <div className="bg-primary/5 dark:bg-primary/10 rounded-2xl p-6 sm:p-8">
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2" data-testid="text-feature-cv-analysis">
-                  {t.featuresSection.cvAnalysis}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-5">
-                  {t.featuresSection.cvAnalysisDesc}
-                </p>
-                <AICVAnalysisMockup />
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6" data-testid="feature-cards-row2">
-            <div className="space-y-4">
-              <NotificationsMockup />
-              <div className="px-1">
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground" data-testid="text-feature-hiring-quality">
-                  {t.featuresSection.hiringQuality}
-                </h3>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {t.featuresSection.hiringQualityDesc}
-                </p>
-              </div>
-            </div>
-            <div className="space-y-4">
-              <div className="bg-emerald-500 dark:bg-emerald-600 rounded-2xl p-6 sm:p-8">
-                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2" data-testid="text-feature-save-time">
-                  {t.featuresSection.saveTime}
-                </h3>
-                <p className="text-sm text-white/80 mb-2">
-                  {t.featuresSection.saveTimeDesc}
-                </p>
-                <SaveTimeMockup />
-              </div>
-            </div>
-          </div>
         </div>
       </section>
+
+      {/* Feature Cards — Collapse/Scatter + Scroll Highlighting */}
+      <FeatureCardsSection />
 
       {/* Comparison Section */}
       <section className="py-20 sm:py-28">
