@@ -23,6 +23,9 @@ export default function SaveTimeMockup() {
 
       const stackCards = containerRef.current!.querySelectorAll("[data-stack-card]");
       const totalCards = stackCards.length;
+      const isMobile = window.innerWidth < 640;
+      const spreadY = isMobile ? 50 : 60;
+      const spreadX = isMobile ? 8 : 15;
 
       gsap.set(stackCards, {
         y: (i: number) => i * 3,
@@ -44,8 +47,8 @@ export default function SaveTimeMockup() {
 
       stackCards.forEach((card, i) => {
         tl.to(card, {
-          y: i * 60,
-          x: i * 15,
+          y: i * spreadY,
+          x: i * spreadX,
           opacity: 1,
           scale: 1,
           rotation: 0,

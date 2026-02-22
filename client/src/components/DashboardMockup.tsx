@@ -174,12 +174,12 @@ export default function DashboardMockup() {
 
       const cards = statCardsRef.current?.children;
       if (cards) {
-        gsap.set(cards, { y: 20, opacity: 0, scale: 0.85, rotateX: 8 });
+        gsap.set(cards, { y: 15, opacity: 0, scale: 0.92 });
         tl1.to(cards, {
-          y: 0, opacity: 1, scale: 1, rotateX: 0,
+          y: 0, opacity: 1, scale: 1,
           duration: 0.6,
-          stagger: 0.08,
-          ease: "back.out(1.4)",
+          stagger: 0.1,
+          ease: "back.out(1.2)",
         }, 0.35);
       }
 
@@ -441,8 +441,8 @@ export default function DashboardMockup() {
       style={{ fontSize: "11px", lineHeight: 1.4, perspective: "1000px" }}
       data-testid="dashboard-mockup"
     >
-      <div className="flex">
-        <div ref={sidebarRef} className="w-[120px] flex-shrink-0 bg-white dark:bg-[#0f172a] flex flex-col border-r border-border rounded-l-2xl">
+      <div className="flex rounded-2xl overflow-hidden">
+        <div ref={sidebarRef} className="hidden sm:flex w-[120px] flex-shrink-0 bg-white dark:bg-[#0f172a] flex flex-col border-r border-border rounded-l-2xl">
           <div className="px-3 py-4 flex flex-wrap items-center gap-2">
             <img src={platoLogo} alt="Plato" className="w-full max-w-[90px] h-auto object-contain" />
           </div>
@@ -493,9 +493,9 @@ export default function DashboardMockup() {
           </div>
         </div>
 
-        <div className="flex-1 min-w-0 rounded-r-2xl overflow-hidden">
+        <div className="flex-1 min-w-0 rounded-2xl sm:rounded-r-2xl sm:rounded-l-none overflow-hidden">
           <div ref={topBarRef} className="h-10 bg-white dark:bg-[#1e293b] border-b border-border flex items-center px-4 gap-3">
-            <div className="flex items-center gap-2 bg-gray-100 dark:bg-[#0f172a] rounded-lg px-3 py-1.5 flex-1 max-w-[300px]">
+            <div className="flex items-center gap-2 bg-gray-100 dark:bg-[#0f172a] rounded-lg px-3 py-1.5 flex-1 max-w-[200px] sm:max-w-[300px]">
               <Search className="w-3 h-3 text-muted-foreground" />
               <span className="text-[9px] text-muted-foreground">Search jobs, candidates, or anything...</span>
             </div>
@@ -527,9 +527,9 @@ export default function DashboardMockup() {
               </div>
             </div>
 
-            <div ref={statCardsRef} className="grid grid-cols-4 gap-2">
+            <div ref={statCardsRef} className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {statCards.map((card, i) => (
-                <div key={i} className={`${cardBg} rounded-xl p-3 border border-border`} data-float>
+                <div key={i} className={`${cardBg} rounded-xl p-3 border border-border`}>
                   <div className={`w-7 h-7 ${card.color} rounded-lg flex items-center justify-center mb-2`}>
                     <card.icon className="w-3.5 h-3.5 text-white" />
                   </div>
@@ -546,7 +546,7 @@ export default function DashboardMockup() {
                 <h3 className="text-[11px] font-bold text-foreground">Overview Statistics</h3>
                 <span className="text-[8px] text-blue-500 font-medium">View All</span>
               </div>
-              <div className="grid grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {overviewStats.map((stat, i) => (
                   <div key={i} data-overview-item>
                     <div className="flex items-center gap-1 text-[8px] text-muted-foreground mb-0.5">
@@ -567,7 +567,7 @@ export default function DashboardMockup() {
 
           {/* === SECTION 2: Charts Row === */}
           <div ref={sec2Ref} className={`${mainBg} px-4 pb-3 space-y-3`}>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <div ref={weeklyCardRef} className={`${cardBg} rounded-xl p-3 border border-border`}>
                 <h3 className="text-[11px] font-bold text-foreground mb-0.5">Weekly Activity</h3>
                 <p className="text-[7px] text-muted-foreground mb-2">Applications, Interviews & Offers</p>
