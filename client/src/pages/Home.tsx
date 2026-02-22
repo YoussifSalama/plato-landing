@@ -74,14 +74,13 @@ function DashboardAssembly() {
   return (
     <div
       ref={ref}
-      className={`dashboard-assembly rounded-2xl border border-border shadow-2xl overflow-hidden bg-card ${isVisible ? "is-visible" : ""}`}
+      className={`dashboard-assembly rounded-2xl border border-border shadow-2xl overflow-hidden ${isVisible ? "is-visible" : ""}`}
       data-testid="img-dashboard-mockup"
     >
       <div className="dashboard-piece dashboard-piece-1">
         <img
           src="/images/dashboard-top.png"
           alt="Plato Dashboard — Overview"
-          className="w-full h-auto block"
           fetchPriority="high"
           loading="eager"
         />
@@ -90,14 +89,12 @@ function DashboardAssembly() {
         <img
           src="/images/dashboard-middle.png"
           alt="Plato Dashboard — Charts & Analytics"
-          className="w-full h-auto block"
         />
       </div>
       <div className="dashboard-piece dashboard-piece-3">
         <img
           src="/images/dashboard-bottom.png"
           alt="Plato Dashboard — Recent Activity"
-          className="w-full h-auto block"
         />
       </div>
     </div>
