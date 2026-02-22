@@ -88,12 +88,12 @@ export default function Home() {
 
 
   return (
-    <div className="relative overflow-x-hidden">
+    <div className="relative" style={{ overflowX: "clip" }}>
       {/* Hero Gradient Glow — extends behind header */}
-      <div className="absolute top-0 left-0 right-0 hidden dark:block pointer-events-none z-0" aria-hidden="true" style={{ height: "700px" }}>
+      <div className="absolute left-0 right-0 hidden dark:block pointer-events-none z-0" aria-hidden="true" style={{ top: "-60px", height: "760px" }}>
         <div className="absolute inset-0 bg-gradient-to-b from-[#071b2e] via-[#0a1628] to-transparent" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[130%] h-[600px] bg-[radial-gradient(ellipse_80%_50%_at_50%_-5%,rgba(9,102,168,0.55),rgba(30,160,226,0.18)_40%,transparent_70%)]" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] h-[500px] bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(14,80,140,0.4),transparent_60%)]" />
+        <div className="absolute left-1/2 -translate-x-1/2 w-[130%] h-[660px] bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(9,102,168,0.55),rgba(30,160,226,0.18)_40%,transparent_70%)]" style={{ top: "0px" }} />
+        <div className="absolute left-1/2 -translate-x-1/2 w-[90%] h-[560px] bg-[radial-gradient(ellipse_60%_40%_at_50%_5%,rgba(14,80,140,0.4),transparent_60%)]" style={{ top: "0px" }} />
       </div>
 
       {/* Hero Section */}
