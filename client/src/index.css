@@ -226,38 +226,12 @@ html {
 
 .dashboard-piece {
   opacity: 0;
-  transition-property: opacity, transform, filter;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-
-.dashboard-piece img {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0;
-  padding: 0;
-}
-
-.dashboard-piece-1 {
   transform: translateY(60px);
   filter: blur(4px);
-  transition-duration: 1000ms;
-  transition-delay: 0ms;
-}
-
-.dashboard-piece-2 {
-  transform: translateY(80px);
-  filter: blur(6px);
-  transition-duration: 1100ms;
-  transition-delay: 250ms;
-}
-
-.dashboard-piece-3 {
-  transform: translateY(100px);
-  filter: blur(8px);
-  transition-duration: 1200ms;
-  transition-delay: 500ms;
+  transition: opacity 1000ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1000ms cubic-bezier(0.16, 1, 0.3, 1),
+              filter 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 .dashboard-assembly.is-visible .dashboard-piece {

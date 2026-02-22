@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
-import { useAppTheme } from "@/lib/theme";
 import { useSEO } from "@/hooks/useSEO";
 import { getDemoLink, config } from "@/lib/config";
 import { Button } from "@/components/ui/button";
@@ -9,6 +8,7 @@ import { SiLinkedin, SiInstagram } from "react-icons/si";
 import { FaCog } from "react-icons/fa";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import DashboardMockup from "@/components/DashboardMockup";
 
 import logoAccentia from "@/assets/logos/accentia.png";
 import logoImplex from "@/assets/logos/implex.png";
@@ -69,49 +69,18 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   );
 }
 
-function DashboardAssembly() {
+function DashboardSection() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.05, rootMargin: "0px 0px -30px 0px" });
-  const { isDark } = useAppTheme();
 
   return (
     <div
       ref={ref}
-      className={`dashboard-assembly rounded-2xl border border-border shadow-2xl overflow-hidden ${isVisible ? "is-visible" : ""}`}
-      data-testid="img-dashboard-mockup"
+      className={`dashboard-assembly ${isVisible ? "is-visible" : ""}`}
+      data-testid="dashboard-mockup-wrapper"
     >
-      {isDark ? (
-        <>
-          <div className="dashboard-piece dashboard-piece-1">
-            <img
-              src="/images/dashboard-top.png"
-              alt="Plato Dashboard — Overview"
-              fetchPriority="high"
-              loading="eager"
-            />
-          </div>
-          <div className="dashboard-piece dashboard-piece-2">
-            <img
-              src="/images/dashboard-middle.png"
-              alt="Plato Dashboard — Charts & Analytics"
-            />
-          </div>
-          <div className="dashboard-piece dashboard-piece-3">
-            <img
-              src="/images/dashboard-bottom.png"
-              alt="Plato Dashboard — Recent Activity"
-            />
-          </div>
-        </>
-      ) : (
-        <div className="dashboard-piece dashboard-piece-1">
-          <img
-            src="/images/dashboard-light.png"
-            alt="Plato Dashboard"
-            fetchPriority="high"
-            loading="eager"
-          />
-        </div>
-      )}
+      <div className="dashboard-piece dashboard-piece-1">
+        <DashboardMockup />
+      </div>
     </div>
   );
 }
@@ -120,12 +89,6 @@ export default function Home() {
   const { t, lang, localePath } = useI18n();
   useSEO({ description: t.meta.pages.home.description });
 
-  useEffect(() => {
-    ["/images/dashboard-top.png", "/images/dashboard-middle.png", "/images/dashboard-bottom.png", "/images/dashboard-light.png"].forEach((s) => {
-      const img = new Image();
-      img.src = s;
-    });
-  }, []);
 
   return (
     <div>
@@ -154,7 +117,7 @@ export default function Home() {
       {/* Dashboard Mockup — Animated Assembly */}
       <section className="pb-16 sm:pb-20">
         <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
-          <DashboardAssembly />
+          <DashboardSection />
         </div>
       </section>
 
