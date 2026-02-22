@@ -22,9 +22,9 @@ export default function Header() {
 
   const navItems: NavItem[] = [
     { label: t.nav.about, path: "/employers", type: "route" },
-    { label: t.nav.pricing, path: "/pricing", type: "route" },
-    { label: t.nav.useCases, path: "/how-it-works", type: "route" },
+    { label: t.nav.contact, path: "/contact", type: "route" },
     { label: t.nav.blog, path: "/blog", type: "route" },
+    { label: t.nav.login, path: "/login", type: "route" },
   ];
 
   const isActive = (path: string) => {
