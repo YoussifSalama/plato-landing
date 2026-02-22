@@ -73,7 +73,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-14 gap-4">
           <Link href={localePath("/")} data-testid="link-home">
             <div className="flex items-center gap-1" style={{ direction: "ltr" }} data-testid="img-logo">
-              <div className="h-8 sm:h-9 w-8 sm:w-9 overflow-hidden flex-shrink-0">
+              <div className="h-8 sm:h-9 overflow-hidden flex-shrink-0" style={{ width: '28px' }}>
                 <img
                   src="/images/plato-logo.png"
                   alt=""

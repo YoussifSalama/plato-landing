@@ -23,7 +23,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
             <div className="flex items-center gap-1" style={{ direction: "ltr" }} data-testid="img-footer-logo">
-              <div className="h-8 sm:h-9 w-8 sm:w-9 overflow-hidden flex-shrink-0">
+              <div className="h-8 sm:h-9 overflow-hidden flex-shrink-0" style={{ width: '28px' }}>
                 <img
                   src="/images/plato-logo.png"
                   alt=""
