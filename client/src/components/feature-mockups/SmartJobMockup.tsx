@@ -1,6 +1,5 @@
 import { useEffect, useRef, useLayoutEffect } from "react";
 import { useI18n } from "@/lib/i18n";
-import platoLogo from "@assets/plato-logo-full_1771725439762.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
@@ -311,7 +310,12 @@ export default function SmartJobMockup() {
       <div className="flex flex-wrap">
         <div ref={sidebarRef} className="hidden sm:flex w-[120px] flex-shrink-0 bg-white dark:bg-[#0f172a] flex-col border-r border-border ltr:rounded-l-2xl rtl:rounded-r-2xl">
           <div className="px-3 py-4 flex flex-wrap items-center gap-2">
-            <img src={platoLogo} alt="Plato" className="w-full max-w-[90px] h-auto object-contain" />
+            <div className="flex items-center gap-0.5" style={{ direction: "ltr" }}>
+              <div className="h-5 w-5 overflow-hidden flex-shrink-0">
+                <img src="/images/plato-logo.png" alt="" className="h-full w-auto max-w-none" />
+              </div>
+              <span className="text-[13px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Host Grotesk', sans-serif" }}>Plato</span>
+            </div>
           </div>
 
           <nav className="flex-1 px-2 space-y-0.5 mt-1">

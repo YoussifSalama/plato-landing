@@ -72,13 +72,16 @@ export default function Header() {
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between h-14 gap-4">
           <Link href={localePath("/")} data-testid="link-home">
-            <img
-              src="/images/plato-logo.png"
-              alt="Plato"
-              className="h-9 sm:h-10"
-              style={{ direction: "ltr" }}
-              data-testid="img-logo"
-            />
+            <div className="flex items-center gap-1" style={{ direction: "ltr" }} data-testid="img-logo">
+              <div className="h-8 sm:h-9 w-8 sm:w-9 overflow-hidden flex-shrink-0">
+                <img
+                  src="/images/plato-logo.png"
+                  alt=""
+                  className="h-full w-auto max-w-none"
+                />
+              </div>
+              <span className="text-[20px] sm:text-[22px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Host Grotesk', sans-serif" }}>Plato</span>
+            </div>
           </Link>
 
           <nav

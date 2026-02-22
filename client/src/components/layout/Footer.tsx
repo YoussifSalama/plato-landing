@@ -22,13 +22,16 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
-            <img
-              src="/images/plato-logo.png"
-              alt="Plato"
-              className="h-9 sm:h-10"
-              style={{ direction: "ltr" }}
-              data-testid="img-footer-logo"
-            />
+            <div className="flex items-center gap-1" style={{ direction: "ltr" }} data-testid="img-footer-logo">
+              <div className="h-8 sm:h-9 w-8 sm:w-9 overflow-hidden flex-shrink-0">
+                <img
+                  src="/images/plato-logo.png"
+                  alt=""
+                  className="h-full w-auto max-w-none"
+                />
+              </div>
+              <span className="text-[20px] sm:text-[22px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Host Grotesk', sans-serif" }}>Plato</span>
+            </div>
             <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
               {t.footer.tagline}
             </p>
