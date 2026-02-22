@@ -7,7 +7,6 @@ import { Plus, Minus } from "lucide-react";
 import { SiLinkedin, SiInstagram } from "react-icons/si";
 import { FaCog } from "react-icons/fa";
 import ScrollReveal from "@/components/shared/ScrollReveal";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import DashboardMockup from "@/components/DashboardMockup";
 
 import logoAccentia from "@/assets/logos/accentia.png";
@@ -70,17 +69,12 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 }
 
 function DashboardSection() {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.05, rootMargin: "0px 0px -30px 0px" });
-
   return (
     <div
-      ref={ref}
-      className={`dashboard-assembly ${isVisible ? "is-visible" : ""}`}
+      className="rounded-2xl border border-border shadow-2xl overflow-hidden"
       data-testid="dashboard-mockup-wrapper"
     >
-      <div className="dashboard-piece dashboard-piece-1">
-        <DashboardMockup />
-      </div>
+      <DashboardMockup />
     </div>
   );
 }
