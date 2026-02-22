@@ -25,7 +25,7 @@ Preferred communication style: Simple, everyday language.
 - Language detected from URL path prefix (`/ar` = Arabic, everything else = English)
 - Translation files in `client/src/lib/translations/en.ts` and `ar.ts`
 - Arabic pages use `dir="rtl"` on the document root
-- Fonts: Inter (Latin) + Noto Sans Arabic loaded from Google Fonts
+- Fonts: Host Grotesk (Latin) + Noto Sans Arabic loaded from Google Fonts
 
 ### Page Structure
 All pages exist in both English and Arabic variants:
