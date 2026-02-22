@@ -4,8 +4,7 @@ import { useSEO } from "@/hooks/useSEO";
 import { getDemoLink, config } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Plus, Minus } from "lucide-react";
-import { SiLinkedin, SiInstagram } from "react-icons/si";
-import { FaCog } from "react-icons/fa";
+import { SiLinkedin, SiInstagram, SiTiktok } from "react-icons/si";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import DashboardMockup from "@/components/DashboardMockup";
 import SmartJobMockup from "@/components/feature-mockups/SmartJobMockup";
@@ -372,11 +371,11 @@ export default function Home() {
                   <SiLinkedin className="w-4 h-4" />
                 </a>
               )}
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="Instagram" data-testid="link-footer-instagram">
+              <a href="https://www.instagram.com/platohiring?igsh=M2puazltZDQxOXFu&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="Instagram" data-testid="link-footer-instagram">
                 <SiInstagram className="w-4 h-4" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="Settings" data-testid="link-footer-settings">
-                <FaCog className="w-4 h-4" />
+              <a href="https://www.tiktok.com/@platohiring?_r=1&_t=ZN-948glBbZIgA" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="TikTok" data-testid="link-footer-tiktok">
+                <SiTiktok className="w-4 h-4" />
               </a>
             </div>
           </div>

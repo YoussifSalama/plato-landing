@@ -1,7 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { useI18n } from "@/lib/i18n";
 import { config } from "@/lib/config";
-import { SiLinkedin } from "react-icons/si";
+import { SiLinkedin, SiInstagram, SiTiktok } from "react-icons/si";
 
 export default function Footer() {
   const { t, dir, localePath } = useI18n();
@@ -56,6 +56,26 @@ export default function Footer() {
 
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-3">
+              <a
+                href="https://www.instagram.com/platohiring?igsh=M2puazltZDQxOXFu&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Instagram"
+                data-testid="link-footer-instagram"
+              >
+                <SiInstagram className="w-4 h-4" />
+              </a>
+              <a
+                href="https://www.tiktok.com/@platohiring?_r=1&_t=ZN-948glBbZIgA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="TikTok"
+                data-testid="link-footer-tiktok"
+              >
+                <SiTiktok className="w-4 h-4" />
+              </a>
               {config.linkedinUrl && (
                 <a
                   href={config.linkedinUrl}
