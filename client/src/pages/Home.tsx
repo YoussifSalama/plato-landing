@@ -122,25 +122,25 @@ export default function Home() {
 
       {/* Trusted By */}
       <section className="py-12 sm:py-16">
-        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
           <ScrollReveal animation="fade-in">
             <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground mb-10" data-testid="text-trusted-by">
               {t.trustedBy.title}
             </p>
           </ScrollReveal>
-          <ScrollReveal animation="fade-up" delay={1}>
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 sm:gap-x-12">
-              {clientLogos.map((logo) => (
+          <div className="marquee-container">
+            <div className="marquee-track">
+              {[...clientLogos, ...clientLogos].map((logo, i) => (
                 <img
-                  key={logo.alt}
+                  key={`${logo.alt}-${i}`}
                   src={logo.src}
                   alt={logo.alt}
-                  className="h-8 sm:h-10 w-auto max-w-[100px] sm:max-w-[120px] object-contain opacity-70 dark:brightness-0 dark:invert grayscale"
-                  data-testid={`logo-${logo.alt.toLowerCase().replace(/\s+/g, "-")}`}
+                  className="h-8 sm:h-10 w-auto max-w-[100px] sm:max-w-[120px] object-contain opacity-60 dark:brightness-0 dark:invert grayscale mx-6 sm:mx-10 flex-shrink-0"
+                  data-testid={i < clientLogos.length ? `logo-${logo.alt.toLowerCase().replace(/\s+/g, "-")}` : undefined}
                 />
               ))}
             </div>
-          </ScrollReveal>
+          </div>
         </div>
       </section>
 

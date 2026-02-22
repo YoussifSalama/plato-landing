@@ -1,6 +1,6 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-type AnimationType = "fade-up" | "fade-left" | "fade-right" | "scale-up" | "fade-in";
+type AnimationType = "fade-up" | "fade-down" | "fade-left" | "fade-right" | "scale-up" | "fade-in";
 
 interface ScrollRevealProps {
   children: React.ReactNode;
@@ -8,14 +8,6 @@ interface ScrollRevealProps {
   delay?: number;
   className?: string;
 }
-
-const animationClasses: Record<AnimationType, string> = {
-  "fade-up": "scroll-fade-up",
-  "fade-left": "scroll-fade-left",
-  "fade-right": "scroll-fade-right",
-  "scale-up": "scroll-scale-up",
-  "fade-in": "scroll-fade-in",
-};
 
 export default function ScrollReveal({
   children,
@@ -25,12 +17,13 @@ export default function ScrollReveal({
 }: ScrollRevealProps) {
   const { ref, isVisible } = useScrollAnimation();
 
-  const delayClass = delay > 0 && delay <= 5 ? `scroll-delay-${delay}` : "";
+  const delayStyle = delay > 0 ? { transitionDelay: `${delay * 80}ms` } : undefined;
 
   return (
     <div
       ref={ref}
-      className={`${isVisible ? `${animationClasses[animation]} ${delayClass}` : "scroll-hidden"} ${className}`}
+      className={`scroll-reveal scroll-${animation} ${isVisible ? "scroll-visible" : ""} ${className}`}
+      style={delayStyle}
     >
       {children}
     </div>
