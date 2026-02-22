@@ -8,6 +8,11 @@ import { SiLinkedin, SiInstagram } from "react-icons/si";
 import { FaCog } from "react-icons/fa";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import DashboardMockup from "@/components/DashboardMockup";
+import CandidateFilteringMockup from "@/components/feature-mockups/CandidateFilteringMockup";
+import AICVAnalysisMockup from "@/components/feature-mockups/AICVAnalysisMockup";
+import NotificationsMockup from "@/components/feature-mockups/NotificationsMockup";
+import SaveTimeMockup from "@/components/feature-mockups/SaveTimeMockup";
+import ComparisonBar from "@/components/feature-mockups/ComparisonBar";
 
 import logoAccentia from "@/assets/logos/accentia.png";
 import logoImplex from "@/assets/logos/implex.png";
@@ -187,27 +192,55 @@ export default function Home() {
             </div>
           </ScrollReveal>
 
-          <ScrollReveal animation="fade-left" delay={1}>
-            <div className="rounded-2xl overflow-hidden">
-              <img
-                src="/images/features-row1.png"
-                alt="Advanced Candidate Filtering and AI CV Analysis"
-                className="w-full h-auto"
-                data-testid="img-feature-cards-row1"
-              />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6" data-testid="feature-cards-row1">
+            <div className="space-y-4">
+              <CandidateFilteringMockup />
+              <div className="px-1">
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground" data-testid="text-feature-candidate-filtering">
+                  {t.featuresSection.candidateFiltering}
+                </h3>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {t.featuresSection.candidateFilteringDesc}
+                </p>
+              </div>
             </div>
-          </ScrollReveal>
+            <div className="space-y-4">
+              <div className="bg-primary/5 dark:bg-primary/10 rounded-2xl p-6 sm:p-8">
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2" data-testid="text-feature-cv-analysis">
+                  {t.featuresSection.cvAnalysis}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-5">
+                  {t.featuresSection.cvAnalysisDesc}
+                </p>
+                <AICVAnalysisMockup />
+              </div>
+            </div>
+          </div>
 
-          <ScrollReveal animation="fade-right" delay={1}>
-            <div className="rounded-2xl overflow-hidden">
-              <img
-                src="/images/features-row2.png"
-                alt="Improve Hiring Quality and Save Time"
-                className="w-full h-auto"
-                data-testid="img-feature-cards-row2"
-              />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6" data-testid="feature-cards-row2">
+            <div className="space-y-4">
+              <NotificationsMockup />
+              <div className="px-1">
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground" data-testid="text-feature-hiring-quality">
+                  {t.featuresSection.hiringQuality}
+                </h3>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {t.featuresSection.hiringQualityDesc}
+                </p>
+              </div>
             </div>
-          </ScrollReveal>
+            <div className="space-y-4">
+              <div className="bg-emerald-500 dark:bg-emerald-600 rounded-2xl p-6 sm:p-8">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2" data-testid="text-feature-save-time">
+                  {t.featuresSection.saveTime}
+                </h3>
+                <p className="text-sm text-white/80 mb-2">
+                  {t.featuresSection.saveTimeDesc}
+                </p>
+                <SaveTimeMockup />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -223,16 +256,17 @@ export default function Home() {
             </p>
           </ScrollReveal>
 
-          <ScrollReveal animation="fade-left" delay={2}>
-            <div className="rounded-2xl overflow-hidden mb-16">
-              <img
-                src="/images/time-comparison.png"
-                alt="Hire the Best Talent / Time - without Plato AI: 7 days, with Plato AI: 2 mins"
-                className="w-full h-auto"
-                data-testid="img-time-comparison"
-              />
-            </div>
-          </ScrollReveal>
+          <div className="mb-16" data-testid="comparison-time">
+            <ComparisonBar
+              title={t.comparisonSection.timeTitle || "Hire the Best Talent / Time"}
+              withoutLabel={t.comparisonSection.withoutPlato}
+              withLabel={t.comparisonSection.withPlato}
+              withoutValue={t.comparisonSection.timeBefore}
+              withValue={t.comparisonSection.timeAfter}
+              withoutWidth={85}
+              withWidth={22}
+            />
+          </div>
 
           <ScrollReveal animation="fade-up">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4 text-foreground" data-testid="text-cost-title">
@@ -243,16 +277,17 @@ export default function Home() {
             </p>
           </ScrollReveal>
 
-          <ScrollReveal animation="fade-right" delay={2}>
-            <div className="rounded-2xl overflow-hidden">
-              <img
-                src="/images/cost-comparison.png"
-                alt="Recruitment Expenses Cost - without Plato AI: 5% Cost Save, with Plato AI: 90% Cost Save"
-                className="w-full h-auto"
-                data-testid="img-cost-comparison"
-              />
-            </div>
-          </ScrollReveal>
+          <div data-testid="comparison-cost">
+            <ComparisonBar
+              title={t.comparisonSection.costCardTitle || "Recruitment Expenses Cost"}
+              withoutLabel={t.comparisonSection.withoutPlato}
+              withLabel={t.comparisonSection.withPlato}
+              withoutValue={t.comparisonSection.costBefore}
+              withValue={t.comparisonSection.costAfter}
+              withoutWidth={25}
+              withWidth={85}
+            />
+          </div>
         </div>
       </section>
 
