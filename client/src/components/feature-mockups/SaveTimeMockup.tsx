@@ -25,10 +25,10 @@ export default function SaveTimeMockup() {
       const totalCards = stackCards.length;
 
       gsap.set(stackCards, {
-        y: 0,
+        y: (i: number) => i * 3,
         x: 0,
-        opacity: (i: number) => i === 0 ? 1 : 0.9 - i * 0.1,
-        scale: (i: number) => 1 - i * 0.03,
+        opacity: (i: number) => i === 0 ? 1 : 0,
+        scale: (i: number) => 1 - i * 0.02,
         rotation: 0,
         zIndex: (i: number) => totalCards - i,
       });
@@ -36,22 +36,22 @@ export default function SaveTimeMockup() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 80%",
-          end: "top 30%",
-          scrub: 0.6,
+          start: "top 85%",
+          end: "top 25%",
+          scrub: 0.5,
         },
       });
 
       stackCards.forEach((card, i) => {
         tl.to(card, {
-          y: i * 55,
-          x: i * 12,
+          y: i * 60,
+          x: i * 15,
           opacity: 1,
           scale: 1,
           rotation: 0,
-          duration: 1,
-          ease: "power2.out",
-        }, 0.08 * i);
+          duration: 1.2,
+          ease: "power3.out",
+        }, 0.12 * i);
       });
 
       const countTl = gsap.timeline({

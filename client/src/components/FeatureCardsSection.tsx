@@ -71,21 +71,21 @@ export default function FeatureCardsSection() {
     all.forEach((row) => {
       if (row === active) {
         gsap.to(row, {
-          scale: 1.01,
-          y: -4,
+          scale: 1.02,
+          y: -8,
           opacity: 1,
-          boxShadow: "0 20px 60px rgba(0,0,0,0.12)",
-          duration: 0.4,
+          boxShadow: "0 24px 70px rgba(0,0,0,0.18)",
+          duration: 0.5,
           ease: "power2.out",
           overwrite: true,
         });
       } else {
         gsap.to(row, {
-          scale: 0.98,
-          y: 0,
-          opacity: 0.45,
-          boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-          duration: 0.4,
+          scale: 0.96,
+          y: 4,
+          opacity: 0.35,
+          boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+          duration: 0.5,
           ease: "power2.out",
           overwrite: true,
         });

@@ -66,7 +66,7 @@ export default function Header() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 dark:bg-black/60 border-b border-gray-200/50 dark:border-white/5"
+      className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 dark:bg-transparent border-b border-gray-200/50 dark:border-transparent"
       dir={dir}
     >
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
