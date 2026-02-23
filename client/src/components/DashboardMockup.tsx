@@ -446,8 +446,8 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
           <div className="px-2 pt-3 pb-2">
             <div className="flex items-center justify-between gap-1">
               <div className="flex items-center gap-1" style={{ direction: "ltr" }}>
-                <div className="w-6 h-6 rounded-lg overflow-hidden flex-shrink-0">
-                  <img src="/images/plato-logo.png" alt="" className="w-full h-full object-contain" />
+                <div className="h-6 overflow-hidden flex-shrink-0" style={{ width: '18px' }}>
+                  <img src="/images/plato-logo.png" alt="" className="h-full w-auto max-w-none" />
                 </div>
                 <div className="min-w-0">
                   <span className={`text-[11px] font-bold tracking-tight ${headingText} block leading-tight truncate`} style={{ fontFamily: "'Host Grotesk', sans-serif" }}>Plato</span>
