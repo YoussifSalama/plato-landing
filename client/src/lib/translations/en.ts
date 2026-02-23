@@ -94,7 +94,7 @@ export const en = {
   footerSection: {
     product: "Product",
     changelog: "Changelog",
-    customerStories: "Customer stories",
+    customerStories: "Testimonials",
     security: "Security",
     chromeExtension: "Chrome extension",
     iosApp: "iOS app",

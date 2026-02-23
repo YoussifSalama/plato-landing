@@ -96,7 +96,7 @@ export const ar: typeof en = {
   footerSection: {
     product: "المنتج",
     changelog: "سجل التغييرات",
-    customerStories: "قصص العملاء",
+    customerStories: "آراء العملاء",
     security: "الأمان",
     chromeExtension: "إضافة كروم",
     iosApp: "تطبيق iOS",
