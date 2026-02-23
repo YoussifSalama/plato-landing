@@ -451,7 +451,6 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
                 </div>
                 <div className="min-w-0">
                   <span className={`text-[11px] font-bold tracking-tight ${headingText} block leading-tight truncate`} style={{ fontFamily: "'Host Grotesk', sans-serif" }}>Plato</span>
-                  <span className={`text-[6px] ${labelText} block leading-tight truncate`}>Plato Hiring</span>
                 </div>
               </div>
               <ChevronLeft className={`w-3 h-3 ${subtleText} flex-shrink-0`} />
