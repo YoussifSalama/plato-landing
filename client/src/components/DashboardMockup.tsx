@@ -35,7 +35,7 @@ const statCards = [
   { icon: Briefcase, label: "Active Jobs", value: 24, color: "bg-blue-500" },
   { icon: Users, label: "Candidates", value: 156, color: "bg-orange-500" },
   { icon: Video, label: "Interviews", value: 12, color: "bg-emerald-500" },
-  { icon: Mail, label: "Messages", value: 8, color: "bg-sky-500" },
+  { icon: Mail, label: "Messages", value: 8, color: "bg-violet-500" },
 ];
 
 const overviewStats = [
@@ -121,7 +121,6 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
   const headerRef = useRef<HTMLDivElement>(null);
   const statCardsRef = useRef<HTMLDivElement>(null);
   const overviewRef = useRef<HTMLDivElement>(null);
-  const chartsRef = useRef<HTMLDivElement>(null);
   const weeklyCardRef = useRef<HTMLDivElement>(null);
   const donutCardRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
@@ -239,9 +238,9 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
       const donutCircles = donutRef.current?.querySelectorAll("circle");
       if (donutCircles) {
         donutCircles.forEach((c) => {
-          const radius = 40;
-          const circumference = 2 * Math.PI * radius;
-          gsap.set(c, { strokeDashoffset: circumference, attr: { "stroke-opacity": 0 } });
+          const r = 40;
+          const circ = 2 * Math.PI * r;
+          gsap.set(c, { strokeDashoffset: circ, attr: { "stroke-opacity": 0 } });
         });
 
         tl2.to(donutCircles, {
@@ -267,88 +266,88 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
       }
 
       if (!compact) {
-      const tl3 = gsap.timeline({
-        scrollTrigger: {
-          trigger: sec3Ref.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play reverse play reverse",
-        },
-      });
-
-      gsap.set(progressRef.current, { y: 50, opacity: 0, scale: 0.9 });
-      gsap.set(growthRef.current, { y: 50, opacity: 0, scale: 0.9 });
-
-      tl3.to(progressRef.current, {
-        y: 0, opacity: 1, scale: 1, duration: 0.7,
-        ease: "back.out(1.4)",
-      }, 0);
-
-      tl3.to(growthRef.current, {
-        y: 0, opacity: 1, scale: 1, duration: 0.7,
-        ease: "back.out(1.4)",
-      }, 0.15);
-
-      const progressBars = progressRef.current?.querySelectorAll("[data-progress-fill]");
-      if (progressBars) {
-        gsap.set(progressBars, { width: "0%" });
-        progressBars.forEach((bar, i) => {
-          const targetWidth = bar.getAttribute("data-target-width") || "0%";
-          tl3.to(bar, {
-            width: targetWidth,
-            duration: 1.0,
-            delay: i * 0.15,
-            ease: "elastic.out(1, 0.5)",
-          }, 0.4);
+        const tl3 = gsap.timeline({
+          scrollTrigger: {
+            trigger: sec3Ref.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play reverse play reverse",
+          },
         });
-      }
 
-      const progressRows = progressRef.current?.querySelectorAll("[data-progress-row]");
-      if (progressRows) {
-        gsap.set(progressRows, { x: isRtl ? 30 : -30, opacity: 0 });
-        tl3.to(progressRows, {
-          x: 0, opacity: 1, duration: 0.5,
-          stagger: 0.12,
-          ease: "power2.out",
-        }, 0.3);
-      }
+        gsap.set(progressRef.current, { y: 50, opacity: 0, scale: 0.9 });
+        gsap.set(growthRef.current, { y: 50, opacity: 0, scale: 0.9 });
 
-      const barElements = growthRef.current?.querySelectorAll("[data-bar]");
-      if (barElements) {
-        gsap.set(barElements, { scaleY: 0, transformOrigin: "bottom center" });
-        tl3.to(barElements, {
-          scaleY: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "elastic.out(1.2, 0.4)",
-        }, 0.5);
-      }
+        tl3.to(progressRef.current, {
+          y: 0, opacity: 1, scale: 1, duration: 0.7,
+          ease: "back.out(1.4)",
+        }, 0);
 
-      const tl4 = gsap.timeline({
-        scrollTrigger: {
-          trigger: sec4Ref.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play reverse play reverse",
-        },
-      });
+        tl3.to(growthRef.current, {
+          y: 0, opacity: 1, scale: 1, duration: 0.7,
+          ease: "back.out(1.4)",
+        }, 0.15);
 
-      gsap.set(activityRef.current, { y: 40, opacity: 0 });
-      tl4.to(activityRef.current, {
-        y: 0, opacity: 1, duration: 0.6,
-        ease: "power3.out",
-      }, 0);
+        const progressBars = progressRef.current?.querySelectorAll("[data-progress-fill]");
+        if (progressBars) {
+          gsap.set(progressBars, { width: "0%" });
+          progressBars.forEach((bar, i) => {
+            const targetWidth = bar.getAttribute("data-target-width") || "0%";
+            tl3.to(bar, {
+              width: targetWidth,
+              duration: 1.0,
+              delay: i * 0.15,
+              ease: "elastic.out(1, 0.5)",
+            }, 0.4);
+          });
+        }
 
-      const actItems = activityRef.current?.querySelectorAll("[data-activity-item]");
-      if (actItems) {
-        gsap.set(actItems, { x: isRtl ? -40 : 40, opacity: 0, scale: 0.9 });
-        tl4.to(actItems, {
-          x: 0, opacity: 1, scale: 1,
-          duration: 0.5,
-          stagger: 0.1,
-          ease: "back.out(1.5)",
-        }, 0.25);
-      }
+        const progressRows = progressRef.current?.querySelectorAll("[data-progress-row]");
+        if (progressRows) {
+          gsap.set(progressRows, { x: isRtl ? 30 : -30, opacity: 0 });
+          tl3.to(progressRows, {
+            x: 0, opacity: 1, duration: 0.5,
+            stagger: 0.12,
+            ease: "power2.out",
+          }, 0.3);
+        }
+
+        const barElements = growthRef.current?.querySelectorAll("[data-bar]");
+        if (barElements) {
+          gsap.set(barElements, { scaleY: 0, transformOrigin: "bottom center" });
+          tl3.to(barElements, {
+            scaleY: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "elastic.out(1.2, 0.4)",
+          }, 0.5);
+        }
+
+        const tl4 = gsap.timeline({
+          scrollTrigger: {
+            trigger: sec4Ref.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play reverse play reverse",
+          },
+        });
+
+        gsap.set(activityRef.current, { y: 40, opacity: 0 });
+        tl4.to(activityRef.current, {
+          y: 0, opacity: 1, duration: 0.6,
+          ease: "power3.out",
+        }, 0);
+
+        const actItems = activityRef.current?.querySelectorAll("[data-activity-item]");
+        if (actItems) {
+          gsap.set(actItems, { x: isRtl ? -40 : 40, opacity: 0, scale: 0.9 });
+          tl4.to(actItems, {
+            x: 0, opacity: 1, scale: 1,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "back.out(1.5)",
+          }, 0.25);
+        }
       }
 
       const navItems = sidebarRef.current?.querySelectorAll("[data-nav-item]");
@@ -371,17 +370,6 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
         }, 0.7);
       }
 
-      gsap.utils.toArray<HTMLElement>("[data-float]").forEach((el, i) => {
-        gsap.to(el, {
-          y: "random(-3, 3)",
-          duration: "random(2, 3.5)",
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          delay: i * 0.3,
-        });
-      });
-
       gsap.utils.toArray<HTMLElement>("[data-pulse]").forEach((el) => {
         gsap.to(el, {
           boxShadow: "0 0 8px 2px rgba(59, 130, 246, 0.3)",
@@ -400,15 +388,15 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
   const cardBg = "bg-[#1e293b]";
   const mainBg = "bg-[#111827]";
 
-  const appData = [30, 45, 35, 55, 65, 50, 40];
-  const intData = [10, 15, 20, 28, 22, 18, 12];
+  const appData = [25, 40, 30, 50, 65, 45, 35];
+  const intData = [10, 15, 18, 25, 20, 15, 10];
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-  const chartW = 280;
-  const chartH = 120;
-  const padL = 25;
+  const chartW = 300;
+  const chartH = 130;
+  const padL = 28;
   const padR = 10;
   const padT = 10;
-  const padB = 18;
+  const padB = 20;
   const maxVal = 80;
   const yLabels = [0, 20, 40, 60, 80];
 
@@ -449,35 +437,35 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
     >
       <div className="flex rounded-2xl overflow-hidden bg-[#0f172a]">
         {/* === SIDEBAR === */}
-        <div ref={sidebarRef} className="hidden sm:flex w-[130px] flex-shrink-0 bg-[#0f172a] flex-col border-r border-white/5">
-          <div className="px-3 pt-4 pb-2">
-            <div className="flex items-center gap-2 justify-between">
-              <div className="flex items-center gap-1.5" style={{ direction: "ltr" }}>
-                <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                  <span className="text-white font-bold text-[11px]">P</span>
+        <div ref={sidebarRef} style={{ width: "15%", minWidth: 90, maxWidth: 140 }} className="flex flex-shrink-0 bg-[#0f172a] flex-col border-r border-white/5">
+          <div className="px-2 pt-3 pb-2">
+            <div className="flex items-center justify-between gap-1">
+              <div className="flex items-center gap-1" style={{ direction: "ltr" }}>
+                <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-bold text-[10px]">P</span>
                 </div>
-                <div>
-                  <span className="text-[12px] font-bold tracking-tight text-white block leading-tight" style={{ fontFamily: "'Host Grotesk', sans-serif" }}>Plato</span>
-                  <span className="text-[7px] text-gray-400 block leading-tight">Plato Agency</span>
+                <div className="min-w-0">
+                  <span className="text-[11px] font-bold tracking-tight text-white block leading-tight truncate" style={{ fontFamily: "'Host Grotesk', sans-serif" }}>Plato</span>
+                  <span className="text-[6px] text-gray-400 block leading-tight truncate">Plato Agency</span>
                 </div>
               </div>
-              <ChevronLeft className="w-3 h-3 text-gray-500" />
+              <ChevronLeft className="w-3 h-3 text-gray-500 flex-shrink-0" />
             </div>
           </div>
 
-          <nav className="flex-1 px-2 space-y-0.5 mt-2">
+          <nav className="flex-1 px-1.5 space-y-px mt-1">
             {sidebarNav.map((item, i) => (
               <div
                 key={i}
                 data-nav-item
-                className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[10px] ${
-                  item.active ? "bg-blue-600 text-white font-medium" : "text-gray-400 hover:text-gray-300"
+                className={`flex items-center gap-1.5 px-2 py-1 rounded-md text-[9px] ${
+                  item.active ? "bg-blue-600 text-white font-medium" : "text-gray-400"
                 }`}
               >
-                <item.icon className="w-3.5 h-3.5" />
-                <span>{item.label}</span>
+                <item.icon className="w-3 h-3 flex-shrink-0" />
+                <span className="truncate">{item.label}</span>
                 {item.badge && (
-                  <span className="ml-auto bg-red-500 text-white text-[7px] w-3.5 h-3.5 rounded-full flex items-center justify-center font-bold">
+                  <span className="ml-auto bg-red-500 text-white text-[6px] w-3 h-3 rounded-full flex items-center justify-center font-bold flex-shrink-0">
                     {item.badge}
                   </span>
                 )}
@@ -485,27 +473,27 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
             ))}
           </nav>
 
-          <div className="px-2 pb-2 space-y-0.5 mt-auto">
-            <div data-sidebar-bottom className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[10px] text-gray-400">
-              <Settings className="w-3.5 h-3.5" />
-              <span>Settings</span>
+          <div className="px-1.5 pb-1.5 space-y-px mt-auto">
+            <div data-sidebar-bottom className="flex items-center gap-1.5 px-2 py-1 rounded-md text-[9px] text-gray-400">
+              <Settings className="w-3 h-3 flex-shrink-0" />
+              <span className="truncate">Settings</span>
             </div>
-            <div data-sidebar-bottom className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[10px] text-gray-400">
-              <HelpCircle className="w-3.5 h-3.5" />
-              <span>Help Center</span>
+            <div data-sidebar-bottom className="flex items-center gap-1.5 px-2 py-1 rounded-md text-[9px] text-gray-400">
+              <HelpCircle className="w-3 h-3 flex-shrink-0" />
+              <span className="truncate">Help Center</span>
             </div>
           </div>
 
-          <div data-sidebar-bottom className="mx-2 mb-3 bg-blue-900/80 rounded-lg p-2">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-[8px] font-bold text-white" data-pulse>HR</div>
-              <div>
-                <div className="text-[9px] font-semibold text-white">HR Manager</div>
-                <div className="text-[7px] text-blue-200/70">hr@company.com</div>
+          <div data-sidebar-bottom className="mx-1.5 mb-2 bg-blue-900/80 rounded-lg p-1.5">
+            <div className="flex items-center gap-1.5">
+              <div className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center text-[7px] font-bold text-white flex-shrink-0" data-pulse>HR</div>
+              <div className="min-w-0">
+                <div className="text-[8px] font-semibold text-white truncate">HR Manager</div>
+                <div className="text-[6px] text-blue-200/70 truncate">hr@company.com</div>
               </div>
             </div>
-            <div className="mt-1.5 flex items-center justify-center gap-1 text-[8px] text-emerald-400 bg-emerald-500/10 rounded py-0.5 cursor-pointer">
-              <LogOut className="w-2.5 h-2.5" />
+            <div className="mt-1 flex items-center justify-center gap-0.5 text-[7px] text-emerald-400 bg-emerald-500/10 rounded py-0.5">
+              <LogOut className="w-2 h-2" />
               Logout
             </div>
           </div>
@@ -514,73 +502,72 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
         {/* === MAIN CONTENT === */}
         <div className="flex-1 min-w-0">
           {/* Top Bar */}
-          <div ref={topBarRef} className="h-10 bg-[#0f172a] border-b border-white/5 flex items-center px-3 sm:px-4 gap-2 sm:gap-3 overflow-hidden">
-            <div className="flex items-center gap-2 bg-[#1e293b] rounded-lg px-2 sm:px-3 py-1.5 min-w-0 flex-1 max-w-[280px]">
-              <Search className="w-3 h-3 text-gray-500 flex-shrink-0" />
-              <span className="text-[9px] text-gray-500 hidden sm:inline truncate">Search jobs, candidates, or anything...</span>
+          <div ref={topBarRef} className="h-8 bg-[#0f172a] border-b border-white/5 flex items-center px-3 gap-2 overflow-hidden">
+            <div className="flex items-center gap-1.5 bg-[#1e293b] rounded-md px-2 py-1 min-w-0 flex-1" style={{ maxWidth: "55%" }}>
+              <Search className="w-2.5 h-2.5 text-gray-500 flex-shrink-0" />
+              <span className="text-[8px] text-gray-500 truncate">Search jobs, candidates, or anything...</span>
             </div>
-            <div className="ml-auto flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <div className="ml-auto flex items-center gap-2 flex-shrink-0">
               <div className="relative">
-                <Bell className="w-3.5 h-3.5 text-gray-400" />
-                <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-ping" />
-                <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full" />
+                <Bell className="w-3 h-3 text-gray-400" />
+                <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-red-500 rounded-full" />
               </div>
-              <div className="h-4 w-px bg-white/10 hidden sm:block" />
-              <div className="hidden sm:flex items-center gap-2">
+              <div className="h-3 w-px bg-white/10" />
+              <div className="flex items-center gap-1.5">
                 <div className="text-right">
-                  <span className="text-[9px] text-white font-medium block leading-tight">HR Manager</span>
-                  <span className="text-[7px] text-gray-400 block leading-tight">Admin</span>
+                  <span className="text-[8px] text-white font-medium block leading-tight">HR Manager</span>
+                  <span className="text-[6px] text-gray-400 block leading-tight">Admin</span>
                 </div>
-                <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-[8px] font-bold text-white">HR</div>
+                <div className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center text-[7px] font-bold text-white">HR</div>
               </div>
-              <Moon className="w-3.5 h-3.5 text-gray-400" />
+              <Moon className="w-3 h-3 text-gray-400" />
             </div>
           </div>
 
           {/* === SECTION 1: Header + Stat Cards + Overview === */}
-          <div ref={sec1Ref} className={`${mainBg} p-4 space-y-3`}>
+          <div ref={sec1Ref} className={`${mainBg} p-3 space-y-2.5`}>
             <div ref={headerRef} className="flex items-start justify-between">
               <div>
-                <h2 className="text-[15px] font-bold text-white">Agency Dashboard</h2>
-                <p className="text-[9px] text-gray-400">Welcome back! Here's what's happening today.</p>
+                <h2 className="text-[13px] font-bold text-white">Agency Dashboard</h2>
+                <p className="text-[8px] text-gray-400">Welcome back! Here's what's happening today.</p>
               </div>
-              <div className="flex items-center gap-1 bg-blue-600 text-white rounded-lg px-3 py-1.5 text-[9px] font-medium" data-pulse>
-                <Plus className="w-3 h-3" />
+              <div className="flex items-center gap-1 bg-blue-600 text-white rounded-md px-2 py-1 text-[8px] font-medium flex-shrink-0" data-pulse>
+                <Plus className="w-2.5 h-2.5" />
                 Post New Job
               </div>
             </div>
 
-            <div ref={statCardsRef} className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <div ref={statCardsRef} style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "6px" }}>
               {statCards.map((card, i) => (
-                <div key={i} className={`${cardBg} rounded-xl p-3 border border-white/5`}>
-                  <div className={`w-7 h-7 ${card.color} rounded-lg flex items-center justify-center mb-2`}>
-                    <card.icon className="w-3.5 h-3.5 text-white" />
+                <div key={i} className={`${cardBg} rounded-lg p-2 border border-white/5`}>
+                  <div className={`w-6 h-6 ${card.color} rounded-md flex items-center justify-center mb-1.5`}>
+                    <card.icon className="w-3 h-3 text-white" />
                   </div>
-                  <div className="text-[8px] text-gray-400">{card.label}</div>
-                  <div className="text-[16px] font-bold text-white leading-tight">
+                  <div className="text-[7px] text-gray-400">{card.label}</div>
+                  <div className="text-[14px] font-bold text-white leading-tight">
                     <CountUpNumber target={card.value} triggerRef={sec1Ref} />
                   </div>
                 </div>
               ))}
             </div>
 
-            <div ref={overviewRef} className={`${cardBg} rounded-xl p-3 border border-white/5`}>
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="text-[11px] font-bold text-white">Overview Statistics</h3>
-                <span className="text-[8px] text-blue-400 font-medium">View All</span>
+            <div ref={overviewRef} className={`${cardBg} rounded-lg p-2.5 border border-white/5`}>
+              <div className="flex items-center justify-between mb-1.5">
+                <h3 className="text-[10px] font-bold text-white">Overview Statistics</h3>
+                <span className="text-[7px] text-blue-400 font-medium">View All</span>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "8px" }}>
                 {overviewStats.map((stat, i) => (
                   <div key={i} data-overview-item>
-                    <div className="flex items-center gap-1 text-[8px] text-gray-400 mb-0.5">
-                      {stat.label}
-                      <TrendingUp className="w-2.5 h-2.5 text-emerald-400" />
+                    <div className="flex items-center gap-0.5 text-[7px] text-gray-400 mb-0.5">
+                      <span className="truncate">{stat.label}</span>
+                      <TrendingUp className="w-2 h-2 text-emerald-400 flex-shrink-0" />
                     </div>
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-[14px] font-bold text-white">
+                    <div className="flex items-baseline gap-0.5">
+                      <span className="text-[13px] font-bold text-white">
                         <CountUpNumber target={stat.numVal} suffix={stat.suffix || ""} triggerRef={sec1Ref} />
                       </span>
-                      <span className="text-[7px] text-emerald-400 font-medium">{stat.change}</span>
+                      <span className="text-[6px] text-emerald-400 font-medium">{stat.change}</span>
                     </div>
                   </div>
                 ))}
@@ -589,51 +576,59 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
           </div>
 
           {/* === SECTION 2: Charts Row === */}
-          <div ref={sec2Ref} className={`${mainBg} px-4 pb-4 space-y-3 ${compact ? "rounded-b-2xl" : ""}`}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              <div ref={weeklyCardRef} className={`${cardBg} rounded-xl p-3 border border-white/5`}>
+          <div ref={sec2Ref} className={`${mainBg} px-3 pb-3 ${compact ? "rounded-b-2xl" : ""}`}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px" }}>
+              <div ref={weeklyCardRef} className={`${cardBg} rounded-lg p-2.5 border border-white/5`}>
                 <div className="flex items-center justify-between mb-0.5">
-                  <h3 className="text-[11px] font-bold text-white">Weekly Activity</h3>
-                </div>
-                <p className="text-[7px] text-gray-400 mb-1">Applications, Interviews & Offers</p>
-                <div className="flex items-center gap-4 mb-2 text-[8px]">
-                  <div className="flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-full bg-blue-500" />
-                    <span className="text-gray-400">Applications</span>
+                  <h3 className="text-[10px] font-bold text-white">Weekly Activity</h3>
+                  <div className="flex items-center gap-3 text-[7px]">
+                    <div className="flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      <span className="text-gray-400">Applications</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                      <span className="text-gray-400">Interviews</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-full bg-amber-500" />
-                    <span className="text-gray-400">Interviews</span>
-                  </div>
                 </div>
+                <p className="text-[6px] text-gray-400 mb-1.5">Applications, Interviews & Offers</p>
                 <svg viewBox={`0 0 ${chartW} ${chartH}`} className="w-full h-auto">
                   {yLabels.map((val) => {
                     const y = chartH - padB - (val / maxVal) * (chartH - padT - padB);
                     return (
                       <g key={val}>
-                        <text x={padL - 4} y={y + 3} textAnchor="end" className="fill-gray-500" style={{ fontSize: 7 }}>{val}</text>
+                        <text x={padL - 4} y={y + 3} textAnchor="end" fill="#6b7280" style={{ fontSize: 7 }}>{val}</text>
                         <line x1={padL} y1={y} x2={chartW - padR} y2={y} stroke="rgba(255,255,255,0.05)" strokeWidth="0.5" />
                       </g>
                     );
                   })}
-                  <path ref={areaFillRef1} d={toArea(appData)} fill="rgba(59, 130, 246, 0.15)" />
-                  <path ref={areaPathRef1} d={toPath(appData)} fill="none" stroke="#3b82f6" strokeWidth="2" />
-                  <path ref={areaFillRef2} d={toArea(intData)} fill="rgba(245, 158, 11, 0.1)" />
-                  <path ref={areaPathRef2} d={toPath(intData)} fill="none" stroke="#f59e0b" strokeWidth="2" />
                   {days.map((d, i) => {
                     const x = padL + i * ((chartW - padL - padR) / (days.length - 1));
                     return (
-                      <text key={i} x={x} y={chartH - 3} textAnchor="middle" className="fill-gray-500" style={{ fontSize: 7 }}>{d}</text>
+                      <g key={`vline-${i}`}>
+                        <line x1={x} y1={padT} x2={x} y2={chartH - padB} stroke="rgba(255,255,255,0.04)" strokeWidth="0.5" strokeDasharray="3,3" />
+                      </g>
+                    );
+                  })}
+                  <path ref={areaFillRef1} d={toArea(appData)} fill="rgba(99, 102, 241, 0.2)" />
+                  <path ref={areaPathRef1} d={toPath(appData)} fill="none" stroke="#818cf8" strokeWidth="2" strokeLinejoin="round" />
+                  <path ref={areaFillRef2} d={toArea(intData)} fill="rgba(245, 158, 11, 0.08)" />
+                  <path ref={areaPathRef2} d={toPath(intData)} fill="none" stroke="#f59e0b" strokeWidth="1.5" strokeLinejoin="round" />
+                  {days.map((d, i) => {
+                    const x = padL + i * ((chartW - padL - padR) / (days.length - 1));
+                    return (
+                      <text key={i} x={x} y={chartH - 4} textAnchor="middle" fill="#6b7280" style={{ fontSize: 7 }}>{d}</text>
                     );
                   })}
                 </svg>
               </div>
 
-              <div ref={donutCardRef} className={`${cardBg} rounded-xl p-3 border border-white/5`}>
-                <h3 className="text-[11px] font-bold text-white mb-0.5">Application Status</h3>
-                <p className="text-[7px] text-gray-400 mb-2">Current distribution by stage</p>
-                <div className="flex items-center gap-4">
-                  <svg ref={donutRef} viewBox="0 0 100 100" className="w-24 h-24 flex-shrink-0">
+              <div ref={donutCardRef} className={`${cardBg} rounded-lg p-2.5 border border-white/5`}>
+                <h3 className="text-[10px] font-bold text-white mb-0.5">Application Status</h3>
+                <p className="text-[6px] text-gray-400 mb-2">Current distribution by stage</p>
+                <div className="flex items-center gap-3">
+                  <svg ref={donutRef} viewBox="0 0 100 100" className="flex-shrink-0" style={{ width: "45%", maxWidth: 110 }}>
                     {donutSegments.map((seg, i) => {
                       const offset = cumulative;
                       cumulative += seg.pct;
@@ -652,14 +647,14 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
                       );
                     })}
                   </svg>
-                  <div className="space-y-1.5 text-[9px]">
+                  <div className="space-y-1 text-[8px] flex-1 min-w-0">
                     {donutSegments.map((seg, i) => (
-                      <div key={i} data-legend-item className="flex items-center justify-between gap-4">
-                        <div className="flex items-center gap-1.5">
+                      <div key={i} data-legend-item className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-1 min-w-0">
                           <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: seg.color }} />
-                          <span className="text-gray-400">{seg.label}</span>
+                          <span className="text-gray-400 truncate">{seg.label}</span>
                         </div>
-                        <span className="font-semibold text-white">{seg.pct}%</span>
+                        <span className="font-semibold text-white flex-shrink-0">{seg.pct}%</span>
                       </div>
                     ))}
                   </div>
@@ -671,20 +666,20 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
           {!compact && (
           <>
           {/* === SECTION 3: Progress + Growth === */}
-          <div ref={sec3Ref} className={`${mainBg} px-4 pb-3 space-y-3`}>
-            <div className="grid grid-cols-2 gap-2">
-              <div ref={progressRef} className={`${cardBg} rounded-xl p-3 border border-white/5`}>
-                <h3 className="text-[11px] font-bold text-white mb-0.5">Department Hiring Progress</h3>
-                <p className="text-[7px] text-gray-400 mb-2">Current vs Target</p>
-                <div className="space-y-2.5">
+          <div ref={sec3Ref} className={`${mainBg} px-3 pb-2.5`}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px" }}>
+              <div ref={progressRef} className={`${cardBg} rounded-lg p-2.5 border border-white/5`}>
+                <h3 className="text-[10px] font-bold text-white mb-0.5">Department Hiring Progress</h3>
+                <p className="text-[6px] text-gray-400 mb-2">Current vs Target</p>
+                <div className="space-y-2">
                   {hiringProgress.map((item, i) => (
                     <div key={i} data-progress-row>
                       <div className="flex items-center justify-between mb-0.5">
-                        <span className="text-[9px] font-semibold text-white">{item.dept}</span>
-                        <span className="text-[7px] text-gray-400">{item.current} / {item.target}</span>
+                        <span className="text-[8px] font-semibold text-white">{item.dept}</span>
+                        <span className="text-[6px] text-gray-400">{item.current} / {item.target}</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <div className="flex-1 h-2 bg-gray-700 rounded-full overflow-hidden">
+                      <div className="flex items-center gap-1.5">
+                        <div className="flex-1 h-1.5 bg-gray-700 rounded-full overflow-hidden">
                           <div
                             className={`h-full rounded-full ${item.color}`}
                             data-progress-fill
@@ -692,37 +687,37 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
                             style={{ width: "0%" }}
                           />
                         </div>
-                        <span className="text-[8px] font-medium text-white w-7 text-right">{item.pct}%</span>
+                        <span className="text-[7px] font-medium text-white w-6 text-right">{item.pct}%</span>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div ref={growthRef} className={`${cardBg} rounded-xl p-3 border border-white/5`}>
-                <h3 className="text-[11px] font-bold text-white mb-0.5">Monthly Growth</h3>
-                <p className="text-[7px] text-gray-400 mb-2">Application volume trend</p>
-                <div className="flex items-end gap-2 h-24">
+              <div ref={growthRef} className={`${cardBg} rounded-lg p-2.5 border border-white/5`}>
+                <h3 className="text-[10px] font-bold text-white mb-0.5">Monthly Growth</h3>
+                <p className="text-[6px] text-gray-400 mb-2">Application volume trend</p>
+                <div className="flex items-end gap-1.5 h-20">
                   {bars.map((val, i) => (
-                    <div key={i} className="flex flex-col items-center gap-1 flex-1">
+                    <div key={i} className="flex flex-col items-center gap-0.5 flex-1">
                       <div
                         data-bar
-                        className="w-full rounded-t bg-gradient-to-t from-blue-600 to-blue-400 min-w-[12px]"
-                        style={{ height: `${(val / maxBar) * 100}%` }}
+                        className="w-full rounded-t bg-gradient-to-t from-blue-600 to-blue-400"
+                        style={{ height: `${(val / maxBar) * 100}%`, minWidth: 8 }}
                       />
-                      <span className="text-[7px] text-gray-400">{months[i]}</span>
+                      <span className="text-[6px] text-gray-400">{months[i]}</span>
                     </div>
                   ))}
                 </div>
-                <div className="flex items-center justify-between mt-2 pt-2 border-t border-white/5">
+                <div className="flex items-center justify-between mt-1.5 pt-1.5 border-t border-white/5">
                   <div>
-                    <div className="text-[7px] text-gray-400 uppercase">Current Month</div>
-                    <div className="text-[14px] font-bold text-white">
+                    <div className="text-[6px] text-gray-400 uppercase">Current Month</div>
+                    <div className="text-[12px] font-bold text-white">
                       <CountUpNumber target={797} triggerRef={sec3Ref} />
                     </div>
                   </div>
-                  <div className="flex items-center gap-1 text-[9px] text-emerald-400 font-medium">
-                    <TrendingUp className="w-3 h-3" />
+                  <div className="flex items-center gap-0.5 text-[8px] text-emerald-400 font-medium">
+                    <TrendingUp className="w-2.5 h-2.5" />
                     +17.2%
                   </div>
                 </div>
@@ -731,22 +726,22 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
           </div>
 
           {/* === SECTION 4: Recent Activity === */}
-          <div ref={sec4Ref} className={`${mainBg} px-4 pb-4 rounded-br-2xl`}>
-            <div ref={activityRef} className={`${cardBg} rounded-xl p-3 border border-white/5`}>
-              <div className="flex items-center justify-between mb-2">
+          <div ref={sec4Ref} className={`${mainBg} px-3 pb-3 rounded-br-2xl`}>
+            <div ref={activityRef} className={`${cardBg} rounded-lg p-2.5 border border-white/5`}>
+              <div className="flex items-center justify-between mb-1.5">
                 <div>
-                  <h3 className="text-[11px] font-bold text-white">Recent Activity</h3>
-                  <p className="text-[7px] text-emerald-400">+23% than last week</p>
+                  <h3 className="text-[10px] font-bold text-white">Recent Activity</h3>
+                  <p className="text-[6px] text-emerald-400">+23% than last week</p>
                 </div>
-                <span className="text-[8px] text-blue-400 font-medium">View All Analytics</span>
+                <span className="text-[7px] text-blue-400 font-medium">View All Analytics</span>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 {activityItems.map((item, i) => (
-                  <div key={i} data-activity-item className="flex items-center gap-2">
-                    <span className={`w-2 h-2 rounded-full flex-shrink-0 ${item.dot}`} />
+                  <div key={i} data-activity-item className="flex items-center gap-1.5">
+                    <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${item.dot}`} />
                     <div className="flex-1 min-w-0">
-                      <div className="text-[9px] font-medium text-white truncate">{item.text}</div>
-                      <div className="text-[7px] text-gray-400">{item.time}</div>
+                      <div className="text-[8px] font-medium text-white truncate">{item.text}</div>
+                      <div className="text-[6px] text-gray-400">{item.time}</div>
                     </div>
                   </div>
                 ))}
