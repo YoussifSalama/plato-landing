@@ -102,7 +102,7 @@ function WeeklyChart({ triggerRef }: { triggerRef: React.RefObject<HTMLDivElemen
       </defs>
       <path d={`M${pts1.join(" L")} L${w},${h + 10} L0,${h + 10} Z`} fill="url(#area1)" opacity="0.5" />
       {weeklyData.map((d, i) => (
-        <text key={d.day} x={(i / 6) * w} y={h + 10} textAnchor="middle" className="fill-gray-500 text-[7px]">{d.day}</text>
+        <text key={d.day} x={(i / 6) * w} y={h + 10} textAnchor="middle" className="fill-gray-400 dark:fill-gray-500 text-[7px]">{d.day}</text>
       ))}
     </svg>
   );
@@ -136,24 +136,32 @@ function DonutChart() {
   );
 }
 
+const shellBg = "bg-gray-100 dark:bg-[#0c1929]";
+const cardBg = "bg-white dark:bg-[#111d2e]";
+const headingText = "text-gray-800 dark:text-gray-300";
+const labelText = "text-gray-500 dark:text-gray-400";
+const valueText = "text-gray-900 dark:text-white";
+const progressTrack = "bg-gray-200 dark:bg-[#1a2a3d]";
+const barInactive = "bg-gray-200 dark:bg-[#1e3a5f]";
+
 export default function AboutAnalyticsDashboard() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div ref={containerRef} className="bg-[#0c1929] text-white p-4 sm:p-5 space-y-4" data-testid="about-analytics">
+    <div ref={containerRef} className={`${shellBg} text-foreground p-4 sm:p-5 space-y-4`} data-testid="about-analytics">
       {/* Overview Statistics */}
-      <div className="bg-[#111d2e] rounded-lg p-4">
-        <h3 className="text-xs font-semibold mb-3 text-gray-300">Overview Statistics</h3>
+      <div className={`${cardBg} rounded-lg p-4`}>
+        <h3 className={`text-xs font-semibold mb-3 ${headingText}`}>Overview Statistics</h3>
         <div className="grid grid-cols-3 gap-3">
           {overviewStats.map((stat) => (
             <div key={stat.label}>
-              <p className="text-[10px] text-gray-400 flex items-center gap-1">
+              <p className={`text-[10px] ${labelText} flex items-center gap-1`}>
                 {stat.label} <TrendingUp className="w-2.5 h-2.5" />
               </p>
-              <p className="text-lg font-bold">
+              <p className={`text-lg font-bold ${valueText}`}>
                 <CountUp target={stat.value} triggerRef={containerRef} />
               </p>
-              <span className="text-[9px] text-emerald-400">{stat.change}</span>
+              <span className="text-[9px] text-emerald-500 dark:text-emerald-400">{stat.change}</span>
             </div>
           ))}
         </div>
@@ -161,14 +169,14 @@ export default function AboutAnalyticsDashboard() {
 
       {/* Weekly Activity + Application Status */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="sm:col-span-2 bg-[#111d2e] rounded-lg p-4">
+        <div className={`sm:col-span-2 ${cardBg} rounded-lg p-4`}>
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-xs font-semibold text-gray-300">Weekly Activity</h3>
+            <h3 className={`text-xs font-semibold ${headingText}`}>Weekly Activity</h3>
             <div className="flex items-center gap-3">
-              <span className="flex items-center gap-1 text-[9px] text-gray-400">
+              <span className={`flex items-center gap-1 text-[9px] ${labelText}`}>
                 <span className="w-2 h-2 rounded-full bg-blue-500 inline-block" /> Applications
               </span>
-              <span className="flex items-center gap-1 text-[9px] text-gray-400">
+              <span className={`flex items-center gap-1 text-[9px] ${labelText}`}>
                 <span className="w-2 h-2 rounded-full bg-orange-500 inline-block" /> Interviews
               </span>
             </div>
@@ -176,9 +184,9 @@ export default function AboutAnalyticsDashboard() {
           <WeeklyChart triggerRef={containerRef} />
         </div>
 
-        <div className="bg-[#111d2e] rounded-lg p-4">
-          <h3 className="text-xs font-semibold text-gray-300 mb-2">Application Status</h3>
-          <p className="text-[9px] text-gray-500 mb-3">Current distribution by stage</p>
+        <div className={`${cardBg} rounded-lg p-4`}>
+          <h3 className={`text-xs font-semibold ${headingText} mb-2`}>Application Status</h3>
+          <p className={`text-[9px] ${labelText} mb-3`}>Current distribution by stage</p>
           <div className="flex justify-center">
             <DonutChart />
           </div>
@@ -187,44 +195,41 @@ export default function AboutAnalyticsDashboard() {
 
       {/* Department Hiring Progress + Monthly Growth */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="sm:col-span-2 bg-[#111d2e] rounded-lg p-4">
-          <h3 className="text-xs font-semibold text-gray-300 mb-1">Department Hiring Progress</h3>
-          <p className="text-[9px] text-gray-500 mb-3">Current vs Target</p>
+        <div className={`sm:col-span-2 ${cardBg} rounded-lg p-4`}>
+          <h3 className={`text-xs font-semibold ${headingText} mb-1`}>Department Hiring Progress</h3>
+          <p className={`text-[9px] ${labelText} mb-3`}>Current vs Target</p>
           <div className="space-y-3">
             {hiringProgress.map((dept) => (
               <div key={dept.dept} className="flex items-center gap-3">
-                <span className="text-[10px] text-gray-400 w-20 flex-shrink-0">{dept.dept}</span>
-                <div className="flex-1 h-2 bg-[#1a2a3d] rounded-full overflow-hidden">
+                <span className={`text-[10px] ${labelText} w-20 flex-shrink-0`}>{dept.dept}</span>
+                <div className={`flex-1 h-2 ${progressTrack} rounded-full overflow-hidden`}>
                   <div
                     className="h-full rounded-full transition-all duration-1000"
                     style={{ width: `${dept.pct}%`, backgroundColor: dept.color }}
                   />
                 </div>
-                <span className="text-[9px] text-gray-400 w-10 text-right flex-shrink-0">{dept.current} / {dept.target}</span>
-                <span className="text-[9px] text-gray-500 w-8 text-right flex-shrink-0">{dept.pct}%</span>
+                <span className={`text-[9px] ${labelText} w-10 text-right flex-shrink-0`}>{dept.current} / {dept.target}</span>
+                <span className={`text-[9px] ${labelText} w-8 text-right flex-shrink-0`}>{dept.pct}%</span>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="bg-[#111d2e] rounded-lg p-4">
-          <h3 className="text-xs font-semibold text-gray-300 mb-1">Monthly Growth</h3>
-          <p className="text-[9px] text-gray-500 mb-3">Application volume trend</p>
+        <div className={`${cardBg} rounded-lg p-4`}>
+          <h3 className={`text-xs font-semibold ${headingText} mb-1`}>Monthly Growth</h3>
+          <p className={`text-[9px] ${labelText} mb-3`}>Application volume trend</p>
           <div className="flex items-end gap-1 h-16">
             {[40, 55, 70, 60, 80, 95, 75, 90, 85, 100, 70, 88].map((v, i) => (
               <div
                 key={i}
-                className="flex-1 rounded-sm"
-                style={{
-                  height: `${v}%`,
-                  backgroundColor: i === 11 ? "#3b82f6" : "#1e3a5f",
-                }}
+                className={`flex-1 rounded-sm ${i === 11 ? "bg-blue-500" : barInactive}`}
+                style={{ height: `${v}%` }}
               />
             ))}
           </div>
           <div className="flex justify-between mt-1">
-            <span className="text-[8px] text-gray-500">Jan</span>
-            <span className="text-[8px] text-gray-500">Dec</span>
+            <span className={`text-[8px] ${labelText}`}>Jan</span>
+            <span className={`text-[8px] ${labelText}`}>Dec</span>
           </div>
         </div>
       </div>
