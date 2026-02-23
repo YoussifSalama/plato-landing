@@ -1,0 +1,335 @@
+Post 1
+
+Title: CVs Are Not Truth: Why Skills Signals Beat “Experience”
+Category: Hiring Strategy
+Tags: Skills-Based Hiring, Recruiting, Hiring
+Slug: cvs-are-not-truth-skills-signals-beat-experience
+Author: Plato Team
+Read time: 2 min
+Publish date: 2026-02-03
+Cover image idea: A hiring team reviewing candidate profiles on a laptop (modern office)
+Card excerpt (120–160 chars): CVs are claims, not proof. Skills signals like work samples and structured interviews help you hire faster with less regret.
+
+Blog content
+
+CV-first hiring is the reason most companies make the same mistake repeatedly: they hire on claims instead of evidence.
+
+A CV is a marketing document. It can be polished, exaggerated, or written in a way that makes average work look impressive. Meanwhile, the job doesn’t care about formatting—it cares about whether someone can actually execute.
+
+Why CV-first hiring breaks
+
+Titles are inconsistent: “Senior” means different things in different companies.
+
+Years don’t equal skill: two people can have “3 years experience” and one is miles ahead.
+
+Confidence gets rewarded: strong talkers often sound competent even when results don’t exist.
+
+Pedigree bias creeps in: school and brand names start replacing real evaluation.
+
+What you should hire on instead: skills signals
+A skills signal is anything that proves capability with real substance, not vibes. Examples:
+
+A short role-relevant work sample
+
+Structured interview answers scored with a rubric
+
+Clear examples of impact (with numbers or outcomes)
+
+Consistency across multiple questions and stages
+
+The goal isn’t to “test harder.” The goal is to collect proof.
+
+Final takeaway
+A CV is a starting point, not a verdict. If you want fewer regret hires, build your process around skills signals—not storytelling.
+
+CTA: Book a demo to see Plato in action.
+
+Post 2
+
+Title: The Only Interview Structure You Need (45 Minutes, No Fluff)
+Category: Interviewing
+Tags: Structured Interviews, Scorecards, Hiring
+Slug: only-interview-structure-you-need-45-minutes
+Author: Plato Team
+Read time: 2 min
+Publish date: 2026-02-06
+Cover image idea: Interview setting with notebook/laptop, professional meeting room
+Card excerpt: Most interviews are random conversations. Use this 45-minute structure and a rubric to make hiring decisions consistent and defensible.
+
+Blog content
+
+Most interviews are not interviews. They’re conversations with a decision at the end. That’s why hiring feels random—and why “different interviewers” lead to different outcomes.
+
+If you want a hiring process you can trust, you need structure.
+
+The 45-minute interview format
+
+0–5 minutes: Set expectations
+Tell the candidate what will happen, so the interview stays focused.
+
+5–25 minutes: Proof questions (3 questions)
+Pick questions that force real detail:
+
+“What result did you personally own? What changed because of you?”
+
+“Hardest problem you solved recently—how did you think through it?”
+
+“Tell me about a failure. What did you do after?”
+
+25–40 minutes: One realistic scenario
+Give a job-related situation and ask what they’d do in week one. This exposes reasoning and priorities.
+
+40–45 minutes: Candidate questions
+Strong candidates ask about success metrics, priorities, constraints—not only salary.
+
+How to score without bias
+Use 4–6 criteria max and score 1–5:
+
+Clarity of thinking
+
+Ownership
+
+Role competence
+
+Execution evidence
+
+Communication
+
+Rule: if you can’t justify the score with evidence, the score doesn’t count.
+
+Final takeaway
+Unstructured interviews produce unstructured hiring. Structure makes decisions faster, fairer, and easier to defend.
+
+CTA: Book a demo to see Plato in action.
+
+Post 3
+
+Title: Candidate Scoring Without the Black Box: What Employers Should Demand
+Category: AI & Evaluation
+Tags: AI Hiring, Candidate Scoring, Trust
+Slug: candidate-scoring-without-the-black-box
+Author: Plato Team
+Read time: 2 min
+Publish date: 2026-02-09
+Cover image idea: Abstract AI + hiring concept (dashboard, scoring, analytics)
+Card excerpt: If a scoring system can’t explain itself, it’s risky. Here’s what “good scoring” looks like: evidence, transparency, and job relevance.
+
+Blog content
+
+Candidate scoring sounds great until someone asks: “Why did this person get 82 and that person get 61?”
+
+If you can’t answer clearly, your score is a liability.
+
+What any scoring system must provide
+
+Explainability (why the score exists)
+The score must show:
+
+top contributing signals
+
+strengths and weaknesses
+
+evidence from answers and behavior
+
+Job relevance
+No generic “smart person” scoring. The score must match the role.
+
+Consistency
+Similar evidence should produce similar scores. If results swing wildly, the scoring is unstable.
+
+Human control
+AI supports decisions. Humans own the final call.
+
+Auditability
+Over time, high scores should correlate with performance. If not, the process needs adjustment.
+
+Final takeaway
+AI in hiring is only useful when it makes decisions more consistent and defensible—not more mysterious.
+
+CTA: Book a demo to see Plato in action.
+
+Post 4
+
+Title: Reduce Time-to-Hire Without Lowering Standards
+Category: Hiring Ops
+Tags: Time-to-Hire, Hiring Process, Operations
+Slug: reduce-time-to-hire-without-lowering-standards
+Author: Plato Team
+Read time: 2 min
+Publish date: 2026-02-12
+Cover image idea: Hiring pipeline board / workflow / team planning
+Card excerpt: Hiring slow isn’t hiring careful—it’s usually hiring messy. Here’s how to speed up decisions without sacrificing quality.
+
+Blog content
+
+Hiring slow doesn’t mean hiring carefully. Most of the time it means:
+
+unclear criteria
+
+too many steps
+
+repetitive interviews
+
+delayed decisions
+
+no clear process owner
+
+The 3 levers that reduce time-to-hire
+
+Define criteria before you start
+Write the 5 things that matter most. If you can’t, you’re not ready to hire.
+
+Use a hard quality gate
+Filter out obvious mismatches quickly so interview time goes to real contenders.
+
+Collect structured evidence
+Instead of endless interviews, use:
+
+structured screen
+
+structured interview
+
+final validation
+
+Fast decisions come from trustworthy evidence.
+
+Final takeaway
+The bottleneck is rarely candidate supply. It’s decision confidence. Fix the evidence and speed follows.
+
+CTA: Book a demo to see Plato in action.
+
+Post 5
+
+Title: High-Volume Hiring: How to Screen 500 Candidates Without Losing Your Mind
+Category: Screening
+Tags: High Volume, Screening, Shortlisting
+Slug: high-volume-hiring-screen-500-candidates
+Author: Plato Team
+Read time: 2 min
+Publish date: 2026-02-15
+Cover image idea: Recruiter reviewing many applications on screen / dashboard
+Card excerpt: When volume hits, most teams panic and filter randomly. Here’s a clean screening system that keeps quality high.
+
+Blog content
+
+High-volume hiring breaks teams because they try to do deep evaluation on everyone. That doesn’t scale.
+
+The solution is not “work harder.” It’s build a funnel.
+
+Step 1: Decide the minimum bar
+Create three lists:
+
+must-haves
+
+nice-to-haves
+
+disqualifiers
+
+Step 2: Ask a few signal questions
+Use 5–7 questions that force clarity:
+
+“What’s a project you owned end-to-end?”
+
+“What metric improved because of you?”
+
+“What tool/process do you use daily and why?”
+
+Step 3: Shortlist based on evidence
+You don’t need perfection. You need strong signal.
+
+Final takeaway
+Volume doesn’t destroy quality. Lack of structure does.
+
+CTA: Book a demo to see Plato in action.
+
+Post 6
+
+Title: Candidate Experience Isn’t “Being Nice.” It’s Removing Friction.
+Category: Candidate Experience
+Tags: Candidate Journey, Employer Brand, Conversion
+Slug: candidate-experience-is-removing-friction
+Author: Plato Team
+Read time: 2 min
+Publish date: 2026-02-18
+Cover image idea: Candidate using phone/laptop applying, clean UI
+Card excerpt: Top candidates drop when the process feels slow, repetitive, or disrespectful. These fixes increase completion and acceptance.
+
+Blog content
+
+Candidate experience is not a “soft” topic. It’s a conversion funnel.
+
+When strong candidates drop off, it’s usually because the process feels:
+
+unclear
+
+slow
+
+repetitive
+
+disrespectful of time
+
+7 fixes that work immediately
+
+Show the steps + timeline
+
+Make it mobile-friendly
+
+Remove unnecessary forms
+
+Stop repeating questions
+
+Give status updates
+
+Keep stages short and focused
+
+Close the loop (don’t ghost)
+
+Final takeaway
+Candidate experience is how you signal your company quality before the candidate even joins.
+
+CTA: Book a demo to see Plato in action.
+
+Post 7
+
+Title: Hiring in MENA Has Its Own Rules: Ignore Them and You’ll Keep Missing
+Category: MENA Insights
+Tags: MENA Hiring, Market Reality, Talent
+Slug: hiring-in-mena-has-its-own-rules
+Author: Plato Team
+Read time: 2 min
+Publish date: 2026-02-21
+Cover image idea: Modern office/team in MENA context, professional setting
+Card excerpt: MENA hiring isn’t Silicon Valley. Different constraints, different signals, different expectations. Here’s how smart employers adapt.
+
+Blog content
+
+A lot of hiring advice online assumes Silicon Valley reality. MENA has different constraints and habits, and ignoring them leads to constant hiring misses.
+
+Real MENA realities
+
+Notice periods can be longer
+
+Titles vary wildly across companies
+
+Language requirements matter more than people admit
+
+Referrals dominate, so you need structured evidence to compete fairly
+
+Candidate trust can be fragile unless the process feels consistent
+
+What wins in MENA
+
+Clear criteria
+
+Structured evaluation
+
+Faster cycles
+
+Transparent communication
+
+This reduces randomness and builds trust for both sides.
+
+Final takeaway
+In MENA, structure isn’t “extra.” It’s how you prove fairness and hire the best talent consistently.
+
+CTA: Book a demo to see Plato in action.
