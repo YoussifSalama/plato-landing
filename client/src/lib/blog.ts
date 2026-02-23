@@ -21,398 +21,573 @@ import blogImg7 from "@/assets/blog/blog-7.jpg";
 
 const enPosts: BlogPost[] = [
   {
-    slug: "insights-for-smarter-hiring",
-    title: "Insights for Smarter Hiring",
-    date: "2025-12-01",
-    summary: "Explore the latest trends in AI-powered recruitment, HR innovation, and talent strategy. The Plato Blog delivers expert insights, practical tips, and real-world perspectives to help you attract top talent, streamline hiring, and build stronger teams with confidence.",
-    tags: ["Tech & Innovation"],
-    category: "Tech & Innovation",
-    author: "Raef Alwani",
+    slug: "cvs-are-not-truth-skills-signals-beat-experience",
+    title: "CVs Are Not Truth: Why Skills Signals Beat \"Experience\"",
+    date: "2026-02-03",
+    summary: "CVs are claims, not proof. Skills signals like work samples and structured interviews help you hire faster with less regret.",
+    tags: ["Skills-Based Hiring", "Recruiting", "Hiring"],
+    category: "Hiring Strategy",
+    author: "Plato Team",
     image: blogImg1,
     lang: "en",
-    content: `Explore the latest trends in AI-powered recruitment, HR innovation, and talent strategy.
+    content: `CV-first hiring is the reason most companies make the same mistake repeatedly: they hire on claims instead of evidence.
 
-## The Evolution of Smart Hiring
+A CV is a marketing document. It can be polished, exaggerated, or written in a way that makes average work look impressive. Meanwhile, the job doesn't care about formatting—it cares about whether someone can actually execute.
 
-The hiring landscape has changed dramatically over the past decade. Traditional methods of screening resumes and conducting interviews are being supplemented — and in some cases replaced — by intelligent systems that can process information faster, more consistently, and with less bias.
+## Why CV-first hiring breaks
 
-## Key Trends Shaping Recruitment
+**Titles are inconsistent** — "Senior" means different things in different companies.
 
-**AI-Powered Screening** — Modern AI tools can analyze thousands of resumes in minutes, identifying the most qualified candidates based on objective criteria rather than subjective impressions.
+**Years don't equal skill** — two people can have "3 years experience" and one is miles ahead.
 
-**Predictive Analytics** — By analyzing historical hiring data, organizations can predict which candidates are most likely to succeed in specific roles, reducing turnover and improving team performance.
+**Confidence gets rewarded** — strong talkers often sound competent even when results don't exist.
 
-**Automated Outreach** — Intelligent systems can engage candidates at the right time with personalized messages, improving response rates and candidate experience.
+**Pedigree bias creeps in** — school and brand names start replacing real evaluation.
 
-## What This Means for HR Teams
+## What you should hire on instead: skills signals
 
-The role of HR is evolving from administrative gatekeeping to strategic talent advisory. With AI handling the repetitive tasks, HR professionals can focus on what they do best: building relationships, understanding team dynamics, and making nuanced decisions that require human judgment.
+A skills signal is anything that proves capability with real substance, not vibes. Examples:
 
-## Getting Started
+- A short role-relevant work sample
+- Structured interview answers scored with a rubric
+- Clear examples of impact (with numbers or outcomes)
+- Consistency across multiple questions and stages
 
-The key to adopting smart hiring practices is to start small. Pick one part of your hiring process — screening, scheduling, or evaluation — and experiment with automation. Measure the results, iterate, and expand from there.
+The goal isn't to "test harder." The goal is to collect proof.
 
-Plato is designed to support exactly this kind of incremental adoption. Our platform handles the heavy lifting so your team can focus on finding the right people.`,
+## Final takeaway
+
+A CV is a starting point, not a verdict. If you want fewer regret hires, build your process around skills signals—not storytelling.
+
+**Book a demo to see Plato in action.**`,
   },
   {
-    slug: "ai-powered-recruitment-talent-strategy",
-    title: "AI-powered recruitment, HR innovation, and talent strategy",
-    date: "2025-11-28",
-    summary: "An exclusive guide to the most prestigious residential areas in Riyadh, featuring world-class amenities and architectural excellence.",
-    tags: ["Market Insights"],
-    category: "Market Insights",
-    author: "Mohammed Al-Rashid",
-    image: blogImg4,
-    lang: "en",
-    content: `The intersection of artificial intelligence and human resources is creating unprecedented opportunities for organizations of all sizes.
-
-## The AI Revolution in HR
-
-Artificial intelligence is no longer a futuristic concept in recruitment — it's a present reality. From resume parsing to candidate matching, AI is transforming every stage of the hiring process.
-
-## Key Benefits
-
-**Speed** — AI can process applications 10x faster than manual review, reducing time-to-hire significantly.
-
-**Consistency** — Unlike human reviewers, AI applies the same criteria to every candidate, ensuring fair and consistent evaluation.
-
-**Scale** — Whether you're hiring for one position or one hundred, AI scales effortlessly to handle any volume.
-
-## Implementation Strategy
-
-1. Start with resume screening automation
-2. Add structured interview frameworks
-3. Implement predictive hiring analytics
-4. Build continuous feedback loops
-
-The future of hiring is here, and it's powered by intelligent technology that augments human decision-making.`,
-  },
-  {
-    slug: "ai-driven-candidate-experience",
-    title: "From AI-driven hiring to improving candidate experience",
-    date: "2025-11-22",
-    summary: "A comprehensive guide to calculating and maximizing your return on investment in the Saudi Arabian property market.",
-    tags: ["Investment"],
-    category: "Investment",
-    author: "Omar Hassan",
+    slug: "only-interview-structure-you-need-45-minutes",
+    title: "The Only Interview Structure You Need (45 Minutes, No Fluff)",
+    date: "2026-02-06",
+    summary: "Most interviews are random conversations. Use this 45-minute structure and a rubric to make hiring decisions consistent and defensible.",
+    tags: ["Structured Interviews", "Scorecards", "Hiring"],
+    category: "Interviewing",
+    author: "Plato Team",
     image: blogImg2,
     lang: "en",
-    content: `Candidate experience is becoming a critical differentiator in the talent market. Organizations that invest in creating positive hiring experiences attract better candidates and build stronger employer brands.
+    content: `Most interviews are not interviews. They're conversations with a decision at the end. That's why hiring feels random—and why "different interviewers" lead to different outcomes.
 
-## Why Candidate Experience Matters
+If you want a hiring process you can trust, you need structure.
 
-In today's competitive job market, top candidates have options. A poor hiring experience — slow responses, unclear processes, or impersonal communication — can drive the best talent to your competitors.
+## The 45-minute interview format
 
-## Key Elements of Great Candidate Experience
+**0–5 minutes: Set expectations**
+Tell the candidate what will happen, so the interview stays focused.
 
-**Transparency** — Keep candidates informed at every stage. Automated updates and clear timelines build trust and reduce anxiety.
+**5–25 minutes: Proof questions (3 questions)**
+Pick questions that force real detail:
 
-**Speed** — Respect candidates' time by streamlining the process. AI-powered tools can reduce hiring cycles from weeks to days.
+- "What result did you personally own? What changed because of you?"
+- "Hardest problem you solved recently—how did you think through it?"
+- "Tell me about a failure. What did you do after?"
 
-**Personalization** — Every candidate should feel valued. Use technology to personalize communication while maintaining efficiency.
+**25–40 minutes: One realistic scenario**
+Give a job-related situation and ask what they'd do in week one. This exposes reasoning and priorities.
 
-## The ROI of Good Experience
+**40–45 minutes: Candidate questions**
+Strong candidates ask about success metrics, priorities, constraints—not only salary.
 
-Companies with strong candidate experience see:
-- 38% higher offer acceptance rates
-- 50% reduction in cost-per-hire
-- Significant improvement in employer brand perception
+## How to score without bias
 
-Investing in candidate experience isn't just the right thing to do — it's a smart business decision.`,
+Use 4–6 criteria max and score 1–5:
+
+- Clarity of thinking
+- Ownership
+- Role competence
+- Execution evidence
+- Communication
+
+Rule: if you can't justify the score with evidence, the score doesn't count.
+
+## Final takeaway
+
+Unstructured interviews produce unstructured hiring. Structure makes decisions faster, fairer, and easier to defend.
+
+**Book a demo to see Plato in action.**`,
   },
   {
-    slug: "expert-content-modern-hr-teams",
-    title: "Dive into expert content designed for modern HR teams.",
-    date: "2025-11-28",
-    summary: "An exclusive guide to the most prestigious residential areas in Riyadh, featuring world-class amenities and architectural excellence.",
-    tags: ["HRM System"],
-    category: "HRM System",
-    author: "Mohammed Al-Rashid",
+    slug: "candidate-scoring-without-the-black-box",
+    title: "Candidate Scoring Without the Black Box: What Employers Should Demand",
+    date: "2026-02-09",
+    summary: "If a scoring system can't explain itself, it's risky. Here's what \"good scoring\" looks like: evidence, transparency, and job relevance.",
+    tags: ["AI Hiring", "Candidate Scoring", "Trust"],
+    category: "AI & Evaluation",
+    author: "Plato Team",
     image: blogImg3,
     lang: "en",
-    content: `Modern HR teams face unprecedented challenges. From managing remote workforces to implementing DEI initiatives, the scope of HR has expanded dramatically.
+    content: `Candidate scoring sounds great until someone asks: "Why did this person get 82 and that person get 61?"
 
-## The Modern HR Technology Stack
+If you can't answer clearly, your score is a liability.
 
-Today's HR teams need more than spreadsheets and email. A modern technology stack includes:
+## What any scoring system must provide
 
-**Applicant Tracking Systems** — Centralize candidate data and streamline the hiring pipeline.
+**Explainability (why the score exists)**
+The score must show:
 
-**AI-Powered Screening** — Automate the initial review of applications to focus on the most promising candidates.
+- Top contributing signals
+- Strengths and weaknesses
+- Evidence from answers and behavior
 
-**Interview Management** — Schedule, conduct, and evaluate interviews consistently across the organization.
+**Job relevance**
+No generic "smart person" scoring. The score must match the role.
 
-**Analytics Dashboard** — Track key metrics like time-to-hire, cost-per-hire, and quality of hire to continuously improve.
+**Consistency**
+Similar evidence should produce similar scores. If results swing wildly, the scoring is unstable.
 
-## Building an Effective HR Strategy
+**Human control**
+AI supports decisions. Humans own the final call.
 
-1. Audit your current processes and identify bottlenecks
-2. Select technology that integrates with your existing systems
-3. Train your team on new tools and methodologies
-4. Measure outcomes and iterate
+**Auditability**
+Over time, high scores should correlate with performance. If not, the process needs adjustment.
 
-The most effective HR teams combine human expertise with technological capability to create hiring processes that are both efficient and equitable.`,
+## Final takeaway
+
+AI in hiring is only useful when it makes decisions more consistent and defensible—not more mysterious.
+
+**Book a demo to see Plato in action.**`,
   },
   {
-    slug: "practical-hiring-tips-industry-analysis",
-    title: "From practical hiring tips to in-depth industry analysis",
-    date: "2025-11-22",
-    summary: "A comprehensive guide to calculating and maximizing your return on investment in the Saudi Arabian property market.",
-    tags: ["Investment"],
-    category: "Investment",
-    author: "Omar Hassan",
-    image: blogImg6,
+    slug: "reduce-time-to-hire-without-lowering-standards",
+    title: "Reduce Time-to-Hire Without Lowering Standards",
+    date: "2026-02-12",
+    summary: "Hiring slow isn't hiring careful—it's usually hiring messy. Here's how to speed up decisions without sacrificing quality.",
+    tags: ["Time-to-Hire", "Hiring Process", "Operations"],
+    category: "Hiring Ops",
+    author: "Plato Team",
+    image: blogImg4,
     lang: "en",
-    content: `The hiring industry is evolving rapidly, driven by technological innovation, changing workforce expectations, and global economic shifts.
+    content: `Hiring slow doesn't mean hiring carefully. Most of the time it means:
 
-## Industry Trends to Watch
+- Unclear criteria
+- Too many steps
+- Repetitive interviews
+- Delayed decisions
+- No clear process owner
 
-**Remote-First Hiring** — The shift to remote work has expanded the talent pool globally, but it also requires new approaches to screening, interviewing, and onboarding.
+## The 3 levers that reduce time-to-hire
 
-**Skills-Based Hiring** — More organizations are moving away from degree requirements and focusing on demonstrated skills and competencies.
+**Define criteria before you start**
+Write the 5 things that matter most. If you can't, you're not ready to hire.
 
-**Diversity and Inclusion** — Building diverse teams isn't just ethically important — it drives better business outcomes through varied perspectives and experiences.
+**Use a hard quality gate**
+Filter out obvious mismatches quickly so interview time goes to real contenders.
 
-## Practical Tips for Hiring Managers
+**Collect structured evidence**
+Instead of endless interviews, use:
 
-1. Write inclusive job descriptions that attract diverse candidates
-2. Use structured interviews to reduce unconscious bias
-3. Implement blind resume screening where possible
-4. Set clear evaluation criteria before reviewing any candidates
-5. Provide timely feedback to all applicants
+- Structured screen
+- Structured interview
+- Final validation
 
-## The Data Behind Great Hiring
+Fast decisions come from trustworthy evidence.
 
-Organizations that adopt data-driven hiring practices see measurable improvements in quality of hire, employee retention, and team performance. The key is collecting the right data and using it to inform — not replace — human decision-making.`,
+## Final takeaway
+
+The bottleneck is rarely candidate supply. It's decision confidence. Fix the evidence and speed follows.
+
+**Book a demo to see Plato in action.**`,
   },
   {
-    slug: "future-of-hiring-starts-here",
-    title: "The Future of Hiring Starts Here",
-    date: "2025-11-28",
-    summary: "An exclusive guide to the most prestigious residential areas in Riyadh, featuring world-class amenities and architectural excellence.",
-    tags: ["Technology"],
-    category: "Technology",
-    author: "Mohammed Al-Rashid",
-    image: blogImg7,
-    lang: "en",
-    content: `The future of hiring is being shaped by a convergence of technologies and methodologies that promise to make recruitment more efficient, equitable, and effective than ever before.
-
-## Emerging Technologies
-
-**Natural Language Processing** — Advanced NLP enables more nuanced understanding of candidate profiles, going beyond keyword matching to understand context and intent.
-
-**Predictive Modeling** — Machine learning models can predict candidate success based on historical data, helping organizations make more informed hiring decisions.
-
-**Conversational AI** — Chatbots and virtual assistants can handle initial candidate engagement, answer questions, and even conduct preliminary screening interviews.
-
-## The Human Element
-
-Despite technological advances, the human element remains central to great hiring. Technology should augment human judgment, not replace it. The best hiring outcomes come from combining AI-powered efficiency with human empathy and insight.
-
-## Looking Ahead
-
-The organizations that will win the talent war are those that embrace innovation while maintaining a human-centered approach to hiring. The future belongs to companies that can move fast, evaluate fairly, and create experiences that candidates value.`,
-  },
-  {
-    slug: "hiring-intelligence-hr-innovation",
-    title: "Hiring Intelligence & HR Innovation",
-    date: "2025-11-22",
-    summary: "A comprehensive guide to calculating and maximizing your return on investment in the Saudi Arabian property market.",
-    tags: ["Tech & Innovation"],
-    category: "Tech & Innovation",
-    author: "Omar Hassan",
+    slug: "high-volume-hiring-screen-500-candidates",
+    title: "High-Volume Hiring: How to Screen 500 Candidates Without Losing Your Mind",
+    date: "2026-02-15",
+    summary: "When volume hits, most teams panic and filter randomly. Here's a clean screening system that keeps quality high.",
+    tags: ["High Volume", "Screening", "Shortlisting"],
+    category: "Screening",
+    author: "Plato Team",
     image: blogImg5,
     lang: "en",
-    content: `Hiring intelligence represents the next evolution in recruitment technology. By combining data analytics, machine learning, and behavioral science, organizations can make smarter hiring decisions at scale.
+    content: `High-volume hiring breaks teams because they try to do deep evaluation on everyone. That doesn't scale.
 
-## What is Hiring Intelligence?
+The solution is not "work harder." It's build a funnel.
 
-Hiring intelligence goes beyond traditional HR analytics. It encompasses:
+## Step 1: Decide the minimum bar
 
-**Talent Market Intelligence** — Understanding supply and demand dynamics in specific talent markets to inform sourcing strategies.
+Create three lists:
 
-**Candidate Quality Scoring** — Using multi-dimensional analysis to evaluate candidates beyond basic qualifications.
+- Must-haves
+- Nice-to-haves
+- Disqualifiers
 
-**Process Optimization** — Identifying and eliminating bottlenecks in the hiring workflow to reduce time-to-hire without compromising quality.
+## Step 2: Ask a few signal questions
 
-## The Innovation Imperative
+Use 5–7 questions that force clarity:
 
-HR departments that fail to innovate risk:
-- Losing top talent to more agile competitors
-- Increasing costs through inefficient processes
-- Missing out on diverse perspectives that drive innovation
+- "What's a project you owned end-to-end?"
+- "What metric improved because of you?"
+- "What tool/process do you use daily and why?"
 
-## Getting Started with Hiring Intelligence
+## Step 3: Shortlist based on evidence
 
-1. Audit your current hiring data — what are you collecting and what's missing?
-2. Identify your biggest pain points — where do candidates drop off?
-3. Start with one AI-powered tool and measure its impact
-4. Scale what works and iterate on what doesn't
+You don't need perfection. You need strong signal.
 
-The journey to smarter hiring starts with a single step. Let Plato guide you there.`,
+## Final takeaway
+
+Volume doesn't destroy quality. Lack of structure does.
+
+**Book a demo to see Plato in action.**`,
+  },
+  {
+    slug: "candidate-experience-is-removing-friction",
+    title: "Candidate Experience Isn't \"Being Nice.\" It's Removing Friction.",
+    date: "2026-02-18",
+    summary: "Top candidates drop when the process feels slow, repetitive, or disrespectful. These fixes increase completion and acceptance.",
+    tags: ["Candidate Journey", "Employer Brand", "Conversion"],
+    category: "Candidate Experience",
+    author: "Plato Team",
+    image: blogImg6,
+    lang: "en",
+    content: `Candidate experience is not a "soft" topic. It's a conversion funnel.
+
+When strong candidates drop off, it's usually because the process feels:
+
+- Unclear
+- Slow
+- Repetitive
+- Disrespectful of time
+
+## 7 fixes that work immediately
+
+1. Show the steps + timeline
+2. Make it mobile-friendly
+3. Remove unnecessary forms
+4. Stop repeating questions
+5. Give status updates
+6. Keep stages short and focused
+7. Close the loop (don't ghost)
+
+## Final takeaway
+
+Candidate experience is how you signal your company quality before the candidate even joins.
+
+**Book a demo to see Plato in action.**`,
+  },
+  {
+    slug: "hiring-in-mena-has-its-own-rules",
+    title: "Hiring in MENA Has Its Own Rules: Ignore Them and You'll Keep Missing",
+    date: "2026-02-21",
+    summary: "MENA hiring isn't Silicon Valley. Different constraints, different signals, different expectations. Here's how smart employers adapt.",
+    tags: ["MENA Hiring", "Market Reality", "Talent"],
+    category: "MENA Insights",
+    author: "Plato Team",
+    image: blogImg7,
+    lang: "en",
+    content: `A lot of hiring advice online assumes Silicon Valley reality. MENA has different constraints and habits, and ignoring them leads to constant hiring misses.
+
+## Real MENA realities
+
+- Notice periods can be longer
+- Titles vary wildly across companies
+- Language requirements matter more than people admit
+- Referrals dominate, so you need structured evidence to compete fairly
+- Candidate trust can be fragile unless the process feels consistent
+
+## What wins in MENA
+
+- Clear criteria
+- Structured evaluation
+- Faster cycles
+- Transparent communication
+
+This reduces randomness and builds trust for both sides.
+
+## Final takeaway
+
+In MENA, structure isn't "extra." It's how you prove fairness and hire the best talent consistently.
+
+**Book a demo to see Plato in action.**`,
   },
 ];
 
 const arPosts: BlogPost[] = [
   {
-    slug: "insights-for-smarter-hiring-ar",
-    title: "رؤى لتوظيف أذكى",
-    date: "2025-12-01",
-    summary: "اكتشف أحدث الاتجاهات في التوظيف المدعوم بالذكاء الاصطناعي وابتكارات الموارد البشرية واستراتيجية المواهب.",
-    tags: ["التقنية والابتكار"],
-    category: "التقنية والابتكار",
-    author: "رائف العلواني",
+    slug: "cvs-are-not-truth-skills-signals-beat-experience",
+    title: "السير الذاتية ليست حقيقة: لماذا تتفوق إشارات المهارات على \"الخبرة\"",
+    date: "2026-02-03",
+    summary: "السير الذاتية ادعاءات وليست أدلة. إشارات المهارات مثل نماذج العمل والمقابلات المنظمة تساعدك على التوظيف بشكل أسرع وبندم أقل.",
+    tags: ["التوظيف القائم على المهارات", "الاستقطاب", "التوظيف"],
+    category: "استراتيجية التوظيف",
+    author: "فريق بلاتو",
     image: blogImg1,
     lang: "ar",
-    content: `اكتشف أحدث الاتجاهات في التوظيف المدعوم بالذكاء الاصطناعي وابتكارات الموارد البشرية واستراتيجية المواهب.
+    content: `التوظيف القائم على السيرة الذاتية هو السبب في أن معظم الشركات تكرر نفس الخطأ: يوظفون بناءً على ادعاءات بدلاً من أدلة.
 
-## تطور التوظيف الذكي
+السيرة الذاتية وثيقة تسويقية. يمكن صقلها أو المبالغة فيها أو كتابتها بطريقة تجعل العمل العادي يبدو مبهراً. في المقابل، لا تهتم الوظيفة بالتنسيق — بل تهتم بما إذا كان الشخص يستطيع التنفيذ فعلاً.
 
-تغير مشهد التوظيف بشكل كبير خلال العقد الماضي. يتم استكمال الأساليب التقليدية لفحص السير الذاتية وإجراء المقابلات بأنظمة ذكية يمكنها معالجة المعلومات بشكل أسرع وأكثر اتساقاً وبتحيز أقل.
+## لماذا يفشل التوظيف القائم على السيرة الذاتية
 
-## الاتجاهات الرئيسية التي تشكل التوظيف
+**المسميات الوظيفية غير متسقة** — "أول" تعني أشياء مختلفة في شركات مختلفة.
 
-**الفحص المدعوم بالذكاء الاصطناعي** — يمكن لأدوات الذكاء الاصطناعي الحديثة تحليل آلاف السير الذاتية في دقائق.
+**السنوات لا تساوي المهارة** — شخصان لديهما "3 سنوات خبرة" وأحدهما يتقدم بمراحل.
 
-**التحليلات التنبؤية** — من خلال تحليل بيانات التوظيف التاريخية، يمكن للمؤسسات التنبؤ بالمرشحين الأكثر احتمالاً للنجاح.
+**الثقة بالنفس تُكافأ** — المتحدثون الأقوياء غالباً ما يبدون أكفاء حتى عندما لا توجد نتائج.
 
-**التواصل الآلي** — يمكن للأنظمة الذكية التواصل مع المرشحين في الوقت المناسب برسائل مخصصة.
+**تحيز النسب يتسلل** — أسماء الجامعات والعلامات التجارية تبدأ في استبدال التقييم الحقيقي.
 
-## ماذا يعني هذا لفرق الموارد البشرية
+## ما يجب التوظيف بناءً عليه بدلاً من ذلك: إشارات المهارات
 
-يتطور دور الموارد البشرية من حراسة إدارية إلى استشارات مواهب استراتيجية. مع تعامل الذكاء الاصطناعي مع المهام المتكررة، يمكن لمتخصصي الموارد البشرية التركيز على ما يجيدونه.`,
+إشارة المهارة هي أي شيء يثبت القدرة بجوهر حقيقي، وليس انطباعات. أمثلة:
+
+- نموذج عمل قصير ذو صلة بالدور
+- إجابات مقابلات منظمة مُقيّمة بمعايير
+- أمثلة واضحة على التأثير (بأرقام أو نتائج)
+- الاتساق عبر أسئلة ومراحل متعددة
+
+الهدف ليس "اختبار أصعب". الهدف هو جمع الأدلة.
+
+## الخلاصة
+
+السيرة الذاتية نقطة بداية، وليست حكماً نهائياً. إذا أردت توظيفات أقل ندماً، ابنِ عمليتك حول إشارات المهارات — وليس سرد القصص.
+
+**احجز عرضاً توضيحياً لرؤية بلاتو في العمل.**`,
   },
   {
-    slug: "ai-powered-recruitment-ar",
-    title: "التوظيف المدعوم بالذكاء الاصطناعي وابتكار الموارد البشرية واستراتيجية المواهب",
-    date: "2025-11-28",
-    summary: "دليل حصري لأهم المناطق السكنية المرموقة في الرياض، يتضمن مرافق عالمية المستوى وتميز معماري.",
-    tags: ["رؤى السوق"],
-    category: "رؤى السوق",
-    author: "محمد الراشد",
-    image: blogImg4,
-    lang: "ar",
-    content: `يخلق تقاطع الذكاء الاصطناعي والموارد البشرية فرصاً غير مسبوقة للمؤسسات من جميع الأحجام.
-
-## ثورة الذكاء الاصطناعي في الموارد البشرية
-
-لم يعد الذكاء الاصطناعي مفهوماً مستقبلياً في التوظيف — إنه واقع حالي. من تحليل السير الذاتية إلى مطابقة المرشحين.
-
-## الفوائد الرئيسية
-
-**السرعة** — يمكن للذكاء الاصطناعي معالجة الطلبات أسرع 10 مرات من المراجعة اليدوية.
-
-**الاتساق** — على عكس المراجعين البشريين، يطبق الذكاء الاصطناعي نفس المعايير على كل مرشح.
-
-**القدرة على التوسع** — سواء كنت توظف لوظيفة واحدة أو مائة، يتوسع الذكاء الاصطناعي بسلاسة.`,
-  },
-  {
-    slug: "ai-driven-candidate-experience-ar",
-    title: "من التوظيف المدعوم بالذكاء الاصطناعي إلى تحسين تجربة المرشح",
-    date: "2025-11-22",
-    summary: "دليل شامل لحساب وتعظيم عائد الاستثمار في سوق العقارات السعودي.",
-    tags: ["استثمار"],
-    category: "استثمار",
-    author: "عمر حسن",
+    slug: "only-interview-structure-you-need-45-minutes",
+    title: "هيكل المقابلة الوحيد الذي تحتاجه (45 دقيقة، بدون حشو)",
+    date: "2026-02-06",
+    summary: "معظم المقابلات محادثات عشوائية. استخدم هذا الهيكل من 45 دقيقة ومعايير التقييم لجعل قرارات التوظيف متسقة وقابلة للدفاع عنها.",
+    tags: ["المقابلات المنظمة", "بطاقات التقييم", "التوظيف"],
+    category: "المقابلات",
+    author: "فريق بلاتو",
     image: blogImg2,
     lang: "ar",
-    content: `أصبحت تجربة المرشح عاملاً حاسماً للتميز في سوق المواهب.
+    content: `معظم المقابلات ليست مقابلات. إنها محادثات مع قرار في النهاية. لهذا يبدو التوظيف عشوائياً — ولهذا "مقابلون مختلفون" يؤدون إلى نتائج مختلفة.
 
-## لماذا تهم تجربة المرشح
+إذا أردت عملية توظيف يمكنك الوثوق بها، تحتاج إلى هيكل.
 
-في سوق العمل التنافسي اليوم، لدى أفضل المرشحين خيارات. تجربة توظيف سيئة يمكن أن تدفع أفضل المواهب إلى منافسيك.
+## صيغة المقابلة من 45 دقيقة
 
-## عناصر أساسية لتجربة مرشح رائعة
+**0–5 دقائق: تحديد التوقعات**
+أخبر المرشح بما سيحدث، ليبقى التركيز على المقابلة.
 
-**الشفافية** — أبقِ المرشحين على اطلاع في كل مرحلة.
+**5–25 دقيقة: أسئلة الإثبات (3 أسئلة)**
+اختر أسئلة تفرض التفاصيل الحقيقية:
 
-**السرعة** — احترم وقت المرشحين بتبسيط العملية.
+- "ما النتيجة التي كنت مسؤولاً عنها شخصياً؟ ما الذي تغير بسببك؟"
+- "أصعب مشكلة حللتها مؤخراً — كيف فكرت فيها؟"
+- "أخبرني عن فشل. ماذا فعلت بعده؟"
 
-**التخصيص** — يجب أن يشعر كل مرشح بالتقدير.`,
+**25–40 دقيقة: سيناريو واقعي واحد**
+أعطِ موقفاً متعلقاً بالوظيفة واسأل ماذا سيفعل في الأسبوع الأول. هذا يكشف طريقة التفكير والأولويات.
+
+**40–45 دقيقة: أسئلة المرشح**
+المرشحون الأقوياء يسألون عن مقاييس النجاح والأولويات والقيود — وليس الراتب فقط.
+
+## كيف تُقيّم بدون تحيز
+
+استخدم 4–6 معايير كحد أقصى وقيّم من 1–5:
+
+- وضوح التفكير
+- الملكية
+- كفاءة الدور
+- أدلة التنفيذ
+- التواصل
+
+القاعدة: إذا لم تستطع تبرير الدرجة بدليل، فالدرجة لا تُحتسب.
+
+## الخلاصة
+
+المقابلات غير المنظمة تُنتج توظيفاً غير منظم. الهيكل يجعل القرارات أسرع وأعدل وأسهل في الدفاع عنها.
+
+**احجز عرضاً توضيحياً لرؤية بلاتو في العمل.**`,
   },
   {
-    slug: "expert-content-modern-hr-ar",
-    title: "محتوى خبراء مصمم لفرق الموارد البشرية الحديثة",
-    date: "2025-11-28",
-    summary: "دليل حصري لأهم المناطق السكنية المرموقة في الرياض، يتضمن مرافق عالمية المستوى.",
-    tags: ["نظام إدارة الموارد البشرية"],
-    category: "نظام إدارة الموارد البشرية",
-    author: "محمد الراشد",
+    slug: "candidate-scoring-without-the-black-box",
+    title: "تقييم المرشحين بدون الصندوق الأسود: ما يجب أن يطالب به أصحاب العمل",
+    date: "2026-02-09",
+    summary: "إذا لم يستطع نظام التقييم شرح نفسه، فهو محفوف بالمخاطر. إليك ما يبدو عليه \"التقييم الجيد\": أدلة وشفافية وصلة بالوظيفة.",
+    tags: ["التوظيف بالذكاء الاصطناعي", "تقييم المرشحين", "الثقة"],
+    category: "الذكاء الاصطناعي والتقييم",
+    author: "فريق بلاتو",
     image: blogImg3,
     lang: "ar",
-    content: `تواجه فرق الموارد البشرية الحديثة تحديات غير مسبوقة. من إدارة القوى العاملة عن بعد إلى تنفيذ مبادرات التنوع والشمول.
+    content: `تقييم المرشحين يبدو رائعاً حتى يسأل أحدهم: "لماذا حصل هذا الشخص على 82 وذاك على 61؟"
 
-## حزمة تكنولوجيا الموارد البشرية الحديثة
+إذا لم تستطع الإجابة بوضوح، فدرجتك مسؤولية.
 
-تحتاج فرق الموارد البشرية اليوم إلى أكثر من جداول البيانات والبريد الإلكتروني.
+## ما يجب أن يوفره أي نظام تقييم
 
-**أنظمة تتبع المتقدمين** — مركزية بيانات المرشحين وتبسيط خط التوظيف.
+**قابلية التفسير (لماذا توجد الدرجة)**
+يجب أن تُظهر الدرجة:
 
-**الفحص المدعوم بالذكاء الاصطناعي** — أتمتة المراجعة الأولية للطلبات.
+- أهم الإشارات المساهمة
+- نقاط القوة والضعف
+- أدلة من الإجابات والسلوك
 
-**إدارة المقابلات** — جدولة وإجراء وتقييم المقابلات بشكل متسق.`,
+**الصلة بالوظيفة**
+لا تقييم عام لـ"الشخص الذكي". يجب أن تتطابق الدرجة مع الدور.
+
+**الاتساق**
+أدلة مشابهة يجب أن تُنتج درجات مشابهة. إذا تأرجحت النتائج بشكل كبير، فالتقييم غير مستقر.
+
+**التحكم البشري**
+الذكاء الاصطناعي يدعم القرارات. البشر يملكون القرار النهائي.
+
+**قابلية التدقيق**
+مع الوقت، يجب أن ترتبط الدرجات العالية بالأداء. إذا لم يحدث ذلك، فالعملية تحتاج تعديلاً.
+
+## الخلاصة
+
+الذكاء الاصطناعي في التوظيف مفيد فقط عندما يجعل القرارات أكثر اتساقاً وقابلية للدفاع — وليس أكثر غموضاً.
+
+**احجز عرضاً توضيحياً لرؤية بلاتو في العمل.**`,
   },
   {
-    slug: "practical-hiring-tips-ar",
-    title: "من نصائح التوظيف العملية إلى تحليل الصناعة المتعمق",
-    date: "2025-11-22",
-    summary: "دليل شامل لحساب وتعظيم عائد الاستثمار في سوق العقارات السعودي.",
-    tags: ["استثمار"],
-    category: "استثمار",
-    author: "عمر حسن",
-    image: blogImg6,
+    slug: "reduce-time-to-hire-without-lowering-standards",
+    title: "قلّل وقت التوظيف دون خفض المعايير",
+    date: "2026-02-12",
+    summary: "التوظيف البطيء ليس توظيفاً حذراً — عادةً ما يكون توظيفاً فوضوياً. إليك كيف تُسرّع القرارات دون التضحية بالجودة.",
+    tags: ["وقت التوظيف", "عملية التوظيف", "العمليات"],
+    category: "عمليات التوظيف",
+    author: "فريق بلاتو",
+    image: blogImg4,
     lang: "ar",
-    content: `تتطور صناعة التوظيف بسرعة، مدفوعة بالابتكار التكنولوجي وتغير توقعات القوى العاملة.
+    content: `التوظيف البطيء لا يعني التوظيف بعناية. في معظم الأحيان يعني:
 
-## اتجاهات الصناعة التي يجب مراقبتها
+- معايير غير واضحة
+- خطوات كثيرة جداً
+- مقابلات متكررة
+- قرارات متأخرة
+- عدم وجود مسؤول واضح عن العملية
 
-**التوظيف عن بعد أولاً** — أدى التحول إلى العمل عن بعد إلى توسيع مجموعة المواهب عالمياً.
+## الروافع الثلاث التي تقلّل وقت التوظيف
 
-**التوظيف القائم على المهارات** — تتحول المزيد من المؤسسات بعيداً عن متطلبات الشهادات.
+**حدّد المعايير قبل البدء**
+اكتب الأشياء الخمسة الأكثر أهمية. إذا لم تستطع، فلست مستعداً للتوظيف.
 
-**التنوع والشمول** — بناء فرق متنوعة ليس مهماً أخلاقياً فحسب بل يدفع نتائج أعمال أفضل.`,
+**استخدم بوابة جودة صارمة**
+افرز عدم التطابق الواضح بسرعة حتى يذهب وقت المقابلة للمتنافسين الحقيقيين.
+
+**اجمع أدلة منظمة**
+بدلاً من المقابلات اللانهائية، استخدم:
+
+- فحص منظم
+- مقابلة منظمة
+- تحقق نهائي
+
+القرارات السريعة تأتي من أدلة جديرة بالثقة.
+
+## الخلاصة
+
+العائق نادراً ما يكون عرض المرشحين. إنه الثقة في القرار. أصلح الأدلة وستتبع السرعة.
+
+**احجز عرضاً توضيحياً لرؤية بلاتو في العمل.**`,
   },
   {
-    slug: "future-of-hiring-ar",
-    title: "مستقبل التوظيف يبدأ من هنا",
-    date: "2025-11-28",
-    summary: "دليل حصري لأهم المناطق السكنية المرموقة في الرياض.",
-    tags: ["التقنية"],
-    category: "التقنية",
-    author: "محمد الراشد",
-    image: blogImg7,
-    lang: "ar",
-    content: `يتشكل مستقبل التوظيف من خلال تقارب التقنيات والمنهجيات التي تعد بجعل التوظيف أكثر كفاءة وإنصافاً وفعالية.
-
-## التقنيات الناشئة
-
-**معالجة اللغة الطبيعية** — يمكّن NLP المتقدم من فهم أدق لملفات المرشحين.
-
-**النمذجة التنبؤية** — يمكن لنماذج التعلم الآلي التنبؤ بنجاح المرشح بناءً على البيانات التاريخية.
-
-**الذكاء الاصطناعي التحادثي** — يمكن لروبوتات الدردشة التعامل مع التواصل الأولي مع المرشحين.`,
-  },
-  {
-    slug: "hiring-intelligence-ar",
-    title: "ذكاء التوظيف وابتكار الموارد البشرية",
-    date: "2025-11-22",
-    summary: "دليل شامل لحساب وتعظيم عائد الاستثمار.",
-    tags: ["التقنية والابتكار"],
-    category: "التقنية والابتكار",
-    author: "عمر حسن",
+    slug: "high-volume-hiring-screen-500-candidates",
+    title: "التوظيف بالحجم الكبير: كيف تفرز 500 مرشح دون أن تفقد عقلك",
+    date: "2026-02-15",
+    summary: "عندما يرتفع الحجم، تصاب معظم الفرق بالذعر وتفرز عشوائياً. إليك نظام فرز نظيف يحافظ على جودة عالية.",
+    tags: ["حجم كبير", "الفرز", "القائمة المختصرة"],
+    category: "الفرز",
+    author: "فريق بلاتو",
     image: blogImg5,
     lang: "ar",
-    content: `يمثل ذكاء التوظيف التطور التالي في تكنولوجيا التوظيف.
+    content: `التوظيف بالحجم الكبير يُحطم الفرق لأنهم يحاولون إجراء تقييم عميق للجميع. هذا لا يتوسع.
 
-## ما هو ذكاء التوظيف؟
+الحل ليس "اعمل بجهد أكبر". إنه ابنِ قمعاً.
 
-يتجاوز ذكاء التوظيف تحليلات الموارد البشرية التقليدية:
+## الخطوة 1: حدّد الحد الأدنى
 
-**ذكاء سوق المواهب** — فهم ديناميكيات العرض والطلب في أسواق مواهب محددة.
+أنشئ ثلاث قوائم:
 
-**تسجيل جودة المرشح** — استخدام التحليل متعدد الأبعاد لتقييم المرشحين.
+- لا بد منها
+- من الجيد وجودها
+- أسباب الاستبعاد
 
-**تحسين العملية** — تحديد والقضاء على الاختناقات في سير عمل التوظيف.`,
+## الخطوة 2: اطرح بضعة أسئلة إشارة
+
+استخدم 5–7 أسئلة تفرض الوضوح:
+
+- "ما مشروع امتلكته من البداية للنهاية؟"
+- "ما المقياس الذي تحسّن بسببك؟"
+- "ما الأداة/العملية التي تستخدمها يومياً ولماذا؟"
+
+## الخطوة 3: اختصر القائمة بناءً على الأدلة
+
+لا تحتاج للكمال. تحتاج لإشارة قوية.
+
+## الخلاصة
+
+الحجم لا يدمر الجودة. غياب الهيكل هو ما يفعل.
+
+**احجز عرضاً توضيحياً لرؤية بلاتو في العمل.**`,
+  },
+  {
+    slug: "candidate-experience-is-removing-friction",
+    title: "تجربة المرشح ليست \"أن تكون لطيفاً.\" إنها إزالة الاحتكاك.",
+    date: "2026-02-18",
+    summary: "أفضل المرشحين يغادرون عندما تبدو العملية بطيئة أو متكررة أو غير محترمة. هذه الإصلاحات تزيد الإكمال والقبول.",
+    tags: ["رحلة المرشح", "العلامة التجارية لصاحب العمل", "التحويل"],
+    category: "تجربة المرشح",
+    author: "فريق بلاتو",
+    image: blogImg6,
+    lang: "ar",
+    content: `تجربة المرشح ليست موضوعاً "ناعماً". إنها قمع تحويل.
+
+عندما يغادر المرشحون الأقوياء، عادةً لأن العملية تبدو:
+
+- غير واضحة
+- بطيئة
+- متكررة
+- غير محترمة للوقت
+
+## 7 إصلاحات تعمل فوراً
+
+1. أظهر الخطوات + الجدول الزمني
+2. اجعلها متوافقة مع الهاتف
+3. أزل النماذج غير الضرورية
+4. توقف عن تكرار الأسئلة
+5. أعطِ تحديثات الحالة
+6. اجعل المراحل قصيرة ومركزة
+7. أغلق الحلقة (لا تتجاهل)
+
+## الخلاصة
+
+تجربة المرشح هي كيف تُشير لجودة شركتك قبل أن ينضم المرشح حتى.
+
+**احجز عرضاً توضيحياً لرؤية بلاتو في العمل.**`,
+  },
+  {
+    slug: "hiring-in-mena-has-its-own-rules",
+    title: "التوظيف في منطقة الشرق الأوسط وشمال أفريقيا له قواعده الخاصة: تجاهلها وستستمر في الفشل",
+    date: "2026-02-21",
+    summary: "التوظيف في المنطقة ليس وادي السيليكون. قيود مختلفة، إشارات مختلفة، توقعات مختلفة. إليك كيف يتكيف أصحاب العمل الأذكياء.",
+    tags: ["توظيف المنطقة", "واقع السوق", "المواهب"],
+    category: "رؤى المنطقة",
+    author: "فريق بلاتو",
+    image: blogImg7,
+    lang: "ar",
+    content: `كثير من نصائح التوظيف على الإنترنت تفترض واقع وادي السيليكون. منطقة الشرق الأوسط وشمال أفريقيا لديها قيود وعادات مختلفة، وتجاهلها يؤدي إلى أخطاء توظيف مستمرة.
+
+## واقع المنطقة الحقيقي
+
+- فترات الإشعار يمكن أن تكون أطول
+- المسميات الوظيفية تتفاوت بشكل كبير بين الشركات
+- متطلبات اللغة أهم مما يعترف به الناس
+- الإحالات تهيمن، لذا تحتاج أدلة منظمة للمنافسة بعدالة
+- ثقة المرشح يمكن أن تكون هشة ما لم تبدو العملية متسقة
+
+## ما ينجح في المنطقة
+
+- معايير واضحة
+- تقييم منظم
+- دورات أسرع
+- تواصل شفاف
+
+هذا يقلل العشوائية ويبني الثقة لكلا الطرفين.
+
+## الخلاصة
+
+في منطقة الشرق الأوسط وشمال أفريقيا، الهيكل ليس "إضافياً". إنه كيف تثبت العدالة وتوظف أفضل المواهب باستمرار.
+
+**احجز عرضاً توضيحياً لرؤية بلاتو في العمل.**`,
   },
 ];
 
