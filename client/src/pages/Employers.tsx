@@ -5,10 +5,10 @@ import { useSEO } from "@/hooks/useSEO";
 import { getDemoLink, config } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "@/components/shared/ScrollReveal";
+import DashboardMockup from "@/components/DashboardMockup";
 import AboutAnalyticsDashboard from "@/components/AboutAnalyticsDashboard";
 import { SiLinkedin, SiInstagram, SiTiktok } from "react-icons/si";
 import { Plus, Minus, Sparkles, Eye, Link2, Clock } from "lucide-react";
-import dashboardScreenshot from "@assets/image_1771805988922.png";
 
 import logoAccentia from "@/assets/logos/accentia.png";
 import logoImplex from "@/assets/logos/implex.png";
@@ -129,39 +129,35 @@ export default function Employers() {
             </p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-            <ScrollReveal animation="fade-left">
-              <div className="rounded-[28px] bg-[#2183DF] p-5 sm:p-7" data-testid="about-dashboard-mockup">
-                <img
-                  src={dashboardScreenshot}
-                  alt="Plato Agency Dashboard"
-                  className="w-full h-auto rounded-xl shadow-2xl"
-                />
-              </div>
-            </ScrollReveal>
+          <ScrollReveal animation="fade-up" delay={2}>
+            <div className="rounded-[32px] bg-[#2183DF] p-6 sm:p-8 lg:p-10" data-testid="about-blue-frame">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+                <div className="rounded-2xl border border-white/10 shadow-2xl overflow-hidden" data-testid="about-dashboard-mockup">
+                  <DashboardMockup compact />
+                </div>
 
-            <div className="space-y-4">
-              {features.map((f, i) => {
-                const Icon = featureIcons[i];
-                return (
-                  <ScrollReveal key={i} animation="fade-right" delay={i + 1}>
-                    <div className="group flex items-start gap-4 p-4 rounded-xl border border-transparent hover:border-border hover:bg-muted/50 transition-colors" data-testid={`about-feature-${i}`}>
-                      <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <Icon className="w-5 h-5 text-primary" />
+                <div className="space-y-4">
+                  {features.map((f, i) => {
+                    const Icon = featureIcons[i];
+                    return (
+                      <div key={i} className="group flex items-start gap-4 p-4 rounded-xl" data-testid={`about-feature-${i}`}>
+                        <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                          <Icon className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-sm font-bold mb-1 flex items-center gap-2 text-white">
+                            {f.title}
+                            <span className="w-4 h-px bg-white/40 inline-block" />
+                          </h3>
+                          <p className="text-sm text-white/70 leading-relaxed">{f.desc}</p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="text-sm font-bold mb-1 flex items-center gap-2">
-                          {f.title}
-                          <span className="w-4 h-px bg-primary inline-block" />
-                        </h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
-                      </div>
-                    </div>
-                  </ScrollReveal>
-                );
-              })}
+                    );
+                  })}
+                </div>
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 

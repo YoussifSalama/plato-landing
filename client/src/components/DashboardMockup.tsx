@@ -110,7 +110,7 @@ function CountUpNumber({ target, suffix = "", triggerRef }: { target: number; su
   return <span ref={numRef}>0{suffix}</span>;
 }
 
-export default function DashboardMockup() {
+export default function DashboardMockup({ compact = false }: { compact?: boolean }) {
   const { lang } = useI18n();
   const isRtl = lang === "ar";
 
@@ -265,6 +265,7 @@ export default function DashboardMockup() {
         }, 1.0);
       }
 
+      if (!compact) {
       const tl3 = gsap.timeline({
         scrollTrigger: {
           trigger: sec3Ref.current,
@@ -347,6 +348,7 @@ export default function DashboardMockup() {
           ease: "back.out(1.5)",
         }, 0.25);
       }
+      }
 
       const navItems = sidebarRef.current?.querySelectorAll("[data-nav-item]");
       if (navItems) {
@@ -392,7 +394,7 @@ export default function DashboardMockup() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, [isRtl]);
+  }, [isRtl, compact]);
 
   const cardBg = "bg-white dark:bg-[#1e293b]";
   const mainBg = "bg-gray-100 dark:bg-[#111827]";
@@ -567,7 +569,7 @@ export default function DashboardMockup() {
           </div>
 
           {/* === SECTION 2: Charts Row === */}
-          <div ref={sec2Ref} className={`${mainBg} px-4 pb-3 space-y-3`}>
+          <div ref={sec2Ref} className={`${mainBg} px-4 pb-3 space-y-3 ${compact ? "rounded-b-2xl" : ""}`}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <div ref={weeklyCardRef} className={`${cardBg} rounded-xl p-3 border border-border`}>
                 <h3 className="text-[11px] font-bold text-foreground mb-0.5">Weekly Activity</h3>
@@ -635,6 +637,8 @@ export default function DashboardMockup() {
             </div>
           </div>
 
+          {!compact && (
+          <>
           {/* === SECTION 3: Progress + Growth === */}
           <div ref={sec3Ref} className={`${mainBg} px-4 pb-3 space-y-3`}>
             <div className="grid grid-cols-2 gap-2">
@@ -718,6 +722,8 @@ export default function DashboardMockup() {
               </div>
             </div>
           </div>
+          </>
+          )}
         </div>
       </div>
     </div>
