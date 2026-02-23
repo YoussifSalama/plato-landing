@@ -129,16 +129,16 @@ export default function Employers() {
             </p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-            <ScrollReveal animation="fade-left">
-              <div className="rounded-[32px] bg-[#2183DF] p-4 sm:p-5 lg:p-6" data-testid="about-blue-frame">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10 items-start">
+            <ScrollReveal animation="fade-left" className="lg:col-span-3">
+              <div className="rounded-[32px] bg-[#2183DF] p-4 sm:p-6 lg:p-7" data-testid="about-blue-frame">
                 <div className="rounded-2xl overflow-hidden shadow-2xl" data-testid="about-dashboard-mockup">
                   <DashboardMockup compact />
                 </div>
               </div>
             </ScrollReveal>
 
-            <div className="space-y-6 lg:pt-4">
+            <div className="lg:col-span-2 space-y-6 lg:pt-4">
               {features.map((f, i) => {
                 const Icon = featureIcons[i];
                 return (
