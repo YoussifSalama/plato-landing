@@ -10,7 +10,7 @@ export default function Footer() {
   const isHome = location === "/" || location === "/ar";
   const isEmployers = location === "/employers" || location === "/ar/employers";
   const isContact = location === "/contact" || location === "/ar/contact";
-  const isBlog = location === "/blog" || location === "/ar/blog";
+  const isBlog = location === "/blog" || location === "/ar/blog" || location.startsWith("/blog/") || location.startsWith("/ar/blog/");
   if (isHome || isEmployers || isContact || isBlog) return null;
 
   const links = [
