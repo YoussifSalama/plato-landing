@@ -314,7 +314,7 @@ export default function SmartJobMockup() {
               <div className="h-5 overflow-hidden flex-shrink-0" style={{ width: '18px' }}>
                 <img src="/images/plato-logo.png" alt="" className="h-full w-auto max-w-none" />
               </div>
-              <span className="text-[13px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Host Grotesk', sans-serif" }}>Plato</span>
+              <span className="text-[13px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Roc Grotesk', sans-serif" }}>Plato</span>
             </div>
           </div>
 

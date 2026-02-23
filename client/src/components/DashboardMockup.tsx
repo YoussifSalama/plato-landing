@@ -450,7 +450,7 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
                   <img src="/images/plato-logo.png" alt="" className="h-full w-auto max-w-none" />
                 </div>
                 <div className="min-w-0">
-                  <span className={`text-[11px] font-bold tracking-tight ${headingText} block leading-tight truncate`} style={{ fontFamily: "'Host Grotesk', sans-serif" }}>Plato</span>
+                  <span className={`text-[11px] font-bold tracking-tight ${headingText} block leading-tight truncate`} style={{ fontFamily: "'Roc Grotesk', sans-serif" }}>Plato</span>
                 </div>
               </div>
               <ChevronLeft className={`w-3 h-3 ${subtleText} flex-shrink-0`} />

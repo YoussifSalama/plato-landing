@@ -36,7 +36,7 @@ export default function Footer() {
                   className="h-full w-auto max-w-none"
                 />
               </div>
-              <span className="text-[20px] sm:text-[22px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Host Grotesk', sans-serif" }}>Plato</span>
+              <span className="text-[20px] sm:text-[22px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Roc Grotesk', sans-serif" }}>Plato</span>
             </div>
             <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
               {t.footer.tagline}

@@ -76,35 +76,33 @@ export default function ComparisonBar({
   }, [withoutWidth, withWidth]);
 
   return (
-    <div ref={containerRef} className="rounded-2xl bg-gray-100 dark:bg-[#0a0e1a] p-4 sm:p-6 md:p-8 border border-border" style={{ fontSize: "14px" }}>
+    <div ref={containerRef} className="rounded-2xl bg-transparent p-4 sm:p-6 md:p-8 border border-gray-400/40 dark:border-gray-600/50" style={{ fontSize: "14px" }}>
       <h3 data-comp-title className="text-base sm:text-lg md:text-xl font-bold text-foreground mb-4 sm:mb-6 text-left">{title}</h3>
 
       <div className="space-y-4">
         <div data-bar-row>
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">{withoutLabel}</span>
-            <span className="text-xs sm:text-sm font-bold text-gray-600 dark:text-gray-400">{withoutValue}</span>
-          </div>
-          <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-lg h-8 sm:h-10 overflow-hidden">
+          <div className="flex items-center gap-3">
             <div
               data-bar-without
-              className="h-full rounded-l-lg bg-gradient-to-r from-red-700 to-red-500 dark:from-red-800/90 dark:to-red-600/80"
+              className="h-10 sm:h-12 rounded-lg bg-red-900/80 dark:bg-red-900/60 border border-red-700/60 dark:border-red-600/50 flex items-center px-3 sm:px-4 overflow-hidden flex-shrink-0"
               style={{ width: "0%", minWidth: "8px" }}
-            />
+            >
+              <span className="text-xs sm:text-sm font-semibold text-gray-200 dark:text-gray-300 whitespace-nowrap">{withoutLabel}</span>
+            </div>
+            <span className="text-sm sm:text-base font-bold text-gray-500 dark:text-gray-400 whitespace-nowrap">{withoutValue}</span>
           </div>
         </div>
 
         <div data-bar-row>
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">{withLabel}</span>
-            <span className="text-xs sm:text-sm font-bold text-blue-600 dark:text-blue-400">{withValue}</span>
-          </div>
-          <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-lg h-8 sm:h-10 overflow-hidden">
+          <div className="flex items-center gap-3">
             <div
               data-bar-with
-              className="h-full rounded-l-lg bg-gradient-to-r from-blue-600 to-blue-400 dark:from-blue-700 dark:to-blue-500"
+              className="h-10 sm:h-12 rounded-lg bg-blue-700/80 dark:bg-blue-800/70 border border-blue-500/60 dark:border-blue-500/50 flex items-center px-3 sm:px-4 overflow-hidden flex-shrink-0"
               style={{ width: "0%", minWidth: "8px" }}
-            />
+            >
+              <span className="text-xs sm:text-sm font-semibold text-gray-100 dark:text-gray-200 whitespace-nowrap">{withLabel}</span>
+            </div>
+            <span className="text-sm sm:text-base font-bold text-gray-500 dark:text-gray-400 whitespace-nowrap">{withValue}</span>
           </div>
         </div>
       </div>

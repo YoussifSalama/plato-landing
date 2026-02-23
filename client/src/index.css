@@ -2,6 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Roc Grotesk';
+  src: url('/fonts/RocGrotesk-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roc Grotesk';
+  src: url('/fonts/RocGrotesk-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roc Grotesk';
+  src: url('/fonts/RocGrotesk-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roc Grotesk';
+  src: url('/fonts/RocGrotesk-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roc Grotesk';
+  src: url('/fonts/RocGrotesk-ExtraBold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* LIGHT MODE */
 :root {
   --button-outline: rgba(0,0,0, .10);
@@ -46,7 +86,7 @@
   --chart-3: 210 50% 40%;
   --chart-4: 199 85% 30%;
   --chart-5: 210 60% 35%;
-  --font-sans: 'Host Grotesk', 'Noto Sans Arabic', sans-serif;
+  --font-sans: 'Roc Grotesk', 'Noto Sans Arabic', sans-serif;
   --font-serif: Georgia, serif;
   --font-mono: Menlo, monospace;
   --radius: .5rem;
