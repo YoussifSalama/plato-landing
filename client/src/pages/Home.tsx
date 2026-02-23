@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { useI18n } from "@/lib/i18n";
 import { useSEO } from "@/hooks/useSEO";
 import { getDemoLink, config } from "@/lib/config";
@@ -289,7 +290,7 @@ export default function Home() {
                 <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.product}</h4>
                 <ul className="space-y-2.5">
                   <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-changelog">{t.footerSection.changelog}</span></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-customer-stories">{t.footerSection.customerStories}</span></li>
+                  <li><Link href={localePath("/testimonials")}><span className="text-xs text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-customer-stories">{t.footerSection.customerStories}</span></Link></li>
                   <li><a href={localePath("/security")} className="text-xs text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-security">{t.footerSection.security}</a></li>
                   <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-chrome">{t.footerSection.chromeExtension} ↗</span></li>
                   <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-ios">{t.footerSection.iosApp} ↗</span></li>
