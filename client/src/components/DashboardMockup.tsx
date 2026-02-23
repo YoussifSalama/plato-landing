@@ -17,6 +17,7 @@ import {
   Plus,
   LogOut,
   TrendingUp,
+  ChevronLeft,
 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -396,35 +397,39 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
     return () => ctx.revert();
   }, [isRtl, compact]);
 
-  const cardBg = "bg-white dark:bg-[#1e293b]";
-  const mainBg = "bg-gray-100 dark:bg-[#111827]";
+  const cardBg = "bg-[#1e293b]";
+  const mainBg = "bg-[#111827]";
 
-  const appData = [30, 45, 35, 55, 60, 50, 40];
-  const intData = [15, 20, 25, 30, 25, 20, 15];
+  const appData = [30, 45, 35, 55, 65, 50, 40];
+  const intData = [10, 15, 20, 28, 22, 18, 12];
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const chartW = 280;
-  const chartH = 100;
-  const pad = 10;
+  const chartH = 120;
+  const padL = 25;
+  const padR = 10;
+  const padT = 10;
+  const padB = 18;
   const maxVal = 80;
+  const yLabels = [0, 20, 40, 60, 80];
 
   function toPath(data: number[]) {
-    const stepX = (chartW - pad * 2) / (data.length - 1);
+    const stepX = (chartW - padL - padR) / (data.length - 1);
     return data.map((v, i) => {
-      const x = pad + i * stepX;
-      const y = chartH - pad - (v / maxVal) * (chartH - pad * 2);
+      const x = padL + i * stepX;
+      const y = chartH - padB - (v / maxVal) * (chartH - padT - padB);
       return `${i === 0 ? "M" : "L"}${x},${y}`;
     }).join(" ");
   }
 
   function toArea(data: number[]) {
-    const stepX = (chartW - pad * 2) / (data.length - 1);
+    const stepX = (chartW - padL - padR) / (data.length - 1);
     const line = data.map((v, i) => {
-      const x = pad + i * stepX;
-      const y = chartH - pad - (v / maxVal) * (chartH - pad * 2);
+      const x = padL + i * stepX;
+      const y = chartH - padB - (v / maxVal) * (chartH - padT - padB);
       return `${x},${y}`;
     }).join(" L");
-    const lastX = pad + (data.length - 1) * stepX;
-    return `M${pad},${chartH - pad} L${line} L${lastX},${chartH - pad} Z`;
+    const lastX = padL + (data.length - 1) * stepX;
+    return `M${padL},${chartH - padB} L${line} L${lastX},${chartH - padB} Z`;
   }
 
   const radius = 40;
@@ -442,24 +447,31 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
       style={{ fontSize: "11px", lineHeight: 1.4, perspective: "1000px" }}
       data-testid="dashboard-mockup"
     >
-      <div className="flex rounded-2xl overflow-hidden">
-        <div ref={sidebarRef} className="hidden sm:flex w-[120px] flex-shrink-0 bg-white dark:bg-[#0f172a] flex flex-col border-r border-border rounded-l-2xl">
-          <div className="px-3 py-4 flex flex-wrap items-center gap-2">
-            <div className="flex items-center gap-0.5" style={{ direction: "ltr" }}>
-              <div className="h-5 overflow-hidden flex-shrink-0" style={{ width: '18px' }}>
-                <img src="/images/plato-logo.png" alt="" className="h-full w-auto max-w-none" />
+      <div className="flex rounded-2xl overflow-hidden bg-[#0f172a]">
+        {/* === SIDEBAR === */}
+        <div ref={sidebarRef} className="hidden sm:flex w-[130px] flex-shrink-0 bg-[#0f172a] flex-col border-r border-white/5">
+          <div className="px-3 pt-4 pb-2">
+            <div className="flex items-center gap-2 justify-between">
+              <div className="flex items-center gap-1.5" style={{ direction: "ltr" }}>
+                <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                  <span className="text-white font-bold text-[11px]">P</span>
+                </div>
+                <div>
+                  <span className="text-[12px] font-bold tracking-tight text-white block leading-tight" style={{ fontFamily: "'Host Grotesk', sans-serif" }}>Plato</span>
+                  <span className="text-[7px] text-gray-400 block leading-tight">Plato Agency</span>
+                </div>
               </div>
-              <span className="text-[13px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Host Grotesk', sans-serif" }}>Plato</span>
+              <ChevronLeft className="w-3 h-3 text-gray-500" />
             </div>
           </div>
 
-          <nav className="flex-1 px-2 space-y-0.5 mt-1">
+          <nav className="flex-1 px-2 space-y-0.5 mt-2">
             {sidebarNav.map((item, i) => (
               <div
                 key={i}
                 data-nav-item
-                className={`flex items-center gap-2 px-2 py-1.5 rounded-md text-[10px] ${
-                  item.active ? "bg-blue-600 text-white font-medium" : "text-muted-foreground"
+                className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[10px] ${
+                  item.active ? "bg-blue-600 text-white font-medium" : "text-gray-400 hover:text-gray-300"
                 }`}
               >
                 <item.icon className="w-3.5 h-3.5" />
@@ -474,46 +486,54 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
           </nav>
 
           <div className="px-2 pb-2 space-y-0.5 mt-auto">
-            <div data-sidebar-bottom className="flex items-center gap-2 px-2 py-1.5 rounded-md text-[10px] text-muted-foreground">
+            <div data-sidebar-bottom className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[10px] text-gray-400">
               <Settings className="w-3.5 h-3.5" />
               <span>Settings</span>
             </div>
-            <div data-sidebar-bottom className="flex items-center gap-2 px-2 py-1.5 rounded-md text-[10px] text-muted-foreground">
+            <div data-sidebar-bottom className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[10px] text-gray-400">
               <HelpCircle className="w-3.5 h-3.5" />
               <span>Help Center</span>
             </div>
           </div>
 
-          <div data-sidebar-bottom className="mx-2 mb-3 bg-blue-900/90 dark:bg-blue-900/80 rounded-lg p-2">
+          <div data-sidebar-bottom className="mx-2 mb-3 bg-blue-900/80 rounded-lg p-2">
             <div className="flex items-center gap-2">
               <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-[8px] font-bold text-white" data-pulse>HR</div>
               <div>
                 <div className="text-[9px] font-semibold text-white">HR Manager</div>
-                <div className="text-[7px] text-blue-200">hr@company.com</div>
+                <div className="text-[7px] text-blue-200/70">hr@company.com</div>
               </div>
             </div>
-            <div className="mt-1.5 flex items-center justify-center gap-1 text-[8px] text-red-300 bg-white/10 rounded py-0.5">
+            <div className="mt-1.5 flex items-center justify-center gap-1 text-[8px] text-emerald-400 bg-emerald-500/10 rounded py-0.5 cursor-pointer">
               <LogOut className="w-2.5 h-2.5" />
               Logout
             </div>
           </div>
         </div>
 
-        <div className="flex-1 min-w-0 rounded-2xl sm:rounded-r-2xl sm:rounded-l-none overflow-hidden">
-          <div ref={topBarRef} className="h-10 bg-white dark:bg-[#1e293b] border-b border-border flex items-center px-3 sm:px-4 gap-2 sm:gap-3 overflow-hidden">
-            <div className="flex items-center gap-2 bg-gray-100 dark:bg-[#0f172a] rounded-lg px-2 sm:px-3 py-1.5 min-w-0">
-              <Search className="w-3 h-3 text-muted-foreground flex-shrink-0" />
-              <span className="text-[9px] text-muted-foreground hidden sm:inline truncate">Search jobs, candidates, or anything...</span>
+        {/* === MAIN CONTENT === */}
+        <div className="flex-1 min-w-0">
+          {/* Top Bar */}
+          <div ref={topBarRef} className="h-10 bg-[#0f172a] border-b border-white/5 flex items-center px-3 sm:px-4 gap-2 sm:gap-3 overflow-hidden">
+            <div className="flex items-center gap-2 bg-[#1e293b] rounded-lg px-2 sm:px-3 py-1.5 min-w-0 flex-1 max-w-[280px]">
+              <Search className="w-3 h-3 text-gray-500 flex-shrink-0" />
+              <span className="text-[9px] text-gray-500 hidden sm:inline truncate">Search jobs, candidates, or anything...</span>
             </div>
             <div className="ml-auto flex items-center gap-2 sm:gap-3 flex-shrink-0">
               <div className="relative">
-                <Bell className="w-3.5 h-3.5 text-muted-foreground" />
+                <Bell className="w-3.5 h-3.5 text-gray-400" />
                 <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-ping" />
                 <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full" />
               </div>
-              <span className="text-[9px] text-foreground font-medium hidden sm:inline">HR Manager</span>
-              <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-[8px] font-bold text-white">HR</div>
-              <Moon className="w-3.5 h-3.5 text-muted-foreground" />
+              <div className="h-4 w-px bg-white/10 hidden sm:block" />
+              <div className="hidden sm:flex items-center gap-2">
+                <div className="text-right">
+                  <span className="text-[9px] text-white font-medium block leading-tight">HR Manager</span>
+                  <span className="text-[7px] text-gray-400 block leading-tight">Admin</span>
+                </div>
+                <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-[8px] font-bold text-white">HR</div>
+              </div>
+              <Moon className="w-3.5 h-3.5 text-gray-400" />
             </div>
           </div>
 
@@ -521,8 +541,8 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
           <div ref={sec1Ref} className={`${mainBg} p-4 space-y-3`}>
             <div ref={headerRef} className="flex items-start justify-between">
               <div>
-                <h2 className="text-[15px] font-bold text-foreground">Agency Dashboard</h2>
-                <p className="text-[9px] text-muted-foreground">Welcome back! Here's what's happening today.</p>
+                <h2 className="text-[15px] font-bold text-white">Agency Dashboard</h2>
+                <p className="text-[9px] text-gray-400">Welcome back! Here's what's happening today.</p>
               </div>
               <div className="flex items-center gap-1 bg-blue-600 text-white rounded-lg px-3 py-1.5 text-[9px] font-medium" data-pulse>
                 <Plus className="w-3 h-3" />
@@ -532,35 +552,35 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
 
             <div ref={statCardsRef} className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {statCards.map((card, i) => (
-                <div key={i} className={`${cardBg} rounded-xl p-3 border border-border`}>
+                <div key={i} className={`${cardBg} rounded-xl p-3 border border-white/5`}>
                   <div className={`w-7 h-7 ${card.color} rounded-lg flex items-center justify-center mb-2`}>
                     <card.icon className="w-3.5 h-3.5 text-white" />
                   </div>
-                  <div className="text-[8px] text-muted-foreground">{card.label}</div>
-                  <div className="text-[16px] font-bold text-foreground leading-tight">
+                  <div className="text-[8px] text-gray-400">{card.label}</div>
+                  <div className="text-[16px] font-bold text-white leading-tight">
                     <CountUpNumber target={card.value} triggerRef={sec1Ref} />
                   </div>
                 </div>
               ))}
             </div>
 
-            <div ref={overviewRef} className={`${cardBg} rounded-xl p-3 border border-border`}>
+            <div ref={overviewRef} className={`${cardBg} rounded-xl p-3 border border-white/5`}>
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-[11px] font-bold text-foreground">Overview Statistics</h3>
-                <span className="text-[8px] text-blue-500 font-medium">View All</span>
+                <h3 className="text-[11px] font-bold text-white">Overview Statistics</h3>
+                <span className="text-[8px] text-blue-400 font-medium">View All</span>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {overviewStats.map((stat, i) => (
                   <div key={i} data-overview-item>
-                    <div className="flex items-center gap-1 text-[8px] text-muted-foreground mb-0.5">
+                    <div className="flex items-center gap-1 text-[8px] text-gray-400 mb-0.5">
                       {stat.label}
-                      <TrendingUp className="w-2.5 h-2.5 text-emerald-500" />
+                      <TrendingUp className="w-2.5 h-2.5 text-emerald-400" />
                     </div>
                     <div className="flex items-baseline gap-1">
-                      <span className="text-[14px] font-bold text-foreground">
+                      <span className="text-[14px] font-bold text-white">
                         <CountUpNumber target={stat.numVal} suffix={stat.suffix || ""} triggerRef={sec1Ref} />
                       </span>
-                      <span className="text-[7px] text-emerald-500 font-medium">{stat.change}</span>
+                      <span className="text-[7px] text-emerald-400 font-medium">{stat.change}</span>
                     </div>
                   </div>
                 ))}
@@ -569,40 +589,51 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
           </div>
 
           {/* === SECTION 2: Charts Row === */}
-          <div ref={sec2Ref} className={`${mainBg} px-4 pb-3 space-y-3 ${compact ? "rounded-b-2xl" : ""}`}>
+          <div ref={sec2Ref} className={`${mainBg} px-4 pb-4 space-y-3 ${compact ? "rounded-b-2xl" : ""}`}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              <div ref={weeklyCardRef} className={`${cardBg} rounded-xl p-3 border border-border`}>
-                <h3 className="text-[11px] font-bold text-foreground mb-0.5">Weekly Activity</h3>
-                <p className="text-[7px] text-muted-foreground mb-2">Applications, Interviews & Offers</p>
+              <div ref={weeklyCardRef} className={`${cardBg} rounded-xl p-3 border border-white/5`}>
+                <div className="flex items-center justify-between mb-0.5">
+                  <h3 className="text-[11px] font-bold text-white">Weekly Activity</h3>
+                </div>
+                <p className="text-[7px] text-gray-400 mb-1">Applications, Interviews & Offers</p>
                 <div className="flex items-center gap-4 mb-2 text-[8px]">
                   <div className="flex items-center gap-1">
                     <span className="w-2 h-2 rounded-full bg-blue-500" />
-                    <span className="text-muted-foreground">Applications</span>
+                    <span className="text-gray-400">Applications</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                    <span className="text-muted-foreground">Interviews</span>
+                    <span className="w-2 h-2 rounded-full bg-amber-500" />
+                    <span className="text-gray-400">Interviews</span>
                   </div>
                 </div>
                 <svg viewBox={`0 0 ${chartW} ${chartH}`} className="w-full h-auto">
-                  <path ref={areaFillRef1} d={toArea(appData)} fill="hsl(210 80% 60% / 0.15)" />
-                  <path ref={areaPathRef1} d={toPath(appData)} fill="none" stroke="hsl(210 80% 55%)" strokeWidth="2" />
-                  <path ref={areaFillRef2} d={toArea(intData)} fill="hsl(150 60% 50% / 0.12)" />
-                  <path ref={areaPathRef2} d={toPath(intData)} fill="none" stroke="hsl(150 60% 45%)" strokeWidth="2" />
-                  {days.map((d, i) => {
-                    const x = pad + i * ((chartW - pad * 2) / (days.length - 1));
+                  {yLabels.map((val) => {
+                    const y = chartH - padB - (val / maxVal) * (chartH - padT - padB);
                     return (
-                      <text key={i} x={x} y={chartH - 1} textAnchor="middle" className="fill-muted-foreground" style={{ fontSize: 7 }}>{d}</text>
+                      <g key={val}>
+                        <text x={padL - 4} y={y + 3} textAnchor="end" className="fill-gray-500" style={{ fontSize: 7 }}>{val}</text>
+                        <line x1={padL} y1={y} x2={chartW - padR} y2={y} stroke="rgba(255,255,255,0.05)" strokeWidth="0.5" />
+                      </g>
+                    );
+                  })}
+                  <path ref={areaFillRef1} d={toArea(appData)} fill="rgba(59, 130, 246, 0.15)" />
+                  <path ref={areaPathRef1} d={toPath(appData)} fill="none" stroke="#3b82f6" strokeWidth="2" />
+                  <path ref={areaFillRef2} d={toArea(intData)} fill="rgba(245, 158, 11, 0.1)" />
+                  <path ref={areaPathRef2} d={toPath(intData)} fill="none" stroke="#f59e0b" strokeWidth="2" />
+                  {days.map((d, i) => {
+                    const x = padL + i * ((chartW - padL - padR) / (days.length - 1));
+                    return (
+                      <text key={i} x={x} y={chartH - 3} textAnchor="middle" className="fill-gray-500" style={{ fontSize: 7 }}>{d}</text>
                     );
                   })}
                 </svg>
               </div>
 
-              <div ref={donutCardRef} className={`${cardBg} rounded-xl p-3 border border-border`}>
-                <h3 className="text-[11px] font-bold text-foreground mb-0.5">Application Status</h3>
-                <p className="text-[7px] text-muted-foreground mb-2">Current distribution by stage</p>
-                <div className="flex items-center gap-6">
-                  <svg ref={donutRef} viewBox="0 0 100 100" className="w-28 h-28 flex-shrink-0">
+              <div ref={donutCardRef} className={`${cardBg} rounded-xl p-3 border border-white/5`}>
+                <h3 className="text-[11px] font-bold text-white mb-0.5">Application Status</h3>
+                <p className="text-[7px] text-gray-400 mb-2">Current distribution by stage</p>
+                <div className="flex items-center gap-4">
+                  <svg ref={donutRef} viewBox="0 0 100 100" className="w-24 h-24 flex-shrink-0">
                     {donutSegments.map((seg, i) => {
                       const offset = cumulative;
                       cumulative += seg.pct;
@@ -626,9 +657,9 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
                       <div key={i} data-legend-item className="flex items-center justify-between gap-4">
                         <div className="flex items-center gap-1.5">
                           <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: seg.color }} />
-                          <span className="text-muted-foreground">{seg.label}</span>
+                          <span className="text-gray-400">{seg.label}</span>
                         </div>
-                        <span className="font-semibold text-foreground">{seg.pct}%</span>
+                        <span className="font-semibold text-white">{seg.pct}%</span>
                       </div>
                     ))}
                   </div>
@@ -642,18 +673,18 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
           {/* === SECTION 3: Progress + Growth === */}
           <div ref={sec3Ref} className={`${mainBg} px-4 pb-3 space-y-3`}>
             <div className="grid grid-cols-2 gap-2">
-              <div ref={progressRef} className={`${cardBg} rounded-xl p-3 border border-border`}>
-                <h3 className="text-[11px] font-bold text-foreground mb-0.5">Department Hiring Progress</h3>
-                <p className="text-[7px] text-muted-foreground mb-2">Current vs Target</p>
+              <div ref={progressRef} className={`${cardBg} rounded-xl p-3 border border-white/5`}>
+                <h3 className="text-[11px] font-bold text-white mb-0.5">Department Hiring Progress</h3>
+                <p className="text-[7px] text-gray-400 mb-2">Current vs Target</p>
                 <div className="space-y-2.5">
                   {hiringProgress.map((item, i) => (
                     <div key={i} data-progress-row>
                       <div className="flex items-center justify-between mb-0.5">
-                        <span className="text-[9px] font-semibold text-foreground">{item.dept}</span>
-                        <span className="text-[7px] text-muted-foreground">{item.current} / {item.target}</span>
+                        <span className="text-[9px] font-semibold text-white">{item.dept}</span>
+                        <span className="text-[7px] text-gray-400">{item.current} / {item.target}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                        <div className="flex-1 h-2 bg-gray-700 rounded-full overflow-hidden">
                           <div
                             className={`h-full rounded-full ${item.color}`}
                             data-progress-fill
@@ -661,16 +692,16 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
                             style={{ width: "0%" }}
                           />
                         </div>
-                        <span className="text-[8px] font-medium text-foreground w-7 text-right">{item.pct}%</span>
+                        <span className="text-[8px] font-medium text-white w-7 text-right">{item.pct}%</span>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div ref={growthRef} className={`${cardBg} rounded-xl p-3 border border-border`}>
-                <h3 className="text-[11px] font-bold text-foreground mb-0.5">Monthly Growth</h3>
-                <p className="text-[7px] text-muted-foreground mb-2">Application volume trend</p>
+              <div ref={growthRef} className={`${cardBg} rounded-xl p-3 border border-white/5`}>
+                <h3 className="text-[11px] font-bold text-white mb-0.5">Monthly Growth</h3>
+                <p className="text-[7px] text-gray-400 mb-2">Application volume trend</p>
                 <div className="flex items-end gap-2 h-24">
                   {bars.map((val, i) => (
                     <div key={i} className="flex flex-col items-center gap-1 flex-1">
@@ -679,18 +710,18 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
                         className="w-full rounded-t bg-gradient-to-t from-blue-600 to-blue-400 min-w-[12px]"
                         style={{ height: `${(val / maxBar) * 100}%` }}
                       />
-                      <span className="text-[7px] text-muted-foreground">{months[i]}</span>
+                      <span className="text-[7px] text-gray-400">{months[i]}</span>
                     </div>
                   ))}
                 </div>
-                <div className="flex items-center justify-between mt-2 pt-2 border-t border-border">
+                <div className="flex items-center justify-between mt-2 pt-2 border-t border-white/5">
                   <div>
-                    <div className="text-[7px] text-muted-foreground uppercase">Current Month</div>
-                    <div className="text-[14px] font-bold text-foreground">
+                    <div className="text-[7px] text-gray-400 uppercase">Current Month</div>
+                    <div className="text-[14px] font-bold text-white">
                       <CountUpNumber target={797} triggerRef={sec3Ref} />
                     </div>
                   </div>
-                  <div className="flex items-center gap-1 text-[9px] text-emerald-500 font-medium">
+                  <div className="flex items-center gap-1 text-[9px] text-emerald-400 font-medium">
                     <TrendingUp className="w-3 h-3" />
                     +17.2%
                   </div>
@@ -701,21 +732,21 @@ export default function DashboardMockup({ compact = false }: { compact?: boolean
 
           {/* === SECTION 4: Recent Activity === */}
           <div ref={sec4Ref} className={`${mainBg} px-4 pb-4 rounded-br-2xl`}>
-            <div ref={activityRef} className={`${cardBg} rounded-xl p-3 border border-border`}>
+            <div ref={activityRef} className={`${cardBg} rounded-xl p-3 border border-white/5`}>
               <div className="flex items-center justify-between mb-2">
                 <div>
-                  <h3 className="text-[11px] font-bold text-foreground">Recent Activity</h3>
-                  <p className="text-[7px] text-emerald-500">+23% than last week</p>
+                  <h3 className="text-[11px] font-bold text-white">Recent Activity</h3>
+                  <p className="text-[7px] text-emerald-400">+23% than last week</p>
                 </div>
-                <span className="text-[8px] text-blue-500 font-medium">View All Analytics</span>
+                <span className="text-[8px] text-blue-400 font-medium">View All Analytics</span>
               </div>
               <div className="space-y-2">
                 {activityItems.map((item, i) => (
                   <div key={i} data-activity-item className="flex items-center gap-2">
                     <span className={`w-2 h-2 rounded-full flex-shrink-0 ${item.dot}`} />
                     <div className="flex-1 min-w-0">
-                      <div className="text-[9px] font-medium text-foreground truncate">{item.text}</div>
-                      <div className="text-[7px] text-muted-foreground">{item.time}</div>
+                      <div className="text-[9px] font-medium text-white truncate">{item.text}</div>
+                      <div className="text-[7px] text-gray-400">{item.time}</div>
                     </div>
                   </div>
                 ))}
