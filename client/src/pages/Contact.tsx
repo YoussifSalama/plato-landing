@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { useI18n } from "@/lib/i18n";
+import { useAppTheme } from "@/lib/theme";
 import { useSEO } from "@/hooks/useSEO";
 import { config, getDemoLink } from "@/lib/config";
 import { Button } from "@/components/ui/button";
@@ -15,7 +16,7 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import ScrollReveal from "@/components/shared/ScrollReveal";
-import { Mail, MapPin, Clock, CheckCircle, Plus, Minus } from "lucide-react";
+import { Mail, MapPin, Clock, Phone, CheckCircle, Plus, Minus } from "lucide-react";
 import { SiLinkedin, SiInstagram, SiTiktok } from "react-icons/si";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -83,6 +84,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 
 export default function Contact() {
   const { t, lang, localePath } = useI18n();
+  const { isDark } = useAppTheme();
   useSEO({ title: t.meta.pages.contact.title, description: t.meta.pages.contact.description });
   const p = t.contactPage;
   const supabaseConfigured = !!(config.supabaseUrl && config.supabaseAnonKey);
@@ -245,12 +247,18 @@ export default function Contact() {
       {/* Info Cards */}
       <section className="relative z-[1] pb-12 sm:pb-16">
         <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div ref={infoCardsRef} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div ref={infoCardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div data-info-card className="flex flex-col items-center justify-center p-6 sm:p-8 rounded-xl border border-border bg-card text-center" data-testid="card-info-email">
               <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center mb-3">
                 <Mail className="w-5 h-5 text-white" />
               </div>
               <span className="text-sm font-medium text-foreground" dir="ltr">{p.infoCards.email}</span>
+            </div>
+            <div data-info-card className="flex flex-col items-center justify-center p-6 sm:p-8 rounded-xl border border-border bg-card text-center" data-testid="card-info-phone">
+              <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center mb-3">
+                <Phone className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-sm font-medium text-foreground" dir="ltr">{p.infoCards.phone}</span>
             </div>
             <div data-info-card className="flex flex-col items-center justify-center p-6 sm:p-8 rounded-xl border border-border bg-card text-center" data-testid="card-info-location">
               <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center mb-3">
@@ -271,16 +279,31 @@ export default function Contact() {
       {/* Map Section */}
       <section className="relative z-[1] pb-16 sm:pb-20">
         <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div ref={mapRef} className="relative rounded-2xl overflow-hidden h-[280px] sm:h-[340px] bg-gray-200 dark:bg-gray-800">
-            <div className="absolute inset-0">
-              <MapBackground />
-            </div>
-            <div data-map-popup className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-4 w-[200px] text-center z-10">
-              <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center mx-auto mb-2">
-                <span className="text-white font-bold text-sm">P</span>
+          <div ref={mapRef} className="relative rounded-2xl overflow-hidden h-[320px] sm:h-[400px] border border-border">
+            <iframe
+              key={isDark ? "dark" : "light"}
+              src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.7!2d31.2!3d30.04!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAyJzI0LjAiTiAzMcKwMTInMDAuMCJF!5e0!3m2!1sen!2seg!4v1700000000000`}
+              width="100%"
+              height="100%"
+              style={{ border: 0, filter: isDark ? "invert(0.9) hue-rotate(180deg) saturate(0.3) brightness(0.8)" : "none" }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Plato Office Location"
+              className="absolute inset-0"
+            />
+            <div data-map-popup className="absolute bottom-4 ltr:left-4 rtl:right-4 bg-white dark:bg-gray-900 rounded-xl shadow-xl p-4 w-[260px] z-10 border border-gray-200 dark:border-gray-700">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-bold text-sm">P</span>
+                </div>
+                <div className="min-w-0">
+                  <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-1">{p.mapCard.title}</h4>
+                  <p className="text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed">{p.mapCard.address}</p>
+                  <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1" dir="ltr">{p.mapCard.phone}</p>
+                  <p className="text-[11px] text-gray-500 dark:text-gray-400" dir="ltr">{p.mapCard.email}</p>
+                </div>
               </div>
-              <h4 className="text-sm font-bold text-gray-900 mb-1">{p.mapCard.title}</h4>
-              <p className="text-[10px] text-gray-500 leading-relaxed">{p.mapCard.address}</p>
             </div>
           </div>
         </div>
@@ -310,20 +333,45 @@ export default function Contact() {
               </div>
             </ScrollReveal>
           ) : !supabaseConfigured ? (
-            <div className="text-center py-12 bg-card rounded-2xl border border-border">
-              <Mail className="w-10 h-10 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground mb-4">
-                {p.fallbackMessage}{" "}
-                <span className="font-medium text-foreground" dir="ltr">
-                  {config.demoEmailFallback}
-                </span>
-              </p>
-              <a href={`mailto:${config.demoEmailFallback}?subject=${encodeURIComponent("Contact from Plato Website")}`}>
-                <Button data-testid="button-contact-email">
-                  <Mail className="w-4 h-4" />
-                  {p.emailUs}
-                </Button>
-              </a>
+            <div className="bg-card rounded-2xl border border-border p-6 sm:p-10">
+              <div className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="space-y-2">
+                    <Label>{p.firstNameLabel}</Label>
+                    <Input placeholder={p.firstNamePlaceholder} disabled className="opacity-60" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>{p.emailLabel}</Label>
+                    <Input placeholder={p.emailPlaceholder} disabled className="opacity-60" />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="space-y-2">
+                    <Label>{p.phoneLabel}</Label>
+                    <Input placeholder={p.phonePlaceholder} disabled className="opacity-60" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>{p.inquiryLabel}</Label>
+                    <Input placeholder={p.inquiryPlaceholder} disabled className="opacity-60" />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label>{p.messageLabel}</Label>
+                  <Textarea placeholder={p.messagePlaceholder} rows={4} disabled className="opacity-60" />
+                </div>
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-border">
+                  <p className="text-sm text-muted-foreground">
+                    {p.fallbackMessage}{" "}
+                    <span className="font-medium text-foreground" dir="ltr">info@platohiring.com</span>
+                  </p>
+                  <a href={`mailto:info@platohiring.com?subject=${encodeURIComponent("Contact from Plato Website")}`}>
+                    <Button className="rounded-full px-8" data-testid="button-contact-email">
+                      <Mail className="w-4 h-4" />
+                      {p.emailUs}
+                    </Button>
+                  </a>
+                </div>
+              </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -582,67 +630,3 @@ export default function Contact() {
   );
 }
 
-function MapBackground() {
-  return (
-    <svg viewBox="0 0 800 400" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="mapBg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#1a1a2e" />
-          <stop offset="100%" stopColor="#16213e" />
-        </linearGradient>
-      </defs>
-      <rect width="800" height="400" fill="url(#mapBg)" />
-
-      <g className="opacity-20">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <line key={`h${i}`} x1="0" y1={i * 35} x2="800" y2={i * 35} stroke="#3b82f6" strokeWidth="0.3" />
-        ))}
-        {Array.from({ length: 24 }).map((_, i) => (
-          <line key={`v${i}`} x1={i * 35} y1="0" x2={i * 35} y2="400" stroke="#3b82f6" strokeWidth="0.3" />
-        ))}
-      </g>
-
-      <g className="opacity-30">
-        <path d="M100,50 L180,80 L220,60 L300,90 L280,140 L320,180 L250,200 L180,170 L120,190 L80,140 Z" fill="none" stroke="#4a5568" strokeWidth="1" />
-        <path d="M350,30 L450,50 L500,40 L540,80 L520,130 L480,160 L420,140 L380,170 L340,120 L360,80 Z" fill="none" stroke="#4a5568" strokeWidth="1" />
-        <path d="M550,100 L650,80 L720,120 L700,180 L660,220 L580,200 L540,160 Z" fill="none" stroke="#4a5568" strokeWidth="1" />
-        <path d="M50,250 L150,230 L200,260 L180,310 L120,330 L60,300 Z" fill="none" stroke="#4a5568" strokeWidth="1" />
-        <path d="M250,240 L350,220 L400,250 L420,310 L380,350 L300,340 L260,290 Z" fill="none" stroke="#4a5568" strokeWidth="1" />
-        <path d="M500,230 L600,210 L680,250 L660,320 L580,350 L510,310 Z" fill="none" stroke="#4a5568" strokeWidth="1" />
-      </g>
-
-      <g className="opacity-40">
-        <path d="M100,120 Q200,100 250,150 Q300,200 350,170" fill="none" stroke="#6b7280" strokeWidth="0.8" strokeDasharray="4,4" />
-        <path d="M400,80 Q450,110 470,150 Q490,200 530,180" fill="none" stroke="#6b7280" strokeWidth="0.8" strokeDasharray="4,4" />
-        <path d="M180,250 Q250,230 320,270 Q380,300 420,280" fill="none" stroke="#6b7280" strokeWidth="0.8" strokeDasharray="4,4" />
-      </g>
-
-      <g className="opacity-50">
-        <text x="120" y="145" fill="#6b7280" fontSize="7" fontFamily="sans-serif">Spring St</text>
-        <text x="300" y="105" fill="#6b7280" fontSize="7" fontFamily="sans-serif">Prince</text>
-        <text x="500" y="165" fill="#6b7280" fontSize="7" fontFamily="sans-serif">2nd Avenue</text>
-        <text x="80" y="280" fill="#6b7280" fontSize="7" fontFamily="sans-serif">Canal St</text>
-        <text x="350" y="355" fill="#6b7280" fontSize="7" fontFamily="sans-serif">Spring Street</text>
-      </g>
-
-      <g>
-        {[
-          { x: 150, y: 130, color: "#22c55e" },
-          { x: 350, y: 95, color: "#22c55e" },
-          { x: 550, y: 160, color: "#22c55e" },
-          { x: 250, y: 270, color: "#22c55e" },
-          { x: 600, y: 280, color: "#22c55e" },
-        ].map((p, i) => (
-          <g key={i}>
-            <circle cx={p.x} cy={p.y} r="3" fill={p.color} opacity="0.6" />
-            <text x={p.x + 5} y={p.y + 3} fill={p.color} fontSize="5" opacity="0.5" fontFamily="sans-serif">M</text>
-          </g>
-        ))}
-      </g>
-
-      <circle cx="400" cy="200" r="6" fill="#3b82f6" opacity="0.8" />
-      <circle cx="400" cy="200" r="10" fill="none" stroke="#3b82f6" strokeWidth="1" opacity="0.4" />
-      <circle cx="400" cy="200" r="16" fill="none" stroke="#3b82f6" strokeWidth="0.5" opacity="0.2" />
-    </svg>
-  );
-}
