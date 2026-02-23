@@ -22,9 +22,9 @@ export default function Header() {
 
   const navItems: NavItem[] = [
     { label: t.nav.about, path: "/employers", type: "route" },
+    { label: t.nav.pricing, path: "/pricing", type: "route" },
     { label: t.nav.contact, path: "/contact", type: "route" },
     { label: t.nav.blog, path: "/blog", type: "route" },
-    { label: t.nav.login, path: "/login", type: "route" },
   ];
 
   const isActive = (path: string) => {
@@ -141,6 +141,11 @@ export default function Header() {
             >
               {t.nav.langSwitch}
             </Button>
+            <Link href={localePath("/login")} data-testid="button-login-header">
+              <Button variant="ghost" size="sm" className="rounded-full px-5">
+                {t.nav.login}
+              </Button>
+            </Link>
             <a href={getDemoLink()} data-testid="button-book-demo-header">
               <Button size="sm" className="rounded-full px-5 shadow-md shadow-primary/20 dark:shadow-primary/30">
                 {t.nav.bookDemo}
@@ -215,6 +220,11 @@ export default function Header() {
               >
                 {t.nav.langSwitch}
               </button>
+              <Link href={localePath("/login")}>
+                <Button variant="outline" className="w-full rounded-full" onClick={() => setMobileOpen(false)} data-testid="button-login-mobile">
+                  {t.nav.login}
+                </Button>
+              </Link>
               <a href={getDemoLink()}>
                 <Button className="w-full rounded-full" onClick={() => setMobileOpen(false)}>
                   {t.nav.bookDemo}
