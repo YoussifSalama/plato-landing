@@ -523,16 +523,41 @@ export default function Contact() {
       </section>
 
       {/* CTA Section */}
-      <ScrollReveal animation="scale-up">
-        <section className="relative overflow-hidden">
-          <a href={config.employerAppUrl} data-testid="button-contact-start-trial" className="block">
-            <img
-              src="/images/cta-banner.png"
-              alt="Ready to transform your hiring process? Start Free Trial or Request Demo"
-              className="w-full h-auto"
-              data-testid="img-contact-cta"
-            />
-          </a>
+      <ScrollReveal animation="fade-up">
+        <section className="relative py-20 sm:py-28 lg:py-32 bg-gradient-to-br from-[#0a3d6b] via-[#0b4d85] to-[#0d5a9e] overflow-hidden">
+          <div className="absolute inset-0 opacity-10" aria-hidden="true">
+            <svg className="absolute right-0 top-0 w-[60%] h-full" viewBox="0 0 600 400" fill="none">
+              <circle cx="450" cy="200" r="150" stroke="white" strokeWidth="1" opacity="0.3" />
+              <circle cx="450" cy="200" r="100" stroke="white" strokeWidth="1" opacity="0.2" />
+              <circle cx="450" cy="200" r="50" stroke="white" strokeWidth="1" opacity="0.15" />
+              <path d="M350 50 L550 250 L350 350" stroke="white" strokeWidth="1.5" opacity="0.2" fill="none" />
+              <path d="M400 100 L500 200 L400 300" stroke="white" strokeWidth="1" opacity="0.15" fill="none" />
+              <rect x="480" y="80" width="80" height="80" rx="8" stroke="white" strokeWidth="1" opacity="0.2" fill="none" />
+              <polygon points="520,130 540,170 500,170" stroke="white" strokeWidth="1" opacity="0.2" fill="none" />
+            </svg>
+          </div>
+          <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative z-[1]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <h2 className="text-3xl sm:text-4xl font-bold text-white leading-tight" data-testid="text-contact-cta-title">
+                  {t.blogPage.readyToTransform} {t.blogPage.yourHiringProcess}{" "}
+                  <span className="font-extrabold">{t.blogPage.hiringProcessBold}</span>
+                </h2>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a href={config.employerAppUrl} data-testid="button-contact-start-trial">
+                    <Button size="lg" className="rounded-full bg-white text-primary hover:bg-white/90 border-white no-default-hover-elevate">
+                      {t.blogPage.startFreeTrial}
+                    </Button>
+                  </a>
+                  <a href={getDemoLink()} data-testid="button-contact-request-demo">
+                    <Button variant="outline" size="lg" className="rounded-full text-white border-white/40 hover:bg-white/10 no-default-hover-elevate">
+                      {t.footerSection.requestDemo}
+                    </Button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </ScrollReveal>
 

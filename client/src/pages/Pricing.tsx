@@ -223,40 +223,37 @@ export default function Pricing() {
 
       {/* CTA Section */}
       <ScrollReveal animation="fade-up">
-        <section className="relative z-[1] mb-16">
-          <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0a2540] to-[#0d3868] p-10 sm:p-16 flex items-center gap-10">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(30,160,226,0.15),transparent_60%)]" />
-              <div className="relative flex-1">
-                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight" data-testid="text-pricing-cta-title">
-                  {p.ctaTitle}{" "}
-                  <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
-                    {p.ctaTitleHighlight}
-                  </span>
+        <section className="relative py-20 sm:py-28 lg:py-32 bg-gradient-to-br from-[#0a3d6b] via-[#0b4d85] to-[#0d5a9e] overflow-hidden">
+          <div className="absolute inset-0 opacity-10" aria-hidden="true">
+            <svg className="absolute right-0 top-0 w-[60%] h-full" viewBox="0 0 600 400" fill="none">
+              <circle cx="450" cy="200" r="150" stroke="white" strokeWidth="1" opacity="0.3" />
+              <circle cx="450" cy="200" r="100" stroke="white" strokeWidth="1" opacity="0.2" />
+              <circle cx="450" cy="200" r="50" stroke="white" strokeWidth="1" opacity="0.15" />
+              <path d="M350 50 L550 250 L350 350" stroke="white" strokeWidth="1.5" opacity="0.2" fill="none" />
+              <path d="M400 100 L500 200 L400 300" stroke="white" strokeWidth="1" opacity="0.15" fill="none" />
+              <rect x="480" y="80" width="80" height="80" rx="8" stroke="white" strokeWidth="1" opacity="0.2" fill="none" />
+              <polygon points="520,130 540,170 500,170" stroke="white" strokeWidth="1" opacity="0.2" fill="none" />
+            </svg>
+          </div>
+          <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative z-[1]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <h2 className="text-3xl sm:text-4xl font-bold text-white leading-tight" data-testid="text-pricing-cta-title">
+                  {t.blogPage.readyToTransform} {t.blogPage.yourHiringProcess}{" "}
+                  <span className="font-extrabold">{t.blogPage.hiringProcessBold}</span>
                 </h2>
-                <p className="text-blue-100/70 mb-6 max-w-lg">{p.ctaSubtitle}</p>
-                <div className="flex flex-wrap gap-3">
-                  <a href={getDemoLink()} data-testid="button-pricing-cta-demo">
-                    <Button size="lg" className="rounded-full">
-                      {p.bookDemo}
-                    </Button>
-                  </a>
-                  <a href={config.employerAppUrl} data-testid="button-pricing-cta-trial">
-                    <Button variant="outline" size="lg" className="rounded-full border-white/20 text-white">
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a href={config.employerAppUrl} data-testid="button-pricing-start-trial">
+                    <Button size="lg" className="rounded-full bg-white text-primary hover:bg-white/90 border-white no-default-hover-elevate">
                       {p.startFreeTrial}
                     </Button>
                   </a>
+                  <a href={getDemoLink()} data-testid="button-pricing-request-demo">
+                    <Button variant="outline" size="lg" className="rounded-full text-white border-white/40 hover:bg-white/10 no-default-hover-elevate">
+                      {t.footerSection.requestDemo}
+                    </Button>
+                  </a>
                 </div>
-              </div>
-              <div className="flex-1 hidden lg:flex items-center justify-center opacity-30">
-                <svg viewBox="0 0 200 200" className="w-48 h-48 text-blue-400" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <circle cx="100" cy="100" r="60" strokeDasharray="8 8" />
-                  <circle cx="100" cy="100" r="40" strokeDasharray="4 4" />
-                  <circle cx="100" cy="100" r="20" />
-                  <circle cx="160" cy="60" r="6" fill="currentColor" />
-                  <circle cx="150" cy="150" r="4" fill="currentColor" />
-                  <circle cx="50" cy="140" r="5" fill="currentColor" />
-                </svg>
               </div>
             </div>
           </div>
