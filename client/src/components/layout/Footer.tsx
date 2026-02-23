@@ -11,13 +11,15 @@ export default function Footer() {
   const isEmployers = location === "/employers" || location === "/ar/employers";
   const isContact = location === "/contact" || location === "/ar/contact";
   const isBlog = location === "/blog" || location === "/ar/blog" || location.startsWith("/blog/") || location.startsWith("/ar/blog/");
-  if (isHome || isEmployers || isContact || isBlog) return null;
+  const isTestimonials = location === "/testimonials" || location === "/ar/testimonials";
+  if (isHome || isEmployers || isContact || isBlog || isTestimonials) return null;
 
   const links = [
     { label: t.footer.privacy, path: "/privacy" },
     { label: t.footer.terms, path: "/terms" },
     { label: t.footer.security, path: "/security" },
     { label: t.footer.contact, path: "/contact" },
+    { label: t.footerSection.customerStories, path: "/testimonials" },
   ];
 
   return (

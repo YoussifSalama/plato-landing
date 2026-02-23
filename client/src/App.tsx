@@ -18,6 +18,7 @@ import Privacy from "@/pages/Privacy";
 import Terms from "@/pages/Terms";
 import Pricing from "@/pages/Pricing";
 import Login from "@/pages/Login";
+import Testimonials from "@/pages/Testimonials";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -36,6 +37,7 @@ function Router() {
       <Route path="/terms" component={Terms} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/login" component={Login} />
+      <Route path="/testimonials" component={Testimonials} />
 
       <Route path="/ar" component={Home} />
       <Route path="/ar/employers" component={Employers} />
@@ -50,6 +52,7 @@ function Router() {
       <Route path="/ar/terms" component={Terms} />
       <Route path="/ar/pricing" component={Pricing} />
       <Route path="/ar/login" component={Login} />
+      <Route path="/ar/testimonials" component={Testimonials} />
 
       <Route component={NotFound} />
     </Switch>

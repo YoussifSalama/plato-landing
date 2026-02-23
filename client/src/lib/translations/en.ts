@@ -404,6 +404,12 @@ If you have questions about these Terms, please contact us at hello@platohiring.
     seekerLogin: "Job Seeker Login",
     seekerDesc: "Check your applications, update your profile, and track interview progress.",
   },
+  testimonialsPage: {
+    metaTitle: "Testimonials - Plato",
+    metaDescription: "Hear from those who've experienced clarity, trust, and innovation that define Plato.",
+    title: "Plato Testimonials",
+    subtitle: "Hear from those who've experienced clarity, trust, and innovation that define Plato. Their stories reflect our commitment to transparency, simplicity, and lasting relationships in every property journey.",
+  },
   blogPage: {
     title: "Plato Blogs",
     subtitle: "Stay ahead in the world of modern hiring with insights, trends, and expert guidance",

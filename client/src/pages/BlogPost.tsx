@@ -352,7 +352,7 @@ export default function BlogPost() {
                 <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.product}</h4>
                 <ul className="space-y-2.5">
                   <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-blogpost-footer-changelog">{t.footerSection.changelog}</span></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-blogpost-footer-customer-stories">{t.footerSection.customerStories}</span></li>
+                  <li><Link href={localePath("/testimonials")}><span className="text-xs text-muted-foreground hover:text-foreground transition-colors" data-testid="link-blogpost-footer-customer-stories">{t.footerSection.customerStories}</span></Link></li>
                   <li><a href={localePath("/security")} className="text-xs text-muted-foreground hover:text-foreground transition-colors" data-testid="link-blogpost-footer-security">{t.footerSection.security}</a></li>
                   <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-blogpost-footer-chrome">{t.footerSection.chromeExtension} ↗</span></li>
                   <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-blogpost-footer-ios">{t.footerSection.iosApp} ↗</span></li>
