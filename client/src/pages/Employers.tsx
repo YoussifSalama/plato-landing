@@ -5,10 +5,10 @@ import { useSEO } from "@/hooks/useSEO";
 import { getDemoLink, config } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "@/components/shared/ScrollReveal";
-import DashboardMockup from "@/components/DashboardMockup";
 import AboutAnalyticsDashboard from "@/components/AboutAnalyticsDashboard";
 import { SiLinkedin, SiInstagram, SiTiktok } from "react-icons/si";
 import { Plus, Minus, Sparkles, Eye, Link2, Clock } from "lucide-react";
+import dashboardScreenshot from "@assets/image_1771805988922.png";
 
 import logoAccentia from "@/assets/logos/accentia.png";
 import logoImplex from "@/assets/logos/implex.png";
@@ -131,8 +131,12 @@ export default function Employers() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <ScrollReveal animation="fade-left">
-              <div className="rounded-2xl border border-border shadow-2xl overflow-hidden" data-testid="about-dashboard-mockup">
-                <DashboardMockup />
+              <div className="rounded-[28px] bg-[#2183DF] p-5 sm:p-7" data-testid="about-dashboard-mockup">
+                <img
+                  src={dashboardScreenshot}
+                  alt="Plato Agency Dashboard"
+                  className="w-full h-auto rounded-xl shadow-2xl"
+                />
               </div>
             </ScrollReveal>
 

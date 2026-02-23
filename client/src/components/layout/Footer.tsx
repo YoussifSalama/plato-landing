@@ -8,7 +8,8 @@ export default function Footer() {
   const [location] = useLocation();
 
   const isHome = location === "/" || location === "/ar";
-  if (isHome) return null;
+  const isEmployers = location === "/employers" || location === "/ar/employers";
+  if (isHome || isEmployers) return null;
 
   const links = [
     { label: t.footer.privacy, path: "/privacy" },
