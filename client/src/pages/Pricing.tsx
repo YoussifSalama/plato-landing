@@ -204,7 +204,7 @@ export default function Pricing() {
               <ScrollReveal key={i} animation="fade-up" delay={i * 1}>
                 <details
                   ref={(el) => { faqRefs.current[i] = el; }}
-                  className="group rounded-xl border border-border bg-card overflow-hidden"
+                  className="group rounded-xl border border-border bg-transparent overflow-hidden"
                   data-testid={`faq-item-${i}`}
                 >
                   <summary className="flex items-center justify-between px-5 py-4 cursor-pointer text-sm font-medium text-foreground select-none list-none [&::-webkit-details-marker]:hidden">

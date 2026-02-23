@@ -250,7 +250,7 @@ export default function Employers() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 sm:py-28 bg-muted">
+      <section className="py-20 sm:py-28">
         <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
           <ScrollReveal animation="fade-up">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
