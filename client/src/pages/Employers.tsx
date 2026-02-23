@@ -129,35 +129,37 @@ export default function Employers() {
             </p>
           </ScrollReveal>
 
-          <ScrollReveal animation="fade-up" delay={2}>
-            <div className="rounded-[32px] bg-[#2183DF] p-6 sm:p-8 lg:p-10" data-testid="about-blue-frame">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
-                <div className="rounded-2xl border border-white/10 shadow-2xl overflow-hidden" data-testid="about-dashboard-mockup">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+            <ScrollReveal animation="fade-left">
+              <div className="rounded-[32px] bg-[#2183DF] p-5 sm:p-7 lg:p-8" data-testid="about-blue-frame">
+                <div className="rounded-2xl overflow-hidden shadow-2xl" data-testid="about-dashboard-mockup">
                   <DashboardMockup compact />
                 </div>
-
-                <div className="space-y-4">
-                  {features.map((f, i) => {
-                    const Icon = featureIcons[i];
-                    return (
-                      <div key={i} className="group flex items-start gap-4 p-4 rounded-xl" data-testid={`about-feature-${i}`}>
-                        <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
-                          <Icon className="w-5 h-5 text-white" />
-                        </div>
-                        <div>
-                          <h3 className="text-sm font-bold mb-1 flex items-center gap-2 text-white">
-                            {f.title}
-                            <span className="w-4 h-px bg-white/40 inline-block" />
-                          </h3>
-                          <p className="text-sm text-white/70 leading-relaxed">{f.desc}</p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
               </div>
+            </ScrollReveal>
+
+            <div className="space-y-6 lg:pt-4">
+              {features.map((f, i) => {
+                const Icon = featureIcons[i];
+                return (
+                  <ScrollReveal key={i} animation="fade-right" delay={i + 1}>
+                    <div className="flex items-start gap-4" data-testid={`about-feature-${i}`}>
+                      <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <Icon className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-bold mb-1.5 flex items-center gap-3 text-foreground">
+                          {f.title}
+                          <span className="w-5 h-px bg-primary inline-block" />
+                        </h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                );
+              })}
             </div>
-          </ScrollReveal>
+          </div>
         </div>
       </section>
 
