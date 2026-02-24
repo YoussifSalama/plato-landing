@@ -204,13 +204,17 @@ export default function BookDemo() {
               </div>
 
               {booked ? (
-                <div className="text-center py-12" data-testid="booking-success">
-                  <CheckCircle2 className="w-16 h-16 text-emerald-500 mx-auto mb-4" />
-                  <h2 className="text-2xl font-bold mb-2">{p.successTitle}</h2>
-                  <p className="text-muted-foreground mb-8 max-w-md mx-auto">{p.successMessage}</p>
-                  <Button onClick={handleReset} className="rounded-full" data-testid="button-book-another">
-                    {p.bookAnother}
-                  </Button>
+                <div className="text-center py-12 animate-in fade-in slide-in-from-bottom-4 duration-500" data-testid="booking-success">
+                  <div className="animate-in zoom-in-50 duration-700 delay-150">
+                    <CheckCircle2 className="w-16 h-16 text-emerald-500 mx-auto mb-4" />
+                  </div>
+                  <h2 className="text-2xl font-bold mb-2 animate-in fade-in slide-in-from-bottom-2 duration-500 delay-300">{p.successTitle}</h2>
+                  <p className="text-muted-foreground mb-8 max-w-md mx-auto animate-in fade-in slide-in-from-bottom-2 duration-500 delay-500">{p.successMessage}</p>
+                  <div className="animate-in fade-in slide-in-from-bottom-2 duration-500 delay-700">
+                    <Button onClick={handleReset} className="rounded-full" data-testid="button-book-another">
+                      {p.bookAnother}
+                    </Button>
+                  </div>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
