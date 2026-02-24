@@ -346,23 +346,70 @@ export const en = {
   },
   privacyPage: {
     title: "Privacy Policy",
-    templateNotice: "Template — replace before launch",
-    content: `This Privacy Policy describes how Plato ("we", "us", or "our") collects, uses, and shares information when you use our services.
-
-**Information We Collect**
-We collect information you provide directly, such as your name, email address, resume, and any other information you submit through our platform.
-
-**How We Use Your Information**
-We use the information we collect to provide and improve our services, communicate with you, and match job seekers with relevant opportunities.
-
-**Information Sharing**
-We do not sell your personal information. We may share information with employers when you apply for positions, and with service providers who help us operate our platform.
-
-**Data Retention**
-We retain your information for as long as necessary to provide our services. You can request deletion of your data at any time.
-
-**Contact Us**
-If you have questions about this Privacy Policy, please contact us at hello@platohiring.com.`,
+    subtitle: "This Privacy Policy explains how we collect, use, store, and protect personal data when you use the Plato HRM platform.",
+    sections: [
+      {
+        title: "Information We Collect",
+        items: [
+          "Name, email address, and contact details",
+          "Company name and business information",
+          "Job postings and hiring requirements",
+          "Interview notes and candidate evaluations",
+        ],
+      },
+      {
+        title: "Information Provided by Candidates",
+        items: [
+          "Full name and contact details",
+          "Resume/CV and employment history",
+          "Education and skills",
+          "Portfolio links or attachments",
+          "Interview responses and assessments",
+        ],
+      },
+      {
+        title: "Automatically Collected Data",
+        items: [
+          "IP address and browser type",
+          "Device information",
+          "Platform usage data and analytics",
+          "Cookies and tracking technologies",
+        ],
+      },
+      {
+        title: "AI Data Processing",
+        items: [
+          "AI processing is automated and based on provided data.",
+          "Results are recommendations only.",
+          "We do not use candidate data to train external AI models without consent.",
+        ],
+      },
+      {
+        title: "Data Sharing & Disclosure",
+        items: [
+          "Companies using Plato for recruitment purposes",
+          "Authorized service providers (hosting, analytics, email delivery)",
+          "Legal authorities when required by law",
+        ],
+      },
+      {
+        title: "Data Storage & Security",
+        items: [
+          "Data encryption",
+          "Secure servers and firewalls",
+          "Access controls and authentication",
+          "Regular security monitoring",
+        ],
+      },
+      {
+        title: "Data Retention",
+        items: [
+          "Provide platform services",
+          "Comply with legal obligations",
+          "Resolve disputes and enforce agreements",
+        ],
+      },
+    ],
   },
   termsPage: {
     title: "Terms & Conditions",
