@@ -185,27 +185,24 @@ export default function Employers() {
       {/* Unified Talent Intelligence Hub */}
       <section className="py-16 sm:py-20 lg:py-28">
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-            <ScrollReveal animation="fade-left">
-              <div className="bg-gradient-to-b from-primary/20 to-primary/5 dark:from-primary/15 dark:to-primary/5 rounded-2xl p-8 sm:p-10 lg:p-12">
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight leading-[1.15] mb-6" data-testid="text-hub-title">
+          <ScrollReveal animation="fade-up">
+            <div className="grid grid-cols-1 lg:grid-cols-2 rounded-3xl overflow-hidden">
+              <div className="bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] p-8 sm:p-10 lg:p-12 flex flex-col justify-center" data-testid="about-hub-panel">
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight leading-[1.15] mb-6 text-white" data-testid="text-hub-title">
                   {p.hubTitle}
                 </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+                <p className="text-sm text-blue-100/80 leading-relaxed mb-5">
                   {p.hubDesc1}
                 </p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-blue-100/80 leading-relaxed">
                   {p.hubDesc2}
                 </p>
               </div>
-            </ScrollReveal>
-
-            <ScrollReveal animation="fade-right" delay={2}>
-              <div className="rounded-2xl border border-border shadow-xl overflow-hidden" data-testid="about-analytics-dashboard">
+              <div className="dark bg-[#0c1929]" data-testid="about-analytics-dashboard">
                 <AboutAnalyticsDashboard />
               </div>
-            </ScrollReveal>
-          </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
