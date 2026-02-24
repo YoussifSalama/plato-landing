@@ -56,6 +56,10 @@ export default function Pricing() {
         <div className="absolute left-1/2 -translate-x-1/2 w-[90%] h-[520px] bg-[radial-gradient(ellipse_60%_55%_at_50%_0%,rgba(9,102,168,0.55),rgba(30,160,226,0.2)_38%,transparent_62%)]" style={{ top: "0px" }} />
         <div className="absolute left-1/2 -translate-x-1/2 w-[65%] h-[420px] bg-[radial-gradient(ellipse_45%_42%_at_50%_5%,rgba(14,80,140,0.35),transparent_52%)]" style={{ top: "0px" }} />
       </div>
+      {/* 3D coil decoration — hero area */}
+      <div className="hidden lg:block absolute right-0 top-0 w-[25%] h-[500px] pointer-events-none z-0" aria-hidden="true">
+        <img src="/images/coil-3d.png" alt="" className="absolute right-0 top-[60px] h-[80%] w-auto max-w-none object-contain object-right opacity-40" />
+      </div>
 
       {/* Hero */}
       <section className="relative pt-24 sm:pt-32 lg:pt-36 pb-8 sm:pb-12 z-[1]">
@@ -204,10 +208,6 @@ export default function Pricing() {
       {/* CTA Section */}
       <ScrollReveal animation="fade-up">
         <section className="relative py-20 sm:py-28 lg:py-32 bg-gradient-to-br from-[#0a3d6b] via-[#0b4d85] to-[#0d5a9e] overflow-hidden">
-          {/* 3D coil decoration — right side */}
-          <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[45%] pointer-events-none" aria-hidden="true">
-            <img src="/images/coil-3d.png" alt="" className="absolute right-0 top-1/2 -translate-y-1/2 h-[90%] w-auto max-w-none object-contain object-right opacity-60" />
-          </div>
           <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative z-[1]">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
