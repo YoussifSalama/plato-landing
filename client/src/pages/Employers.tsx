@@ -186,21 +186,21 @@ export default function Employers() {
       <section className="py-16 sm:py-20 lg:py-28">
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
           <ScrollReveal animation="fade-up">
-            <div className="relative overflow-visible">
-              <div className="rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] lg:min-h-[480px]" data-testid="about-hub-panel">
-                <div className="lg:w-[42%] p-8 sm:p-10 lg:p-12 lg:py-16">
-                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tight leading-[1.15] mb-6 text-white" data-testid="text-hub-title">
+            <div className="relative overflow-visible lg:mb-16">
+              <div className="rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] lg:min-h-[600px]" data-testid="about-hub-panel">
+                <div className="lg:w-[42%] p-8 sm:p-10 lg:p-14 lg:py-20">
+                  <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-[1.15] mb-8 text-white" data-testid="text-hub-title">
                     {p.hubTitle}
                   </h2>
-                  <p className="text-sm text-blue-100/80 leading-relaxed mb-5">
+                  <p className="text-[15px] text-blue-100/80 leading-relaxed mb-6">
                     {p.hubDesc1}
                   </p>
-                  <p className="text-sm text-blue-100/80 leading-relaxed">
+                  <p className="text-[15px] text-blue-100/80 leading-relaxed">
                     {p.hubDesc2}
                   </p>
                 </div>
               </div>
-              <div className="relative lg:absolute lg:right-0 lg:top-[40px] lg:bottom-[-40px] lg:w-[56%] dark rounded-2xl overflow-hidden bg-[#0c1929] shadow-2xl" data-testid="about-analytics-dashboard">
+              <div className="relative lg:absolute lg:right-0 lg:top-[50px] lg:bottom-[-60px] lg:w-[58%] dark rounded-2xl overflow-hidden bg-[#0c1929] shadow-2xl" data-testid="about-analytics-dashboard">
                 <AboutAnalyticsDashboard />
               </div>
             </div>
