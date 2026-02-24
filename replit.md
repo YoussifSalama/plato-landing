@@ -37,6 +37,7 @@ All pages exist in both English and Arabic variants:
 - For Job Seekers (`/job-seekers`, `/ar/job-seekers`)
 - How It Works (`/how-it-works`, `/ar/how-it-works`)
 - Blog with individual posts (`/blog`, `/blog/:slug`)
+- Book a Demo (`/book-demo`, `/ar/book-demo`) — functional booking system with calendar, time slots, and database persistence
 - FAQ, Contact, Security, Privacy, Terms, Pricing, Login
 
 ### Backend (Express)
@@ -48,7 +49,7 @@ All pages exist in both English and Arabic variants:
 
 ### Database
 - **ORM**: Drizzle ORM configured for PostgreSQL
-- **Schema**: Defined in `shared/schema.ts` — currently has a basic `users` table
+- **Schema**: Defined in `shared/schema.ts` — has `users` and `demo_bookings` tables
 - **Migrations**: Generated to `./migrations` directory via `drizzle-kit`
 - **Schema push**: Use `npm run db:push` to push schema changes
 - **Validation**: Drizzle-zod for generating Zod schemas from database tables

@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation } from "wouter";
 import { useI18n } from "@/lib/i18n";
 import { useAppTheme } from "@/lib/theme";
-import { getDemoLink } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import SmartHashLink from "@/components/shared/SmartHashLink";
 import { Menu, X, Sun, Moon } from "lucide-react";
@@ -146,11 +145,11 @@ export default function Header() {
                 {t.nav.login}
               </Button>
             </Link>
-            <a href={getDemoLink()} data-testid="button-book-demo-header">
+            <Link href={localePath("/book-demo")} data-testid="button-book-demo-header">
               <Button size="sm" className="rounded-full px-5 shadow-md shadow-primary/20 dark:shadow-primary/30">
                 {t.nav.bookDemo}
               </Button>
-            </a>
+            </Link>
           </div>
 
           <div className="lg:hidden flex items-center gap-2">
@@ -225,11 +224,11 @@ export default function Header() {
                   {t.nav.login}
                 </Button>
               </Link>
-              <a href={getDemoLink()}>
+              <Link href={localePath("/book-demo")}>
                 <Button className="w-full rounded-full" onClick={() => setMobileOpen(false)}>
                   {t.nav.bookDemo}
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

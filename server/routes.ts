@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { insertDemoBookingSchema } from "@shared/schema";
 
 const SITE_ROUTES = [
   "/",
@@ -15,12 +16,49 @@ const SITE_ROUTES = [
   "/terms",
   "/pricing",
   "/login",
+  "/book-demo",
 ];
 
 export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+  app.get("/api/demo-bookings", async (req, res) => {
+    const date = req.query.date as string;
+    if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      return res.status(400).json({ error: "Invalid date format. Use YYYY-MM-DD." });
+    }
+    const bookings = await storage.getBookingsByDate(date);
+    res.json(bookings.map(b => ({ time: b.bookingTime })));
+  });
+
+  app.post("/api/demo-bookings", async (req, res) => {
+    const parsed = insertDemoBookingSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ error: "Invalid booking data.", details: parsed.error.flatten() });
+    }
+    const bookingDate = new Date(parsed.data.bookingDate + "T00:00:00");
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    if (bookingDate < now) {
+      return res.status(400).json({ error: "Cannot book a date in the past." });
+    }
+    const dayOfWeek = bookingDate.getDay();
+    if (dayOfWeek === 5 || dayOfWeek === 6) {
+      return res.status(400).json({ error: "Cannot book on weekends." });
+    }
+
+    try {
+      const booking = await storage.createBooking(parsed.data);
+      res.status(201).json({ id: booking.id, date: booking.bookingDate, time: booking.bookingTime });
+    } catch (err: any) {
+      if (err.code === "23505") {
+        return res.status(409).json({ error: "This time slot is already booked." });
+      }
+      throw err;
+    }
+  });
+
   app.get("/robots.txt", (_req, res) => {
     res.type("text/plain").send(
       `User-agent: *\nAllow: /\n\nSitemap: ${getBaseUrl(_req)}/sitemap.xml`

@@ -1,13 +1,14 @@
-import { type User, type InsertUser } from "@shared/schema";
+import { type User, type InsertUser, type DemoBooking, type InsertDemoBooking, demoBookings } from "@shared/schema";
 import { randomUUID } from "crypto";
-
-// modify the interface with any CRUD methods
-// you might need
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  getBookingsByDate(date: string): Promise<DemoBooking[]>;
+  createBooking(booking: InsertDemoBooking): Promise<DemoBooking>;
 }
 
 export class MemStorage implements IStorage {
@@ -32,6 +33,15 @@ export class MemStorage implements IStorage {
     const user: User = { ...insertUser, id };
     this.users.set(id, user);
     return user;
+  }
+
+  async getBookingsByDate(date: string): Promise<DemoBooking[]> {
+    return db.select().from(demoBookings).where(eq(demoBookings.bookingDate, date));
+  }
+
+  async createBooking(booking: InsertDemoBooking): Promise<DemoBooking> {
+    const [result] = await db.insert(demoBookings).values(booking).returning();
+    return result;
   }
 }
 

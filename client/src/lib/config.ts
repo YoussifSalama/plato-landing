@@ -9,10 +9,7 @@ export const config = {
 };
 
 export function getDemoLink(): string {
-  if (config.demoBookingUrl) {
-    return config.demoBookingUrl;
-  }
-  return `mailto:${config.demoEmailFallback}?subject=${encodeURIComponent("Plato Demo Request")}`;
+  return "/book-demo";
 }
 
 export function getEmployerLoginUrl(): string {
