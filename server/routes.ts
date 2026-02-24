@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertDemoBookingSchema } from "@shared/schema";
 import { sendBookingConfirmation, sendBookingNotificationToAdmin } from "./email";
+import { createDemoEvent } from "./calendar";
 
 const SITE_ROUTES = [
   "/",
@@ -52,19 +53,25 @@ export async function registerRoutes(
     try {
       const booking = await storage.createBooking(parsed.data);
 
-      sendBookingConfirmation({
+      const emailData = {
         name: parsed.data.name,
         email: parsed.data.email,
         bookingDate: parsed.data.bookingDate,
         bookingTime: parsed.data.bookingTime,
-      }).catch(() => {});
+        meetLink: '',
+        eventLink: '',
+      };
 
-      sendBookingNotificationToAdmin({
-        name: parsed.data.name,
-        email: parsed.data.email,
-        bookingDate: parsed.data.bookingDate,
-        bookingTime: parsed.data.bookingTime,
-      }).catch(() => {});
+      try {
+        const calendarResult = await createDemoEvent(parsed.data);
+        emailData.meetLink = calendarResult.meetLink;
+        emailData.eventLink = calendarResult.eventLink;
+      } catch (calErr: any) {
+        console.error('Failed to create Google Calendar event:', calErr.message);
+      }
+
+      sendBookingConfirmation(emailData).catch(() => {});
+      sendBookingNotificationToAdmin(emailData).catch(() => {});
 
       res.status(201).json({ id: booking.id, date: booking.bookingDate, time: booking.bookingTime });
     } catch (err: any) {

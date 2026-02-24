@@ -64,66 +64,74 @@ function escapeHtml(str: string): string {
     .replace(/"/g, '&quot;');
 }
 
-function generateIcsContent(booking: BookingData): string {
-  const dateClean = booking.bookingDate.replace(/-/g, '');
-  const timeParts = booking.bookingTime.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
-  let hour = 0;
-  let minute = 0;
-  if (timeParts) {
-    hour = parseInt(timeParts[1], 10);
-    minute = parseInt(timeParts[2], 10);
-    const ampm = timeParts[3].toUpperCase();
-    if (ampm === 'PM' && hour !== 12) hour += 12;
-    if (ampm === 'AM' && hour === 12) hour = 0;
-  }
-  const startTime = `${String(hour).padStart(2, '0')}${String(minute).padStart(2, '0')}00`;
-  const endHour = minute >= 30 ? hour + 1 : hour;
-  const endMinute = minute >= 30 ? minute - 30 : minute + 30;
-  const endTime = `${String(endHour).padStart(2, '0')}${String(endMinute).padStart(2, '0')}00`;
-
-  return [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//Plato//Demo Booking//EN',
-    'BEGIN:VEVENT',
-    `DTSTART;TZID=Asia/Riyadh:${dateClean}T${startTime}`,
-    `DTEND;TZID=Asia/Riyadh:${dateClean}T${endTime}`,
-    `SUMMARY:Plato Demo — ${escapeHtml(booking.name)}`,
-    `DESCRIPTION:30-minute product demo with the Plato team. We'll walk through the candidate flow\\, scoring\\, and shortlisting features.`,
-    'LOCATION:Google Meet (link will be shared before the call)',
-    `ORGANIZER;CN=Plato Team:mailto:hello@platohiring.com`,
-    `ATTENDEE;CN=${escapeHtml(booking.name)}:mailto:${booking.email}`,
-    'STATUS:CONFIRMED',
-    `UID:plato-demo-${dateClean}-${startTime}@platohiring.com`,
-    'END:VEVENT',
-    'END:VCALENDAR',
-  ].join('\r\n');
-}
-
-interface BookingData {
+interface BookingEmailData {
   name: string;
   email: string;
   bookingDate: string;
   bookingTime: string;
+  meetLink?: string;
+  eventLink?: string;
 }
 
 const HOST_NAME = 'Plato Team';
 const HOST_TITLE = 'Customer Success';
 const HOST_EMAIL = 'hello@platohiring.com';
-const COMPANY_PHONE = '+966 50 000 0000';
-const TIMEZONE = 'AST (Arabia Standard Time)';
+const TIMEZONE = 'EET (Egypt Time, UTC+2)';
 const RESCHEDULE_URL = 'https://platohiring.com/book-demo';
 
-export async function sendBookingConfirmation(booking: BookingData) {
+export async function sendBookingConfirmation(booking: BookingEmailData) {
   try {
     const { client, fromEmail } = await getUncachableSendGridClient();
     const formattedDate = formatDate(booking.bookingDate);
     const dayName = getDayName(booking.bookingDate);
     const firstName = getFirstName(booking.name);
     const time = booking.bookingTime;
+    const meetLink = booking.meetLink || '';
+    const eventLink = booking.eventLink || '';
 
-    const icsContent = generateIcsContent(booking);
-    const icsBase64 = Buffer.from(icsContent).toString('base64');
+    const meetLinkRow = meetLink
+      ? `<tr>
+           <td style="padding:6px 0;color:#374151;font-size:15px;line-height:1.7;">
+             <strong>Meeting link:</strong> <a href="${meetLink}" style="color:#0966A8;text-decoration:none;word-break:break-all;">${meetLink}</a>
+           </td>
+         </tr>`
+      : '';
+
+    const joinButtonHtml = meetLink
+      ? `<table cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:16px;">
+           <tr>
+             <td align="center">
+               <table cellpadding="0" cellspacing="0">
+                 <tr>
+                   <td align="center" style="background:#0966A8;border-radius:8px;">
+                     <a href="${meetLink}" target="_blank" style="display:inline-block;padding:14px 36px;color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;">
+                       Join Google Meet
+                     </a>
+                   </td>
+                 </tr>
+               </table>
+             </td>
+           </tr>
+         </table>`
+      : '';
+
+    const calendarButtonHtml = eventLink
+      ? `<table cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:16px;">
+           <tr>
+             <td align="center">
+               <table cellpadding="0" cellspacing="0">
+                 <tr>
+                   <td align="center" style="background:#ffffff;border:1px solid #d0e3f5;border-radius:8px;">
+                     <a href="${eventLink}" target="_blank" style="display:inline-block;padding:12px 28px;color:#0966A8;font-size:14px;font-weight:600;text-decoration:none;">
+                       View in Google Calendar
+                     </a>
+                   </td>
+                 </tr>
+               </table>
+             </td>
+           </tr>
+         </table>`
+      : '';
 
     const msg = {
       to: booking.email,
@@ -132,17 +140,6 @@ export async function sendBookingConfirmation(booking: BookingData) {
         name: 'Plato',
       },
       subject: `Your Plato demo is confirmed — ${dayName}, ${formattedDate}`,
-      headers: {
-        'X-Preheader': `${dayName} at ${time} ${TIMEZONE} — 30 min product walkthrough with the Plato team`,
-      },
-      attachments: [
-        {
-          content: icsBase64,
-          filename: 'plato-demo.ics',
-          type: 'text/calendar',
-          disposition: 'attachment' as const,
-        },
-      ],
       html: `
 <!DOCTYPE html>
 <html>
@@ -191,11 +188,7 @@ export async function sendBookingConfirmation(booking: BookingData) {
                           <strong>Duration:</strong> 30 minutes
                         </td>
                       </tr>
-                      <tr>
-                        <td style="padding:6px 0;color:#374151;font-size:15px;line-height:1.7;">
-                          <strong>Meeting link:</strong> Sent before the call
-                        </td>
-                      </tr>
+                      ${meetLinkRow}
                       <tr>
                         <td style="padding:6px 0;color:#374151;font-size:15px;line-height:1.7;">
                           <strong>Host:</strong> ${HOST_NAME}, ${HOST_TITLE}
@@ -205,6 +198,9 @@ export async function sendBookingConfirmation(booking: BookingData) {
                   </td>
                 </tr>
               </table>
+
+              <!-- Join Meeting CTA -->
+              ${joinButtonHtml}
 
               <!-- What we'll cover -->
               <p style="color:#111827;margin:0 0 12px;font-size:15px;font-weight:600;">
@@ -245,22 +241,8 @@ export async function sendBookingConfirmation(booking: BookingData) {
                 </tr>
               </table>
 
-              <!-- Add to Calendar CTA -->
-              <table cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:16px;">
-                <tr>
-                  <td align="center">
-                    <table cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td align="center" style="background:#0966A8;border-radius:8px;">
-                          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Plato+Demo&dates=${booking.bookingDate.replace(/-/g, '')}/${booking.bookingDate.replace(/-/g, '')}&details=30-minute+product+demo+with+the+Plato+team.&location=Google+Meet+(link+shared+before+call)&sf=true" target="_blank" style="display:inline-block;padding:14px 36px;color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;">
-                            Add to Google Calendar
-                          </a>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
+              <!-- View in Calendar -->
+              ${calendarButtonHtml}
 
               <!-- Reschedule link -->
               <table cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:28px;">
@@ -317,11 +299,12 @@ export async function sendBookingConfirmation(booking: BookingData) {
   }
 }
 
-export async function sendBookingNotificationToAdmin(booking: BookingData) {
+export async function sendBookingNotificationToAdmin(booking: BookingEmailData) {
   try {
     const { client, fromEmail } = await getUncachableSendGridClient();
     const formattedDate = formatDate(booking.bookingDate);
     const time = booking.bookingTime;
+    const meetLink = booking.meetLink || 'Not generated';
 
     const msg = {
       to: 'hello@platohiring.com',
@@ -338,6 +321,7 @@ export async function sendBookingNotificationToAdmin(booking: BookingData) {
   <p><strong>Date:</strong> ${formattedDate}</p>
   <p><strong>Time:</strong> ${time} ${TIMEZONE}</p>
   <p><strong>Duration:</strong> 30 minutes</p>
+  <p><strong>Meeting link:</strong> <a href="${meetLink}">${meetLink}</a></p>
   <hr style="border:none;border-top:1px solid #e5e7eb;margin:20px 0;">
   <p style="color:#6b7280;font-size:13px;">This is an automated notification from the Plato booking system.</p>
 </div>`,
