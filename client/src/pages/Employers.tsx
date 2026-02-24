@@ -186,9 +186,9 @@ export default function Employers() {
       <section className="py-16 sm:py-20 lg:py-28">
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
           <ScrollReveal animation="fade-up">
-            <div className="relative rounded-3xl bg-[#070d18] p-6 sm:p-8 lg:p-10 overflow-hidden">
-              <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-stretch">
-                <div className="lg:w-[40%] flex-shrink-0 bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] rounded-2xl p-8 sm:p-10 lg:p-12 flex flex-col justify-center" data-testid="about-hub-panel">
+            <div className="relative rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] overflow-visible" data-testid="about-hub-panel">
+              <div className="relative lg:min-h-[520px]">
+                <div className="relative z-[1] lg:w-[42%] p-8 sm:p-10 lg:p-12 lg:py-16 flex flex-col justify-center">
                   <h2 className="text-2xl sm:text-3xl font-bold tracking-tight leading-[1.15] mb-6 text-white" data-testid="text-hub-title">
                     {p.hubTitle}
                   </h2>
@@ -199,7 +199,7 @@ export default function Employers() {
                     {p.hubDesc2}
                   </p>
                 </div>
-                <div className="lg:w-[60%] dark rounded-2xl overflow-hidden bg-[#0c1929]" data-testid="about-analytics-dashboard">
+                <div className="relative lg:absolute lg:right-[-20px] lg:top-[-20px] lg:bottom-[-20px] lg:w-[58%] dark rounded-2xl overflow-hidden bg-[#0c1929] shadow-2xl" data-testid="about-analytics-dashboard">
                   <AboutAnalyticsDashboard />
                 </div>
               </div>
