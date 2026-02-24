@@ -189,8 +189,8 @@ export default function BookDemo() {
               {/* Header */}
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-border">
                 <div className="flex items-center gap-4">
-                  <div className="h-14 w-14 overflow-hidden flex-shrink-0 rounded-full bg-primary/10 flex items-center justify-center">
-                    <img src="/images/plato-logo.png" alt="" className="h-9 w-auto" />
+                  <div className="h-14 w-14 overflow-hidden flex-shrink-0 rounded-full">
+                    <img src="/images/plato-icon.png" alt="" className="h-full w-full object-cover" />
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">{p.brandName}</p>
