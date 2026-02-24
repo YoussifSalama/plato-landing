@@ -203,10 +203,10 @@ export default function Employers() {
               <AboutAnalyticsDashboard />
             </div>
 
-            {/* Desktop layout — blue panel base with dashboard overlay */}
-            <div className="hidden lg:block relative" data-testid="about-hub-panel">
-              <div className="relative rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] px-10 py-12 min-h-[320px]">
-                <div className="w-[40%] pr-4">
+            {/* Desktop layout: blue panel as base, dashboard floating on right */}
+            <div className="hidden lg:block relative mb-8" data-testid="about-hub-panel">
+              <div className="relative rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] px-10 py-12 min-h-[340px]">
+                <div className="w-[42%] flex flex-col justify-center">
                   <h2 className="text-2xl font-bold tracking-tight leading-[1.15] mb-5 text-white" data-testid="text-hub-title">
                     {p.hubTitle}
                   </h2>
@@ -217,13 +217,14 @@ export default function Employers() {
                     {p.hubDesc2}
                   </p>
                 </div>
+              </div>
 
-                <div
-                  className="absolute top-[-20px] bottom-[-20px] right-[-24px] w-[58%] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
-                  data-testid="about-analytics-dashboard"
-                >
-                  <AboutAnalyticsDashboard />
-                </div>
+              <div
+                className="absolute top-[-24px] right-[-20px] w-[58%] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
+                style={{ bottom: "-28px" }}
+                data-testid="about-analytics-dashboard"
+              >
+                <AboutAnalyticsDashboard />
               </div>
             </div>
           </ScrollReveal>
