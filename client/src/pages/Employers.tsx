@@ -184,10 +184,9 @@ export default function Employers() {
       </section>
 
       {/* Unified Talent Intelligence Hub */}
-      <section className="py-16 sm:py-20 lg:py-28">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+      <section className="py-16 sm:py-20 lg:py-28 lg:overflow-visible">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 lg:overflow-visible">
           <ScrollReveal animation="fade-up">
-            {/* Mobile layout */}
             <div className="lg:hidden rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] p-8 sm:p-10 mb-6">
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-[1.15] mb-8 text-white" data-testid="text-hub-title-mobile">
                 {p.hubTitle}
@@ -203,25 +202,24 @@ export default function Employers() {
               <AboutAnalyticsDashboard />
             </div>
 
-            {/* Desktop layout: blue panel as base, dashboard floating on right */}
-            <div className="hidden lg:block relative mb-8" data-testid="about-hub-panel">
-              <div className="relative rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] px-10 py-12 min-h-[340px]">
-                <div className="w-[42%] flex flex-col justify-center">
-                  <h2 className="text-2xl font-bold tracking-tight leading-[1.15] mb-5 text-white" data-testid="text-hub-title">
-                    {p.hubTitle}
-                  </h2>
-                  <p className="text-[13px] text-blue-100/80 leading-relaxed mb-4">
-                    {p.hubDesc1}
-                  </p>
-                  <p className="text-[13px] text-blue-100/80 leading-relaxed">
-                    {p.hubDesc2}
-                  </p>
-                </div>
+            <div className="hidden lg:flex relative items-start" data-testid="about-hub-panel">
+              <div className="absolute inset-0 top-0 bottom-[32px] rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4]" />
+
+              <div className="relative z-[1] w-[36%] flex-shrink-0 px-10 pt-10 pb-16 flex flex-col justify-start self-stretch">
+                <h2 className="text-2xl font-bold tracking-tight leading-[1.15] mb-5 text-white" data-testid="text-hub-title">
+                  {p.hubTitle}
+                </h2>
+                <p className="text-[13px] text-blue-100/80 leading-relaxed mb-4">
+                  {p.hubDesc1}
+                </p>
+                <p className="text-[13px] text-blue-100/80 leading-relaxed">
+                  {p.hubDesc2}
+                </p>
               </div>
 
               <div
-                className="absolute top-[-24px] right-[-20px] w-[58%] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
-                style={{ bottom: "-28px" }}
+                className="relative z-[2] w-[64%] mt-[28px] mb-[-32px] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
+                style={{ marginRight: "-32px" }}
                 data-testid="about-analytics-dashboard"
               >
                 <AboutAnalyticsDashboard />
