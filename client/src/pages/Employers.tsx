@@ -212,7 +212,7 @@ export default function Employers() {
                     {p.hubDesc2}
                   </p>
                 </div>
-                <div className="flex-1 mt-[28px] mb-[-32px] dark rounded-l-2xl overflow-hidden bg-[#0d1117] shadow-2xl" style={{ marginRight: "calc(-1 * (100vw - 100%) / 2)" }} data-testid="about-analytics-dashboard">
+                <div className="flex-1 mt-[28px] mb-[-32px] dark rounded-l-2xl overflow-hidden bg-[#0d1117] shadow-2xl origin-top-left" style={{ marginRight: "calc(-1 * (100vw - 100%) / 2)", transform: "scale(0.78)", height: "fit-content" }} data-testid="about-analytics-dashboard">
                   <AboutAnalyticsDashboard />
                 </div>
               </div>
