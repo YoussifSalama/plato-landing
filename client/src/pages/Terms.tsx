@@ -37,8 +37,8 @@ export default function Terms() {
       {/* Sections */}
       <section className="relative z-[1] pb-20 sm:pb-28">
         {/* 3D coil decoration — right side of content */}
-        <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[30%] pointer-events-none z-0" aria-hidden="true">
-          <img src="/images/coil-3d.png" alt="" className="absolute right-0 top-[10%] h-[80%] w-auto max-w-none object-contain object-right opacity-50" />
+        <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[25%] pointer-events-none z-0" aria-hidden="true">
+          <img src="/images/coil-3d.png" alt="" className="absolute right-0 top-[20%] h-[50%] w-auto max-w-none object-contain object-right opacity-40" />
         </div>
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 relative z-[1]">
           <div className="space-y-10">
