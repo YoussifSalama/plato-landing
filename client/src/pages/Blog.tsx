@@ -112,7 +112,7 @@ export default function Blog() {
           <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
             <ScrollReveal animation="fade-up">
               <Link href={localePath(`/blog/${featuredPost.slug}`)}>
-                <div className="group rounded-2xl overflow-hidden bg-card border border-border cursor-pointer hover:border-blue-500/30 transition-colors" data-testid={`card-blog-featured-${featuredPost.slug}`}>
+                <div className="group rounded-2xl overflow-hidden cursor-pointer transition-colors" data-testid={`card-blog-featured-${featuredPost.slug}`}>
                   <div className="grid grid-cols-1 lg:grid-cols-2">
                     <div className="relative h-[260px] lg:h-[380px] overflow-hidden">
                       <img
@@ -171,7 +171,7 @@ export default function Blog() {
               {gridPosts.map((post, i) => (
                 <ScrollReveal key={post.slug} animation="fade-up" delay={i % 4}>
                   <Link href={localePath(`/blog/${post.slug}`)}>
-                    <div className="group rounded-2xl overflow-hidden bg-card border border-border cursor-pointer hover:border-blue-500/30 transition-colors h-full flex flex-col" data-testid={`card-blog-${post.slug}`}>
+                    <div className="group rounded-2xl overflow-hidden cursor-pointer transition-colors h-full flex flex-col" data-testid={`card-blog-${post.slug}`}>
                       <div className="relative h-[200px] sm:h-[220px] overflow-hidden">
                         <img
                           src={post.image}
