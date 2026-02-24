@@ -224,8 +224,8 @@ function DonutChart({ triggerRef }: { triggerRef: React.RefObject<HTMLDivElement
             className={`flex items-center gap-2 cursor-pointer transition-opacity duration-200 ${hovered !== null && hovered !== idx ? "opacity-40" : ""}`}
             onMouseEnter={() => setHovered(idx)} onMouseLeave={() => setHovered(null)}>
             <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: seg.color }} />
-            <span className="text-[10px] text-gray-400 min-w-[55px]">{seg.label}</span>
-            <span className="text-[11px] text-white font-bold">{seg.pct}%</span>
+            <span className="text-[10px] text-gray-400 min-w-[60px]">{seg.label}</span>
+            <span className="text-[11px] text-white font-bold ml-1">{seg.pct}%</span>
           </div>
         ))}
       </div>
