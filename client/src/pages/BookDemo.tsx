@@ -48,9 +48,18 @@ export default function BookDemo() {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const [currentMonth, setCurrentMonth] = useState(today.getMonth());
-  const [currentYear, setCurrentYear] = useState(today.getFullYear());
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const getInitialDate = () => {
+    const d = new Date(today);
+    while (d.getDay() === 5 || d.getDay() === 6) {
+      d.setDate(d.getDate() + 1);
+    }
+    return d;
+  };
+
+  const [initialDate] = useState(getInitialDate);
+  const [currentMonth, setCurrentMonth] = useState(initialDate.getMonth());
+  const [currentYear, setCurrentYear] = useState(initialDate.getFullYear());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(initialDate);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -111,8 +120,11 @@ export default function BookDemo() {
   };
 
   const handleReset = () => {
+    const freshDate = getInitialDate();
     setBooked(false);
-    setSelectedDate(null);
+    setSelectedDate(freshDate);
+    setCurrentMonth(freshDate.getMonth());
+    setCurrentYear(freshDate.getFullYear());
     setSelectedTime(null);
     setName("");
     setEmail("");
