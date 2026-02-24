@@ -44,10 +44,10 @@ export default function FAQ() {
 
   return (
     <div className="relative min-h-screen" style={{ overflowX: "clip" }}>
-      {/* Subtle radial blue glow */}
+      {/* Subtle radial blue glow — concentrated in the center */}
       <div className="absolute left-0 right-0 pointer-events-none z-0" aria-hidden="true" style={{ top: "-60px", height: "480px" }}>
-        <div className="absolute left-1/2 -translate-x-1/2 w-[115%] h-[380px] bg-[radial-gradient(ellipse_65%_42%_at_50%_0%,rgba(9,102,168,0.18),rgba(30,160,226,0.07)_38%,transparent_62%)]" style={{ top: "0px" }} />
-        <div className="absolute left-1/2 -translate-x-1/2 w-[75%] h-[300px] bg-[radial-gradient(ellipse_48%_32%_at_50%_5%,rgba(14,80,140,0.12),transparent_52%)]" style={{ top: "0px" }} />
+        <div className="absolute left-1/2 -translate-x-1/2 w-[70%] h-[380px] bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,rgba(9,102,168,0.28),rgba(30,160,226,0.1)_35%,transparent_55%)]" style={{ top: "0px" }} />
+        <div className="absolute left-1/2 -translate-x-1/2 w-[50%] h-[300px] bg-[radial-gradient(ellipse_40%_30%_at_50%_5%,rgba(14,80,140,0.18),transparent_45%)]" style={{ top: "0px" }} />
       </div>
 
       {/* Hero Section */}
