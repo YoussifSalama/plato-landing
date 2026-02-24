@@ -274,7 +274,7 @@ export default function Blog() {
       </ScrollReveal>
 
       {/* Footer */}
-      <footer className="bg-card border-t border-border pt-16 pb-8">
+      <footer className="border-t border-border pt-16 pb-8">
         <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
           <ScrollReveal animation="fade-up">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
