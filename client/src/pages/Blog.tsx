@@ -55,19 +55,17 @@ export default function Blog() {
           </ScrollReveal>
 
           <ScrollReveal animation="fade-in" delay={2}>
-            <div className="flex items-center gap-0 max-w-lg mx-auto mb-10">
-              <div className="relative flex-1">
-                <Input
-                  type="search"
-                  placeholder={p.searchPlaceholder}
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="rounded-e-none border-e-0 h-11 bg-card"
-                  data-testid="input-blog-search"
-                />
-              </div>
+            <div className="flex items-center max-w-lg mx-auto mb-10 bg-card border border-border rounded-full px-2 py-1.5">
+              <Input
+                type="search"
+                placeholder={p.searchPlaceholder}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="border-0 bg-transparent shadow-none focus-visible:ring-0 h-9 flex-1"
+                data-testid="input-blog-search"
+              />
               <Button
-                className="rounded-s-none h-11 px-6"
+                className="rounded-full h-9 px-6"
                 onClick={() => {}}
                 data-testid="button-blog-search"
               >
