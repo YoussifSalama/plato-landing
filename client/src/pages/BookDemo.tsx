@@ -328,7 +328,7 @@ export default function BookDemo() {
                             value={name}
                             onChange={e => setName(e.target.value)}
                             placeholder={p.namePlaceholder}
-                            className="rounded-xl"
+                            className="!rounded-full h-11"
                             data-testid="input-name"
                           />
                         </div>
@@ -344,7 +344,7 @@ export default function BookDemo() {
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                             placeholder={p.emailPlaceholder}
-                            className="rounded-xl"
+                            className="!rounded-full h-11"
                             data-testid="input-email"
                           />
                         </div>
