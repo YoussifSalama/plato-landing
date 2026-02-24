@@ -211,11 +211,11 @@ export default function Employers() {
                     {p.hubDesc2}
                   </p>
                 </div>
-                <div className="w-[58%] mt-[50px] mb-[-60px] dark rounded-2xl overflow-hidden bg-[#0c1929] shadow-2xl" data-testid="about-analytics-dashboard">
+                <div className="w-[58%] mt-[50px] mb-[-60px] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl" data-testid="about-analytics-dashboard">
                   <AboutAnalyticsDashboard />
                 </div>
               </div>
-              <div className="lg:hidden dark rounded-2xl overflow-hidden bg-[#0c1929] shadow-2xl" data-testid="about-analytics-dashboard-mobile">
+              <div className="lg:hidden dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl" data-testid="about-analytics-dashboard-mobile">
                 <AboutAnalyticsDashboard />
               </div>
             </div>
