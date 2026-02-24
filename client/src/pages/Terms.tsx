@@ -62,24 +62,8 @@ export default function Terms() {
       <ScrollReveal animation="fade-up">
         <section className="relative py-20 sm:py-28 lg:py-32 bg-gradient-to-br from-[#0a3d6b] via-[#0b4d85] to-[#0d5a9e] overflow-hidden">
           {/* 3D coil decoration — right side */}
-          <div className="absolute right-[5%] sm:right-[10%] top-1/2 -translate-y-1/2 w-[280px] sm:w-[360px] h-[280px] sm:h-[360px] opacity-30" aria-hidden="true">
-            <svg viewBox="0 0 360 360" fill="none" className="w-full h-full">
-              <defs>
-                <linearGradient id="coilGradCTA" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#60b5f0" stopOpacity="0.9" />
-                  <stop offset="100%" stopColor="#1a8fd4" stopOpacity="0.5" />
-                </linearGradient>
-              </defs>
-              <ellipse cx="180" cy="60" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="3" fill="none" opacity="0.3" />
-              <ellipse cx="180" cy="90" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="3" fill="none" opacity="0.4" />
-              <ellipse cx="180" cy="120" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="3.5" fill="none" opacity="0.5" />
-              <ellipse cx="180" cy="150" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="3.5" fill="none" opacity="0.6" />
-              <ellipse cx="180" cy="180" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="4" fill="none" opacity="0.7" />
-              <ellipse cx="180" cy="210" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="3.5" fill="none" opacity="0.6" />
-              <ellipse cx="180" cy="240" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="3" fill="none" opacity="0.5" />
-              <ellipse cx="180" cy="270" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="3" fill="none" opacity="0.4" />
-              <ellipse cx="180" cy="300" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="2.5" fill="none" opacity="0.3" />
-            </svg>
+          <div className="absolute right-0 top-0 bottom-0 w-[40%] sm:w-[45%] pointer-events-none" aria-hidden="true">
+            <img src="/images/coil-3d.png" alt="" className="absolute right-0 top-1/2 -translate-y-1/2 h-full w-auto max-w-none object-contain object-right opacity-70" />
           </div>
           <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative z-[1]">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
