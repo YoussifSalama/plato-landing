@@ -204,7 +204,7 @@ export default function Employers() {
             <div className="hidden lg:flex relative items-start" data-testid="about-hub-panel">
               <div className="absolute inset-0 top-0 bottom-[32px] rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4]" />
 
-              <div className="relative z-[1] w-[38%] flex-shrink-0 px-10 py-16 flex flex-col justify-center self-stretch">
+              <div className="relative z-[1] w-[36%] flex-shrink-0 px-10 pt-10 pb-16 flex flex-col justify-start self-stretch">
                 <h2 className="text-2xl font-bold tracking-tight leading-[1.15] mb-5 text-white" data-testid="text-hub-title">
                   {p.hubTitle}
                 </h2>
@@ -217,7 +217,8 @@ export default function Employers() {
               </div>
 
               <div
-                className="relative z-[2] w-[62%] mt-[28px] mb-[-32px] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
+                className="relative z-[2] w-[64%] mt-[28px] mb-[-32px] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
+                style={{ marginRight: "-32px" }}
                 data-testid="about-analytics-dashboard"
               >
                 <AboutAnalyticsDashboard />
