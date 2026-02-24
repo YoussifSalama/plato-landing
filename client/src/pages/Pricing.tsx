@@ -1,10 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useI18n } from "@/lib/i18n";
 import { useSEO } from "@/hooks/useSEO";
 import { getDemoLink, config } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "@/components/shared/ScrollReveal";
-import { Check, Zap, Crown, Rocket, Building2, ChevronDown } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import { Link } from "wouter";
 import { SiLinkedin, SiInstagram, SiTiktok } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
@@ -13,32 +13,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PLAN_ICONS = [Zap, Rocket, Crown, Building2];
-const PLAN_KEYS = ["starter", "growth", "pro", "enterprise"] as const;
-const PLAN_GRADIENTS = [
-  "from-blue-500/20 to-cyan-500/20",
-  "from-blue-500/20 to-indigo-500/20",
-  "from-indigo-500/20 to-purple-500/20",
-  "from-purple-500/20 to-pink-500/20",
-];
-const PLAN_ICON_COLORS = [
-  "text-cyan-500",
-  "text-blue-500",
-  "text-indigo-500",
-  "text-purple-500",
-];
-const PLAN_BORDER_COLORS = [
-  "border-cyan-500/20 dark:border-cyan-500/30",
-  "border-blue-500/20 dark:border-blue-500/30",
-  "border-indigo-500/30 dark:border-indigo-500/40",
-  "border-purple-500/20 dark:border-purple-500/30",
-];
+const PLAN_KEYS = ["intro", "base", "pro", "enterprise"] as const;
 
 export default function Pricing() {
-  const { t, localePath, dir } = useI18n();
+  const { t, localePath } = useI18n();
   useSEO({ title: t.meta.pages.pricing.title, description: t.meta.pages.pricing.description });
   const p = t.pricingPage;
-
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
   const cardsRef = useRef<HTMLDivElement>(null);
   const faqRefs = useRef<(HTMLDetailsElement | null)[]>([]);
 
@@ -51,19 +32,10 @@ export default function Pricing() {
 
     const ctx = gsap.context(() => {
       gsap.set(cards, { y: 60, opacity: 0, scale: 0.95 });
-
       gsap.to(cards, {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.7,
-        stagger: 0.12,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: cardsRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
+        y: 0, opacity: 1, scale: 1,
+        duration: 0.7, stagger: 0.12, ease: "power3.out",
+        scrollTrigger: { trigger: cardsRef.current, start: "top 80%", toggleActions: "play none none reverse" },
       });
     }, cardsRef);
 
@@ -71,30 +43,54 @@ export default function Pricing() {
   }, []);
 
   const plans = [
-    { key: "starter" as const, plan: p.plans.starter, highlighted: false },
-    { key: "growth" as const, plan: p.plans.growth, highlighted: false },
+    { key: "intro" as const, plan: p.plans.intro, highlighted: false },
+    { key: "base" as const, plan: p.plans.base, highlighted: false },
     { key: "pro" as const, plan: p.plans.pro, highlighted: true },
     { key: "enterprise" as const, plan: p.plans.enterprise, highlighted: false },
   ];
 
   return (
     <div className="relative" style={{ overflowX: "clip" }}>
-      <div className="absolute left-0 right-0 hidden dark:block pointer-events-none z-0" aria-hidden="true" style={{ top: "-60px", height: "620px" }}>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#071b2e] via-[#0a1628] to-transparent" />
-        <div className="absolute left-1/2 -translate-x-1/2 w-[130%] h-[520px] bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(9,102,168,0.45),rgba(30,160,226,0.15)_40%,transparent_70%)]" style={{ top: "0px" }} />
-        <div className="absolute left-1/2 -translate-x-1/2 w-[90%] h-[420px] bg-[radial-gradient(ellipse_60%_40%_at_50%_5%,rgba(14,80,140,0.3),transparent_60%)]" style={{ top: "0px" }} />
+      {/* Radial blue glow */}
+      <div className="absolute left-0 right-0 pointer-events-none z-0" aria-hidden="true" style={{ top: "-60px", height: "600px" }}>
+        <div className="absolute left-1/2 -translate-x-1/2 w-[90%] h-[520px] bg-[radial-gradient(ellipse_60%_55%_at_50%_0%,rgba(9,102,168,0.55),rgba(30,160,226,0.2)_38%,transparent_62%)]" style={{ top: "0px" }} />
+        <div className="absolute left-1/2 -translate-x-1/2 w-[65%] h-[420px] bg-[radial-gradient(ellipse_45%_42%_at_50%_5%,rgba(14,80,140,0.35),transparent_52%)]" style={{ top: "0px" }} />
       </div>
 
       {/* Hero */}
-      <section className="relative pt-24 sm:pt-32 lg:pt-36 pb-12 sm:pb-16 z-[1]">
+      <section className="relative pt-24 sm:pt-32 lg:pt-36 pb-8 sm:pb-12 z-[1]">
         <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
           <ScrollReveal animation="fade-up">
-            <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.1]" data-testid="text-pricing-title">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]" data-testid="text-pricing-title">
               {p.title}
             </h1>
           </ScrollReveal>
           <ScrollReveal animation="fade-up" delay={2}>
-            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{p.subtitle}</p>
+            <p className="mt-4 text-base sm:text-lg text-muted-foreground">{p.subtitle}</p>
+          </ScrollReveal>
+
+          {/* Monthly / Yearly Toggle */}
+          <ScrollReveal animation="fade-up" delay={3}>
+            <div className="mt-8 inline-flex items-center rounded-full border border-border bg-card p-1" data-testid="toggle-billing-cycle">
+              <Button
+                variant={billingCycle === "monthly" ? "default" : "ghost"}
+                size="sm"
+                onClick={() => setBillingCycle("monthly")}
+                className="rounded-full px-5"
+                data-testid="button-billing-monthly"
+              >
+                {p.monthly}
+              </Button>
+              <Button
+                variant={billingCycle === "yearly" ? "default" : "ghost"}
+                size="sm"
+                onClick={() => setBillingCycle("yearly")}
+                className="rounded-full px-5"
+                data-testid="button-billing-yearly"
+              >
+                {p.yearly}
+              </Button>
+            </div>
           </ScrollReveal>
         </div>
       </section>
@@ -102,10 +98,10 @@ export default function Pricing() {
       {/* Pricing Cards */}
       <section className="relative z-[1] pb-20 sm:pb-28">
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {plans.map(({ key, plan, highlighted }, idx) => {
-              const Icon = PLAN_ICONS[idx];
+          <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-end">
+            {plans.map(({ key, plan, highlighted }) => {
               const isEnterprise = key === "enterprise";
+              const price = billingCycle === "monthly" ? plan.monthlyPrice : plan.yearlyPrice;
 
               return (
                 <div
@@ -114,72 +110,55 @@ export default function Pricing() {
                   data-testid={`card-pricing-${key}`}
                   className={`relative rounded-2xl p-6 flex flex-col transition-all duration-300 ${
                     highlighted
-                      ? `bg-gradient-to-b ${PLAN_GRADIENTS[idx]} border-2 ${PLAN_BORDER_COLORS[idx]} shadow-lg shadow-indigo-500/10 dark:shadow-indigo-500/20`
-                      : `bg-card border ${PLAN_BORDER_COLORS[idx]}`
+                      ? "bg-card border-2 border-primary/50 shadow-lg shadow-primary/10 -mt-4 pb-8"
+                      : "bg-card border border-border"
                   }`}
                 >
                   {highlighted && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <span className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-[11px] font-semibold px-4 py-1 rounded-full shadow-md" data-testid="text-popular-badge">
+                      <span className="bg-primary text-primary-foreground text-[10px] font-bold px-3 py-1 rounded-full tracking-wider" data-testid="text-popular-badge">
                         {p.popular}
                       </span>
                     </div>
                   )}
 
-                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${PLAN_GRADIENTS[idx]} flex items-center justify-center mb-4`}>
-                    <Icon className={`w-5 h-5 ${PLAN_ICON_COLORS[idx]}`} />
+                  <div className="mb-4">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-3xl sm:text-4xl font-bold text-foreground" data-testid={`text-plan-price-${key}`}>
+                        {price}
+                      </span>
+                      {!isEnterprise && (
+                        <span className="text-sm text-muted-foreground">{p.perMonth}</span>
+                      )}
+                    </div>
                   </div>
 
-                  <h3 className="text-lg font-bold text-foreground" data-testid={`text-plan-name-${key}`}>
+                  <h3 className="text-lg font-bold text-foreground mb-2" data-testid={`text-plan-name-${key}`}>
                     {plan.name}
                   </h3>
 
-                  <div className="mt-2 mb-3 flex items-baseline gap-1">
-                    <span className="text-3xl font-bold text-foreground" data-testid={`text-plan-price-${key}`}>
-                      {plan.price}
-                    </span>
-                    {!isEnterprise && (
-                      <span className="text-sm text-muted-foreground">{p.perMonth}</span>
-                    )}
-                  </div>
-
-                  <div className="mb-4">
-                    <span className={`inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full bg-gradient-to-r ${PLAN_GRADIENTS[idx]}`}>
-                      <Zap className="w-3 h-3" />
-                      {plan.creditsAmount} {p.credits}
-                    </span>
-                  </div>
-
-                  <p className="text-sm text-muted-foreground mb-6 leading-relaxed flex-grow-0">
+                  <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
                     {plan.description}
                   </p>
 
-                  <ul className="space-y-2.5 mb-6 flex-1">
+                  <ul className="space-y-3 mb-6 flex-1">
                     {plan.features.map((feature: string, i: number) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-foreground/80">
-                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                      <li key={i} className="flex items-start gap-2.5 text-sm text-foreground/80">
+                        <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                         <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
 
-                  {isEnterprise ? (
-                    <a href={getDemoLink()} data-testid={`button-plan-cta-${key}`}>
-                      <Button variant="outline" className="w-full rounded-full" size="lg">
-                        {p.contactSales}
-                      </Button>
-                    </a>
-                  ) : (
-                    <a href={getDemoLink()} data-testid={`button-plan-cta-${key}`}>
-                      <Button
-                        className={`w-full rounded-full ${highlighted ? "shadow-md shadow-indigo-500/20" : ""}`}
-                        variant={highlighted ? "default" : "outline"}
-                        size="lg"
-                      >
-                        {p.getStarted}
-                      </Button>
-                    </a>
-                  )}
+                  <a href={isEnterprise ? getDemoLink() : config.employerAppUrl} data-testid={`button-plan-cta-${key}`}>
+                    <Button
+                      variant={highlighted ? "default" : "outline"}
+                      className="w-full rounded-full"
+                      size="lg"
+                    >
+                      {p.choosePlan}
+                    </Button>
+                  </a>
                 </div>
               );
             })}
@@ -225,16 +204,9 @@ export default function Pricing() {
       {/* CTA Section */}
       <ScrollReveal animation="fade-up">
         <section className="relative py-20 sm:py-28 lg:py-32 bg-gradient-to-br from-[#0a3d6b] via-[#0b4d85] to-[#0d5a9e] overflow-hidden">
-          <div className="absolute inset-0 opacity-10" aria-hidden="true">
-            <svg className="absolute right-0 top-0 w-[60%] h-full" viewBox="0 0 600 400" fill="none">
-              <circle cx="450" cy="200" r="150" stroke="white" strokeWidth="1" opacity="0.3" />
-              <circle cx="450" cy="200" r="100" stroke="white" strokeWidth="1" opacity="0.2" />
-              <circle cx="450" cy="200" r="50" stroke="white" strokeWidth="1" opacity="0.15" />
-              <path d="M350 50 L550 250 L350 350" stroke="white" strokeWidth="1.5" opacity="0.2" fill="none" />
-              <path d="M400 100 L500 200 L400 300" stroke="white" strokeWidth="1" opacity="0.15" fill="none" />
-              <rect x="480" y="80" width="80" height="80" rx="8" stroke="white" strokeWidth="1" opacity="0.2" fill="none" />
-              <polygon points="520,130 540,170 500,170" stroke="white" strokeWidth="1" opacity="0.2" fill="none" />
-            </svg>
+          {/* 3D coil decoration — right side */}
+          <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[45%] pointer-events-none" aria-hidden="true">
+            <img src="/images/coil-3d.png" alt="" className="absolute right-0 top-1/2 -translate-y-1/2 h-[90%] w-auto max-w-none object-contain object-right opacity-60" />
           </div>
           <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative z-[1]">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -245,12 +217,12 @@ export default function Pricing() {
                 </h2>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a href={config.employerAppUrl} data-testid="button-pricing-start-trial">
-                    <Button size="lg" className="rounded-full bg-white text-primary hover:bg-white/90 border-white no-default-hover-elevate">
+                    <Button size="lg" className="rounded-full bg-white text-primary border-white">
                       {p.startFreeTrial}
                     </Button>
                   </a>
                   <a href={getDemoLink()} data-testid="button-pricing-request-demo">
-                    <Button variant="outline" size="lg" className="rounded-full text-white border-white/40 hover:bg-white/10 no-default-hover-elevate">
+                    <Button variant="outline" size="lg" className="rounded-full text-white border-white/40">
                       {t.footerSection.requestDemo}
                     </Button>
                   </a>

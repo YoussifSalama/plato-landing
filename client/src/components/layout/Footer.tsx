@@ -22,6 +22,7 @@ export default function Footer() {
 
   const companyLinks = [
     { label: t.footerSection.about, path: "/employers" },
+    { label: "Pricing", path: "/pricing" },
     { label: t.footerSection.blog, path: "/blog" },
     { label: "FAQs", path: "/faq" },
     { label: t.footer.contact, path: "/contact" },
