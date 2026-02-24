@@ -217,8 +217,8 @@ export default function Employers() {
               </div>
 
               <div
-                className="absolute top-[-20px] right-[-24px] w-[60%] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
-                style={{ bottom: "-20px" }}
+                className="absolute top-[24px] right-[-24px] w-[60%] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
+                style={{ bottom: "-28px" }}
                 data-testid="about-analytics-dashboard"
               >
                 <AboutAnalyticsDashboard />
