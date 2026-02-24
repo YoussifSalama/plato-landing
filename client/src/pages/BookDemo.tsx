@@ -190,7 +190,7 @@ export default function BookDemo() {
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-border">
                 <div className="flex items-center gap-4">
                   <div className="h-14 w-14 flex-shrink-0 rounded-full overflow-hidden shadow-lg">
-                    <img src="/images/plato-p-icon.png" alt="Plato" className="scale-[1.7] h-full w-full object-cover" />
+                    <img src="/images/plato-p-icon.png" alt="Plato" className="scale-[1.7] translate-x-[-2px] h-full w-full object-cover" />
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">{p.brandName}</p>
