@@ -21,26 +21,8 @@ export default function Terms() {
       </div>
 
       {/* Hero */}
-      <section className="relative z-[1] pb-8 sm:pb-12">
-        {/* 3D coil/spring decoration */}
-        <div className="absolute top-[60px] sm:top-[50px] left-1/2 -translate-x-1/2 w-[260px] sm:w-[320px] h-[180px] sm:h-[200px] opacity-50" aria-hidden="true">
-          <svg viewBox="0 0 320 200" fill="none" className="w-full h-full">
-            <defs>
-              <linearGradient id="coilGradTerms" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#1a8fd4" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#0966a8" stopOpacity="0.4" />
-              </linearGradient>
-            </defs>
-            <ellipse cx="160" cy="40" rx="100" ry="24" stroke="url(#coilGradTerms)" strokeWidth="2.5" fill="none" opacity="0.4" />
-            <ellipse cx="160" cy="65" rx="100" ry="24" stroke="url(#coilGradTerms)" strokeWidth="2.5" fill="none" opacity="0.45" />
-            <ellipse cx="160" cy="90" rx="100" ry="24" stroke="url(#coilGradTerms)" strokeWidth="2.5" fill="none" opacity="0.55" />
-            <ellipse cx="160" cy="115" rx="100" ry="24" stroke="url(#coilGradTerms)" strokeWidth="2.5" fill="none" opacity="0.5" />
-            <ellipse cx="160" cy="140" rx="100" ry="24" stroke="url(#coilGradTerms)" strokeWidth="2" fill="none" opacity="0.4" />
-            <ellipse cx="160" cy="165" rx="100" ry="24" stroke="url(#coilGradTerms)" strokeWidth="2" fill="none" opacity="0.3" />
-          </svg>
-        </div>
-
-        <div className="relative z-[1] pt-28 sm:pt-36 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+      <section className="relative z-[1] pt-24 sm:pt-32 lg:pt-36 pb-8 sm:pb-12">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
           <ScrollReveal animation="fade-up">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]" data-testid="text-terms-title">
               {p.title}
@@ -79,15 +61,24 @@ export default function Terms() {
       {/* CTA Section */}
       <ScrollReveal animation="fade-up">
         <section className="relative py-20 sm:py-28 lg:py-32 bg-gradient-to-br from-[#0a3d6b] via-[#0b4d85] to-[#0d5a9e] overflow-hidden">
-          <div className="absolute inset-0 opacity-10" aria-hidden="true">
-            <svg className="absolute right-0 top-0 w-[60%] h-full" viewBox="0 0 600 400" fill="none">
-              <circle cx="450" cy="200" r="150" stroke="white" strokeWidth="1" opacity="0.3" />
-              <circle cx="450" cy="200" r="100" stroke="white" strokeWidth="1" opacity="0.2" />
-              <circle cx="450" cy="200" r="50" stroke="white" strokeWidth="1" opacity="0.15" />
-              <path d="M350 50 L550 250 L350 350" stroke="white" strokeWidth="1.5" opacity="0.2" fill="none" />
-              <path d="M400 100 L500 200 L400 300" stroke="white" strokeWidth="1" opacity="0.15" fill="none" />
-              <rect x="480" y="80" width="80" height="80" rx="8" stroke="white" strokeWidth="1" opacity="0.2" fill="none" />
-              <polygon points="520,130 540,170 500,170" stroke="white" strokeWidth="1" opacity="0.2" fill="none" />
+          {/* 3D coil decoration — right side */}
+          <div className="absolute right-[5%] sm:right-[10%] top-1/2 -translate-y-1/2 w-[280px] sm:w-[360px] h-[280px] sm:h-[360px] opacity-30" aria-hidden="true">
+            <svg viewBox="0 0 360 360" fill="none" className="w-full h-full">
+              <defs>
+                <linearGradient id="coilGradCTA" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#60b5f0" stopOpacity="0.9" />
+                  <stop offset="100%" stopColor="#1a8fd4" stopOpacity="0.5" />
+                </linearGradient>
+              </defs>
+              <ellipse cx="180" cy="60" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="3" fill="none" opacity="0.3" />
+              <ellipse cx="180" cy="90" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="3" fill="none" opacity="0.4" />
+              <ellipse cx="180" cy="120" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="3.5" fill="none" opacity="0.5" />
+              <ellipse cx="180" cy="150" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="3.5" fill="none" opacity="0.6" />
+              <ellipse cx="180" cy="180" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="4" fill="none" opacity="0.7" />
+              <ellipse cx="180" cy="210" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="3.5" fill="none" opacity="0.6" />
+              <ellipse cx="180" cy="240" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="3" fill="none" opacity="0.5" />
+              <ellipse cx="180" cy="270" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="3" fill="none" opacity="0.4" />
+              <ellipse cx="180" cy="300" rx="120" ry="30" stroke="url(#coilGradCTA)" strokeWidth="2.5" fill="none" opacity="0.3" />
             </svg>
           </div>
           <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative z-[1]">
