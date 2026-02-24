@@ -187,6 +187,7 @@ export default function Employers() {
       <section className="py-16 sm:py-20 lg:py-28 lg:overflow-visible">
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 lg:overflow-visible">
           <ScrollReveal animation="fade-up">
+            {/* Mobile layout — stacked */}
             <div className="lg:hidden rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] p-8 sm:p-10 mb-6">
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-[1.15] mb-8 text-white" data-testid="text-hub-title-mobile">
                 {p.hubTitle}
@@ -202,22 +203,29 @@ export default function Employers() {
               <AboutAnalyticsDashboard />
             </div>
 
+            {/* Desktop layout — blue panel base with dashboard overlay */}
             <div className="hidden lg:block relative" data-testid="about-hub-panel">
-              <div className="relative rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] px-10 py-12 min-h-[320px]">
-                <div className="w-[40%] pr-4">
-                  <h2 className="text-2xl font-bold tracking-tight leading-[1.15] mb-5 text-white" data-testid="text-hub-title">
+              <div className="relative rounded-[28px] bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] px-12 py-14 min-h-[380px] overflow-visible">
+                <div className="w-[42%] ltr:pr-6 rtl:pl-6">
+                  <h2 className="text-[26px] font-bold tracking-tight leading-[1.15] mb-6 text-white" data-testid="text-hub-title">
                     {p.hubTitle}
                   </h2>
-                  <p className="text-[13px] text-blue-100/80 leading-relaxed mb-4">
+                  <p className="text-[14px] text-blue-100/80 leading-relaxed mb-5">
                     {p.hubDesc1}
                   </p>
-                  <p className="text-[13px] text-blue-100/80 leading-relaxed">
+                  <p className="text-[14px] text-blue-100/80 leading-relaxed">
                     {p.hubDesc2}
                   </p>
                 </div>
 
                 <div
-                  className="absolute top-[-20px] bottom-[-20px] right-[-24px] w-[58%] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
+                  className="absolute dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-[0_25px_60px_-12px_rgba(0,0,0,0.5)]"
+                  style={{
+                    top: "-24px",
+                    bottom: "-24px",
+                    insetInlineEnd: "-32px",
+                    width: "58%",
+                  }}
                   data-testid="about-analytics-dashboard"
                 >
                   <AboutAnalyticsDashboard />
