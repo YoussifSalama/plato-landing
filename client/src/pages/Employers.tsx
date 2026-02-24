@@ -188,7 +188,7 @@ export default function Employers() {
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 lg:overflow-visible">
           <ScrollReveal animation="fade-up">
             <div className="relative lg:overflow-visible">
-              <div className="hidden lg:block absolute left-0 right-0 top-0 bottom-[32px] rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4]" data-testid="about-hub-panel" />
+              <div className="hidden lg:block absolute left-0 right-0 top-0 bottom-[80px] rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4]" data-testid="about-hub-panel" />
               <div className="lg:hidden rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] p-8 sm:p-10 mb-6">
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-[1.15] mb-8 text-white" data-testid="text-hub-title-mobile">
                   {p.hubTitle}
