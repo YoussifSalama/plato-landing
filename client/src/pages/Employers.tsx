@@ -71,6 +71,36 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   );
 }
 
+function FeatureAccordion({ icon: Icon, title, desc, index }: { icon: React.ComponentType<{ className?: string }>; title: string; desc: string; index: number }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div data-testid={`about-feature-${index}`}>
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-start gap-4 text-left py-2"
+        data-testid={`about-feature-toggle-${index}`}
+      >
+        <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+          <Icon className="w-5 h-5 text-primary" />
+        </div>
+        <div className="flex-1 min-w-0 pt-2">
+          <h3 className="text-sm font-bold text-foreground">{title}</h3>
+        </div>
+        {open ? (
+          <Minus className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-2.5" />
+        ) : (
+          <Plus className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-2.5" />
+        )}
+      </button>
+      {open && (
+        <div className="ps-14 pb-2 text-sm text-muted-foreground leading-relaxed">
+          {desc}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Employers() {
   const { t, lang, localePath } = useI18n();
   useSEO({ title: t.meta.pages.employers.title, description: t.meta.pages.employers.description });
@@ -138,23 +168,12 @@ export default function Employers() {
               </div>
             </ScrollReveal>
 
-            <div className="lg:col-span-2 space-y-6 lg:pt-4">
+            <div className="lg:col-span-2 space-y-4 lg:pt-4">
               {features.map((f, i) => {
                 const Icon = featureIcons[i];
                 return (
                   <ScrollReveal key={i} animation="fade-right" delay={i + 1}>
-                    <div className="flex items-start gap-4" data-testid={`about-feature-${i}`}>
-                      <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <Icon className="w-5 h-5 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="text-sm font-bold mb-1.5 flex items-center gap-3 text-foreground">
-                          {f.title}
-                          <span className="w-5 h-px bg-primary inline-block" />
-                        </h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
-                      </div>
-                    </div>
+                    <FeatureAccordion icon={Icon} title={f.title} desc={f.desc} index={i} />
                   </ScrollReveal>
                 );
               })}
