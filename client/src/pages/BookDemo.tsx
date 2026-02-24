@@ -59,8 +59,9 @@ export default function BookDemo() {
 
   const dateStr = selectedDate ? formatDate(selectedDate) : "";
 
+  const bookingsUrl = dateStr ? `/api/demo-bookings?date=${dateStr}` : "";
   const { data: bookedSlots = [] } = useQuery<{ time: string }[]>({
-    queryKey: ["/api/demo-bookings", dateStr],
+    queryKey: [bookingsUrl],
     enabled: !!dateStr,
   });
 
@@ -91,12 +92,12 @@ export default function BookDemo() {
     onSuccess: () => {
       setBooked(true);
       setError(null);
-      queryClient.invalidateQueries({ queryKey: ["/api/demo-bookings", dateStr] });
+      queryClient.invalidateQueries({ queryKey: [bookingsUrl] });
     },
     onError: (err: Error) => {
       if (err.message.includes("409")) {
         setError(p.errorSlotTaken);
-        queryClient.invalidateQueries({ queryKey: ["/api/demo-bookings", dateStr] });
+        queryClient.invalidateQueries({ queryKey: [bookingsUrl] });
       } else {
         setError(p.errorGeneric);
       }
@@ -139,6 +140,10 @@ export default function BookDemo() {
   const isWeekend = (day: number) => {
     const d = new Date(currentYear, currentMonth, day).getDay();
     return d === 5 || d === 6;
+  };
+
+  const isToday = (day: number) => {
+    return day === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear();
   };
 
   const isSelected = (day: number) => {
@@ -245,15 +250,16 @@ export default function BookDemo() {
                           const weekend = isWeekend(day);
                           const disabled = past || weekend;
                           const sel = isSelected(day);
+                          const todayMark = isToday(day);
 
                           return (
                             <Button
                               key={day}
-                              variant={sel ? "default" : "ghost"}
+                              variant={sel ? "default" : disabled ? "ghost" : "outline"}
                               size="sm"
                               onClick={() => selectDay(day)}
                               disabled={disabled}
-                              className="w-full aspect-square rounded-full text-sm font-medium p-0"
+                              className={`w-full aspect-square rounded-full text-sm font-medium p-0 ${todayMark && !sel ? "ring-2 ring-primary" : ""}`}
                               data-testid={`calendar-day-${day}`}
                             >
                               {day}
