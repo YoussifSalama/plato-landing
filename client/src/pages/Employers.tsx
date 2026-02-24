@@ -207,7 +207,7 @@ export default function Employers() {
 
             {/* Desktop layout — blue panel as base, dashboard overlaid on right */}
             <div className="hidden lg:block relative" data-testid="about-hub-panel">
-              <div className="rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] px-10 py-12 min-h-[340px]">
+              <div className="rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] px-10 py-12 min-h-[520px]">
                 <div className="w-[40%]">
                   <h2 className="text-2xl font-bold tracking-tight leading-[1.15] mb-5 text-white" data-testid="text-hub-title">
                     {p.hubTitle}
@@ -221,7 +221,7 @@ export default function Employers() {
                 </div>
               </div>
               <div
-                className="absolute right-[-24px] top-[-28px] bottom-[-28px] w-[58%] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
+                className="absolute right-[-24px] top-[-28px] bottom-[-28px] w-[58%] dark rounded-2xl bg-[#0d1117] shadow-2xl"
                 data-testid="about-analytics-dashboard"
               >
                 <div className="h-full w-full" style={{ transform: "scale(0.82)", transformOrigin: "top left" }}>

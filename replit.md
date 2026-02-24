@@ -11,7 +11,7 @@ The application is a full-stack TypeScript project with a React SPA frontend ser
 Preferred communication style: Simple, everyday language.
 
 ### LOCKED Layouts — Do NOT Modify
-- **Employers page "Unified Talent Intelligence Hub" section** (lines ~189–237 in `client/src/pages/Employers.tsx`): Blue gradient panel (rounded-3xl, px-10 py-12, min-h-[340px]) as full-width base container. Text on left 40%. Dashboard absolutely positioned on right (w-[58%], right-[-24px], top-[-28px], bottom-[-28px]) with scale(0.82), creating layered overlay effect with overflow beyond the blue panel. Mobile: stacked vertically. This layout is finalized and must not be changed when editing other parts of the page.
+- **Employers page "Unified Talent Intelligence Hub" section** (lines ~189–237 in `client/src/pages/Employers.tsx`): Blue gradient panel (rounded-3xl, px-10 py-12, min-h-[520px]) as full-width base container. Text on left 40%. Dashboard absolutely positioned on right (w-[58%], right-[-24px], top-[-28px], bottom-[-28px]) with scale(0.82), creating layered overlay effect with overflow beyond the blue panel. No overflow-hidden on dashboard. Mobile: stacked vertically. This layout is finalized and must not be changed when editing other parts of the page.
 
 ## System Architecture
 
