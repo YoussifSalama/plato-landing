@@ -36,7 +36,11 @@ export default function Terms() {
 
       {/* Sections */}
       <section className="relative z-[1] pb-20 sm:pb-28">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+        {/* 3D coil decoration — right side of content */}
+        <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[30%] pointer-events-none z-0" aria-hidden="true">
+          <img src="/images/coil-3d.png" alt="" className="absolute right-0 top-[10%] h-[80%] w-auto max-w-none object-contain object-right opacity-50" />
+        </div>
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 relative z-[1]">
           <div className="space-y-10">
             {p.sections.map((section: { title: string; items: string[] }, i: number) => (
               <ScrollReveal key={i} animation="fade-up">
@@ -61,10 +65,6 @@ export default function Terms() {
       {/* CTA Section */}
       <ScrollReveal animation="fade-up">
         <section className="relative py-20 sm:py-28 lg:py-32 bg-gradient-to-br from-[#0a3d6b] via-[#0b4d85] to-[#0d5a9e] overflow-hidden">
-          {/* 3D coil decoration — right side */}
-          <div className="absolute right-0 top-0 bottom-0 w-[40%] sm:w-[45%] pointer-events-none" aria-hidden="true">
-            <img src="/images/coil-3d.png" alt="" className="absolute right-0 top-1/2 -translate-y-1/2 h-full w-auto max-w-none object-contain object-right opacity-70" />
-          </div>
           <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative z-[1]">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
