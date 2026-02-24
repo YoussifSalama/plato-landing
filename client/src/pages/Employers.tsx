@@ -184,25 +184,40 @@ export default function Employers() {
       </section>
 
       {/* Unified Talent Intelligence Hub */}
-      <section className="py-16 sm:py-20 lg:py-28">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+      <section className="py-16 sm:py-20 lg:py-28 lg:overflow-visible">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 lg:overflow-visible">
           <ScrollReveal animation="fade-up">
-            <div className="relative rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] overflow-visible" data-testid="about-hub-panel">
-              <div className="relative lg:min-h-[520px]">
-                <div className="relative z-[1] lg:w-[42%] p-8 sm:p-10 lg:p-12 lg:py-16 flex flex-col justify-center">
-                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tight leading-[1.15] mb-6 text-white" data-testid="text-hub-title">
+            <div className="relative lg:overflow-visible">
+              <div className="hidden lg:block absolute left-0 right-0 top-0 bottom-[60px] rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4]" data-testid="about-hub-panel" />
+              <div className="lg:hidden rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] p-8 sm:p-10 mb-6">
+                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-[1.15] mb-8 text-white" data-testid="text-hub-title-mobile">
+                  {p.hubTitle}
+                </h2>
+                <p className="text-[15px] text-blue-100/80 leading-relaxed mb-6">
+                  {p.hubDesc1}
+                </p>
+                <p className="text-[15px] text-blue-100/80 leading-relaxed">
+                  {p.hubDesc2}
+                </p>
+              </div>
+              <div className="hidden lg:flex relative z-[1] gap-0">
+                <div className="w-[38%] flex-shrink-0 p-14 py-20 flex flex-col justify-center">
+                  <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-[1.15] mb-8 text-white" data-testid="text-hub-title">
                     {p.hubTitle}
                   </h2>
-                  <p className="text-sm text-blue-100/80 leading-relaxed mb-5">
+                  <p className="text-[15px] text-blue-100/80 leading-relaxed mb-6">
                     {p.hubDesc1}
                   </p>
-                  <p className="text-sm text-blue-100/80 leading-relaxed">
+                  <p className="text-[15px] text-blue-100/80 leading-relaxed">
                     {p.hubDesc2}
                   </p>
                 </div>
-                <div className="relative lg:absolute lg:right-[-20px] lg:top-[-20px] lg:bottom-[-20px] lg:w-[58%] dark rounded-2xl overflow-hidden bg-[#0c1929] shadow-2xl" data-testid="about-analytics-dashboard">
+                <div className="flex-1 mt-[50px] mb-[-60px] dark rounded-l-2xl overflow-hidden bg-[#0d1117] shadow-2xl" style={{ marginRight: "calc(-1 * (100vw - 100%) / 2)" }} data-testid="about-analytics-dashboard">
                   <AboutAnalyticsDashboard />
                 </div>
+              </div>
+              <div className="lg:hidden dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl" data-testid="about-analytics-dashboard-mobile">
+                <AboutAnalyticsDashboard />
               </div>
             </div>
           </ScrollReveal>
