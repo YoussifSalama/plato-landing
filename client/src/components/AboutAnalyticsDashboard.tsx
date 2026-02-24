@@ -201,8 +201,8 @@ function DonutChart({ triggerRef }: { triggerRef: React.RefObject<HTMLDivElement
   const circumference = 2 * Math.PI * radius;
 
   return (
-    <div className="flex items-center gap-5 mt-4">
-      <svg ref={svgRef} viewBox="0 0 140 140" className="w-[120px] h-[120px] flex-shrink-0">
+    <div className="flex items-center gap-4 mt-3">
+      <svg ref={svgRef} viewBox="0 0 140 140" className="w-[100px] h-[100px] flex-shrink-0">
         <circle cx="70" cy="70" r={radius} fill="none" stroke="#172334" strokeWidth="18" />
         {donutSegments.map((seg, idx) => {
           const offset = circumference * (1 - cumulative / 100);
@@ -218,14 +218,14 @@ function DonutChart({ triggerRef }: { triggerRef: React.RefObject<HTMLDivElement
           );
         })}
       </svg>
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         {donutSegments.map((seg, idx) => (
           <div key={seg.label}
-            className={`flex items-center gap-2.5 cursor-pointer transition-opacity duration-200 ${hovered !== null && hovered !== idx ? "opacity-40" : ""}`}
+            className={`flex items-center gap-2 cursor-pointer transition-opacity duration-200 ${hovered !== null && hovered !== idx ? "opacity-40" : ""}`}
             onMouseEnter={() => setHovered(idx)} onMouseLeave={() => setHovered(null)}>
-            <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: seg.color }} />
-            <span className="text-[12px] text-gray-400 min-w-[65px]">{seg.label}</span>
-            <span className="text-[13px] text-white font-bold">{seg.pct}%</span>
+            <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: seg.color }} />
+            <span className="text-[10px] text-gray-400 min-w-[55px]">{seg.label}</span>
+            <span className="text-[11px] text-white font-bold">{seg.pct}%</span>
           </div>
         ))}
       </div>
@@ -261,10 +261,10 @@ function BarChart({ triggerRef }: { triggerRef: React.RefObject<HTMLDivElement |
             <span key={v} className="text-[9px] text-[#4a5568] text-right pr-1">{v}</span>
           ))}
         </div>
-        <div ref={barsRef} className="flex items-end gap-[10px] h-[140px] ml-[34px]">
+        <div ref={barsRef} className="flex items-end gap-2 h-[100px] ml-[30px]">
           {monthlyData.map((d, i) => (
             <div key={d.month} className="flex-1 flex flex-col items-center relative">
-              <div className="w-full relative" style={{ height: "140px" }}>
+              <div className="w-full relative" style={{ height: "100px" }}>
                 <div data-bar
                   className={`absolute bottom-0 w-full rounded-t-sm transition-colors duration-200 ${hoveredBar === i ? "bg-[#42a5f5]" : "bg-[#1e88e5]"}`}
                   style={{ height: `${(d.value / maxVal) * 100}%` }}
@@ -308,17 +308,17 @@ function HiringBars({ triggerRef }: { triggerRef: React.RefObject<HTMLDivElement
   }, [triggerRef]);
 
   return (
-    <div ref={barsRef} className="space-y-5">
+    <div ref={barsRef} className="space-y-3.5">
       {hiringProgress.map((dept) => (
         <div key={dept.dept}>
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-[13px] text-white font-semibold">{dept.dept}</span>
-            <div className="flex items-center gap-4">
-              <span className="text-[12px] text-gray-400">{dept.current} / {dept.target}</span>
-              <span className="text-[13px] text-white font-bold">{dept.pct}%</span>
+          <div className="flex items-center justify-between mb-1.5">
+            <span className="text-[11px] text-white font-semibold">{dept.dept}</span>
+            <div className="flex items-center gap-3">
+              <span className="text-[10px] text-gray-400">{dept.current} / {dept.target}</span>
+              <span className="text-[11px] text-white font-bold">{dept.pct}%</span>
             </div>
           </div>
-          <div className="h-[10px] bg-[#172334] rounded-full overflow-hidden">
+          <div className="h-2 bg-[#172334] rounded-full overflow-hidden">
             <div data-fill data-width={`${dept.pct}%`} className="h-full rounded-full" style={{ backgroundColor: dept.color }} />
           </div>
         </div>
@@ -331,72 +331,72 @@ export default function AboutAnalyticsDashboard() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div ref={containerRef} className="bg-[#0d1117] p-6 sm:p-7 h-full" data-testid="about-analytics">
-      <div className="flex justify-center gap-2 mb-6">
+    <div ref={containerRef} className="bg-[#0d1117] p-4 sm:p-5 h-full" data-testid="about-analytics">
+      <div className="flex justify-center gap-1.5 mb-4">
         {[0, 1, 2, 3].map((i) => (
-          <div key={i} className={`w-[7px] h-[7px] rounded-full ${i === 0 ? "bg-gray-500" : "bg-[#1e2d3d]"}`} />
+          <div key={i} className={`w-[6px] h-[6px] rounded-full ${i === 0 ? "bg-gray-500" : "bg-[#1e2d3d]"}`} />
         ))}
       </div>
 
-      <div className="space-y-5">
-        <div className="bg-[#0f1923] rounded-xl p-6 border border-[#1a2d44]/50">
-          <div className="flex items-center justify-between mb-5">
-            <h3 className="text-[15px] font-bold text-white">Overview Statistics</h3>
-            <span className="text-[12px] text-[#2dd4bf] cursor-pointer hover:text-[#5eead4] transition-colors font-medium" data-testid="link-view-all">View All</span>
+      <div className="space-y-3.5">
+        <div className="bg-[#0f1923] rounded-lg p-4 border border-[#1a2d44]/50">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-[13px] font-bold text-white">Overview Statistics</h3>
+            <span className="text-[10px] text-[#2dd4bf] cursor-pointer hover:text-[#5eead4] transition-colors font-medium" data-testid="link-view-all">View All</span>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {overviewStats.map((stat) => (
               <div key={stat.label} data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}>
-                <p className="text-[11px] text-[#6b7a8d] flex items-center gap-1 mb-2">
+                <p className="text-[9px] text-[#6b7a8d] flex items-center gap-1 mb-1">
                   {stat.label} <span className="text-[#5a6a7d]">↑</span>
                 </p>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-[26px] font-bold text-white leading-none tracking-tight">
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-[20px] font-bold text-white leading-none tracking-tight">
                     <CountUp target={stat.value} suffix={stat.suffix} triggerRef={containerRef} />
                   </span>
-                  <span className="text-[11px] text-emerald-400 font-semibold">{stat.change}</span>
+                  <span className="text-[9px] text-emerald-400 font-semibold">{stat.change}</span>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-5 gap-5">
-          <div className="sm:col-span-3 bg-[#0f1923] rounded-xl p-6 border border-[#1a2d44]/50">
-            <div className="flex items-center justify-between mb-2">
+        <div className="grid grid-cols-1 sm:grid-cols-5 gap-3.5">
+          <div className="sm:col-span-3 bg-[#0f1923] rounded-lg p-4 border border-[#1a2d44]/50">
+            <div className="flex items-center justify-between mb-1">
               <div>
-                <h3 className="text-[15px] font-bold text-white">Weekly Activity</h3>
-                <p className="text-[10px] text-[#5a6a7d] mt-0.5">Applications, Interviews & Offers</p>
+                <h3 className="text-[13px] font-bold text-white">Weekly Activity</h3>
+                <p className="text-[9px] text-[#5a6a7d] mt-0.5">Applications, Interviews & Offers</p>
               </div>
-              <div className="flex items-center gap-4">
-                <span className="flex items-center gap-1.5 text-[11px] text-[#6b7a8d]">
-                  <span className="w-[9px] h-[9px] rounded-full bg-blue-500 inline-block" /> Applications
+              <div className="flex items-center gap-3">
+                <span className="flex items-center gap-1 text-[9px] text-[#6b7a8d]">
+                  <span className="w-2 h-2 rounded-full bg-blue-500 inline-block" /> Applications
                 </span>
-                <span className="flex items-center gap-1.5 text-[11px] text-[#6b7a8d]">
-                  <span className="w-[9px] h-[9px] rounded-full bg-orange-500 inline-block" /> Interviews
+                <span className="flex items-center gap-1 text-[9px] text-[#6b7a8d]">
+                  <span className="w-2 h-2 rounded-full bg-orange-500 inline-block" /> Interviews
                 </span>
               </div>
             </div>
             <WeeklyChart triggerRef={containerRef} />
           </div>
 
-          <div className="sm:col-span-2 bg-[#0f1923] rounded-xl p-6 border border-[#1a2d44]/50">
-            <h3 className="text-[15px] font-bold text-white">Application Status</h3>
-            <p className="text-[10px] text-[#5a6a7d] mt-0.5">Current distribution by stage</p>
+          <div className="sm:col-span-2 bg-[#0f1923] rounded-lg p-4 border border-[#1a2d44]/50">
+            <h3 className="text-[13px] font-bold text-white">Application Status</h3>
+            <p className="text-[9px] text-[#5a6a7d] mt-0.5">Current distribution by stage</p>
             <DonutChart triggerRef={containerRef} />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <div className="bg-[#0f1923] rounded-xl p-6 border border-[#1a2d44]/50">
-            <h3 className="text-[15px] font-bold text-white">Department Hiring Progress</h3>
-            <p className="text-[10px] text-[#5a6a7d] mt-0.5 mb-5">Current vs Target</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div className="bg-[#0f1923] rounded-lg p-4 border border-[#1a2d44]/50">
+            <h3 className="text-[13px] font-bold text-white">Department Hiring Progress</h3>
+            <p className="text-[9px] text-[#5a6a7d] mt-0.5 mb-3">Current vs Target</p>
             <HiringBars triggerRef={containerRef} />
           </div>
 
-          <div className="bg-[#0f1923] rounded-xl p-6 border border-[#1a2d44]/50">
-            <h3 className="text-[15px] font-bold text-white">Monthly Growth</h3>
-            <p className="text-[10px] text-[#5a6a7d] mt-0.5 mb-4">Application volume trend</p>
+          <div className="bg-[#0f1923] rounded-lg p-4 border border-[#1a2d44]/50">
+            <h3 className="text-[13px] font-bold text-white">Monthly Growth</h3>
+            <p className="text-[9px] text-[#5a6a7d] mt-0.5 mb-3">Application volume trend</p>
             <BarChart triggerRef={containerRef} />
           </div>
         </div>
