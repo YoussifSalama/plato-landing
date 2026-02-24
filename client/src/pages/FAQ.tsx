@@ -44,10 +44,10 @@ export default function FAQ() {
 
   return (
     <div className="relative min-h-screen" style={{ overflowX: "clip" }}>
-      {/* Very subtle radial blue glow — barely visible, faint center tint */}
-      <div className="absolute left-0 right-0 pointer-events-none z-0" aria-hidden="true" style={{ top: "-60px", height: "460px" }}>
-        <div className="absolute left-1/2 -translate-x-1/2 w-[110%] h-[360px] bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(9,102,168,0.13),rgba(30,160,226,0.05)_35%,transparent_60%)]" style={{ top: "0px" }} />
-        <div className="absolute left-1/2 -translate-x-1/2 w-[70%] h-[280px] bg-[radial-gradient(ellipse_45%_30%_at_50%_5%,rgba(14,80,140,0.08),transparent_50%)]" style={{ top: "0px" }} />
+      {/* Subtle radial blue glow */}
+      <div className="absolute left-0 right-0 pointer-events-none z-0" aria-hidden="true" style={{ top: "-60px", height: "480px" }}>
+        <div className="absolute left-1/2 -translate-x-1/2 w-[115%] h-[380px] bg-[radial-gradient(ellipse_65%_42%_at_50%_0%,rgba(9,102,168,0.18),rgba(30,160,226,0.07)_38%,transparent_62%)]" style={{ top: "0px" }} />
+        <div className="absolute left-1/2 -translate-x-1/2 w-[75%] h-[300px] bg-[radial-gradient(ellipse_48%_32%_at_50%_5%,rgba(14,80,140,0.12),transparent_52%)]" style={{ top: "0px" }} />
       </div>
 
       {/* Hero Section */}
