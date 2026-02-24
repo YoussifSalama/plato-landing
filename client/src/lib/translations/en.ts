@@ -12,7 +12,7 @@ export const en = {
       contact: { title: "Contact Us", description: "Get in touch with the Plato team. We'd love to hear from you." },
       security: { title: "Security & Privacy", description: "Learn how Plato protects your data with encryption, access controls, and data minimization practices." },
       privacy: { title: "Privacy Policy", description: "Plato's privacy policy — how we collect, use, and protect your information." },
-      terms: { title: "Terms of Service", description: "Terms of service governing the use of the Plato platform." },
+      terms: { title: "Terms & Conditions", description: "Terms and conditions governing your access to and use of the Plato HRM platform." },
       pricing: { title: "Pricing", description: "Simple, transparent pricing for teams of all sizes. Book a demo to learn more." },
       login: { title: "Login", description: "Log in to your Plato account — employers and job seekers." },
     },
@@ -365,27 +365,71 @@ We retain your information for as long as necessary to provide our services. You
 If you have questions about this Privacy Policy, please contact us at hello@platohiring.com.`,
   },
   termsPage: {
-    title: "Terms of Service",
-    templateNotice: "Template — replace before launch",
-    content: `These Terms of Service ("Terms") govern your use of the Plato platform and services.
-
-**Acceptance of Terms**
-By accessing or using Plato, you agree to be bound by these Terms. If you do not agree, please do not use our services.
-
-**Use of Services**
-You agree to use Plato only for lawful purposes and in accordance with these Terms. You are responsible for maintaining the confidentiality of your account.
-
-**Intellectual Property**
-The Plato platform, including its design, features, and content, is owned by us and protected by applicable intellectual property laws.
-
-**Limitation of Liability**
-Plato is provided "as is" without warranties of any kind. We are not liable for any indirect, incidental, or consequential damages arising from your use of the platform.
-
-**Changes to Terms**
-We may update these Terms from time to time. Continued use of the platform after changes constitutes acceptance of the updated Terms.
-
-**Contact Us**
-If you have questions about these Terms, please contact us at hello@platohiring.com.`,
+    title: "Terms & Conditions",
+    subtitle: "Welcome to Plato. These Terms and Conditions govern your access to and use of the Plato HRM platform.",
+    sections: [
+      {
+        title: "Definitions",
+        items: [
+          '"Platform" refers to Plato HRM system and all related services.',
+          '"User" refers to HR managers, companies, recruiters, and candidates using the platform.',
+          '"Company" refers to the organization subscribing to Plato services.',
+          '"AI Tools" refer to automated CV analysis, candidate screening, and interview assistance features.',
+        ],
+      },
+      {
+        title: "Eligibility",
+        items: [
+          "Be at least 18 years old.",
+          "Have authority to represent your company (for business accounts).",
+          "Provide accurate and complete registration information.",
+        ],
+      },
+      {
+        title: "Platform Services",
+        items: [
+          "Job posting and management",
+          "AI-powered CV screening and analysis",
+          "Candidate tracking and interview management",
+          "Hiring analytics and reporting",
+          "Dashboard with job filters and workflow automation",
+        ],
+      },
+      {
+        title: "User Responsibilities",
+        items: [
+          "Provide accurate job and candidate information.",
+          "Use the platform only for lawful recruitment purposes.",
+          "Maintain confidentiality of login credentials.",
+          "Not misuse AI tools for discriminatory or unethical hiring practices.",
+        ],
+      },
+      {
+        title: "AI & Automation Disclaimer",
+        items: [
+          "AI results are advisory only.",
+          "Final hiring decisions remain the responsibility of the company.",
+          "Plato does not guarantee hiring outcomes or candidate suitability.",
+        ],
+      },
+      {
+        title: "Data Privacy & Protection",
+        items: [
+          "Candidate resumes and personal information",
+          "Company job postings and hiring data",
+          "Usage analytics to improve platform performance",
+        ],
+      },
+      {
+        title: "Subscription & Payments",
+        items: [
+          "Some features may require a paid subscription.",
+          "Fees are billed according to the selected plan.",
+          "Failure to pay may result in suspension of services.",
+          "All fees are non-refundable unless otherwise stated.",
+        ],
+      },
+    ],
   },
   pricingPage: {
     title: "Pricing",

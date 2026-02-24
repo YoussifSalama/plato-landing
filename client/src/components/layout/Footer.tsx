@@ -16,7 +16,8 @@ export default function Footer() {
   const isTestimonials = location === "/testimonials" || location === "/ar/testimonials";
   const isPricing = location === "/pricing" || location === "/ar/pricing";
   const isFaq = location === "/faq" || location === "/ar/faq";
-  if (isHome || isEmployers || isContact || isBlog || isTestimonials || isPricing || isFaq) return null;
+  const isTerms = location === "/terms" || location === "/ar/terms";
+  if (isHome || isEmployers || isContact || isBlog || isTestimonials || isPricing || isFaq || isTerms) return null;
 
   const companyLinks = [
     { label: t.footerSection.about, path: "/employers" },
