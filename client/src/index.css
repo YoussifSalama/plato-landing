@@ -29,6 +29,14 @@
 @font-face {
   font-family: 'Roc Grotesk';
   src: url('/fonts/RocGrotesk-Bold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roc Grotesk';
+  src: url('/fonts/RocGrotesk-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -335,6 +343,10 @@ section[id] {
 
   body {
     @apply font-sans antialiased bg-background text-foreground overflow-x-hidden;
+  }
+
+  button, input, select, textarea {
+    font-family: inherit;
   }
 }
 
