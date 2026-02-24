@@ -189,18 +189,8 @@ export default function BookDemo() {
               {/* Header */}
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-border">
                 <div className="flex items-center gap-4">
-                  <div className="h-14 w-14 flex-shrink-0 rounded-full bg-[#111318] flex items-center justify-center shadow-lg">
-                    <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <defs>
-                        <linearGradient id="pGrad" x1="10" y1="10" x2="54" y2="54" gradientUnits="userSpaceOnUse">
-                          <stop offset="0%" stopColor="#0966A8" />
-                          <stop offset="100%" stopColor="#1EA0E2" />
-                        </linearGradient>
-                      </defs>
-                      <circle cx="22" cy="16" r="4.5" fill="url(#pGrad)" />
-                      <path d="M18 12C18 12 14 16 14 28C14 40 18 52 22 54C24 55 26 52 26 48V36C26 36 38 36 44 30C50 24 50 16 44 12C38 8 26 8 18 12Z" fill="url(#pGrad)" />
-                      <path d="M26 20C26 20 34 18 38 20C42 22 42 28 38 30C34 32 26 32 26 32V20Z" fill="#111318" />
-                    </svg>
+                  <div className="h-14 w-14 flex-shrink-0 rounded-full bg-[#0a0e14] flex items-center justify-center shadow-lg">
+                    <img src="/images/plato-logo.png" alt="Plato" className="h-8 w-8 object-contain" />
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">{p.brandName}</p>
