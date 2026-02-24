@@ -44,40 +44,38 @@ export default function FAQ() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section with blue gradient arc and 3D coil */}
-      <section className="relative pt-0 pb-16 sm:pb-20 overflow-hidden">
-        {/* Blue gradient arc at top */}
-        <div className="absolute top-0 left-0 right-0 h-[280px] sm:h-[320px]" aria-hidden="true">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a3d6b]/80 via-[#0b4d85]/40 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 h-[60px]" style={{ background: 'linear-gradient(to bottom, rgba(10,61,107,0.15), transparent)' }} />
+      {/* Hero Section with blue gradient extending behind header */}
+      <section className="relative pb-16 sm:pb-20 overflow-hidden" style={{ marginTop: '-56px', paddingTop: '56px' }}>
+        {/* Blue gradient background - extends behind header */}
+        <div className="absolute top-0 left-0 right-0 h-[340px] sm:h-[380px]" aria-hidden="true">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a3d6b] via-[#0b4d85]/60 to-transparent" />
         </div>
 
-        {/* 3D coil/spring decoration */}
-        <div className="absolute top-[40px] sm:top-[30px] left-1/2 -translate-x-1/2 w-[300px] sm:w-[380px] h-[200px] sm:h-[240px] opacity-60" aria-hidden="true">
-          <svg viewBox="0 0 380 240" fill="none" className="w-full h-full">
+        {/* 3D coil/spring decoration - centered */}
+        <div className="absolute top-[80px] sm:top-[70px] left-1/2 -translate-x-1/2 w-[260px] sm:w-[320px] h-[180px] sm:h-[200px] opacity-50" aria-hidden="true">
+          <svg viewBox="0 0 320 200" fill="none" className="w-full h-full">
             <defs>
               <linearGradient id="coilGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#1a8fd4" stopOpacity="0.7" />
-                <stop offset="100%" stopColor="#0966a8" stopOpacity="0.3" />
+                <stop offset="0%" stopColor="#1a8fd4" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#0966a8" stopOpacity="0.4" />
               </linearGradient>
             </defs>
-            <ellipse cx="190" cy="60" rx="120" ry="30" stroke="url(#coilGrad)" strokeWidth="3" fill="none" opacity="0.5" />
-            <ellipse cx="190" cy="90" rx="120" ry="30" stroke="url(#coilGrad)" strokeWidth="3" fill="none" opacity="0.55" />
-            <ellipse cx="190" cy="120" rx="120" ry="30" stroke="url(#coilGrad)" strokeWidth="3" fill="none" opacity="0.6" />
-            <ellipse cx="190" cy="150" rx="120" ry="30" stroke="url(#coilGrad)" strokeWidth="3" fill="none" opacity="0.5" />
-            <ellipse cx="190" cy="180" rx="120" ry="30" stroke="url(#coilGrad)" strokeWidth="2.5" fill="none" opacity="0.4" />
-            <path d="M70 60 C70 60, 70 180, 70 180" stroke="url(#coilGrad)" strokeWidth="2" opacity="0.3" />
-            <path d="M310 60 C310 60, 310 180, 310 180" stroke="url(#coilGrad)" strokeWidth="2" opacity="0.3" />
+            <ellipse cx="160" cy="40" rx="100" ry="24" stroke="url(#coilGrad)" strokeWidth="2.5" fill="none" opacity="0.4" />
+            <ellipse cx="160" cy="65" rx="100" ry="24" stroke="url(#coilGrad)" strokeWidth="2.5" fill="none" opacity="0.45" />
+            <ellipse cx="160" cy="90" rx="100" ry="24" stroke="url(#coilGrad)" strokeWidth="2.5" fill="none" opacity="0.55" />
+            <ellipse cx="160" cy="115" rx="100" ry="24" stroke="url(#coilGrad)" strokeWidth="2.5" fill="none" opacity="0.5" />
+            <ellipse cx="160" cy="140" rx="100" ry="24" stroke="url(#coilGrad)" strokeWidth="2" fill="none" opacity="0.4" />
+            <ellipse cx="160" cy="165" rx="100" ry="24" stroke="url(#coilGrad)" strokeWidth="2" fill="none" opacity="0.3" />
           </svg>
         </div>
 
-        {/* Glow effects behind coil */}
-        <div className="absolute top-[20px] left-1/2 -translate-x-1/2 w-[600px] h-[300px]" aria-hidden="true">
-          <div className="absolute top-[30%] left-[35%] w-[180px] h-[180px] rounded-full bg-blue-500/25 blur-[80px]" />
-          <div className="absolute top-[20%] left-[50%] w-[200px] h-[200px] rounded-full bg-blue-600/20 blur-[90px]" />
+        {/* Glow effects */}
+        <div className="absolute top-[40px] left-1/2 -translate-x-1/2 w-[500px] h-[280px]" aria-hidden="true">
+          <div className="absolute top-[25%] left-[30%] w-[160px] h-[160px] rounded-full bg-blue-500/20 blur-[70px]" />
+          <div className="absolute top-[15%] left-[50%] w-[180px] h-[180px] rounded-full bg-blue-600/15 blur-[80px]" />
         </div>
 
-        <div className="relative z-[1] pt-36 sm:pt-44 max-w-3xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
+        <div className="relative z-[1] pt-28 sm:pt-36 max-w-3xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
           <ScrollReveal animation="fade-up">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]" data-testid="text-faq-title">
               {p.title}
