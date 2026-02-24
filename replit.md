@@ -11,7 +11,7 @@ The application is a full-stack TypeScript project with a React SPA frontend ser
 Preferred communication style: Simple, everyday language.
 
 ### LOCKED Layouts — Do NOT Modify
-- **Employers page "Unified Talent Intelligence Hub" section** (lines ~186–234 in `client/src/pages/Employers.tsx`): Blue gradient panel (rounded-3xl, px-10 py-12, min-h-[520px]) as full-width base container. Text on left 40%. Dashboard absolutely positioned on right (w-[62%], right-[-32px], top-[20px], bottom-[-40px]) with scale(0.78), transformOrigin "top left", width/height 128.2%, creating layered overlay effect with blue panel peeking above dashboard and dashboard extending beyond bottom. No overflow-hidden on outer container. Mobile: stacked vertically. This layout is finalized and must not be changed when editing other parts of the page.
+- **Employers page "Unified Talent Intelligence Hub" section** (lines ~186–234 in `client/src/pages/Employers.tsx`): Blue gradient panel (rounded-3xl, px-10 py-12, min-h-[520px]) as full-width base container. Text on left 40%. Dashboard absolutely positioned on right (w-[62%], right-[-32px], top-[20px], bottom-[-40px]) with scale(0.78), transformOrigin "top left", width/height 128.2%, creating layered overlay effect with blue panel peeking above dashboard and dashboard extending beyond bottom. No overflow-hidden on outer container. Dashboard wrapper uses `bg-white dark:bg-[#0d1117]` with `border border-gray-200 dark:border-transparent` (theme-aware, no forced dark class). Mobile: stacked vertically. This layout is finalized and must not be changed when editing other parts of the page.
 
 ## System Architecture
 
@@ -85,6 +85,7 @@ Configurable via Vite env vars (prefixed with `VITE_`):
 - Theme toggle (sun/moon icon) in the Header for both desktop and mobile
 - All components use semantic Tailwind tokens (bg-background, text-foreground, bg-card, bg-muted, border-border, text-muted-foreground) that auto-adapt to light/dark
 - Dark mode background is pure black (0 0% 0%)
+- Dashboard components (`AboutAnalyticsDashboard`) are fully theme-aware — white/gray-50 backgrounds in light mode, dark navy in dark mode. All text, borders, chart elements, and tooltips use `dark:` variants
 
 ### Navigation & Transitions
 - Header nav: About, Pricing, Use Cases, Blogs
@@ -99,7 +100,7 @@ Configurable via Vite env vars (prefixed with `VITE_`):
 - Buttons: ALL interactive elements use shadcn `<Button>` with default behavior — no custom hover classes
 - Logo: `public/images/plato-logo.png` (transparent background) used in Header and Footer; inverted in dark mode
 - Typography: Headings use `font-semibold tracking-tight leading-[1.1]` or `font-bold` throughout
-- Font: Roc Grotesk (self-hosted OTF in `public/fonts/`, weights Light–ExtraBold)
+- Font: Roc Grotesk (self-hosted OTF in `public/fonts/`, weights Light–ExtraBold, weight 600/semibold mapped to Bold OTF). Form controls inherit font via `font-family: inherit` in base layer
 - Header: h-14, backdrop-blur-xl, text-[13px] nav items, max-w-6xl container, rounded-full "Book a Demo" button
 - Homepage has an integrated multi-column footer; other pages use shared Footer component
 - Footer: max-w-6xl, text-[13px] links, text-xs copyright

@@ -90,6 +90,8 @@ Custom system (no external i18n library):
 - All components use semantic Tailwind tokens: `bg-background`, `text-foreground`, `bg-card`, `bg-muted`, `border-border`, `text-muted-foreground`
 - Dark mode background is pure black (`0 0% 0%`)
 - CSS variables for all colors defined in `client/src/index.css`
+- Dashboard components (`AboutAnalyticsDashboard`) are fully theme-aware — white/gray-50 backgrounds in light mode, dark navy in dark mode. All text, borders, chart elements, and tooltips use `dark:` variants
+- Form controls (`button`, `input`, `select`, `textarea`) inherit `font-family` via base layer CSS rule
 
 ## Booking System Flow
 
