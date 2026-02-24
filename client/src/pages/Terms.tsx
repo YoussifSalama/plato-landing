@@ -14,15 +14,33 @@ export default function Terms() {
 
   return (
     <div className="relative min-h-screen" style={{ overflowX: "clip" }}>
-      {/* Radial blue glow — same style as FAQ */}
-      <div className="absolute left-0 right-0 pointer-events-none z-0" aria-hidden="true" style={{ top: "-60px", height: "500px" }}>
-        <div className="absolute left-1/2 -translate-x-1/2 w-[75%] h-[420px] bg-[radial-gradient(ellipse_55%_45%_at_50%_0%,rgba(9,102,168,0.48),rgba(30,160,226,0.18)_35%,transparent_58%)]" style={{ top: "0px" }} />
-        <div className="absolute left-1/2 -translate-x-1/2 w-[55%] h-[340px] bg-[radial-gradient(ellipse_42%_32%_at_50%_5%,rgba(14,80,140,0.3),transparent_48%)]" style={{ top: "0px" }} />
+      {/* Radial blue glow — matching FAQ */}
+      <div className="absolute left-0 right-0 pointer-events-none z-0" aria-hidden="true" style={{ top: "-60px", height: "600px" }}>
+        <div className="absolute left-1/2 -translate-x-1/2 w-[90%] h-[520px] bg-[radial-gradient(ellipse_60%_55%_at_50%_0%,rgba(9,102,168,0.55),rgba(30,160,226,0.2)_38%,transparent_62%)]" style={{ top: "0px" }} />
+        <div className="absolute left-1/2 -translate-x-1/2 w-[65%] h-[420px] bg-[radial-gradient(ellipse_45%_42%_at_50%_5%,rgba(14,80,140,0.35),transparent_52%)]" style={{ top: "0px" }} />
       </div>
 
       {/* Hero */}
-      <section className="relative z-[1] pt-24 sm:pt-32 lg:pt-36 pb-8 sm:pb-12">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+      <section className="relative z-[1] pb-8 sm:pb-12">
+        {/* 3D coil/spring decoration */}
+        <div className="absolute top-[60px] sm:top-[50px] left-1/2 -translate-x-1/2 w-[260px] sm:w-[320px] h-[180px] sm:h-[200px] opacity-50" aria-hidden="true">
+          <svg viewBox="0 0 320 200" fill="none" className="w-full h-full">
+            <defs>
+              <linearGradient id="coilGradTerms" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#1a8fd4" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#0966a8" stopOpacity="0.4" />
+              </linearGradient>
+            </defs>
+            <ellipse cx="160" cy="40" rx="100" ry="24" stroke="url(#coilGradTerms)" strokeWidth="2.5" fill="none" opacity="0.4" />
+            <ellipse cx="160" cy="65" rx="100" ry="24" stroke="url(#coilGradTerms)" strokeWidth="2.5" fill="none" opacity="0.45" />
+            <ellipse cx="160" cy="90" rx="100" ry="24" stroke="url(#coilGradTerms)" strokeWidth="2.5" fill="none" opacity="0.55" />
+            <ellipse cx="160" cy="115" rx="100" ry="24" stroke="url(#coilGradTerms)" strokeWidth="2.5" fill="none" opacity="0.5" />
+            <ellipse cx="160" cy="140" rx="100" ry="24" stroke="url(#coilGradTerms)" strokeWidth="2" fill="none" opacity="0.4" />
+            <ellipse cx="160" cy="165" rx="100" ry="24" stroke="url(#coilGradTerms)" strokeWidth="2" fill="none" opacity="0.3" />
+          </svg>
+        </div>
+
+        <div className="relative z-[1] pt-28 sm:pt-36 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
           <ScrollReveal animation="fade-up">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]" data-testid="text-terms-title">
               {p.title}
