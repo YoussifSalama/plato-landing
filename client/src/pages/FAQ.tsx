@@ -43,16 +43,18 @@ export default function FAQ() {
   const p = t.faqPage;
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section with blue gradient extending behind header */}
-      <section className="relative pb-16 sm:pb-20 overflow-hidden" style={{ marginTop: '-56px', paddingTop: '56px' }}>
-        {/* Blue gradient background - extends behind header */}
-        <div className="absolute top-0 left-0 right-0 h-[340px] sm:h-[380px]" aria-hidden="true">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a3d6b] via-[#0b4d85]/60 to-transparent" />
-        </div>
+    <div className="relative min-h-screen" style={{ overflowX: "clip" }}>
+      {/* Radial blue glow behind header — dark sides, subtle center glow */}
+      <div className="absolute left-0 right-0 pointer-events-none z-0" aria-hidden="true" style={{ top: "-60px", height: "620px" }}>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#071b2e] via-[#0a1628] to-transparent" />
+        <div className="absolute left-1/2 -translate-x-1/2 w-[130%] h-[520px] bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(9,102,168,0.45),rgba(30,160,226,0.15)_40%,transparent_70%)]" style={{ top: "0px" }} />
+        <div className="absolute left-1/2 -translate-x-1/2 w-[90%] h-[400px] bg-[radial-gradient(ellipse_60%_40%_at_50%_5%,rgba(14,80,140,0.3),transparent_60%)]" style={{ top: "0px" }} />
+      </div>
 
+      {/* Hero Section */}
+      <section className="relative pb-16 sm:pb-20 z-[1]">
         {/* 3D coil/spring decoration - centered */}
-        <div className="absolute top-[80px] sm:top-[70px] left-1/2 -translate-x-1/2 w-[260px] sm:w-[320px] h-[180px] sm:h-[200px] opacity-50" aria-hidden="true">
+        <div className="absolute top-[60px] sm:top-[50px] left-1/2 -translate-x-1/2 w-[260px] sm:w-[320px] h-[180px] sm:h-[200px] opacity-50" aria-hidden="true">
           <svg viewBox="0 0 320 200" fill="none" className="w-full h-full">
             <defs>
               <linearGradient id="coilGrad" x1="0" y1="0" x2="1" y2="1">
@@ -69,18 +71,12 @@ export default function FAQ() {
           </svg>
         </div>
 
-        {/* Glow effects */}
-        <div className="absolute top-[40px] left-1/2 -translate-x-1/2 w-[500px] h-[280px]" aria-hidden="true">
-          <div className="absolute top-[25%] left-[30%] w-[160px] h-[160px] rounded-full bg-blue-500/20 blur-[70px]" />
-          <div className="absolute top-[15%] left-[50%] w-[180px] h-[180px] rounded-full bg-blue-600/15 blur-[80px]" />
-        </div>
-
-        <div className="relative z-[1] pt-28 sm:pt-36 max-w-3xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
+        <div className="relative z-[1] pt-28 sm:pt-36 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
           <ScrollReveal animation="fade-up">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]" data-testid="text-faq-title">
               {p.title}
             </h1>
-            <p className="mt-5 text-base sm:text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed" data-testid="text-faq-subtitle">
+            <p className="mt-5 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed" data-testid="text-faq-subtitle">
               {p.subtitle}
             </p>
           </ScrollReveal>
@@ -88,8 +84,8 @@ export default function FAQ() {
       </section>
 
       {/* FAQ Accordion */}
-      <section className="pb-20 sm:pb-28">
-        <div className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12">
+      <section className="relative z-[1] pb-20 sm:pb-28">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
           <ScrollReveal animation="fade-up">
             <div className="border-t border-border">
               {p.items.map((item, i) => (
