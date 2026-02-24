@@ -333,44 +333,86 @@ export default function Contact() {
               </div>
             </ScrollReveal>
           ) : !supabaseConfigured ? (
-            <div className="bg-card rounded-2xl border border-border p-6 sm:p-10">
-              <div className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="space-y-2">
-                    <Label>{p.firstNameLabel}</Label>
-                    <Input placeholder={p.firstNamePlaceholder} disabled className="opacity-60" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>{p.emailLabel}</Label>
-                    <Input placeholder={p.emailPlaceholder} disabled className="opacity-60" />
-                  </div>
+            <div className="space-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div data-form-field className="space-y-2">
+                  <Label>{p.firstNameLabel}</Label>
+                  <Input
+                    placeholder={p.firstNamePlaceholder}
+                    value={form.firstName}
+                    onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+                    data-testid="input-contact-firstname-fallback"
+                  />
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="space-y-2">
-                    <Label>{p.phoneLabel}</Label>
-                    <Input placeholder={p.phonePlaceholder} disabled className="opacity-60" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>{p.inquiryLabel}</Label>
-                    <Input placeholder={p.inquiryPlaceholder} disabled className="opacity-60" />
-                  </div>
+                <div data-form-field className="space-y-2">
+                  <Label>{p.emailLabel}</Label>
+                  <Input
+                    placeholder={p.emailPlaceholder}
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    data-testid="input-contact-email-fallback"
+                  />
                 </div>
-                <div className="space-y-2">
-                  <Label>{p.messageLabel}</Label>
-                  <Textarea placeholder={p.messagePlaceholder} rows={4} disabled className="opacity-60" />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div data-form-field className="space-y-2">
+                  <Label>{p.phoneLabel}</Label>
+                  <Input
+                    placeholder={p.phonePlaceholder}
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    data-testid="input-contact-phone-fallback"
+                  />
                 </div>
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-border">
-                  <p className="text-sm text-muted-foreground">
-                    {p.fallbackMessage}{" "}
-                    <span className="font-medium text-foreground" dir="ltr">info@platohiring.com</span>
-                  </p>
-                  <a href={`mailto:info@platohiring.com?subject=${encodeURIComponent("Contact from Plato Website")}`}>
-                    <Button className="rounded-full px-8" data-testid="button-contact-email">
-                      <Mail className="w-4 h-4" />
-                      {p.emailUs}
-                    </Button>
-                  </a>
+                <div data-form-field className="space-y-2">
+                  <Label>{p.inquiryLabel}</Label>
+                  <Select
+                    value={form.inquiry}
+                    onValueChange={(v) => setForm({ ...form, inquiry: v })}
+                  >
+                    <SelectTrigger data-testid="select-contact-inquiry-fallback">
+                      <SelectValue placeholder={p.inquiryPlaceholder} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {p.inquiryOptions.map((opt) => (
+                        <SelectItem key={opt} value={opt}>
+                          {opt}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
+              </div>
+              <div data-form-field className="space-y-2">
+                <Label>{p.messageLabel}</Label>
+                <Textarea
+                  placeholder={p.messagePlaceholder}
+                  rows={5}
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  data-testid="input-contact-message-fallback"
+                />
+              </div>
+              <div data-form-field className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
+                <div className="flex items-center gap-2">
+                  <Checkbox
+                    id="terms-fallback"
+                    checked={agreed}
+                    onCheckedChange={(v) => setAgreed(v === true)}
+                    data-testid="checkbox-contact-terms-fallback"
+                  />
+                  <label htmlFor="terms-fallback" className="text-sm text-muted-foreground cursor-pointer">
+                    {p.termsAgree}{" "}
+                    <a href={localePath("/terms")} className="underline text-foreground">{p.termsOfUse}</a>
+                    {" "}{p.andText}{" "}
+                    <a href={localePath("/privacy")} className="underline text-foreground">{p.privacyPolicy}</a>
+                  </label>
+                </div>
+                <a href={`mailto:info@platohiring.com?subject=${encodeURIComponent("Contact from Plato Website")}&body=${encodeURIComponent(`Name: ${form.firstName}\nEmail: ${form.email}\nPhone: ${form.phone}\nInquiry: ${form.inquiry}\n\n${form.message}`)}`}>
+                  <Button className="rounded-full px-8" disabled={!agreed} data-testid="button-contact-submit-fallback">
+                    {p.submit}
+                  </Button>
+                </a>
               </div>
             </div>
           ) : (
