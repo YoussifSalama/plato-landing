@@ -202,27 +202,26 @@ export default function Employers() {
               <AboutAnalyticsDashboard />
             </div>
 
-            <div className="hidden lg:flex relative items-start" data-testid="about-hub-panel">
-              <div className="absolute inset-0 top-0 bottom-[32px] rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4]" />
+            <div className="hidden lg:block relative" data-testid="about-hub-panel">
+              <div className="relative rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] px-10 py-12 min-h-[320px]">
+                <div className="w-[40%] pr-4">
+                  <h2 className="text-2xl font-bold tracking-tight leading-[1.15] mb-5 text-white" data-testid="text-hub-title">
+                    {p.hubTitle}
+                  </h2>
+                  <p className="text-[13px] text-blue-100/80 leading-relaxed mb-4">
+                    {p.hubDesc1}
+                  </p>
+                  <p className="text-[13px] text-blue-100/80 leading-relaxed">
+                    {p.hubDesc2}
+                  </p>
+                </div>
 
-              <div className="relative z-[1] w-[36%] flex-shrink-0 px-10 pt-10 pb-16 flex flex-col justify-start self-stretch">
-                <h2 className="text-2xl font-bold tracking-tight leading-[1.15] mb-5 text-white" data-testid="text-hub-title">
-                  {p.hubTitle}
-                </h2>
-                <p className="text-[13px] text-blue-100/80 leading-relaxed mb-4">
-                  {p.hubDesc1}
-                </p>
-                <p className="text-[13px] text-blue-100/80 leading-relaxed">
-                  {p.hubDesc2}
-                </p>
-              </div>
-
-              <div
-                className="relative z-[2] w-[64%] mt-[28px] mb-[-32px] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
-                style={{ marginRight: "-32px" }}
-                data-testid="about-analytics-dashboard"
-              >
-                <AboutAnalyticsDashboard />
+                <div
+                  className="absolute top-[-20px] bottom-[-20px] right-[-24px] w-[58%] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
+                  data-testid="about-analytics-dashboard"
+                >
+                  <AboutAnalyticsDashboard />
+                </div>
               </div>
             </div>
           </ScrollReveal>
