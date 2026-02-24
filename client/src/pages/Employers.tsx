@@ -224,7 +224,7 @@ export default function Employers() {
                 className="absolute right-[-32px] top-[20px] bottom-[-40px] w-[62%] dark rounded-2xl bg-[#0d1117] shadow-2xl overflow-hidden"
                 data-testid="about-analytics-dashboard"
               >
-                <div style={{ transform: "scale(0.85)", transformOrigin: "top left", width: "117.65%", height: "117.65%" }}>
+                <div style={{ transform: "scale(0.78)", transformOrigin: "top left", width: "128.2%", height: "128.2%" }}>
                   <AboutAnalyticsDashboard />
                 </div>
               </div>

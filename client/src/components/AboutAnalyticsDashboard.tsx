@@ -201,8 +201,8 @@ function DonutChart({ triggerRef }: { triggerRef: React.RefObject<HTMLDivElement
   const circumference = 2 * Math.PI * radius;
 
   return (
-    <div className="flex items-center gap-4 mt-3">
-      <svg ref={svgRef} viewBox="0 0 140 140" className="w-[100px] h-[100px] flex-shrink-0">
+    <div className="flex items-center gap-5 mt-3">
+      <svg ref={svgRef} viewBox="0 0 140 140" className="w-[90px] h-[90px] flex-shrink-0">
         <circle cx="70" cy="70" r={radius} fill="none" stroke="#172334" strokeWidth="18" />
         {donutSegments.map((seg, idx) => {
           const offset = circumference * (1 - cumulative / 100);
