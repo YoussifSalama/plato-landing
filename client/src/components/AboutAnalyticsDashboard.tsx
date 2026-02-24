@@ -331,27 +331,27 @@ export default function AboutAnalyticsDashboard() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div ref={containerRef} className="bg-[#0d1117] p-3 sm:p-4 h-full" data-testid="about-analytics">
+    <div ref={containerRef} className="bg-[#0d1117] p-4 sm:p-5 h-full" data-testid="about-analytics">
       <div className="flex justify-center gap-1.5 mb-3">
         {[0, 1, 2, 3].map((i) => (
           <div key={i} className={`w-[5px] h-[5px] rounded-full ${i === 0 ? "bg-gray-500" : "bg-[#1e2d3d]"}`} />
         ))}
       </div>
 
-      <div className="space-y-2.5">
-        <div className="bg-[#0f1923] rounded-lg p-3 border border-[#1a2d44]/50">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-[11px] font-bold text-white">Overview Statistics</h3>
+      <div className="space-y-3">
+        <div className="bg-[#0f1923] rounded-lg p-3.5 border border-[#1a2d44]/50">
+          <div className="flex items-center justify-between mb-2.5">
+            <h3 className="text-[12px] font-bold text-white">Overview Statistics</h3>
             <span className="text-[9px] text-[#2dd4bf] cursor-pointer hover:text-[#5eead4] transition-colors font-medium" data-testid="link-view-all">View All</span>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {overviewStats.map((stat) => (
               <div key={stat.label} data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}>
-                <p className="text-[8px] text-[#6b7a8d] flex items-center gap-0.5 mb-0.5">
+                <p className="text-[8px] text-[#6b7a8d] flex items-center gap-0.5 mb-1">
                   {stat.label} <span className="text-[#5a6a7d]">↑</span>
                 </p>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-[16px] font-bold text-white leading-none tracking-tight">
+                  <span className="text-[18px] font-bold text-white leading-none tracking-tight">
                     <CountUp target={stat.value} suffix={stat.suffix} triggerRef={containerRef} />
                   </span>
                   <span className="text-[8px] text-emerald-400 font-semibold">{stat.change}</span>
@@ -361,14 +361,14 @@ export default function AboutAnalyticsDashboard() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-5 gap-2.5">
-          <div className="sm:col-span-3 bg-[#0f1923] rounded-lg p-3 border border-[#1a2d44]/50">
+        <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
+          <div className="sm:col-span-3 bg-[#0f1923] rounded-lg p-3.5 border border-[#1a2d44]/50">
             <div className="flex items-center justify-between mb-1">
               <div>
-                <h3 className="text-[11px] font-bold text-white">Weekly Activity</h3>
+                <h3 className="text-[12px] font-bold text-white">Weekly Activity</h3>
                 <p className="text-[8px] text-[#5a6a7d]">Applications, Interviews & Offers</p>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <span className="flex items-center gap-1 text-[8px] text-[#6b7a8d]">
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-500 inline-block" /> Applications
                 </span>
@@ -380,23 +380,23 @@ export default function AboutAnalyticsDashboard() {
             <WeeklyChart triggerRef={containerRef} />
           </div>
 
-          <div className="sm:col-span-2 bg-[#0f1923] rounded-lg p-3 border border-[#1a2d44]/50">
-            <h3 className="text-[11px] font-bold text-white">Application Status</h3>
+          <div className="sm:col-span-2 bg-[#0f1923] rounded-lg p-3.5 border border-[#1a2d44]/50">
+            <h3 className="text-[12px] font-bold text-white">Application Status</h3>
             <p className="text-[8px] text-[#5a6a7d]">Current distribution by stage</p>
             <DonutChart triggerRef={containerRef} />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-          <div className="bg-[#0f1923] rounded-lg p-3 border border-[#1a2d44]/50">
-            <h3 className="text-[11px] font-bold text-white">Department Hiring Progress</h3>
-            <p className="text-[8px] text-[#5a6a7d] mb-2">Current vs Target</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="bg-[#0f1923] rounded-lg p-3.5 border border-[#1a2d44]/50">
+            <h3 className="text-[12px] font-bold text-white">Department Hiring Progress</h3>
+            <p className="text-[8px] text-[#5a6a7d] mb-2.5">Current vs Target</p>
             <HiringBars triggerRef={containerRef} />
           </div>
 
-          <div className="bg-[#0f1923] rounded-lg p-3 border border-[#1a2d44]/50">
-            <h3 className="text-[11px] font-bold text-white">Monthly Growth</h3>
-            <p className="text-[8px] text-[#5a6a7d] mb-2">Application volume trend</p>
+          <div className="bg-[#0f1923] rounded-lg p-3.5 border border-[#1a2d44]/50">
+            <h3 className="text-[12px] font-bold text-white">Monthly Growth</h3>
+            <p className="text-[8px] text-[#5a6a7d] mb-2.5">Application volume trend</p>
             <BarChart triggerRef={containerRef} />
           </div>
         </div>

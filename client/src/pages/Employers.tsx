@@ -202,23 +202,23 @@ export default function Employers() {
             </div>
 
             <div className="hidden lg:block relative" data-testid="about-hub-panel">
-              <div className="rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] px-10 py-12">
+              <div className="rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] px-10 py-16">
                 <div className="w-[38%]">
                   <h2 className="text-2xl font-bold tracking-tight leading-[1.15] mb-5 text-white" data-testid="text-hub-title">
                     {p.hubTitle}
                   </h2>
-                  <p className="text-[12px] text-blue-100/80 leading-relaxed mb-3">
+                  <p className="text-[13px] text-blue-100/80 leading-relaxed mb-4">
                     {p.hubDesc1}
                   </p>
-                  <p className="text-[12px] text-blue-100/80 leading-relaxed">
+                  <p className="text-[13px] text-blue-100/80 leading-relaxed">
                     {p.hubDesc2}
                   </p>
                 </div>
               </div>
 
               <div
-                className="absolute top-[24px] right-[-24px] w-[60%] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
-                style={{ bottom: "-28px" }}
+                className="absolute top-[28px] right-[-24px] w-[60%] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
+                style={{ bottom: "-32px" }}
                 data-testid="about-analytics-dashboard"
               >
                 <AboutAnalyticsDashboard />
