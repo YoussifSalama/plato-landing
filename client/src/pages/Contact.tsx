@@ -519,7 +519,7 @@ export default function Contact() {
       </section>
 
       {/* Trusted By Logos */}
-      <section className="py-12 sm:py-16 border-t border-border">
+      <section className="py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
           <ScrollReveal animation="fade-in">
             <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground mb-10" data-testid="text-contact-trusted-by">
