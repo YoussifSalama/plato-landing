@@ -44,11 +44,10 @@ export default function FAQ() {
 
   return (
     <div className="relative min-h-screen" style={{ overflowX: "clip" }}>
-      {/* Radial blue glow behind header — dark sides, subtle center glow */}
-      <div className="absolute left-0 right-0 pointer-events-none z-0" aria-hidden="true" style={{ top: "-60px", height: "620px" }}>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#071b2e] via-[#0a1628] to-transparent" />
-        <div className="absolute left-1/2 -translate-x-1/2 w-[130%] h-[520px] bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(9,102,168,0.45),rgba(30,160,226,0.15)_40%,transparent_70%)]" style={{ top: "0px" }} />
-        <div className="absolute left-1/2 -translate-x-1/2 w-[90%] h-[400px] bg-[radial-gradient(ellipse_60%_40%_at_50%_5%,rgba(14,80,140,0.3),transparent_60%)]" style={{ top: "0px" }} />
+      {/* Very subtle radial blue glow — barely visible, faint center tint */}
+      <div className="absolute left-0 right-0 pointer-events-none z-0" aria-hidden="true" style={{ top: "-60px", height: "460px" }}>
+        <div className="absolute left-1/2 -translate-x-1/2 w-[110%] h-[360px] bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(9,102,168,0.13),rgba(30,160,226,0.05)_35%,transparent_60%)]" style={{ top: "0px" }} />
+        <div className="absolute left-1/2 -translate-x-1/2 w-[70%] h-[280px] bg-[radial-gradient(ellipse_45%_30%_at_50%_5%,rgba(14,80,140,0.08),transparent_50%)]" style={{ top: "0px" }} />
       </div>
 
       {/* Hero Section */}
