@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertDemoBookingSchema } from "@shared/schema";
+import { sendBookingConfirmation, sendBookingNotificationToAdmin } from "./email";
 
 const SITE_ROUTES = [
   "/",
@@ -50,6 +51,21 @@ export async function registerRoutes(
 
     try {
       const booking = await storage.createBooking(parsed.data);
+
+      sendBookingConfirmation({
+        name: parsed.data.name,
+        email: parsed.data.email,
+        bookingDate: parsed.data.bookingDate,
+        bookingTime: parsed.data.bookingTime,
+      }).catch(() => {});
+
+      sendBookingNotificationToAdmin({
+        name: parsed.data.name,
+        email: parsed.data.email,
+        bookingDate: parsed.data.bookingDate,
+        bookingTime: parsed.data.bookingTime,
+      }).catch(() => {});
+
       res.status(201).json({ id: booking.id, date: booking.bookingDate, time: booking.bookingTime });
     } catch (err: any) {
       if (err.code === "23505") {
