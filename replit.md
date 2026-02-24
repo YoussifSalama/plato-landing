@@ -10,6 +10,9 @@ The application is a full-stack TypeScript project with a React SPA frontend ser
 
 Preferred communication style: Simple, everyday language.
 
+### LOCKED Layouts — Do NOT Modify
+- **Employers page "Unified Talent Intelligence Hub" section** (lines ~189–225 in `client/src/pages/Employers.tsx`): Blue gradient panel as absolute background (bottom-[140px]), text on left 38% with justify-start, dashboard on right using flex-1 with transform: scale(0.78), mt-[28px], mb-[-32px], extending to viewport right edge via negative margin. This layout is finalized and must not be changed when editing other parts of the page.
+
 ## System Architecture
 
 ### Frontend (React SPA)
