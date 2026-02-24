@@ -200,7 +200,7 @@ export default function Employers() {
                   {p.hubDesc2}
                 </p>
               </div>
-              <div className="dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl" data-testid="about-analytics-dashboard-mobile">
+              <div className="rounded-2xl overflow-hidden bg-white dark:bg-[#0d1117] shadow-2xl border border-gray-200 dark:border-transparent" data-testid="about-analytics-dashboard-mobile">
                 <AboutAnalyticsDashboard />
               </div>
             </div>
@@ -221,7 +221,7 @@ export default function Employers() {
                 </div>
               </div>
               <div
-                className="absolute right-[-32px] top-[20px] bottom-[-40px] w-[62%] dark rounded-2xl bg-[#0d1117] shadow-2xl overflow-hidden"
+                className="absolute right-[-32px] top-[20px] bottom-[-40px] w-[62%] rounded-2xl bg-white dark:bg-[#0d1117] shadow-2xl overflow-hidden border border-gray-200 dark:border-transparent"
                 data-testid="about-analytics-dashboard"
               >
                 <div style={{ transform: "scale(0.78)", transformOrigin: "top left", width: "128.2%", height: "128.2%" }}>

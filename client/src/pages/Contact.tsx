@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
+import { Link } from "wouter";
 import { useI18n } from "@/lib/i18n";
 import { useAppTheme } from "@/lib/theme";
 import { useSEO } from "@/hooks/useSEO";

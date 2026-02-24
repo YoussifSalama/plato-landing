@@ -139,8 +139,8 @@ function WeeklyChart({ triggerRef }: { triggerRef: React.RefObject<HTMLDivElemen
       <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-auto" onMouseLeave={() => setTooltip(null)}>
         {gridLines.map((v) => (
           <g key={v}>
-            <line x1={padL} x2={w - padR} y1={toY(v)} y2={toY(v)} stroke="#1e2d3d" strokeWidth="0.5" strokeDasharray="4,4" />
-            <text x={padL - 6} y={toY(v) + 3} textAnchor="end" className="fill-[#4a5568] text-[8px]">{v}</text>
+            <line x1={padL} x2={w - padR} y1={toY(v)} y2={toY(v)} className="stroke-gray-200 dark:stroke-[#1e2d3d]" strokeWidth="0.5" strokeDasharray="4,4" />
+            <text x={padL - 6} y={toY(v) + 3} textAnchor="end" className="fill-gray-400 dark:fill-[#4a5568] text-[8px]">{v}</text>
           </g>
         ))}
         <defs>
@@ -154,24 +154,24 @@ function WeeklyChart({ triggerRef }: { triggerRef: React.RefObject<HTMLDivElemen
         <path ref={pathRef2} d={intPath} fill="none" stroke="#f97316" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
         {weeklyData.map((d, i) => (
           <g key={d.day}>
-            <text x={toX(i)} y={h - 6} textAnchor="middle" className="fill-[#4a5568] text-[9px]">{d.day}</text>
+            <text x={toX(i)} y={h - 6} textAnchor="middle" className="fill-gray-400 dark:fill-[#4a5568] text-[9px]">{d.day}</text>
             <rect x={toX(i) - 20} y={padT} width={40} height={chartH} fill="transparent" className="cursor-pointer"
               onMouseEnter={() => setTooltip({ x: toX(i), y: toY(d.apps), day: d.day, apps: d.apps, interviews: d.interviews })} />
           </g>
         ))}
         {weeklyData.map((d, i) => (
           <g key={`dots-${i}`}>
-            <circle cx={toX(i)} cy={toY(d.apps)} r="3.5" fill="#3b82f6" stroke="#0f1923" strokeWidth="2" />
-            <circle cx={toX(i)} cy={toY(d.interviews)} r="3.5" fill="#f97316" stroke="#0f1923" strokeWidth="2" />
+            <circle cx={toX(i)} cy={toY(d.apps)} r="3.5" fill="#3b82f6" className="stroke-white dark:stroke-[#0f1923]" strokeWidth="2" />
+            <circle cx={toX(i)} cy={toY(d.interviews)} r="3.5" fill="#f97316" className="stroke-white dark:stroke-[#0f1923]" strokeWidth="2" />
           </g>
         ))}
       </svg>
       {tooltip && (
-        <div className="absolute pointer-events-none bg-[#162436] border border-[#253d56] rounded-lg px-3 py-2 shadow-xl z-10"
+        <div className="absolute pointer-events-none bg-white dark:bg-[#162436] border border-gray-200 dark:border-[#253d56] rounded-lg px-3 py-2 shadow-xl z-10"
           style={{ left: `${(tooltip.x / w) * 100}%`, top: `${(tooltip.y / h) * 100 - 18}%`, transform: "translateX(-50%)" }}>
-          <p className="text-[10px] text-gray-200 font-semibold mb-1">{tooltip.day}</p>
-          <p className="text-[9px] text-blue-400">Applications: {tooltip.apps}</p>
-          <p className="text-[9px] text-orange-400">Interviews: {tooltip.interviews}</p>
+          <p className="text-[10px] text-gray-800 dark:text-gray-200 font-semibold mb-1">{tooltip.day}</p>
+          <p className="text-[9px] text-blue-500 dark:text-blue-400">Applications: {tooltip.apps}</p>
+          <p className="text-[9px] text-orange-500 dark:text-orange-400">Interviews: {tooltip.interviews}</p>
         </div>
       )}
     </div>
@@ -203,7 +203,7 @@ function DonutChart({ triggerRef }: { triggerRef: React.RefObject<HTMLDivElement
   return (
     <div className="flex items-center gap-5 mt-3">
       <svg ref={svgRef} viewBox="0 0 140 140" className="w-[90px] h-[90px] flex-shrink-0">
-        <circle cx="70" cy="70" r={radius} fill="none" stroke="#172334" strokeWidth="18" />
+        <circle cx="70" cy="70" r={radius} fill="none" className="stroke-gray-100 dark:stroke-[#172334]" strokeWidth="18" />
         {donutSegments.map((seg, idx) => {
           const offset = circumference * (1 - cumulative / 100);
           const dashLen = circumference * (seg.pct / 100);
@@ -224,8 +224,8 @@ function DonutChart({ triggerRef }: { triggerRef: React.RefObject<HTMLDivElement
             className={`flex items-center gap-2 cursor-pointer transition-opacity duration-200 ${hovered !== null && hovered !== idx ? "opacity-40" : ""}`}
             onMouseEnter={() => setHovered(idx)} onMouseLeave={() => setHovered(null)}>
             <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: seg.color }} />
-            <span className="text-[10px] text-gray-400 min-w-[60px]">{seg.label}</span>
-            <span className="text-[11px] text-white font-bold ml-1">{seg.pct}%</span>
+            <span className="text-[10px] text-gray-500 dark:text-gray-400 min-w-[60px]">{seg.label}</span>
+            <span className="text-[11px] text-gray-900 dark:text-white font-bold ml-1">{seg.pct}%</span>
           </div>
         ))}
       </div>
@@ -258,7 +258,7 @@ function BarChart({ triggerRef }: { triggerRef: React.RefObject<HTMLDivElement |
       <div className="relative">
         <div className="absolute left-0 top-0 bottom-[20px] w-[30px] flex flex-col justify-between">
           {[800, 600, 400, 200].map((v) => (
-            <span key={v} className="text-[9px] text-[#4a5568] text-right pr-1">{v}</span>
+            <span key={v} className="text-[9px] text-gray-400 dark:text-[#4a5568] text-right pr-1">{v}</span>
           ))}
         </div>
         <div ref={barsRef} className="flex items-end gap-2 h-[100px] ml-[30px]">
@@ -270,18 +270,18 @@ function BarChart({ triggerRef }: { triggerRef: React.RefObject<HTMLDivElement |
                   style={{ height: `${(d.value / maxVal) * 100}%` }}
                   onMouseEnter={() => setHoveredBar(i)} onMouseLeave={() => setHoveredBar(null)} />
                 {hoveredBar === i && (
-                  <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#162436] border border-[#253d56] rounded px-2 py-1 text-[10px] text-white whitespace-nowrap z-10 shadow-lg font-semibold">
+                  <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-white dark:bg-[#162436] border border-gray-200 dark:border-[#253d56] rounded px-2 py-1 text-[10px] text-gray-900 dark:text-white whitespace-nowrap z-10 shadow-lg font-semibold">
                     {d.value}
                   </div>
                 )}
               </div>
-              <span className="text-[10px] text-[#4a5568] mt-1.5">{d.month}</span>
+              <span className="text-[10px] text-gray-400 dark:text-[#4a5568] mt-1.5">{d.month}</span>
             </div>
           ))}
         </div>
       </div>
-      <div className="mt-4 pt-3 border-t border-[#1a2d44] text-center">
-        <span className="text-[10px] text-[#4a5568] uppercase tracking-[0.15em] font-bold">Current Month</span>
+      <div className="mt-4 pt-3 border-t border-gray-200 dark:border-[#1a2d44] text-center">
+        <span className="text-[10px] text-gray-400 dark:text-[#4a5568] uppercase tracking-[0.15em] font-bold">Current Month</span>
       </div>
     </div>
   );
@@ -312,13 +312,13 @@ function HiringBars({ triggerRef }: { triggerRef: React.RefObject<HTMLDivElement
       {hiringProgress.map((dept) => (
         <div key={dept.dept}>
           <div className="flex items-center justify-between mb-1.5">
-            <span className="text-[11px] text-white font-semibold">{dept.dept}</span>
+            <span className="text-[11px] text-gray-900 dark:text-white font-semibold">{dept.dept}</span>
             <div className="flex items-center gap-3">
-              <span className="text-[10px] text-gray-400">{dept.current} / {dept.target}</span>
-              <span className="text-[11px] text-white font-bold">{dept.pct}%</span>
+              <span className="text-[10px] text-gray-500 dark:text-gray-400">{dept.current} / {dept.target}</span>
+              <span className="text-[11px] text-gray-900 dark:text-white font-bold">{dept.pct}%</span>
             </div>
           </div>
-          <div className="h-2 bg-[#172334] rounded-full overflow-hidden">
+          <div className="h-2 bg-gray-100 dark:bg-[#172334] rounded-full overflow-hidden">
             <div data-fill data-width={`${dept.pct}%`} className="h-full rounded-full" style={{ backgroundColor: dept.color }} />
           </div>
         </div>
@@ -331,30 +331,30 @@ export default function AboutAnalyticsDashboard() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div ref={containerRef} className="bg-[#0d1117] p-4 sm:p-5 h-full" data-testid="about-analytics">
+    <div ref={containerRef} className="bg-white dark:bg-[#0d1117] p-4 sm:p-5 h-full" data-testid="about-analytics">
       <div className="flex justify-center gap-1.5 mb-3">
         {[0, 1, 2, 3].map((i) => (
-          <div key={i} className={`w-[5px] h-[5px] rounded-full ${i === 0 ? "bg-gray-500" : "bg-[#1e2d3d]"}`} />
+          <div key={i} className={`w-[5px] h-[5px] rounded-full ${i === 0 ? "bg-gray-400 dark:bg-gray-500" : "bg-gray-200 dark:bg-[#1e2d3d]"}`} />
         ))}
       </div>
 
       <div className="space-y-3">
-        <div className="bg-[#0f1923] rounded-lg p-3.5 border border-[#1a2d44]/50">
+        <div className="bg-gray-50 dark:bg-[#0f1923] rounded-lg p-3.5 border border-gray-200 dark:border-[#1a2d44]/50">
           <div className="flex items-center justify-between mb-2.5">
-            <h3 className="text-[12px] font-bold text-white">Overview Statistics</h3>
+            <h3 className="text-[12px] font-bold text-gray-900 dark:text-white">Overview Statistics</h3>
             <span className="text-[9px] text-[#2dd4bf] cursor-pointer hover:text-[#5eead4] transition-colors font-medium" data-testid="link-view-all">View All</span>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {overviewStats.map((stat) => (
               <div key={stat.label} data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}>
-                <p className="text-[8px] text-[#6b7a8d] flex items-center gap-0.5 mb-1">
-                  {stat.label} <span className="text-[#5a6a7d]">↑</span>
+                <p className="text-[8px] text-gray-400 dark:text-[#6b7a8d] flex items-center gap-0.5 mb-1">
+                  {stat.label} <span className="text-gray-300 dark:text-[#5a6a7d]">↑</span>
                 </p>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-[18px] font-bold text-white leading-none tracking-tight">
+                  <span className="text-[18px] font-bold text-gray-900 dark:text-white leading-none tracking-tight">
                     <CountUp target={stat.value} suffix={stat.suffix} triggerRef={containerRef} />
                   </span>
-                  <span className="text-[8px] text-emerald-400 font-semibold">{stat.change}</span>
+                  <span className="text-[8px] text-emerald-500 dark:text-emerald-400 font-semibold">{stat.change}</span>
                 </div>
               </div>
             ))}
@@ -362,17 +362,17 @@ export default function AboutAnalyticsDashboard() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
-          <div className="sm:col-span-3 bg-[#0f1923] rounded-lg p-3.5 border border-[#1a2d44]/50">
+          <div className="sm:col-span-3 bg-gray-50 dark:bg-[#0f1923] rounded-lg p-3.5 border border-gray-200 dark:border-[#1a2d44]/50">
             <div className="flex items-center justify-between mb-1">
               <div>
-                <h3 className="text-[12px] font-bold text-white">Weekly Activity</h3>
-                <p className="text-[8px] text-[#5a6a7d]">Applications, Interviews & Offers</p>
+                <h3 className="text-[12px] font-bold text-gray-900 dark:text-white">Weekly Activity</h3>
+                <p className="text-[8px] text-gray-400 dark:text-[#5a6a7d]">Applications, Interviews & Offers</p>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="flex items-center gap-1 text-[8px] text-[#6b7a8d]">
+                <span className="flex items-center gap-1 text-[8px] text-gray-500 dark:text-[#6b7a8d]">
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-500 inline-block" /> Applications
                 </span>
-                <span className="flex items-center gap-1 text-[8px] text-[#6b7a8d]">
+                <span className="flex items-center gap-1 text-[8px] text-gray-500 dark:text-[#6b7a8d]">
                   <span className="w-1.5 h-1.5 rounded-full bg-orange-500 inline-block" /> Interviews
                 </span>
               </div>
@@ -380,23 +380,23 @@ export default function AboutAnalyticsDashboard() {
             <WeeklyChart triggerRef={containerRef} />
           </div>
 
-          <div className="sm:col-span-2 bg-[#0f1923] rounded-lg p-3.5 border border-[#1a2d44]/50">
-            <h3 className="text-[12px] font-bold text-white">Application Status</h3>
-            <p className="text-[8px] text-[#5a6a7d]">Current distribution by stage</p>
+          <div className="sm:col-span-2 bg-gray-50 dark:bg-[#0f1923] rounded-lg p-3.5 border border-gray-200 dark:border-[#1a2d44]/50">
+            <h3 className="text-[12px] font-bold text-gray-900 dark:text-white">Application Status</h3>
+            <p className="text-[8px] text-gray-400 dark:text-[#5a6a7d]">Current distribution by stage</p>
             <DonutChart triggerRef={containerRef} />
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div className="bg-[#0f1923] rounded-lg p-3.5 border border-[#1a2d44]/50">
-            <h3 className="text-[12px] font-bold text-white">Department Hiring Progress</h3>
-            <p className="text-[8px] text-[#5a6a7d] mb-2.5">Current vs Target</p>
+          <div className="bg-gray-50 dark:bg-[#0f1923] rounded-lg p-3.5 border border-gray-200 dark:border-[#1a2d44]/50">
+            <h3 className="text-[12px] font-bold text-gray-900 dark:text-white">Department Hiring Progress</h3>
+            <p className="text-[8px] text-gray-400 dark:text-[#5a6a7d] mb-2.5">Current vs Target</p>
             <HiringBars triggerRef={containerRef} />
           </div>
 
-          <div className="bg-[#0f1923] rounded-lg p-3.5 border border-[#1a2d44]/50">
-            <h3 className="text-[12px] font-bold text-white">Monthly Growth</h3>
-            <p className="text-[8px] text-[#5a6a7d] mb-2.5">Application volume trend</p>
+          <div className="bg-gray-50 dark:bg-[#0f1923] rounded-lg p-3.5 border border-gray-200 dark:border-[#1a2d44]/50">
+            <h3 className="text-[12px] font-bold text-gray-900 dark:text-white">Monthly Growth</h3>
+            <p className="text-[8px] text-gray-400 dark:text-[#5a6a7d] mb-2.5">Application volume trend</p>
             <BarChart triggerRef={containerRef} />
           </div>
         </div>
