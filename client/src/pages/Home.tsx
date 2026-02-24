@@ -6,6 +6,7 @@ import { getDemoLink, config } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Plus, Minus } from "lucide-react";
 import { SiLinkedin, SiInstagram, SiTiktok } from "react-icons/si";
+import { FaXTwitter } from "react-icons/fa6";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import DashboardMockup from "@/components/DashboardMockup";
 import SmartJobMockup from "@/components/feature-mockups/SmartJobMockup";
@@ -307,102 +308,68 @@ export default function Home() {
       </ScrollReveal>
 
       {/* Footer */}
-      <footer className="border-t border-border pt-16 pb-8">
-        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
-          <ScrollReveal animation="fade-up">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
-              <div>
-                <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.product}</h4>
-                <ul className="space-y-2.5">
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-changelog">{t.footerSection.changelog}</span></li>
-                  <li><Link href={localePath("/testimonials")}><span className="text-xs text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-customer-stories">{t.footerSection.customerStories}</span></Link></li>
-                  <li><a href={localePath("/security")} className="text-xs text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-security">{t.footerSection.security}</a></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-chrome">{t.footerSection.chromeExtension} ↗</span></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-ios">{t.footerSection.iosApp} ↗</span></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-android">{t.footerSection.androidApp} ↗</span></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-zapier">{t.footerSection.zapier} ↗</span></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-integromat">{t.footerSection.integromat} ↗</span></li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.company}</h4>
-                <ul className="space-y-2.5">
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-about">{t.footerSection.about}</span></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-careers">{t.footerSection.careers}</span></li>
-                  <li><a href={localePath("/blog")} className="text-xs text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-blog">{t.footerSection.blog}</a></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-startup-program">{t.footerSection.startupProgram}</span></li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.platoFor}</h4>
-                <ul className="space-y-2.5">
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-startups">{t.footerSection.startups}</span></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-agencies">{t.footerSection.agencies}</span></li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.support}</h4>
-                <ul className="space-y-2.5">
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-help">{t.footerSection.helpCenter}</span></li>
-                  <li><a href={localePath("/contact")} className="text-xs text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-support">{t.footerSection.talkToSupport}</a></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-api-docs">{t.footerSection.apiDocs} ↗</span></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-footer-system-status">{t.footerSection.systemStatus} ↗</span></li>
-                </ul>
-              </div>
-
-              <div className="col-span-2">
-                <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.readyToBuild}</h4>
-                <div className="flex flex-col gap-3">
-                  <a href={config.employerAppUrl} data-testid="button-footer-start-free">
-                    <Button className="w-full rounded-full" size="lg">
-                      {t.footerSection.startForFree}
-                    </Button>
-                  </a>
-                  <a href={getDemoLink()} data-testid="button-footer-request-demo">
-                    <Button variant="outline" className="w-full rounded-full" size="lg">
-                      {t.footerSection.requestDemo}
-                    </Button>
-                  </a>
+      <footer className="border-t border-border pt-14 pb-8">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
+            <div>
+              <div className="flex items-center gap-1" style={{ direction: "ltr" }}>
+                <div className="h-8 sm:h-9 overflow-hidden flex-shrink-0" style={{ width: '28px' }}>
+                  <img src="/images/plato-logo.png" alt="" className="h-full w-auto max-w-none" />
                 </div>
+                <span className="text-[20px] sm:text-[22px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Roc Grotesk', sans-serif" }}>Plato</span>
+              </div>
+              <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-[260px]">
+                {t.footer.tagline}
+              </p>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold text-foreground mb-4">{t.footer.companyTitle}</h4>
+              <ul className="space-y-2.5">
+                <li><Link href={localePath("/employers")}><span className="text-[13px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.about}</span></Link></li>
+                <li><Link href={localePath("/pricing")}><span className="text-[13px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer">Pricing</span></Link></li>
+                <li><Link href={localePath("/blog")}><span className="text-[13px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.blog}</span></Link></li>
+                <li><Link href={localePath("/faq")}><span className="text-[13px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer">FAQs</span></Link></li>
+                <li><Link href={localePath("/contact")}><span className="text-[13px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footer.contact}</span></Link></li>
+                <li><Link href={localePath("/testimonials")}><span className="text-[13px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.customerStories}</span></Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold text-foreground mb-4">{t.footer.contactsTitle}</h4>
+              <ul className="space-y-2.5">
+                <li><a href="mailto:info@plato.com" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors" dir="ltr">info@Plato.com</a></li>
+                <li><a href="tel:+20101245567" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors" dir="ltr">+20101245567</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold text-foreground mb-4">{t.footer.readyToGrow}</h4>
+              <div className="flex flex-col gap-3">
+                <a href={config.employerAppUrl} target="_blank" rel="noopener noreferrer">
+                  <Button className="rounded-full w-full px-6">{t.footer.startForFree}</Button>
+                </a>
+                <a href={getDemoLink()} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" className="rounded-full w-full px-6">{t.footer.requestDemo}</Button>
+                </a>
               </div>
             </div>
-          </ScrollReveal>
+          </div>
 
           <div className="pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-muted-foreground/70" data-testid="text-copyright">
-              {t.footerSection.copyright}
-            </p>
+            <p className="text-xs text-muted-foreground/70">{t.footer.copyright}</p>
             <div className="flex items-center gap-4">
-              <a href={localePath("/terms")} className="text-xs text-muted-foreground/70 hover:text-muted-foreground transition-colors" data-testid="link-footer-terms">
-                {t.footerSection.termsAndConditions}
-              </a>
-              <span className="text-muted-foreground/30">·</span>
-              <a href={localePath("/privacy")} className="text-xs text-muted-foreground/70 hover:text-muted-foreground transition-colors" data-testid="link-footer-privacy">
-                {t.footerSection.privacyPolicy}
-              </a>
-            </div>
-            <div className="flex items-center gap-3">
-              {config.linkedinUrl && (
-                <a
-                  href={config.linkedinUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                  aria-label="LinkedIn"
-                  data-testid="link-linkedin"
-                >
-                  <SiLinkedin className="w-4 h-4" />
-                </a>
-              )}
-              <a href="https://www.instagram.com/platohiring?igsh=M2puazltZDQxOXFu&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="Instagram" data-testid="link-footer-instagram">
-                <SiInstagram className="w-4 h-4" />
-              </a>
-              <a href="https://www.tiktok.com/@platohiring?_r=1&_t=ZN-948glBbZIgA" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="TikTok" data-testid="link-footer-tiktok">
-                <SiTiktok className="w-4 h-4" />
-              </a>
+              <Link href={localePath("/terms")}><span className="text-xs text-muted-foreground/70 hover:text-foreground transition-colors cursor-pointer">{t.footer.termsAndConditions}</span></Link>
+              <span className="text-xs text-muted-foreground/40">·</span>
+              <Link href={localePath("/privacy")}><span className="text-xs text-muted-foreground/70 hover:text-foreground transition-colors cursor-pointer">{t.footer.privacy}</span></Link>
+              <div className="flex items-center gap-3 ltr:ml-4 rtl:mr-4">
+                <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground/70 hover:text-foreground transition-colors" aria-label="X"><FaXTwitter className="w-3.5 h-3.5" /></a>
+                <a href="https://www.instagram.com/platohiring" target="_blank" rel="noopener noreferrer" className="text-muted-foreground/70 hover:text-foreground transition-colors" aria-label="Instagram"><SiInstagram className="w-3.5 h-3.5" /></a>
+                <a href="https://www.tiktok.com/@platohiring" target="_blank" rel="noopener noreferrer" className="text-muted-foreground/70 hover:text-foreground transition-colors" aria-label="TikTok"><SiTiktok className="w-3.5 h-3.5" /></a>
+                {config.linkedinUrl && (
+                  <a href={config.linkedinUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground/70 hover:text-foreground transition-colors" aria-label="LinkedIn"><SiLinkedin className="w-3.5 h-3.5" /></a>
+                )}
+              </div>
             </div>
           </div>
         </div>

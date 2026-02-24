@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/shared/ScrollReveal";
 import DashboardMockup from "@/components/DashboardMockup";
 import AboutAnalyticsDashboard from "@/components/AboutAnalyticsDashboard";
 import { SiLinkedin, SiInstagram, SiTiktok } from "react-icons/si";
+import { FaXTwitter } from "react-icons/fa6";
 import { Plus, Minus, Sparkles, Eye, Link2, Clock } from "lucide-react";
 
 import logoAccentia from "@/assets/logos/accentia.png";
@@ -183,9 +184,10 @@ export default function Employers() {
       </section>
 
       {/* Unified Talent Intelligence Hub */}
-      <section className="py-16 sm:py-20 lg:py-28 lg:overflow-visible">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 lg:overflow-visible">
+      <section className="py-16 sm:py-20 lg:py-28">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
           <ScrollReveal animation="fade-up">
+            {/* Mobile layout */}
             <div className="lg:hidden rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] p-8 sm:p-10 mb-6">
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-[1.15] mb-8 text-white" data-testid="text-hub-title-mobile">
                 {p.hubTitle}
@@ -201,24 +203,25 @@ export default function Employers() {
               <AboutAnalyticsDashboard />
             </div>
 
-            <div className="hidden lg:flex relative items-start" data-testid="about-hub-panel">
-              <div className="absolute inset-0 top-0 bottom-[32px] rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4]" />
-
-              <div className="relative z-[1] w-[36%] flex-shrink-0 px-10 pt-10 pb-16 flex flex-col justify-start self-stretch">
-                <h2 className="text-2xl font-bold tracking-tight leading-[1.15] mb-5 text-white" data-testid="text-hub-title">
-                  {p.hubTitle}
-                </h2>
-                <p className="text-[13px] text-blue-100/80 leading-relaxed mb-4">
-                  {p.hubDesc1}
-                </p>
-                <p className="text-[13px] text-blue-100/80 leading-relaxed">
-                  {p.hubDesc2}
-                </p>
+            {/* Desktop layout: blue panel as base, dashboard floating on right */}
+            <div className="hidden lg:block relative mb-8" data-testid="about-hub-panel">
+              <div className="relative rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] px-10 py-12 min-h-[340px]">
+                <div className="w-[42%] flex flex-col justify-center">
+                  <h2 className="text-2xl font-bold tracking-tight leading-[1.15] mb-5 text-white" data-testid="text-hub-title">
+                    {p.hubTitle}
+                  </h2>
+                  <p className="text-[13px] text-blue-100/80 leading-relaxed mb-4">
+                    {p.hubDesc1}
+                  </p>
+                  <p className="text-[13px] text-blue-100/80 leading-relaxed">
+                    {p.hubDesc2}
+                  </p>
+                </div>
               </div>
 
               <div
-                className="relative z-[2] w-[64%] mt-[28px] mb-[-32px] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
-                style={{ marginRight: "-32px" }}
+                className="absolute top-[-24px] right-[-20px] w-[58%] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
+                style={{ bottom: "-28px" }}
                 data-testid="about-analytics-dashboard"
               >
                 <AboutAnalyticsDashboard />
@@ -351,81 +354,68 @@ export default function Employers() {
       </ScrollReveal>
 
       {/* Footer */}
-      <footer className="bg-card border-t border-border pt-16 pb-8">
-        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
-          <ScrollReveal animation="fade-up">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
-              <div>
-                <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.product}</h4>
-                <ul className="space-y-2.5">
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.changelog}</span></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.customerStories}</span></li>
-                  <li><a href={localePath("/security")} className="text-xs text-muted-foreground hover:text-foreground transition-colors">{t.footerSection.security}</a></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.chromeExtension} ↗</span></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.iosApp} ↗</span></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.androidApp} ↗</span></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.zapier} ↗</span></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.integromat} ↗</span></li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.company}</h4>
-                <ul className="space-y-2.5">
-                  <li><Link href={localePath("/employers")} className="text-xs text-muted-foreground hover:text-foreground transition-colors">{t.footerSection.about}</Link></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.careers}</span></li>
-                  <li><Link href={localePath("/blog")} className="text-xs text-muted-foreground hover:text-foreground transition-colors">{t.footerSection.blog}</Link></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.startupProgram}</span></li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.platoFor}</h4>
-                <ul className="space-y-2.5">
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.startups}</span></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.agencies}</span></li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.support}</h4>
-                <ul className="space-y-2.5">
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.helpCenter}</span></li>
-                  <li><Link href={localePath("/contact")} className="text-xs text-muted-foreground hover:text-foreground transition-colors">{t.footerSection.talkToSupport}</Link></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.apiDocs} ↗</span></li>
-                  <li><span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.systemStatus} ↗</span></li>
-                </ul>
-              </div>
-              <div className="col-span-2">
-                <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footerSection.readyToBuild}</h4>
-                <div className="flex flex-col gap-3">
-                  <a href={config.employerAppUrl}>
-                    <Button className="w-full rounded-full" size="lg">{t.footerSection.startForFree}</Button>
-                  </a>
-                  <a href={getDemoLink()}>
-                    <Button variant="outline" className="w-full rounded-full" size="lg">{t.footerSection.requestDemo}</Button>
-                  </a>
+      <footer className="border-t border-border pt-14 pb-8">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
+            <div>
+              <div className="flex items-center gap-1" style={{ direction: "ltr" }}>
+                <div className="h-8 sm:h-9 overflow-hidden flex-shrink-0" style={{ width: '28px' }}>
+                  <img src="/images/plato-logo.png" alt="" className="h-full w-auto max-w-none" />
                 </div>
+                <span className="text-[20px] sm:text-[22px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Roc Grotesk', sans-serif" }}>Plato</span>
+              </div>
+              <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-[260px]">
+                {t.footer.tagline}
+              </p>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold text-foreground mb-4">{t.footer.companyTitle}</h4>
+              <ul className="space-y-2.5">
+                <li><Link href={localePath("/employers")}><span className="text-[13px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.about}</span></Link></li>
+                <li><Link href={localePath("/pricing")}><span className="text-[13px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer">Pricing</span></Link></li>
+                <li><Link href={localePath("/blog")}><span className="text-[13px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.blog}</span></Link></li>
+                <li><Link href={localePath("/faq")}><span className="text-[13px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer">FAQs</span></Link></li>
+                <li><Link href={localePath("/contact")}><span className="text-[13px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footer.contact}</span></Link></li>
+                <li><Link href={localePath("/testimonials")}><span className="text-[13px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{t.footerSection.customerStories}</span></Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold text-foreground mb-4">{t.footer.contactsTitle}</h4>
+              <ul className="space-y-2.5">
+                <li><a href="mailto:info@plato.com" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors" dir="ltr">info@Plato.com</a></li>
+                <li><a href="tel:+20101245567" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors" dir="ltr">+20101245567</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold text-foreground mb-4">{t.footer.readyToGrow}</h4>
+              <div className="flex flex-col gap-3">
+                <a href={config.employerAppUrl} target="_blank" rel="noopener noreferrer">
+                  <Button className="rounded-full w-full px-6">{t.footer.startForFree}</Button>
+                </a>
+                <a href={getDemoLink()} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" className="rounded-full w-full px-6">{t.footer.requestDemo}</Button>
+                </a>
               </div>
             </div>
-          </ScrollReveal>
+          </div>
 
           <div className="pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-muted-foreground/70">{t.footerSection.copyright}</p>
+            <p className="text-xs text-muted-foreground/70">{t.footer.copyright}</p>
             <div className="flex items-center gap-4">
-              <a href={localePath("/terms")} className="text-xs text-muted-foreground/70 hover:text-muted-foreground transition-colors">{t.footerSection.termsAndConditions}</a>
-              <span className="text-muted-foreground/30">·</span>
-              <a href={localePath("/privacy")} className="text-xs text-muted-foreground/70 hover:text-muted-foreground transition-colors">{t.footerSection.privacyPolicy}</a>
-            </div>
-            <div className="flex items-center gap-3">
-              {config.linkedinUrl && (
-                <a href={config.linkedinUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="LinkedIn">
-                  <SiLinkedin className="w-4 h-4" />
-                </a>
-              )}
-              <a href="https://www.instagram.com/platohiring?igsh=M2puazltZDQxOXFu&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="Instagram">
-                <SiInstagram className="w-4 h-4" />
-              </a>
-              <a href="https://www.tiktok.com/@platohiring?_r=1&_t=ZN-948glBbZIgA" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="TikTok">
-                <SiTiktok className="w-4 h-4" />
-              </a>
+              <Link href={localePath("/terms")}><span className="text-xs text-muted-foreground/70 hover:text-foreground transition-colors cursor-pointer">{t.footer.termsAndConditions}</span></Link>
+              <span className="text-xs text-muted-foreground/40">·</span>
+              <Link href={localePath("/privacy")}><span className="text-xs text-muted-foreground/70 hover:text-foreground transition-colors cursor-pointer">{t.footer.privacy}</span></Link>
+              <div className="flex items-center gap-3 ltr:ml-4 rtl:mr-4">
+                <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground/70 hover:text-foreground transition-colors" aria-label="X"><FaXTwitter className="w-3.5 h-3.5" /></a>
+                <a href="https://www.instagram.com/platohiring" target="_blank" rel="noopener noreferrer" className="text-muted-foreground/70 hover:text-foreground transition-colors" aria-label="Instagram"><SiInstagram className="w-3.5 h-3.5" /></a>
+                <a href="https://www.tiktok.com/@platohiring" target="_blank" rel="noopener noreferrer" className="text-muted-foreground/70 hover:text-foreground transition-colors" aria-label="TikTok"><SiTiktok className="w-3.5 h-3.5" /></a>
+                {config.linkedinUrl && (
+                  <a href={config.linkedinUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground/70 hover:text-foreground transition-colors" aria-label="LinkedIn"><SiLinkedin className="w-3.5 h-3.5" /></a>
+                )}
+              </div>
             </div>
           </div>
         </div>
