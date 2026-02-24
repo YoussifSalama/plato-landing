@@ -183,10 +183,10 @@ export default function Employers() {
       </section>
 
       {/* Unified Talent Intelligence Hub */}
-      <section className="py-16 sm:py-20 lg:py-28">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+      <section className="py-16 sm:py-20 lg:py-28 lg:overflow-visible">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 lg:overflow-visible">
           <ScrollReveal animation="fade-up">
-            <div className="relative">
+            <div className="relative lg:overflow-visible">
               <div className="hidden lg:block absolute left-0 right-0 top-0 bottom-[60px] rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4]" data-testid="about-hub-panel" />
               <div className="lg:hidden rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] p-8 sm:p-10 mb-6">
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-[1.15] mb-8 text-white" data-testid="text-hub-title-mobile">
@@ -200,7 +200,7 @@ export default function Employers() {
                 </p>
               </div>
               <div className="hidden lg:flex relative z-[1] gap-0">
-                <div className="w-[42%] flex-shrink-0 p-14 py-20 flex flex-col justify-center">
+                <div className="w-[38%] flex-shrink-0 p-14 py-20 flex flex-col justify-center">
                   <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-[1.15] mb-8 text-white" data-testid="text-hub-title">
                     {p.hubTitle}
                   </h2>
@@ -211,7 +211,7 @@ export default function Employers() {
                     {p.hubDesc2}
                   </p>
                 </div>
-                <div className="flex-1 mt-[50px] mb-[-60px] -mr-8 lg:-mr-12 dark rounded-l-2xl overflow-hidden bg-[#0d1117] shadow-2xl" data-testid="about-analytics-dashboard">
+                <div className="flex-1 mt-[50px] mb-[-60px] dark rounded-l-2xl overflow-hidden bg-[#0d1117] shadow-2xl" style={{ marginRight: "calc(-1 * (100vw - 100%) / 2)" }} data-testid="about-analytics-dashboard">
                   <AboutAnalyticsDashboard />
                 </div>
               </div>
