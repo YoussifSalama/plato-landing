@@ -188,12 +188,12 @@ export default function BookDemo() {
             <div className="bg-card border border-border rounded-2xl p-6 sm:p-8 lg:p-10 shadow-xl" data-testid="book-demo-card">
               {/* Header */}
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-border">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 overflow-hidden flex-shrink-0 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <img src="/images/plato-logo.png" alt="" className="h-7 w-auto" />
+                <div className="flex items-center gap-4">
+                  <div className="h-14 w-14 overflow-hidden flex-shrink-0 rounded-full bg-primary/10 flex items-center justify-center">
+                    <img src="/images/plato-logo.png" alt="" className="h-9 w-auto" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground">{p.brandName}</p>
+                    <p className="text-sm text-muted-foreground">{p.brandName}</p>
                     <h1 className="text-xl sm:text-2xl font-bold tracking-tight" data-testid="text-book-demo-title">{p.title}</h1>
                   </div>
                 </div>
