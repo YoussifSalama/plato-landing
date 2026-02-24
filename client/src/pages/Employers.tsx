@@ -186,36 +186,41 @@ export default function Employers() {
       <section className="py-16 sm:py-20 lg:py-28 lg:overflow-visible">
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 lg:overflow-visible">
           <ScrollReveal animation="fade-up">
-            <div className="relative lg:overflow-visible">
-              <div className="hidden lg:block absolute left-0 right-0 top-0 bottom-[45px] rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4]" data-testid="about-hub-panel" />
-              <div className="lg:hidden rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] p-8 sm:p-10 mb-6">
-                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-[1.15] mb-8 text-white" data-testid="text-hub-title-mobile">
-                  {p.hubTitle}
-                </h2>
-                <p className="text-[15px] text-blue-100/80 leading-relaxed mb-6">
-                  {p.hubDesc1}
-                </p>
-                <p className="text-[15px] text-blue-100/80 leading-relaxed">
-                  {p.hubDesc2}
-                </p>
-              </div>
-              <div className="hidden lg:flex relative z-[1] gap-0">
-                <div className="w-[38%] flex-shrink-0 p-10 py-14 flex flex-col justify-center">
-                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tight leading-[1.15] mb-5 text-white" data-testid="text-hub-title">
+            <div className="lg:hidden rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] p-8 sm:p-10 mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-[1.15] mb-8 text-white" data-testid="text-hub-title-mobile">
+                {p.hubTitle}
+              </h2>
+              <p className="text-[15px] text-blue-100/80 leading-relaxed mb-6">
+                {p.hubDesc1}
+              </p>
+              <p className="text-[15px] text-blue-100/80 leading-relaxed">
+                {p.hubDesc2}
+              </p>
+            </div>
+            <div className="lg:hidden dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl" data-testid="about-analytics-dashboard-mobile">
+              <AboutAnalyticsDashboard />
+            </div>
+
+            <div className="hidden lg:block relative" data-testid="about-hub-panel">
+              <div className="rounded-3xl bg-gradient-to-br from-[#0a3d6b] via-[#1260a0] to-[#1a7fd4] px-10 py-12">
+                <div className="w-[38%]">
+                  <h2 className="text-2xl font-bold tracking-tight leading-[1.15] mb-5 text-white" data-testid="text-hub-title">
                     {p.hubTitle}
                   </h2>
-                  <p className="text-[13px] text-blue-100/80 leading-relaxed mb-4">
+                  <p className="text-[12px] text-blue-100/80 leading-relaxed mb-3">
                     {p.hubDesc1}
                   </p>
-                  <p className="text-[13px] text-blue-100/80 leading-relaxed">
+                  <p className="text-[12px] text-blue-100/80 leading-relaxed">
                     {p.hubDesc2}
                   </p>
                 </div>
-                <div className="flex-1 mt-[35px] mb-[-45px] dark rounded-l-2xl overflow-hidden bg-[#0d1117] shadow-2xl" style={{ marginRight: "calc(-1 * (100vw - 100%) / 2)" }} data-testid="about-analytics-dashboard">
-                  <AboutAnalyticsDashboard />
-                </div>
               </div>
-              <div className="lg:hidden dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl" data-testid="about-analytics-dashboard-mobile">
+
+              <div
+                className="absolute top-[-20px] right-[-24px] w-[60%] dark rounded-2xl overflow-hidden bg-[#0d1117] shadow-2xl"
+                style={{ bottom: "-20px" }}
+                data-testid="about-analytics-dashboard"
+              >
                 <AboutAnalyticsDashboard />
               </div>
             </div>
