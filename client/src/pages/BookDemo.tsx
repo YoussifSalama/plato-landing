@@ -189,10 +189,9 @@ export default function BookDemo() {
               {/* Header */}
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-border">
                 <div className="flex items-center gap-4">
-                  <div className="relative h-14 w-14 flex-shrink-0 rounded-full overflow-hidden shadow-lg bg-gray-100 dark:bg-transparent">
-                    <img src="/images/plato-p-icon.png" alt="Plato" className="scale-[1.7] -translate-x-[4px] -translate-y-[2px] h-full w-full object-cover hidden dark:block" />
-                    <div className="flex items-center justify-center h-full w-full dark:hidden">
-                      <img src="/images/plato-logo.png" alt="Plato" className="h-8 w-auto max-w-none" style={{ marginRight: '-22px' }} />
+                  <div className="relative h-14 w-14 flex-shrink-0 rounded-full overflow-hidden shadow-lg bg-gray-100 dark:bg-[#111827] border border-gray-200 dark:border-gray-700/50 flex items-center justify-center">
+                    <div className="w-[34px] h-[34px] overflow-hidden flex-shrink-0">
+                      <img src="/images/plato-logo.png" alt="Plato" className="h-full w-auto max-w-none" />
                     </div>
                   </div>
                   <div>
