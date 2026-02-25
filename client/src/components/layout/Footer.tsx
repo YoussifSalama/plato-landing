@@ -99,11 +99,11 @@ export default function Footer() {
                   {t.footer.startForFree}
                 </Button>
               </a>
-              <a href={demoLink} target="_blank" rel="noopener noreferrer">
+              <Link href={localePath("/book-demo")}>
                 <Button variant="outline" className="rounded-full w-full px-6" data-testid="button-footer-request-demo">
                   {t.footer.requestDemo}
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

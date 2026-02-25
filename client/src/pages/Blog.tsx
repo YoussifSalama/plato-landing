@@ -316,9 +316,9 @@ export default function Blog() {
                 <a href={config.employerAppUrl} target="_blank" rel="noopener noreferrer">
                   <Button className="rounded-full w-full px-6">{t.footer.startForFree}</Button>
                 </a>
-                <a href={getDemoLink()} target="_blank" rel="noopener noreferrer">
+                <Link href={localePath("/book-demo")}>
                   <Button variant="outline" className="rounded-full w-full px-6">{t.footer.requestDemo}</Button>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
