@@ -68,7 +68,7 @@ export default function Header() {
       className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 dark:bg-transparent border-b border-gray-200/50 dark:border-transparent"
       dir={dir}
     >
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="w-full px-6 sm:px-8 lg:px-10">
         <div className="flex items-center h-14 gap-4">
           <div className="flex-1 flex items-center">
           <Link href={localePath("/")} data-testid="link-home">
