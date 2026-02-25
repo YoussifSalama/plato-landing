@@ -26,7 +26,7 @@ export default function Login() {
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-5">
           <a
             href={getEmployerLoginUrl()}
-            className="group block rounded-2xl border border-gray-200 dark:border-[#1a2332] bg-white/50 dark:bg-[#0c1520]/80 p-7 sm:p-8 text-start transition-colors hover:border-[#0966A8]/50 dark:hover:border-[#0966A8]/50"
+            className="group block rounded-2xl border border-gray-200 dark:border-[#1a2332] bg-transparent p-7 sm:p-8 text-start transition-colors hover:border-[#0966A8]/50 dark:hover:border-[#0966A8]/50"
             data-testid="button-employer-login"
           >
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0966A8] to-[#1EA0E2] flex items-center justify-center mb-5">
@@ -44,7 +44,7 @@ export default function Login() {
 
           <a
             href={getApplicantLoginUrl()}
-            className="group block rounded-2xl border border-gray-200 dark:border-[#1a2332] bg-white/50 dark:bg-[#0c1520]/80 p-7 sm:p-8 text-start transition-colors hover:border-[#0966A8]/50 dark:hover:border-[#0966A8]/50"
+            className="group block rounded-2xl border border-gray-200 dark:border-[#1a2332] bg-transparent p-7 sm:p-8 text-start transition-colors hover:border-[#0966A8]/50 dark:hover:border-[#0966A8]/50"
             data-testid="button-seeker-login"
           >
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0966A8] to-[#1EA0E2] flex items-center justify-center mb-5">
