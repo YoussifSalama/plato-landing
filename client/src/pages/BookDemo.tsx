@@ -190,7 +190,7 @@ export default function BookDemo() {
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-border">
                 <div className="flex items-center gap-4">
                   <div className="relative h-14 w-14 flex-shrink-0 rounded-full overflow-hidden shadow-lg bg-gray-100 dark:bg-[#111827] border border-gray-200 dark:border-gray-700/50 flex items-center justify-center">
-                    <div className="w-[34px] h-[34px] overflow-hidden flex-shrink-0">
+                    <div className="w-[28px] h-[34px] overflow-hidden flex-shrink-0" style={{ marginLeft: '-2px' }}>
                       <img src="/images/plato-logo.png" alt="Plato" className="h-full w-auto max-w-none" />
                     </div>
                   </div>
