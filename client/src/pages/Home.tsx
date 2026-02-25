@@ -4,7 +4,7 @@ import { useI18n } from "@/lib/i18n";
 import { useSEO } from "@/hooks/useSEO";
 import { getDemoLink, config } from "@/lib/config";
 import { Button } from "@/components/ui/button";
-import { Plus, Minus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { SiLinkedin, SiInstagram, SiTiktok } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 import ScrollReveal from "@/components/shared/ScrollReveal";
@@ -57,17 +57,20 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         data-testid={`faq-item-${question.slice(0, 20).replace(/\s+/g, "-").toLowerCase()}`}
       >
         <span className="text-sm sm:text-base font-medium text-foreground">{question}</span>
-        {open ? (
-          <Minus className="w-5 h-5 text-muted-foreground flex-shrink-0 ml-4" />
-        ) : (
-          <Plus className="w-5 h-5 text-muted-foreground flex-shrink-0 ml-4" />
-        )}
+        <span className={`flex-shrink-0 ml-4 transition-transform duration-300 ${open ? "rotate-45" : "rotate-0"}`}>
+          <Plus className="w-5 h-5 text-muted-foreground" />
+        </span>
       </button>
-      {open && (
-        <div className="pb-5 text-sm text-muted-foreground leading-relaxed">
-          {answer}
+      <div
+        className="grid transition-all duration-300 ease-in-out"
+        style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+      >
+        <div className="overflow-hidden">
+          <div className="pb-5 text-sm text-muted-foreground leading-relaxed">
+            {answer}
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

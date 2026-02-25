@@ -4,7 +4,7 @@ import { useI18n } from "@/lib/i18n";
 import { useSEO } from "@/hooks/useSEO";
 import { getDemoLink, config } from "@/lib/config";
 import { Button } from "@/components/ui/button";
-import { Plus, Minus } from "lucide-react";
+import { Plus } from "lucide-react";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import { SiLinkedin, SiInstagram, SiTiktok } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
@@ -22,17 +22,22 @@ function FAQItem({ question, answer, defaultOpen = false }: { question: string; 
         <span className="text-[15px] sm:text-base font-medium text-foreground leading-snug pr-4">
           {question}
         </span>
-        <span className="flex-shrink-0 mt-0.5 text-muted-foreground">
-          {isOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+        <span className={`flex-shrink-0 mt-0.5 text-muted-foreground transition-transform duration-300 ${isOpen ? "rotate-45" : "rotate-0"}`}>
+          <Plus className="w-5 h-5" />
         </span>
       </button>
-      {isOpen && (
-        <div className="pb-6 -mt-1">
-          <p className="text-sm text-muted-foreground leading-relaxed pr-10">
-            {answer}
-          </p>
+      <div
+        className="grid transition-all duration-300 ease-in-out"
+        style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+      >
+        <div className="overflow-hidden">
+          <div className="pb-6 -mt-1">
+            <p className="text-sm text-muted-foreground leading-relaxed pr-10">
+              {answer}
+            </p>
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

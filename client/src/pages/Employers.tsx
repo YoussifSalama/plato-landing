@@ -9,7 +9,7 @@ import DashboardMockup from "@/components/DashboardMockup";
 import AboutAnalyticsDashboard from "@/components/AboutAnalyticsDashboard";
 import { SiLinkedin, SiInstagram, SiTiktok } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
-import { Plus, Minus, Sparkles, Eye, Link2, Clock } from "lucide-react";
+import { Plus, Sparkles, Eye, Link2, Clock } from "lucide-react";
 
 import logoAccentia from "@/assets/logos/accentia.png";
 import logoImplex from "@/assets/logos/implex.png";
@@ -57,17 +57,20 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         data-testid={`faq-about-${question.slice(0, 20).replace(/\s+/g, "-").toLowerCase()}`}
       >
         <span className="text-sm sm:text-base font-medium text-foreground">{question}</span>
-        {open ? (
-          <Minus className="w-5 h-5 text-muted-foreground flex-shrink-0 ml-4" />
-        ) : (
-          <Plus className="w-5 h-5 text-muted-foreground flex-shrink-0 ml-4" />
-        )}
+        <span className={`flex-shrink-0 ml-4 transition-transform duration-300 ${open ? "rotate-45" : "rotate-0"}`}>
+          <Plus className="w-5 h-5 text-muted-foreground" />
+        </span>
       </button>
-      {open && (
-        <div className="pb-5 text-sm text-muted-foreground leading-relaxed">
-          {answer}
+      <div
+        className="grid transition-all duration-300 ease-in-out"
+        style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+      >
+        <div className="overflow-hidden">
+          <div className="pb-5 text-sm text-muted-foreground leading-relaxed">
+            {answer}
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -87,17 +90,20 @@ function FeatureAccordion({ icon: Icon, title, desc, index }: { icon: React.Comp
         <div className="flex-1 min-w-0 pt-2">
           <h3 className="text-sm font-bold text-foreground">{title}</h3>
         </div>
-        {open ? (
-          <Minus className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-2.5" />
-        ) : (
-          <Plus className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-2.5" />
-        )}
+        <span className={`flex-shrink-0 mt-2.5 transition-transform duration-300 ${open ? "rotate-45" : "rotate-0"}`}>
+          <Plus className="w-5 h-5 text-muted-foreground" />
+        </span>
       </button>
-      {open && (
-        <div className="ps-14 pb-2 text-sm text-muted-foreground leading-relaxed">
-          {desc}
+      <div
+        className="grid transition-all duration-300 ease-in-out"
+        style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+      >
+        <div className="overflow-hidden">
+          <div className="ps-14 pb-2 text-sm text-muted-foreground leading-relaxed">
+            {desc}
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }
