@@ -69,7 +69,8 @@ export default function Header() {
       dir={dir}
     >
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-between h-14 gap-4">
+        <div className="flex items-center h-14 gap-4">
+          <div className="flex-1 flex items-center">
           <Link href={localePath("/")} data-testid="link-home">
             <div className="flex items-center gap-1" style={{ direction: "ltr" }} data-testid="img-logo">
               <div className="h-8 sm:h-9 overflow-hidden flex-shrink-0" style={{ width: '28px' }}>
@@ -82,6 +83,7 @@ export default function Header() {
               <span className="text-[20px] sm:text-[22px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Roc Grotesk', sans-serif" }}>Plato</span>
             </div>
           </Link>
+          </div>
 
           <nav
             className="hidden lg:flex items-center bg-white/90 dark:bg-white/10 backdrop-blur-sm rounded-full px-1.5 py-1 border border-gray-200/60 dark:border-white/10 shadow-sm dark:shadow-none"
@@ -121,7 +123,7 @@ export default function Header() {
             })}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="flex-1 hidden lg:flex items-center justify-end gap-3">
             <button
               onClick={toggleTheme}
               className="p-2 rounded-md text-muted-foreground transition-colors"
@@ -152,7 +154,7 @@ export default function Header() {
             </Link>
           </div>
 
-          <div className="lg:hidden flex items-center gap-2">
+          <div className="flex-1 lg:hidden flex items-center justify-end gap-2">
             <button
               onClick={toggleTheme}
               className="p-2 rounded-md text-muted-foreground transition-colors"
