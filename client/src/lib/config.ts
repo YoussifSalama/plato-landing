@@ -13,9 +13,9 @@ export function getDemoLink(): string {
 }
 
 export function getEmployerLoginUrl(): string {
-  return config.employerAppUrl || "/employers";
+  return "https://agency.platohiring.com/auth/login";
 }
 
 export function getApplicantLoginUrl(): string {
-  return config.applicantAppUrl;
+  return "https://candidate.platohiring.com/auth/login";
 }
