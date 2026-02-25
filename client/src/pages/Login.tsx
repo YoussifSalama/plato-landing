@@ -10,7 +10,7 @@ export default function Login() {
 
   return (
     <div className="min-h-[calc(100vh-56px)] flex flex-col items-center justify-center px-4 sm:px-6 pb-16 pt-24 sm:pt-28">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-b from-[#0966A8]/30 via-[#1EA0E2]/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-[#0966A8]/50 via-[#1EA0E2]/20 to-transparent rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 w-full max-w-3xl mx-auto text-center">
         <h1
@@ -26,7 +26,7 @@ export default function Login() {
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-5">
           <a
             href={getEmployerLoginUrl()}
-            className="group block rounded-2xl border border-[#1a2332] dark:border-[#1a2332] bg-[#f8f9fa] dark:bg-[#0c1520] p-7 sm:p-8 text-start transition-colors hover:border-[#0966A8]/50 dark:hover:border-[#0966A8]/50"
+            className="group block rounded-2xl border border-gray-200 dark:border-[#1a2332] bg-white/50 dark:bg-[#0c1520]/80 p-7 sm:p-8 text-start transition-colors hover:border-[#0966A8]/50 dark:hover:border-[#0966A8]/50"
             data-testid="button-employer-login"
           >
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0966A8] to-[#1EA0E2] flex items-center justify-center mb-5">
@@ -44,7 +44,7 @@ export default function Login() {
 
           <a
             href={getApplicantLoginUrl()}
-            className="group block rounded-2xl border border-[#1a2332] dark:border-[#1a2332] bg-[#f8f9fa] dark:bg-[#0c1520] p-7 sm:p-8 text-start transition-colors hover:border-[#0966A8]/50 dark:hover:border-[#0966A8]/50"
+            className="group block rounded-2xl border border-gray-200 dark:border-[#1a2332] bg-white/50 dark:bg-[#0c1520]/80 p-7 sm:p-8 text-start transition-colors hover:border-[#0966A8]/50 dark:hover:border-[#0966A8]/50"
             data-testid="button-seeker-login"
           >
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0966A8] to-[#1EA0E2] flex items-center justify-center mb-5">
