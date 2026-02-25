@@ -52,12 +52,12 @@ export default function Pricing() {
   return (
     <div className="relative" style={{ overflowX: "clip" }}>
       {/* Radial blue glow */}
-      <div className="absolute left-0 right-0 pointer-events-none z-0" aria-hidden="true" style={{ top: "-60px", height: "600px" }}>
+      <div className="absolute left-0 right-0 hidden dark:block pointer-events-none z-0" aria-hidden="true" style={{ top: "-60px", height: "600px" }}>
         <div className="absolute left-1/2 -translate-x-1/2 w-[90%] h-[520px] bg-[radial-gradient(ellipse_60%_55%_at_50%_0%,rgba(9,102,168,0.55),rgba(30,160,226,0.2)_38%,transparent_62%)]" style={{ top: "0px" }} />
         <div className="absolute left-1/2 -translate-x-1/2 w-[65%] h-[420px] bg-[radial-gradient(ellipse_45%_42%_at_50%_5%,rgba(14,80,140,0.35),transparent_52%)]" style={{ top: "0px" }} />
       </div>
       {/* 3D coil decoration — hero area */}
-      <div className="hidden lg:block absolute right-0 top-0 w-[25%] h-[500px] pointer-events-none z-0" aria-hidden="true">
+      <div className="hidden dark:lg:block absolute right-0 top-0 w-[25%] h-[500px] pointer-events-none z-0" aria-hidden="true">
         <img src="/images/coil-3d.png" alt="" className="absolute right-0 top-[60px] h-[80%] w-auto max-w-none object-contain object-right opacity-40" />
       </div>
 
