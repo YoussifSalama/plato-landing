@@ -16,6 +16,7 @@ export const en = {
       pricing: { title: "Pricing", description: "Simple, transparent pricing for teams of all sizes. Book a demo to learn more." },
       bookDemo: { title: "Book a Demo", description: "Schedule a demo with Plato to see how AI-powered hiring can transform your recruitment process." },
       login: { title: "Login", description: "Log in to your Plato account — employers and job seekers." },
+      signup: { title: "Create Account", description: "Create your Plato account — start your free trial as an employer or job seeker." },
     },
   },
   nav: {
@@ -583,6 +584,18 @@ export const en = {
     seekerCta: "Continue as Job Seeker",
     newToPlato: "New to Plato?",
     createAccount: "Create an account",
+  },
+  signupPage: {
+    title: "Choose Account Type",
+    subtitle: "Select your account type to start free trial.",
+    employerTitle: "Employer",
+    employerDesc: "Access your hiring dashboard, manage candidates, post jobs, and build your dream team.",
+    employerCta: "Continue as Employer",
+    seekerTitle: "Job Seeker",
+    seekerDesc: "Browse opportunities, track applications, update your profile, and land your next role.",
+    seekerCta: "Continue as Job Seeker",
+    alreadyHaveAccount: "Already has an account?",
+    login: "Login",
   },
   testimonialsPage: {
     metaTitle: "Testimonials - Plato",

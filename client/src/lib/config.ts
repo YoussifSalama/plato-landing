@@ -19,3 +19,11 @@ export function getEmployerLoginUrl(): string {
 export function getApplicantLoginUrl(): string {
   return "https://candidate.platohiring.com/auth/login";
 }
+
+export function getEmployerSignupUrl(): string {
+  return "https://agency.platohiring.com/auth/register";
+}
+
+export function getApplicantSignupUrl(): string {
+  return "https://candidate.platohiring.com/auth/register";
+}

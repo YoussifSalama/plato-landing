@@ -18,6 +18,7 @@ import Privacy from "@/pages/Privacy";
 import Terms from "@/pages/Terms";
 import Pricing from "@/pages/Pricing";
 import Login from "@/pages/Login";
+import Signup from "@/pages/Signup";
 import Testimonials from "@/pages/Testimonials";
 import BookDemo from "@/pages/BookDemo";
 import NotFound from "@/pages/not-found";
@@ -38,6 +39,7 @@ function Router() {
       <Route path="/terms" component={Terms} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/login" component={Login} />
+      <Route path="/signup" component={Signup} />
       <Route path="/testimonials" component={Testimonials} />
       <Route path="/book-demo" component={BookDemo} />
 
@@ -54,6 +56,7 @@ function Router() {
       <Route path="/ar/terms" component={Terms} />
       <Route path="/ar/pricing" component={Pricing} />
       <Route path="/ar/login" component={Login} />
+      <Route path="/ar/signup" component={Signup} />
       <Route path="/ar/testimonials" component={Testimonials} />
       <Route path="/ar/book-demo" component={BookDemo} />
 

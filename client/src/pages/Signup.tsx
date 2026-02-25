@@ -1,13 +1,13 @@
 import { Link } from "wouter";
 import { useI18n } from "@/lib/i18n";
 import { useSEO } from "@/hooks/useSEO";
-import { getEmployerLoginUrl, getApplicantLoginUrl } from "@/lib/config";
+import { getEmployerSignupUrl, getApplicantSignupUrl } from "@/lib/config";
 import { ClipboardList, UserRound, ArrowRight } from "lucide-react";
 
-export default function Login() {
+export default function Signup() {
   const { t, dir, localePath } = useI18n();
-  useSEO({ title: t.meta.pages.login.title, description: t.meta.pages.login.description });
-  const p = t.loginPage;
+  useSEO({ title: t.meta.pages.signup.title, description: t.meta.pages.signup.description });
+  const p = t.signupPage;
 
   return (
     <div className="min-h-[calc(100vh-56px)] flex flex-col items-center justify-center px-4 sm:px-6 pb-16 pt-24 sm:pt-28">
@@ -16,7 +16,7 @@ export default function Login() {
       <div className="relative z-10 w-full max-w-3xl mx-auto text-center">
         <h1
           className="text-4xl sm:text-5xl lg:text-[56px] font-bold tracking-tight leading-[1.1]"
-          data-testid="text-login-title"
+          data-testid="text-signup-title"
         >
           {p.title}
         </h1>
@@ -26,11 +26,11 @@ export default function Login() {
 
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-5">
           <a
-            href={getEmployerLoginUrl()}
+            href={getEmployerSignupUrl()}
             target="_blank"
             rel="noopener noreferrer"
             className="group block rounded-2xl border border-gray-200 dark:border-[#1a2332] bg-transparent p-7 sm:p-8 text-start transition-colors hover:border-[#0966A8]/50 dark:hover:border-[#0966A8]/50"
-            data-testid="button-employer-login"
+            data-testid="button-employer-signup"
           >
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0966A8] to-[#1EA0E2] flex items-center justify-center mb-5">
               <ClipboardList className="w-5 h-5 text-white" />
@@ -46,11 +46,11 @@ export default function Login() {
           </a>
 
           <a
-            href={getApplicantLoginUrl()}
+            href={getApplicantSignupUrl()}
             target="_blank"
             rel="noopener noreferrer"
             className="group block rounded-2xl border border-gray-200 dark:border-[#1a2332] bg-transparent p-7 sm:p-8 text-start transition-colors hover:border-[#0966A8]/50 dark:hover:border-[#0966A8]/50"
-            data-testid="button-seeker-login"
+            data-testid="button-seeker-signup"
           >
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0966A8] to-[#1EA0E2] flex items-center justify-center mb-5">
               <UserRound className="w-5 h-5 text-white" />
@@ -67,13 +67,13 @@ export default function Login() {
         </div>
 
         <p className="mt-10 text-sm text-muted-foreground">
-          {p.newToPlato}{" "}
+          {p.alreadyHaveAccount}{" "}
           <Link
-            href={localePath("/signup")}
+            href={localePath("/login")}
             className="text-[#1EA0E2] hover:underline font-medium"
-            data-testid="link-create-account"
+            data-testid="link-login-from-signup"
           >
-            {p.createAccount}
+            {p.login}
           </Link>
         </p>
       </div>
