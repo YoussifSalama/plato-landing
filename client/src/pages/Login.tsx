@@ -1,53 +1,77 @@
 import { useI18n } from "@/lib/i18n";
 import { useSEO } from "@/hooks/useSEO";
 import { getEmployerLoginUrl, getApplicantLoginUrl } from "@/lib/config";
-import { Card, CardContent } from "@/components/ui/card";
-import Section from "@/components/shared/Section";
-import { Building2, User } from "lucide-react";
+import { ClipboardList, UserRound, ArrowRight } from "lucide-react";
 
 export default function Login() {
-  const { t } = useI18n();
+  const { t, dir } = useI18n();
   useSEO({ title: t.meta.pages.login.title, description: t.meta.pages.login.description });
   const p = t.loginPage;
 
   return (
-    <Section className="pt-20 sm:pt-28 lg:pt-32">
-      <div className="max-w-lg mx-auto text-center">
-        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight leading-[1.1]" data-testid="text-login-title">
+    <div className="min-h-[calc(100vh-56px)] flex flex-col items-center justify-center px-4 sm:px-6 pb-16 pt-24 sm:pt-28">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-b from-[#0966A8]/30 via-[#1EA0E2]/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative z-10 w-full max-w-3xl mx-auto text-center">
+        <h1
+          className="text-4xl sm:text-5xl lg:text-[56px] font-bold tracking-tight leading-[1.1]"
+          data-testid="text-login-title"
+        >
           {p.title}
         </h1>
-        <p className="mt-3 text-muted-foreground">{p.subtitle}</p>
+        <p className="mt-4 text-muted-foreground text-base sm:text-lg">
+          {p.subtitle}
+        </p>
 
-        <div className="mt-10 space-y-4">
-          <a href={getEmployerLoginUrl()} data-testid="button-employer-login">
-            <Card className="hover-elevate overflow-visible cursor-pointer">
-              <CardContent className="p-6 flex items-start gap-4">
-                <div className="w-11 h-11 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Building2 className="w-5 h-5 text-primary" />
-                </div>
-                <div className="text-start">
-                  <h2 className="font-semibold text-base">{p.employerLogin}</h2>
-                  <p className="text-sm text-muted-foreground mt-1">{p.employerDesc}</p>
-                </div>
-              </CardContent>
-            </Card>
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <a
+            href={getEmployerLoginUrl()}
+            className="group block rounded-2xl border border-[#1a2332] dark:border-[#1a2332] bg-[#f8f9fa] dark:bg-[#0c1520] p-7 sm:p-8 text-start transition-colors hover:border-[#0966A8]/50 dark:hover:border-[#0966A8]/50"
+            data-testid="button-employer-login"
+          >
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0966A8] to-[#1EA0E2] flex items-center justify-center mb-5">
+              <ClipboardList className="w-5 h-5 text-white" />
+            </div>
+            <h2 className="text-xl font-semibold tracking-tight">{p.employerTitle}</h2>
+            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+              {p.employerDesc}
+            </p>
+            <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[#1EA0E2] group-hover:gap-2.5 transition-all">
+              {p.employerCta}
+              <ArrowRight className={`w-4 h-4 ${dir === 'rtl' ? 'rotate-180' : ''}`} />
+            </span>
           </a>
 
-          <a href={getApplicantLoginUrl()} data-testid="button-seeker-login">
-            <Card className="hover-elevate overflow-visible cursor-pointer mt-4">
-              <CardContent className="p-6 flex items-start gap-4">
-                <div className="w-11 h-11 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <User className="w-5 h-5 text-primary" />
-                </div>
-                <div className="text-start">
-                  <h2 className="font-semibold text-base">{p.seekerLogin}</h2>
-                  <p className="text-sm text-muted-foreground mt-1">{p.seekerDesc}</p>
-                </div>
-              </CardContent>
-            </Card>
+          <a
+            href={getApplicantLoginUrl()}
+            className="group block rounded-2xl border border-[#1a2332] dark:border-[#1a2332] bg-[#f8f9fa] dark:bg-[#0c1520] p-7 sm:p-8 text-start transition-colors hover:border-[#0966A8]/50 dark:hover:border-[#0966A8]/50"
+            data-testid="button-seeker-login"
+          >
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0966A8] to-[#1EA0E2] flex items-center justify-center mb-5">
+              <UserRound className="w-5 h-5 text-white" />
+            </div>
+            <h2 className="text-xl font-semibold tracking-tight">{p.seekerTitle}</h2>
+            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+              {p.seekerDesc}
+            </p>
+            <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[#1EA0E2] group-hover:gap-2.5 transition-all">
+              {p.seekerCta}
+              <ArrowRight className={`w-4 h-4 ${dir === 'rtl' ? 'rotate-180' : ''}`} />
+            </span>
           </a>
         </div>
+
+        <p className="mt-10 text-sm text-muted-foreground">
+          {p.newToPlato}{" "}
+          <a
+            href={getApplicantLoginUrl()}
+            className="text-[#1EA0E2] hover:underline font-medium"
+            data-testid="link-create-account"
+          >
+            {p.createAccount}
+          </a>
+        </p>
       </div>
-    </Section>
+    </div>
   );
 }
