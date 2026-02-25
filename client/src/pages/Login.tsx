@@ -26,6 +26,8 @@ export default function Login() {
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-5">
           <a
             href={getEmployerLoginUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group block rounded-2xl border border-gray-200 dark:border-[#1a2332] bg-transparent p-7 sm:p-8 text-start transition-colors hover:border-[#0966A8]/50 dark:hover:border-[#0966A8]/50"
             data-testid="button-employer-login"
           >
@@ -44,6 +46,8 @@ export default function Login() {
 
           <a
             href={getApplicantLoginUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group block rounded-2xl border border-gray-200 dark:border-[#1a2332] bg-transparent p-7 sm:p-8 text-start transition-colors hover:border-[#0966A8]/50 dark:hover:border-[#0966A8]/50"
             data-testid="button-seeker-login"
           >
