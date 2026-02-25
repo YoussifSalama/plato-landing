@@ -396,11 +396,11 @@ export default function Testimonials() {
                   <span className="font-extrabold">{t.blogPage.hiringProcessBold}</span>
                 </h2>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <a href={config.employerAppUrl} data-testid="button-testimonials-start-trial">
+                  <Link href={localePath("/signup")} data-testid="button-testimonials-start-trial">
                     <Button size="lg" className="rounded-full bg-white text-primary hover:bg-white/90 border-white no-default-hover-elevate">
                       {t.blogPage.startFreeTrial}
                     </Button>
-                  </a>
+                  </Link>
                   <a href={getDemoLink()} data-testid="button-testimonials-request-demo">
                     <Button variant="outline" size="lg" className="rounded-full text-white border-white/40 hover:bg-white/10 no-default-hover-elevate">
                       {t.footerSection.requestDemo}
@@ -452,9 +452,9 @@ export default function Testimonials() {
             <div>
               <h4 className="text-sm font-semibold text-foreground mb-4">{t.footer.readyToGrow}</h4>
               <div className="flex flex-col gap-3">
-                <a href={config.employerAppUrl} target="_blank" rel="noopener noreferrer">
+                <Link href={localePath("/signup")}>
                   <Button className="rounded-full w-full px-6">{t.footer.startForFree}</Button>
-                </a>
+                </Link>
                 <Link href={localePath("/book-demo")}>
                   <Button variant="outline" className="rounded-full w-full px-6">{t.footer.requestDemo}</Button>
                 </Link>

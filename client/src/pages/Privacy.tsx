@@ -73,11 +73,11 @@ export default function Privacy() {
                   <span className="font-extrabold">{t.blogPage.hiringProcessBold}</span>
                 </h2>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <a href={config.employerAppUrl} data-testid="button-privacy-start-trial">
+                  <Link href={localePath("/signup")} data-testid="button-privacy-start-trial">
                     <Button size="lg" className="rounded-full bg-white text-primary border-white">
                       {t.blogPage.startFreeTrial}
                     </Button>
-                  </a>
+                  </Link>
                   <a href={getDemoLink()} data-testid="button-privacy-request-demo">
                     <Button variant="outline" size="lg" className="rounded-full text-white border-white/40">
                       {t.footerSection.requestDemo}
@@ -129,9 +129,9 @@ export default function Privacy() {
             <div>
               <h4 className="text-sm font-semibold text-foreground mb-4">{t.footer.readyToGrow}</h4>
               <div className="flex flex-col gap-3">
-                <a href={config.employerAppUrl} target="_blank" rel="noopener noreferrer">
+                <Link href={localePath("/signup")}>
                   <Button className="rounded-full w-full px-6">{t.footer.startForFree}</Button>
-                </a>
+                </Link>
                 <Link href={localePath("/book-demo")}>
                   <Button variant="outline" className="rounded-full w-full px-6">{t.footer.requestDemo}</Button>
                 </Link>

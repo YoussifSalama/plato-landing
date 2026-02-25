@@ -154,7 +154,7 @@ export default function Pricing() {
                     ))}
                   </ul>
 
-                  <a href={isEnterprise ? getDemoLink() : config.employerAppUrl} data-testid={`button-plan-cta-${key}`}>
+                  <Link href={localePath(isEnterprise ? "/book-demo" : "/signup")} data-testid={`button-plan-cta-${key}`}>
                     <Button
                       variant={highlighted ? "default" : "outline"}
                       className="w-full rounded-full"
@@ -162,7 +162,7 @@ export default function Pricing() {
                     >
                       {p.choosePlan}
                     </Button>
-                  </a>
+                  </Link>
                 </div>
               );
             })}
@@ -216,11 +216,11 @@ export default function Pricing() {
                   <span className="font-extrabold">{t.blogPage.hiringProcessBold}</span>
                 </h2>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <a href={config.employerAppUrl} data-testid="button-pricing-start-trial">
+                  <Link href={localePath("/signup")} data-testid="button-pricing-start-trial">
                     <Button size="lg" className="rounded-full bg-white text-primary border-white">
                       {p.startFreeTrial}
                     </Button>
-                  </a>
+                  </Link>
                   <a href={getDemoLink()} data-testid="button-pricing-request-demo">
                     <Button variant="outline" size="lg" className="rounded-full text-white border-white/40">
                       {t.footerSection.requestDemo}
@@ -272,9 +272,9 @@ export default function Pricing() {
             <div>
               <h4 className="text-sm font-semibold text-foreground mb-4">{t.footer.readyToGrow}</h4>
               <div className="flex flex-col gap-3">
-                <a href={config.employerAppUrl} target="_blank" rel="noopener noreferrer">
+                <Link href={localePath("/signup")}>
                   <Button className="rounded-full w-full px-6">{t.footer.startForFree}</Button>
-                </a>
+                </Link>
                 <Link href={localePath("/book-demo")}>
                   <Button variant="outline" className="rounded-full w-full px-6">{t.footer.requestDemo}</Button>
                 </Link>

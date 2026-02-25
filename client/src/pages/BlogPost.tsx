@@ -318,11 +318,11 @@ export default function BlogPost() {
                 {p.yourHiringProcess} <span className="text-white">{p.hiringProcessBold}</span>
               </h2>
               <div className="flex flex-wrap gap-4">
-                <a href={config.employerAppUrl} data-testid="link-blogpost-cta-start-trial">
+                <Link href={localePath("/signup")} data-testid="link-blogpost-cta-start-trial">
                   <Button size="lg" variant="outline" className="rounded-full" data-testid="button-blogpost-cta-start-trial">
                     {p.startFreeTrial}
                   </Button>
-                </a>
+                </Link>
                 <a href={getDemoLink()} data-testid="link-blogpost-cta-request-demo">
                   <Button size="lg" className="rounded-full" data-testid="button-blogpost-cta-request-demo">
                     {t.footerSection.requestDemo}
@@ -383,9 +383,9 @@ export default function BlogPost() {
             <div>
               <h4 className="text-sm font-semibold text-foreground mb-4">{t.footer.readyToGrow}</h4>
               <div className="flex flex-col gap-3">
-                <a href={config.employerAppUrl} target="_blank" rel="noopener noreferrer">
+                <Link href={localePath("/signup")}>
                   <Button className="rounded-full w-full px-6">{t.footer.startForFree}</Button>
-                </a>
+                </Link>
                 <Link href={localePath("/book-demo")}>
                   <Button variant="outline" className="rounded-full w-full px-6">{t.footer.requestDemo}</Button>
                 </Link>

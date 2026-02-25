@@ -94,11 +94,11 @@ export default function Footer() {
               {t.footer.readyToGrow}
             </h4>
             <div className="flex flex-col gap-3">
-              <a href={config.employerAppUrl} target="_blank" rel="noopener noreferrer">
+              <Link href={localePath("/signup")}>
                 <Button className="rounded-full w-full px-6" data-testid="button-footer-start-free">
                   {t.footer.startForFree}
                 </Button>
-              </a>
+              </Link>
               <Link href={localePath("/book-demo")}>
                 <Button variant="outline" className="rounded-full w-full px-6" data-testid="button-footer-request-demo">
                   {t.footer.requestDemo}
