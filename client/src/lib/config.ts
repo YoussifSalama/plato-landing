@@ -21,9 +21,9 @@ export function getApplicantLoginUrl(): string {
 }
 
 export function getEmployerSignupUrl(): string {
-  return "https://agency.platohiring.com/auth/register";
+  return "https://agency.platohiring.com/auth/signup";
 }
 
 export function getApplicantSignupUrl(): string {
-  return "https://candidate.platohiring.com/auth/register";
+  return "https://candidate.platohiring.com/auth/signup";
 }
