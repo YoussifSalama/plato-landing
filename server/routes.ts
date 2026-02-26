@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertDemoBookingSchema } from "@shared/schema";
-import { sendBookingConfirmation, sendBookingNotificationToAdmin } from "./email";
+import { sendBookingConfirmation, sendBookingNotificationToAdmin, sendContactFormEmail } from "./email";
 import { createDemoEvent } from "./calendar";
 
 const SITE_ROUTES = [
@@ -81,6 +81,40 @@ export async function registerRoutes(
         return res.status(409).json({ error: "This time slot is already booked." });
       }
       throw err;
+    }
+  });
+
+  app.post("/api/contact", async (req, res) => {
+    const { name, email, phone, inquiry, message, language } = req.body;
+
+    if (!name || typeof name !== "string" || !name.trim()) {
+      return res.status(400).json({ error: "Name is required." });
+    }
+    if (!email || typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({ error: "A valid email is required." });
+    }
+    if (!message || typeof message !== "string" || !message.trim()) {
+      return res.status(400).json({ error: "Message is required." });
+    }
+
+    try {
+      const sent = await sendContactFormEmail({
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone?.trim() || undefined,
+        inquiry: inquiry?.trim() || undefined,
+        message: message.trim(),
+        language: language || undefined,
+      });
+
+      if (!sent) {
+        return res.status(500).json({ error: "Failed to send message. Please try again later." });
+      }
+
+      res.json({ success: true });
+    } catch (err: any) {
+      console.error("Contact form error:", err.message);
+      res.status(500).json({ error: "Failed to send message. Please try again later." });
     }
   });
 

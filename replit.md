@@ -49,7 +49,7 @@ All pages exist in both English and Arabic variants:
 - **Dev server**: Vite dev middleware served through Express (see `server/vite.ts`)
 - **Production**: Static files served from `dist/public` (see `server/static.ts`), with SPA fallback to `index.html`
 - **API routes**: Registered in `server/routes.ts`, prefixed with `/api`
-- **Email**: SendGrid integration via Replit Connectors (`server/email.ts`)
+- **Email**: SendGrid integration via Replit Connectors (`server/email.ts`) — handles booking confirmations + contact form messages to `info@platohiring.com`
 - **Calendar**: Google Calendar integration via Replit Connectors (`server/calendar.ts`)
 - **Storage**: `MemStorage` class in `server/storage.ts` — uses in-memory for users, PostgreSQL for bookings
 

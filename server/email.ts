@@ -299,6 +299,111 @@ export async function sendBookingConfirmation(booking: BookingEmailData) {
   }
 }
 
+interface ContactFormData {
+  name: string;
+  email: string;
+  phone?: string;
+  inquiry?: string;
+  message: string;
+  language?: string;
+}
+
+export async function sendContactFormEmail(data: ContactFormData) {
+  try {
+    const { client, fromEmail } = await getUncachableSendGridClient();
+
+    const msg = {
+      to: 'info@platohiring.com',
+      from: {
+        email: fromEmail,
+        name: 'Plato Website',
+      },
+      replyTo: {
+        email: data.email,
+        name: data.name,
+      },
+      subject: `New Contact Message — ${escapeHtml(data.name)}${data.inquiry ? ` (${escapeHtml(data.inquiry)})` : ''}`,
+      html: `
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background-color:#f4f4f5;font-family:Arial,Helvetica,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f5;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+          <tr>
+            <td style="background:linear-gradient(135deg,#0966A8,#1EA0E2);padding:28px 40px;text-align:center;">
+              <h1 style="color:#ffffff;margin:0;font-size:22px;font-weight:700;">New Contact Form Message</h1>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:36px 40px;">
+              <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f0f7ff;border-radius:10px;border:1px solid #d0e3f5;margin-bottom:24px;">
+                <tr>
+                  <td style="padding:24px;">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="padding:6px 0;color:#374151;font-size:15px;line-height:1.7;">
+                          <strong>Name:</strong> ${escapeHtml(data.name)}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding:6px 0;color:#374151;font-size:15px;line-height:1.7;">
+                          <strong>Email:</strong> <a href="mailto:${escapeHtml(data.email)}" style="color:#0966A8;text-decoration:none;">${escapeHtml(data.email)}</a>
+                        </td>
+                      </tr>
+                      ${data.phone ? `<tr>
+                        <td style="padding:6px 0;color:#374151;font-size:15px;line-height:1.7;">
+                          <strong>Phone:</strong> ${escapeHtml(data.phone)}
+                        </td>
+                      </tr>` : ''}
+                      ${data.inquiry ? `<tr>
+                        <td style="padding:6px 0;color:#374151;font-size:15px;line-height:1.7;">
+                          <strong>Inquiry Type:</strong> ${escapeHtml(data.inquiry)}
+                        </td>
+                      </tr>` : ''}
+                      ${data.language ? `<tr>
+                        <td style="padding:6px 0;color:#374151;font-size:15px;line-height:1.7;">
+                          <strong>Language:</strong> ${data.language === 'ar' ? 'Arabic' : 'English'}
+                        </td>
+                      </tr>` : ''}
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              <div style="margin-bottom:24px;">
+                <p style="color:#111827;font-size:15px;font-weight:600;margin:0 0 8px;">Message:</p>
+                <p style="color:#374151;font-size:14px;line-height:1.7;margin:0;white-space:pre-wrap;">${escapeHtml(data.message)}</p>
+              </div>
+              <hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0;">
+              <p style="color:#9ca3af;font-size:12px;margin:0;">
+                You can reply directly to this email to respond to ${escapeHtml(data.name)}.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:20px 40px;border-top:1px solid #e5e7eb;text-align:center;">
+              <p style="color:#9ca3af;font-size:11px;margin:0;">&copy; ${new Date().getFullYear()} Plato. Contact form submission from platohiring.com</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`,
+    };
+
+    await client.send(msg);
+    console.log(`Contact form email sent for ${data.name} (${data.email})`);
+    return true;
+  } catch (error: any) {
+    console.error('Failed to send contact form email:', error?.response?.body || error.message);
+    return false;
+  }
+}
+
 export async function sendBookingNotificationToAdmin(booking: BookingEmailData) {
   try {
     const { client, fromEmail } = await getUncachableSendGridClient();

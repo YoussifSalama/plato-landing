@@ -88,7 +88,6 @@ export default function Contact() {
   const { isDark } = useAppTheme();
   useSEO({ title: t.meta.pages.contact.title, description: t.meta.pages.contact.description });
   const p = t.contactPage;
-  const supabaseConfigured = !!(config.supabaseUrl && config.supabaseAnonKey);
 
   const [form, setForm] = useState({
     firstName: "",
@@ -182,36 +181,31 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!supabaseConfigured) return;
 
     setSubmitting(true);
     setError("");
 
     try {
-      const res = await fetch(`${config.supabaseUrl}/rest/v1/contact_leads`, {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          apikey: config.supabaseAnonKey,
-          Authorization: `Bearer ${config.supabaseAnonKey}`,
-          Prefer: "return=minimal",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: form.firstName,
           email: form.email,
-          company: "",
-          role: "",
-          hiring_volume: form.inquiry,
+          phone: form.phone,
+          inquiry: form.inquiry,
           message: form.message,
-          source_page: "contact",
           language: lang,
         }),
       });
 
-      if (!res.ok) throw new Error("Failed to submit");
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Failed to submit");
+      }
       setSubmitted(true);
-    } catch {
-      setError("Something went wrong. Please try again or email us directly.");
+    } catch (err: any) {
+      setError(err.message || "Something went wrong. Please try again or email us directly.");
     } finally {
       setSubmitting(false);
     }
@@ -333,89 +327,6 @@ export default function Contact() {
                 </p>
               </div>
             </ScrollReveal>
-          ) : !supabaseConfigured ? (
-            <div className="space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div data-form-field className="space-y-2">
-                  <Label>{p.firstNameLabel}</Label>
-                  <Input
-                    placeholder={p.firstNamePlaceholder}
-                    value={form.firstName}
-                    onChange={(e) => setForm({ ...form, firstName: e.target.value })}
-                    data-testid="input-contact-firstname-fallback"
-                  />
-                </div>
-                <div data-form-field className="space-y-2">
-                  <Label>{p.emailLabel}</Label>
-                  <Input
-                    placeholder={p.emailPlaceholder}
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    data-testid="input-contact-email-fallback"
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div data-form-field className="space-y-2">
-                  <Label>{p.phoneLabel}</Label>
-                  <Input
-                    placeholder={p.phonePlaceholder}
-                    value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    data-testid="input-contact-phone-fallback"
-                  />
-                </div>
-                <div data-form-field className="space-y-2">
-                  <Label>{p.inquiryLabel}</Label>
-                  <Select
-                    value={form.inquiry}
-                    onValueChange={(v) => setForm({ ...form, inquiry: v })}
-                  >
-                    <SelectTrigger data-testid="select-contact-inquiry-fallback">
-                      <SelectValue placeholder={p.inquiryPlaceholder} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {p.inquiryOptions.map((opt) => (
-                        <SelectItem key={opt} value={opt}>
-                          {opt}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              <div data-form-field className="space-y-2">
-                <Label>{p.messageLabel}</Label>
-                <Textarea
-                  placeholder={p.messagePlaceholder}
-                  rows={5}
-                  value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  data-testid="input-contact-message-fallback"
-                />
-              </div>
-              <div data-form-field className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
-                <div className="flex items-center gap-2">
-                  <Checkbox
-                    id="terms-fallback"
-                    checked={agreed}
-                    onCheckedChange={(v) => setAgreed(v === true)}
-                    data-testid="checkbox-contact-terms-fallback"
-                  />
-                  <label htmlFor="terms-fallback" className="text-sm text-muted-foreground cursor-pointer">
-                    {p.termsAgree}{" "}
-                    <a href={localePath("/terms")} className="underline text-foreground">{p.termsOfUse}</a>
-                    {" "}{p.andText}{" "}
-                    <a href={localePath("/privacy")} className="underline text-foreground">{p.privacyPolicy}</a>
-                  </label>
-                </div>
-                <a href={`mailto:info@platohiring.com?subject=${encodeURIComponent("Contact from Plato Website")}&body=${encodeURIComponent(`Name: ${form.firstName}\nEmail: ${form.email}\nPhone: ${form.phone}\nInquiry: ${form.inquiry}\n\n${form.message}`)}`}>
-                  <Button className="rounded-full px-8" disabled={!agreed} data-testid="button-contact-submit-fallback">
-                    {p.submit}
-                  </Button>
-                </a>
-              </div>
-            </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
