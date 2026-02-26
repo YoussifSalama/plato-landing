@@ -6,7 +6,6 @@ import { Star, Link as LinkIcon } from "lucide-react";
 import { Link } from "wouter";
 import { config, getDemoLink } from "@/lib/config";
 import { SiLinkedin, SiInstagram, SiTiktok } from "react-icons/si";
-import { FaXTwitter } from "react-icons/fa6";
 
 interface Testimonial {
   name: string;
@@ -469,7 +468,7 @@ export default function Testimonials() {
               <span className="text-xs text-muted-foreground/40">·</span>
               <Link href={localePath("/privacy")}><span className="text-xs text-muted-foreground/70 hover:text-foreground transition-colors cursor-pointer">{t.footer.privacy}</span></Link>
               <div className="flex items-center gap-3 ltr:ml-4 rtl:mr-4">
-                <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground/70 hover:text-foreground transition-colors" aria-label="X"><FaXTwitter className="w-3.5 h-3.5" /></a>
+                <a href="https://www.linkedin.com/company/aere-capital/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground/70 hover:text-foreground transition-colors" aria-label="LinkedIn"><SiLinkedin className="w-3.5 h-3.5" /></a>
                 <a href="https://www.instagram.com/platohiring" target="_blank" rel="noopener noreferrer" className="text-muted-foreground/70 hover:text-foreground transition-colors" aria-label="Instagram"><SiInstagram className="w-3.5 h-3.5" /></a>
                 <a href="https://www.tiktok.com/@platohiring" target="_blank" rel="noopener noreferrer" className="text-muted-foreground/70 hover:text-foreground transition-colors" aria-label="TikTok"><SiTiktok className="w-3.5 h-3.5" /></a>
                 {config.linkedinUrl && (

@@ -3,7 +3,6 @@ import { useI18n } from "@/lib/i18n";
 import { config, getDemoLink } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { SiLinkedin, SiInstagram, SiTiktok } from "react-icons/si";
-import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   const { t, dir, localePath } = useI18n();
@@ -126,14 +125,14 @@ export default function Footer() {
             </Link>
             <div className="flex items-center gap-3 ltr:ml-4 rtl:mr-4">
               <a
-                href="https://x.com"
+                href="https://www.linkedin.com/company/aere-capital/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground/70 hover:text-foreground transition-colors"
-                aria-label="X (Twitter)"
-                data-testid="link-footer-twitter"
+                aria-label="LinkedIn"
+                data-testid="link-footer-linkedin-main"
               >
-                <FaXTwitter className="w-3.5 h-3.5" />
+                <SiLinkedin className="w-3.5 h-3.5" />
               </a>
               <a
                 href="https://www.instagram.com/platohiring"
