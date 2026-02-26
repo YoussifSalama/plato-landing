@@ -4,7 +4,7 @@
 
 ```
 ├── client/                         # Frontend React SPA
-│   ├── index.html                  # HTML entry point with OG meta tags
+│   ├── index.html                  # HTML entry with OG, Twitter Card, canonical meta
 │   └── src/
 │       ├── main.tsx                # React entry point
 │       ├── App.tsx                 # Router (Wouter) + providers
@@ -12,20 +12,22 @@
 │       ├── assets/                 # Images, logos, generated feature images
 │       │   ├── features/           # Feature card illustrations
 │       │   ├── logos/              # 15 client logos (trusted-by marquee)
-│       │   └── dashboard-mockup.png
+│       │   └── blog/              # Blog post hero images
 │       ├── components/
 │       │   ├── layout/             # Header, Footer, Layout wrapper
 │       │   ├── shared/             # ScrollReveal, SmartHashLink, Section, ScrollManager, PageTransition
+│       │   ├── seo/                # JSON-LD structured data components (JsonLd.tsx)
+│       │   ├── feature-mockups/    # Live animated product mockups (SmartJobMockup, ComparisonBar)
 │       │   ├── ui/                 # shadcn/ui components (Button, Card, Dialog, etc.)
 │       │   ├── AboutAnalyticsDashboard.tsx  # Live animated analytics (donut chart, bars)
 │       │   ├── DashboardMockup.tsx          # ATS dashboard mockup component
 │       │   └── FeatureCardsSection.tsx      # Animated feature cards grid
 │       ├── hooks/
-│       │   ├── useSEO.ts           # Per-page document title + meta description
+│       │   ├── useSEO.ts           # Per-page title, meta, OG, Twitter Cards, canonical URL
 │       │   ├── useScrollAnimation.ts  # GSAP scroll-based animation hook
 │       │   └── use-toast.ts        # Toast notification hook
 │       ├── lib/
-│       │   ├── config.ts           # All env vars with sensible defaults
+│       │   ├── config.ts           # All env vars with sensible defaults + external URL helpers
 │       │   ├── i18n.tsx            # I18n provider + hooks (useI18n)
 │       │   ├── theme.tsx           # Light/dark theme provider + useAppTheme
 │       │   ├── blog.ts             # In-memory blog posts (EN + AR)
@@ -44,7 +46,9 @@
 │           ├── Testimonials.tsx    # 15 real client testimonials
 │           ├── Pricing.tsx, FAQ.tsx, Contact.tsx
 │           ├── Security.tsx, Privacy.tsx, Terms.tsx
-│           └── Login.tsx
+│           ├── Login.tsx           # Login portal (links to external apps)
+│           ├── Signup.tsx          # Signup portal (links to external apps)
+│           └── not-found.tsx       # 404 page
 │
 ├── server/                         # Express backend
 │   ├── index.ts                    # Server entry (port 5000)
@@ -61,11 +65,11 @@
 │
 ├── public/
 │   ├── fonts/                      # Roc Grotesk OTF (Light, Regular, Medium, Bold, ExtraBold)
-│   └── images/                     # plato-logo.png, plato-p-icon.png
+│   └── images/                     # plato-logo.png, plato-p-icon.png, og-default.png
 │
 ├── docs/
 │   ├── ARCHITECTURE.md             # This file
-│   └── DATABASE.md                 # Supabase contact_leads schema (optional)
+│   └── DATABASE.md                 # Database systems overview
 │
 └── migrations/                     # Drizzle-generated SQL migrations
 ```
@@ -87,11 +91,25 @@ Custom system (no external i18n library):
 - Light/dark mode via `ThemeProvider` + `useAppTheme` hook in `client/src/lib/theme.tsx`
 - Dark mode is default, persisted to `localStorage` under key `plato-theme`
 - Toggle in Header (sun/moon icon) for desktop and mobile
+- **Theme transition**: Uses double `requestAnimationFrame` pattern — first rAF schedules the class toggle, second rAF ensures the browser has painted before applying transitions. This prevents flash-of-wrong-theme.
 - All components use semantic Tailwind tokens: `bg-background`, `text-foreground`, `bg-card`, `bg-muted`, `border-border`, `text-muted-foreground`
 - Dark mode background is pure black (`0 0% 0%`)
 - CSS variables for all colors defined in `client/src/index.css`
 - Dashboard components (`AboutAnalyticsDashboard`) are fully theme-aware — white/gray-50 backgrounds in light mode, dark navy in dark mode. All text, borders, chart elements, and tooltips use `dark:` variants
 - Form controls (`button`, `input`, `select`, `textarea`) inherit `font-family` via base layer CSS rule
+
+## Accordion / Collapsible Pattern
+
+FAQ items and feature accordions use a CSS-based animation approach:
+
+1. State managed with `useState(false)` for open/closed
+2. Buttons have `aria-expanded={open}` for accessibility
+3. Content wrapper uses `grid` with `gridTemplateRows: open ? "1fr" : "0fr"` for smooth height animation
+4. Inner content div has `overflow-hidden` to clip during transition
+5. Plus icon rotates 45° when open (becomes an X)
+6. Transition: `transition-all duration-300 ease-in-out`
+
+This pattern avoids JavaScript height calculations and provides smooth CSS-only expand/collapse.
 
 ## Booking System Flow
 
@@ -103,12 +121,30 @@ Custom system (no external i18n library):
 6. Booking inserted to PostgreSQL (unique constraint on date+time prevents conflicts)
 7. Google Calendar event created with Meet link (Cairo timezone EET, UTC+2)
 8. Confirmation email sent to booker (SendGrid) with Meet link + calendar link
-9. Admin notification sent to `hello@platohiring.com`
+9. Admin notification sent to `info@platohiring.com`
 10. Frontend shows animated success screen
 
-## Config
+## Config & External URLs
 
 All external URLs and feature toggles in `client/src/lib/config.ts`. Reads `import.meta.env.VITE_*` with defaults so the site works without configuration.
+
+### External App URLs
+- Employer Login: `https://agency.platohiring.com/auth/login`
+- Employer Signup: `https://agency.platohiring.com/auth/signup`
+- Job Seeker Login: `https://candidate.platohiring.com/auth/login`
+- Job Seeker Signup: `https://candidate.platohiring.com/auth/signup`
+
+These are opened in new tabs from the Login and Signup pages. Helper functions `getLoginLink(type)` and `getSignupLink(type)` in `config.ts` construct these URLs.
+
+### CTA Navigation
+- All "Start Free Trial" buttons → internal navigation to `/signup`
+- All "Request Demo" / "Book a Demo" buttons → internal navigation to `/book-demo`
+- Pricing non-enterprise plans → `/signup`, enterprise → `/book-demo`
+
+### Contact Info
+- Email: `info@platohiring.com`
+- Phone: `+201022330092`
+- Social: LinkedIn only (`linkedin.com/company/aere-capital/`) — no X/Twitter
 
 ## Navigation
 
@@ -119,10 +155,34 @@ All external URLs and feature toggles in `client/src/lib/config.ts`. Reads `impo
 
 ## SEO
 
-- Per-page `document.title` + `<meta description>` via `useSEO` hook
-- Translation keys in `t.meta.pages.*`
-- Server-generated `/sitemap.xml` with hreflang EN/AR alternates
+Comprehensive, per-page SEO via the `useSEO` hook:
+
+### Meta Tags (per page)
+- `document.title` with site name suffix
+- `<meta name="description">`
+- `<meta property="og:title/description/image/url/type/site_name">`
+- `<meta name="twitter:card/title/description/image">` (summary_large_image)
+- `<link rel="canonical">` (EN pages self-reference; AR pages canonicalize to EN equivalent)
+
+### Default OG Image
+- Branded 1200×630 image at `/images/og-default.png`
+- Used as fallback when no page-specific image is provided
+
+### JSON-LD Structured Data (`client/src/components/seo/JsonLd.tsx`)
+- `Organization` schema on Home page (company info, logo, contact, social)
+- `WebSite` schema on Home page
+- `FAQPage` schema on Home and FAQ pages (from translation data)
+- `Article` schema on BlogPost pages (headline, author, date, image)
+
+### Sitemap & Robots
+- Server-generated `/sitemap.xml` with hreflang EN/AR alternates for all routes
 - Server-generated `/robots.txt` pointing to sitemap
+- All pages including `/signup` and `/testimonials` included
+
+### Accessibility
+- All FAQ accordion buttons have `aria-expanded` attribute
+- All logo images have descriptive `alt="Plato"` text
+- Decorative images (coil-3d) correctly use `alt=""` with `aria-hidden`
 
 ## Integrations (Replit-managed)
 

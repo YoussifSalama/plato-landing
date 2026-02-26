@@ -1,11 +1,13 @@
 import { Link } from "wouter";
 import { useI18n } from "@/lib/i18n";
+import { useSEO } from "@/hooks/useSEO";
 import { Button } from "@/components/ui/button";
 import Section from "@/components/shared/Section";
 import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   const { localePath } = useI18n();
+  useSEO({ title: "Page Not Found", description: "The page you're looking for doesn't exist or has been moved." });
 
   return (
     <Section className="pt-20 sm:pt-28 lg:pt-32">

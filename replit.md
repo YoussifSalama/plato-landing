@@ -40,7 +40,9 @@ All pages exist in both English and Arabic variants:
 - Blog with individual posts (`/blog`, `/blog/:slug`)
 - Book a Demo (`/book-demo`, `/ar/book-demo`) — functional booking system with calendar, time slots, Google Calendar + SendGrid
 - Testimonials (`/testimonials`, `/ar/testimonials`) — 15 real client testimonials
-- FAQ, Contact, Security, Privacy, Terms, Pricing, Login
+- FAQ, Contact, Security, Privacy, Terms, Pricing
+- Login (`/login`, `/ar/login`) — portal linking to external apps (agency.platohiring.com, candidate.platohiring.com)
+- Signup (`/signup`, `/ar/signup`) — portal linking to external signup apps
 
 ### Backend (Express)
 - **Runtime**: Node.js with Express 5
@@ -57,6 +59,7 @@ All pages exist in both English and Arabic variants:
 - **Migrations**: Generated to `./migrations` directory via `drizzle-kit`
 - **Schema push**: Use `npm run db:push` to push schema changes
 - **Validation**: Drizzle-zod for generating Zod schemas from database tables
+- **Supabase**: Optional — `contact_leads` table for contact form submissions (see `docs/DATABASE.md`)
 
 ### Build System
 - **Dev**: `tsx server/index.ts` runs the Express server with Vite HMR
@@ -73,16 +76,30 @@ Configurable via Vite env vars (prefixed with `VITE_`):
 - `VITE_SUPABASE_ANON_KEY` — Supabase anonymous key
 - `DATABASE_URL` — PostgreSQL connection string for Drizzle
 
+### External URLs & Config
+- `config.ts` provides helper functions: `getLoginLink(type)`, `getSignupLink(type)`, `getDemoLink(lang)`
+- Employer app: `https://agency.platohiring.com/auth/{login|signup}`
+- Job Seeker app: `https://candidate.platohiring.com/auth/{login|signup}`
+- All "Start Free Trial" buttons → internal navigation to `/signup`
+- All "Request Demo" / "Book a Demo" buttons → internal navigation to `/book-demo`
+- Contact email: `info@platohiring.com`, phone: `+201022330092`
+- Social: LinkedIn only (`linkedin.com/company/aere-capital/`) — no X/Twitter
+
 ### SEO
-- Per-page `document.title` and `<meta name="description">` via `useSEO` hook
+- **useSEO hook** (`client/src/hooks/useSEO.ts`): Sets per-page `document.title`, `<meta description>`, Open Graph tags (`og:title`, `og:description`, `og:image`, `og:url`, `og:type`, `og:site_name`), Twitter Card tags (`summary_large_image`), and `<link rel="canonical">`
+- **Canonical strategy**: EN pages self-reference; AR pages canonicalize to their EN equivalent
+- **Default OG image**: Branded 1200×630 image at `public/images/og-default.png`
+- **JSON-LD structured data** (`client/src/components/seo/JsonLd.tsx`): Organization + WebSite on Home, FAQPage on Home + FAQ, Article on BlogPost
+- **Sitemap**: Server-generated `/sitemap.xml` with hreflang EN/AR alternates for all routes (including `/signup`, `/testimonials`)
+- **Robots**: Server-generated `/robots.txt` pointing to sitemap
+- **Accessibility**: FAQ accordion buttons have `aria-expanded`; all logo images have `alt="Plato"`
 - Translation keys for page meta in `t.meta.pages.*`
-- Server-generated `/sitemap.xml` with hreflang alternates for EN/AR
-- Server-generated `/robots.txt` pointing to sitemap
 
 ### Theme System
 - Light/dark mode support via `client/src/lib/theme.tsx` (ThemeProvider + useAppTheme hook)
 - Dark mode is the default, persisted to localStorage under "plato-theme"
 - Theme toggle (sun/moon icon) in the Header for both desktop and mobile
+- Theme transition uses double `requestAnimationFrame` pattern for smooth switching
 - All components use semantic Tailwind tokens (bg-background, text-foreground, bg-card, bg-muted, border-border, text-muted-foreground) that auto-adapt to light/dark
 - Dark mode background is pure black (0 0% 0%)
 - Dashboard components (`AboutAnalyticsDashboard`) are fully theme-aware — white/gray-50 backgrounds in light mode, dark navy in dark mode. All text, borders, chart elements, and tooltips use `dark:` variants
@@ -109,6 +126,11 @@ Configurable via Vite env vars (prefixed with `VITE_`):
 - Layout: `Layout.tsx` wraps all pages with ThemeProvider, sticky Header and Footer
 - Key visuals (dashboards, analytics panels) are live animated React components instead of static screenshots
 
+### Animation Patterns
+- **Accordion**: CSS `grid-template-rows` transition (0fr → 1fr) with `overflow-hidden`; Plus icon rotates 45°
+- **ScrollReveal**: GSAP + ScrollTrigger wrapper for scroll-based fade-in animations
+- **PageTransition**: 220ms opacity fade-in on route changes (respects `prefers-reduced-motion`)
+
 ## External Dependencies
 
 - **PostgreSQL**: Database (via Drizzle ORM), required for `DATABASE_URL`
@@ -122,6 +144,6 @@ Configurable via Vite env vars (prefixed with `VITE_`):
 - **Lucide React + React Icons**: Icon libraries
 
 ## Documentation
-- `README.md` — Project overview, quick start, route map, API endpoints, env vars, content guide
-- `docs/ARCHITECTURE.md` — Folder structure, i18n/RTL strategy, booking flow, integrations
-- `docs/DATABASE.md` — Supabase contact_leads schema SQL, RLS policies
+- `README.md` — Project overview, quick start, route map, API endpoints, env vars, SEO guide, content guide
+- `docs/ARCHITECTURE.md` — Folder structure, i18n/RTL strategy, theme system, booking flow, SEO details, integrations
+- `docs/DATABASE.md` — Database systems overview (PostgreSQL primary + Supabase optional)

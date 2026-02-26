@@ -96,7 +96,8 @@ export default function Terms() {
             <div>
               <div className="flex items-center gap-1" style={{ direction: "ltr" }}>
                 <div className="h-8 sm:h-9 overflow-hidden flex-shrink-0" style={{ width: '28px' }}>
-                  <img src="/images/plato-logo.png" alt="" className="h-full w-auto max-w-none" />
+                  <img src="/images/plato-logo.png"
+                  alt="Plato" className="h-full w-auto max-w-none" />
                 </div>
                 <span className="text-[20px] sm:text-[22px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Roc Grotesk', sans-serif" }}>Plato</span>
               </div>

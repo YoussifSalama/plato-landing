@@ -1,6 +1,40 @@
-# Database Schema
+# Database Systems
 
-## Contact Leads (Supabase)
+This project uses two separate database systems for different purposes.
+
+## 1. PostgreSQL (Primary — Demo Bookings)
+
+The primary database is PostgreSQL, managed via Drizzle ORM. It stores demo booking data and is configured via the `DATABASE_URL` environment variable.
+
+### Schema (defined in `shared/schema.ts`)
+
+```sql
+-- Users table (for future auth)
+CREATE TABLE users (
+  id VARCHAR PRIMARY KEY DEFAULT gen_random_uuid(),
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL
+);
+
+-- Demo bookings table
+CREATE TABLE demo_bookings (
+  id VARCHAR PRIMARY KEY DEFAULT gen_random_uuid(),
+  booking_date DATE NOT NULL,
+  booking_time TEXT NOT NULL,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT now(),
+  UNIQUE(booking_date, booking_time)
+);
+```
+
+### Usage
+- Push schema changes: `npm run db:push`
+- Drizzle config: `drizzle.config.ts`
+- Connection: `server/db.ts`
+- Storage interface: `server/storage.ts`
+
+## 2. Supabase (Optional — Contact Form Leads)
 
 The contact form on `/contact` can optionally submit leads to a Supabase table. This is configured via `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` environment variables.
 

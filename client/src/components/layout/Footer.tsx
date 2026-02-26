@@ -39,7 +39,7 @@ export default function Footer() {
               <div className="h-8 sm:h-9 overflow-hidden flex-shrink-0" style={{ width: '28px' }}>
                 <img
                   src="/images/plato-logo.png"
-                  alt=""
+                  alt="Plato"
                   className="h-full w-auto max-w-none"
                 />
               </div>

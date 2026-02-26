@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/shared/ScrollReveal";
 import { ArrowLeft, Calendar, Clock, ArrowRight, Bookmark, Share2, User } from "lucide-react";
 import { config, getDemoLink } from "@/lib/config";
 import { SiLinkedin, SiInstagram, SiTiktok } from "react-icons/si";
+import { ArticleJsonLd } from "@/components/seo/JsonLd";
 
 function renderMarkdown(text: string) {
   const lines = text.split("\n");
@@ -113,6 +114,7 @@ export default function BlogPost() {
   useSEO({
     title: post ? post.title : "Post Not Found",
     description: post ? post.summary : undefined,
+    image: post?.image,
   });
 
   if (!post) {
@@ -141,6 +143,14 @@ export default function BlogPost() {
 
   return (
     <div className="min-h-screen">
+      <ArticleJsonLd
+        headline={post.title}
+        datePublished={post.date}
+        author={post.author}
+        image={post.image}
+        description={post.summary}
+        url={`https://platohiring.com/blog/${post.slug}`}
+      />
       {/* Hero Image */}
       <div className="relative w-full h-[50vh] sm:h-[55vh] lg:h-[60vh]">
         <img
@@ -350,7 +360,8 @@ export default function BlogPost() {
             <div>
               <div className="flex items-center gap-1" style={{ direction: "ltr" }}>
                 <div className="h-8 sm:h-9 overflow-hidden flex-shrink-0" style={{ width: '28px' }}>
-                  <img src="/images/plato-logo.png" alt="" className="h-full w-auto max-w-none" />
+                  <img src="/images/plato-logo.png"
+                  alt="Plato" className="h-full w-auto max-w-none" />
                 </div>
                 <span className="text-[20px] sm:text-[22px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Roc Grotesk', sans-serif" }}>Plato</span>
               </div>

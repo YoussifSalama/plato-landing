@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { useI18n } from "@/lib/i18n";
 import { useSEO } from "@/hooks/useSEO";
@@ -11,6 +11,7 @@ import DashboardMockup from "@/components/DashboardMockup";
 import SmartJobMockup from "@/components/feature-mockups/SmartJobMockup";
 import FeatureCardsSection from "@/components/FeatureCardsSection";
 import ComparisonBar from "@/components/feature-mockups/ComparisonBar";
+import { OrganizationJsonLd, WebSiteJsonLd, FAQPageJsonLd } from "@/components/seo/JsonLd";
 
 import logoAccentia from "@/assets/logos/accentia.png";
 import logoImplex from "@/assets/logos/implex.png";
@@ -52,6 +53,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
     <div className="border-t border-gray-200 dark:border-white/10">
       <button
         onClick={() => setOpen(!open)}
+        aria-expanded={open}
         className="w-full flex items-center justify-between py-5 text-left"
         data-testid={`faq-item-${question.slice(0, 20).replace(/\s+/g, "-").toLowerCase()}`}
       >
@@ -89,9 +91,13 @@ export default function Home() {
   const { t, lang, localePath } = useI18n();
   useSEO({ description: t.meta.pages.home.description });
 
+  const faqItems = useMemo(() => t.faqSection.items, [t]);
 
   return (
     <div className="relative" style={{ overflowX: "clip" }}>
+      <OrganizationJsonLd />
+      <WebSiteJsonLd />
+      <FAQPageJsonLd items={faqItems} />
       {/* Hero Gradient Glow — extends behind header */}
       <div className="absolute left-0 right-0 hidden dark:block pointer-events-none z-0" aria-hidden="true" style={{ top: "-60px", height: "760px" }}>
         <div className="absolute inset-0 bg-gradient-to-b from-[#071b2e] via-[#0a1628] to-transparent" />
@@ -316,7 +322,8 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-1" style={{ direction: "ltr" }}>
                 <div className="h-8 sm:h-9 overflow-hidden flex-shrink-0" style={{ width: '28px' }}>
-                  <img src="/images/plato-logo.png" alt="" className="h-full w-auto max-w-none" />
+                  <img src="/images/plato-logo.png"
+                  alt="Plato" className="h-full w-auto max-w-none" />
                 </div>
                 <span className="text-[20px] sm:text-[22px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Roc Grotesk', sans-serif" }}>Plato</span>
               </div>

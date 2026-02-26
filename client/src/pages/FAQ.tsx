@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { useI18n } from "@/lib/i18n";
 import { useSEO } from "@/hooks/useSEO";
@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import { SiLinkedin, SiInstagram, SiTiktok } from "react-icons/si";
+import { FAQPageJsonLd } from "@/components/seo/JsonLd";
 
 function FAQItem({ question, answer, defaultOpen = false }: { question: string; answer: string; defaultOpen?: boolean }) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -16,6 +17,7 @@ function FAQItem({ question, answer, defaultOpen = false }: { question: string; 
       <button
         className="w-full flex items-start justify-between gap-4 py-6 text-start"
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
         data-testid="button-faq-toggle"
       >
         <span className="text-[15px] sm:text-base font-medium text-foreground leading-snug pr-4">
@@ -45,9 +47,11 @@ export default function FAQ() {
   const { t, lang, localePath } = useI18n();
   useSEO({ title: t.meta.pages.faq.title, description: t.meta.pages.faq.description });
   const p = t.faqPage;
+  const faqItems = useMemo(() => p.items, [p]);
 
   return (
     <div className="relative min-h-screen" style={{ overflowX: "clip" }}>
+      <FAQPageJsonLd items={faqItems} />
       {/* Radial blue glow — wider and taller, concentrated center */}
       <div className="absolute left-0 right-0 hidden dark:block pointer-events-none z-0" aria-hidden="true" style={{ top: "-60px", height: "600px" }}>
         <div className="absolute left-1/2 -translate-x-1/2 w-[90%] h-[520px] bg-[radial-gradient(ellipse_60%_55%_at_50%_0%,rgba(9,102,168,0.55),rgba(30,160,226,0.2)_38%,transparent_62%)]" style={{ top: "0px" }} />
@@ -150,7 +154,8 @@ export default function FAQ() {
             <div>
               <div className="flex items-center gap-1" style={{ direction: "ltr" }}>
                 <div className="h-8 sm:h-9 overflow-hidden flex-shrink-0" style={{ width: '28px' }}>
-                  <img src="/images/plato-logo.png" alt="" className="h-full w-auto max-w-none" />
+                  <img src="/images/plato-logo.png"
+                  alt="Plato" className="h-full w-auto max-w-none" />
                 </div>
                 <span className="text-[20px] sm:text-[22px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Roc Grotesk', sans-serif" }}>Plato</span>
               </div>

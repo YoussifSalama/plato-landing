@@ -33,7 +33,7 @@ npm run dev        # → http://localhost:5000
 
 ```
 client/
-├── index.html                        # HTML entry with OG meta
+├── index.html                        # HTML entry with OG, Twitter Card, canonical meta
 ├── src/
 │   ├── main.tsx                      # React entry
 │   ├── App.tsx                       # Router + providers
@@ -41,7 +41,7 @@ client/
 │   ├── assets/                       # Images, logos, fonts references
 │   │   ├── features/                 # Generated feature card images
 │   │   ├── logos/                    # 15 client logos (trusted-by section)
-│   │   └── dashboard-mockup.png
+│   │   └── blog/                    # Blog post images
 │   ├── components/
 │   │   ├── layout/                   # Header, Footer, Layout wrapper
 │   │   │   ├── Header.tsx            # Sticky header, nav, language switcher, theme toggle
@@ -53,16 +53,21 @@ client/
 │   │   │   ├── Section.tsx           # Standard section wrapper
 │   │   │   ├── ScrollManager.tsx     # Scroll position management
 │   │   │   └── PageTransition.tsx    # 220ms fade-in on route changes
+│   │   ├── seo/                      # SEO components
+│   │   │   └── JsonLd.tsx            # JSON-LD structured data (Organization, FAQPage, Article)
+│   │   ├── feature-mockups/          # Live animated product mockups
+│   │   │   ├── SmartJobMockup.tsx    # Smart job posting mockup
+│   │   │   └── ComparisonBar.tsx     # Before/after comparison animation
 │   │   ├── ui/                       # shadcn/ui primitives (Button, Card, etc.)
 │   │   ├── AboutAnalyticsDashboard.tsx  # Live animated analytics dashboard
 │   │   ├── DashboardMockup.tsx       # ATS dashboard mockup
 │   │   └── FeatureCardsSection.tsx   # Animated feature cards
 │   ├── hooks/
-│   │   ├── useSEO.ts                 # Per-page title + meta description
+│   │   ├── useSEO.ts                 # Per-page title, meta, OG, Twitter Cards, canonical
 │   │   ├── useScrollAnimation.ts     # Scroll-based animation hook
 │   │   └── use-toast.ts              # Toast notifications
 │   ├── lib/
-│   │   ├── config.ts                 # All env vars with defaults (single source of truth)
+│   │   ├── config.ts                 # All env vars with defaults + external URL helpers
 │   │   ├── i18n.tsx                  # I18n provider + hooks (useI18n)
 │   │   ├── theme.tsx                 # Light/dark theme provider
 │   │   ├── blog.ts                   # In-memory blog posts (EN + AR)
@@ -88,11 +93,11 @@ shared/
 │
 public/
 ├── fonts/            # Roc Grotesk OTF files (Light, Regular, Medium, Bold, ExtraBold)
-└── images/           # plato-logo.png, plato-p-icon.png
+└── images/           # plato-logo.png, plato-p-icon.png, og-default.png
 │
 docs/
 ├── ARCHITECTURE.md   # Detailed architecture notes
-└── DATABASE.md       # Supabase contact_leads schema + RLS
+└── DATABASE.md       # Database systems overview (PostgreSQL + Supabase)
 ```
 
 ---
@@ -118,8 +123,25 @@ Every route exists in both English and Arabic (`/ar` prefix). Language is auto-d
 | `/privacy` | `/ar/privacy` | Privacy Policy |
 | `/terms` | `/ar/terms` | Terms of Service |
 | `/login` | `/ar/login` | Login Portal |
+| `/signup` | `/ar/signup` | Signup Portal |
 
 Server-only routes: `/robots.txt`, `/sitemap.xml` (with hreflang alternates)
+
+---
+
+## External URLs
+
+| Purpose | URL |
+|---------|-----|
+| Employer Login | `https://agency.platohiring.com/auth/login` |
+| Employer Signup | `https://agency.platohiring.com/auth/signup` |
+| Job Seeker Login | `https://candidate.platohiring.com/auth/login` |
+| Job Seeker Signup | `https://candidate.platohiring.com/auth/signup` |
+| LinkedIn | `https://www.linkedin.com/company/aere-capital/` |
+| Contact Email | `info@platohiring.com` |
+| Contact Phone | `+201022330092` |
+
+All "Start Free Trial" buttons navigate internally to `/signup`. All "Request Demo" / "Book a Demo" buttons navigate internally to `/book-demo`. External app URLs (login/signup portals) open in new tabs.
 
 ---
 
@@ -144,7 +166,7 @@ Server-only routes: `/robots.txt`, `/sitemap.xml` (with hreflang alternates)
 1. Slot saved to PostgreSQL (unique constraint prevents double-booking)
 2. Google Calendar event created with Google Meet link (Cairo timezone, EET UTC+2)
 3. Confirmation email sent to booker via SendGrid (includes Meet link + calendar link)
-4. Admin notification email sent to `hello@platohiring.com`
+4. Admin notification email sent to `info@platohiring.com`
 
 ---
 
@@ -159,6 +181,7 @@ Server-only routes: `/robots.txt`, `/sitemap.xml` (with hreflang alternates)
 - Dark mode is default, persisted to `localStorage` under `plato-theme`
 - Toggle in header (sun/moon icon)
 - All components use semantic Tailwind tokens (`bg-background`, `text-foreground`, etc.)
+- Theme transition uses double `requestAnimationFrame` pattern for smooth switching
 
 ### Book a Demo System
 - Calendar UI: date picker (weekdays only, Sun–Thu), time slot grid (9 AM – 5 PM)
@@ -170,11 +193,45 @@ Server-only routes: `/robots.txt`, `/sitemap.xml` (with hreflang alternates)
 - Key visuals (dashboards, analytics panels) are live animated React components instead of static screenshots
 - `ScrollReveal` wrapper uses GSAP ScrollTrigger for scroll-based animations
 - `PageTransition` adds 220ms fade-in between routes (respects `prefers-reduced-motion`)
+- Accordion animations use CSS `grid-template-rows` transition (0fr → 1fr)
 
 ### SEO
-- Per-page `document.title` + `<meta description>` via `useSEO` hook
-- Server-generated `/sitemap.xml` with hreflang EN/AR alternates
-- Server-generated `/robots.txt`
+
+Comprehensive SEO implementation:
+
+- **Per-page meta**: `useSEO` hook sets `document.title`, `<meta description>`, OG tags, Twitter Cards, and `<link rel="canonical">` on every page
+- **Open Graph**: `og:title`, `og:description`, `og:image` (branded 1200×630 default at `/images/og-default.png`), `og:url`, `og:type`, `og:site_name`
+- **Twitter Cards**: `summary_large_image` card type with title, description, and image
+- **Canonical URLs**: Self-referencing for English pages; Arabic pages canonicalize to their English equivalent
+- **JSON-LD structured data**:
+  - `Organization` schema on Home page (name, logo, contact, social links)
+  - `WebSite` schema on Home page
+  - `FAQPage` schema on Home and FAQ pages
+  - `Article` schema on individual blog posts
+- **Sitemap**: Server-generated `/sitemap.xml` with hreflang EN/AR alternates for all routes
+- **Robots**: Server-generated `/robots.txt` pointing to sitemap
+- **Accessibility**: All FAQ accordion buttons have `aria-expanded` attribute; all logo images have descriptive `alt` text
+- **404 page**: Has proper `useSEO` hook with title and description
+
+#### Adding SEO to a New Page
+
+```tsx
+import { useSEO } from "@/hooks/useSEO";
+
+export default function NewPage() {
+  useSEO({
+    title: "Page Title",        // appended with " | Plato"
+    description: "Page description for search engines.",
+    image: "/images/custom.png", // optional, defaults to og-default.png
+  });
+  // ...
+}
+```
+
+For JSON-LD, import from `@/components/seo/JsonLd`:
+```tsx
+import { FAQPageJsonLd, ArticleJsonLd } from "@/components/seo/JsonLd";
+```
 
 ---
 
@@ -219,6 +276,8 @@ demo_bookings
 
 Push schema changes: `npm run db:push`
 
+Additionally, a Supabase `contact_leads` table can be used for the contact form (see `docs/DATABASE.md`).
+
 ---
 
 ## Building for Production
@@ -249,4 +308,5 @@ Edit `client/src/lib/translations/en.ts` or `ar.ts`. Arabic file is typed agains
 - **Gradient palette**: `#0966A8` → `#1EA0E2` (light), `#0B5E96` → `#1A8FCC` (dark)
 - **Buttons**: All interactive elements use shadcn `<Button>` with default behavior
 - **Logo**: `public/images/plato-logo.png` (transparent bg), inverted in dark mode
-- **Icons**: Lucide React for UI icons, `react-icons/si` for brand logos
+- **Icons**: Lucide React for UI icons, `react-icons/si` for brand logos (LinkedIn, Instagram, TikTok)
+- **Social**: LinkedIn (`linkedin.com/company/aere-capital/`) — no X/Twitter

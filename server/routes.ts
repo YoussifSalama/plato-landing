@@ -18,7 +18,9 @@ const SITE_ROUTES = [
   "/terms",
   "/pricing",
   "/login",
+  "/signup",
   "/book-demo",
+  "/testimonials",
 ];
 
 export async function registerRoutes(

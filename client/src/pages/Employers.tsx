@@ -52,6 +52,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
     <div className="border-t border-gray-200 dark:border-white/10">
       <button
         onClick={() => setOpen(!open)}
+        aria-expanded={open}
         className="w-full flex items-center justify-between py-5 text-left"
         data-testid={`faq-about-${question.slice(0, 20).replace(/\s+/g, "-").toLowerCase()}`}
       >
@@ -80,6 +81,7 @@ function FeatureAccordion({ icon: Icon, title, desc, index }: { icon: React.Comp
     <div data-testid={`about-feature-${index}`}>
       <button
         onClick={() => setOpen(!open)}
+        aria-expanded={open}
         className="w-full flex items-start gap-4 text-left py-2"
         data-testid={`about-feature-toggle-${index}`}
       >
@@ -367,7 +369,8 @@ export default function Employers() {
             <div>
               <div className="flex items-center gap-1" style={{ direction: "ltr" }}>
                 <div className="h-8 sm:h-9 overflow-hidden flex-shrink-0" style={{ width: '28px' }}>
-                  <img src="/images/plato-logo.png" alt="" className="h-full w-auto max-w-none" />
+                  <img src="/images/plato-logo.png"
+                  alt="Plato" className="h-full w-auto max-w-none" />
                 </div>
                 <span className="text-[20px] sm:text-[22px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Roc Grotesk', sans-serif" }}>Plato</span>
               </div>
