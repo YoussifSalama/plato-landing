@@ -121,8 +121,8 @@ export default function Privacy() {
             <div>
               <h4 className="text-sm font-semibold text-foreground mb-4">{t.footer.contactsTitle}</h4>
               <ul className="space-y-2.5">
-                <li><a href="mailto:info@plato.com" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors" dir="ltr">info@Plato.com</a></li>
-                <li><a href="tel:+20101245567" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors" dir="ltr">+20101245567</a></li>
+                <li><a href="mailto:info@platohiring.com" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors" dir="ltr">info@platohiring.com</a></li>
+                <li><a href="tel:+201022330092" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors" dir="ltr">+201022330092</a></li>
               </ul>
             </div>
 
