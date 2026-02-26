@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
-  allowedDevOrigins: ['*.replit.dev', '*.riker.replit.dev', '*.replit.app'],
+  allowedDevOrigins: ['*.replit.dev', '*.riker.replit.dev', '*.replit.app', '127.0.0.1'],
   images: {
     unoptimized: true,
   },
