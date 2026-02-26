@@ -16,7 +16,7 @@ type NavItem =
 export default function Header() {
   const { t, lang, dir, switchLang, localePath } = useI18n();
   const { isDark, toggleTheme } = useAppTheme();
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "/";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeHash, setActiveHash] = useState("");
 
@@ -145,16 +145,16 @@ export default function Header() {
             >
               {t.nav.langSwitch}
             </Button>
-            <Link href={localePath("/login")} data-testid="button-login-header">
-              <Button variant="ghost" size="sm" className="rounded-full px-5">
+            <Button asChild variant="ghost" size="sm" className="rounded-full px-5">
+              <Link href={localePath("/login")} data-testid="button-login-header">
                 {t.nav.login}
-              </Button>
-            </Link>
-            <Link href={localePath("/book-demo")} data-testid="button-book-demo-header">
-              <Button size="sm" className="rounded-full px-5 shadow-md shadow-primary/20 dark:shadow-primary/30">
+              </Link>
+            </Button>
+            <Button asChild size="sm" className="rounded-full px-5 shadow-md shadow-primary/20 dark:shadow-primary/30">
+              <Link href={localePath("/book-demo")} data-testid="button-book-demo-header">
                 {t.nav.bookDemo}
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
 
           <div className="flex-1 lg:hidden flex items-center justify-end gap-2">
@@ -224,16 +224,16 @@ export default function Header() {
               >
                 {t.nav.langSwitch}
               </button>
-              <Link href={localePath("/login")}>
-                <Button variant="outline" className="w-full rounded-full" onClick={() => setMobileOpen(false)} data-testid="button-login-mobile">
+              <Button asChild variant="outline" className="w-full rounded-full">
+                <Link href={localePath("/login")} onClick={() => setMobileOpen(false)} data-testid="button-login-mobile">
                   {t.nav.login}
-                </Button>
-              </Link>
-              <Link href={localePath("/book-demo")}>
-                <Button className="w-full rounded-full" onClick={() => setMobileOpen(false)}>
+                </Link>
+              </Button>
+              <Button asChild className="w-full rounded-full">
+                <Link href={localePath("/book-demo")} onClick={() => setMobileOpen(false)}>
                   {t.nav.bookDemo}
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

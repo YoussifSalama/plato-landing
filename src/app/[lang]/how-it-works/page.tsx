@@ -1,2 +1,2 @@
-import HowItWorks from "@/pages/HowItWorks";
+import HowItWorks from "@/page-components/HowItWorks";
 export default function HowItWorksPage() { return <HowItWorks />; }

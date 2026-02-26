@@ -19,7 +19,7 @@ export default function SmartHashLink({
   onClick,
   "data-testid": testId,
 }: SmartHashLinkProps) {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "/";
   const { lang } = useI18n();
 
   const homePath = lang === "ar" ? "/ar" : "/";

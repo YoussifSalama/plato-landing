@@ -1,2 +1,2 @@
-import BookDemo from "@/pages/BookDemo";
+import BookDemo from "@/page-components/BookDemo";
 export default function BookDemoPage() { return <BookDemo />; }

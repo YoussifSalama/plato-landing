@@ -54,7 +54,7 @@ src/
     api/
       demo-bookings/route.ts
       contact/route.ts
-  pages/              # Client component page implementations
+  page-components/    # Client component page implementations
   components/
     layout/           # Header, Footer, Layout, ClientLayout
     ui/               # shadcn/ui components
@@ -85,7 +85,7 @@ public/
 ### Routing Strategy
 - URL rewrites in `next.config.js` map `/` → `/en`, `/employers` → `/en/employers`, etc.
 - Arabic pages at `/ar/*` go directly to `[lang]` route with `lang=ar`
-- All page.tsx files are thin wrappers importing client components from `src/pages/`
+- All page.tsx files are thin wrappers importing client components from `src/page-components/`
 
 ### Internationalization (i18n)
 - Custom context-based i18n system in `src/lib/i18n.tsx`

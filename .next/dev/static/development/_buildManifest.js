@@ -70,24 +70,7 @@ self.__BUILD_MANIFEST = {
     "fallback": []
   },
   "sortedPages": [
-    "/Blog",
-    "/BlogPost",
-    "/BookDemo",
-    "/Contact",
-    "/Employers",
-    "/FAQ",
-    "/Home",
-    "/HowItWorks",
-    "/JobSeekers",
-    "/Login",
-    "/Pricing",
-    "/Privacy",
-    "/Security",
-    "/Signup",
-    "/Terms",
-    "/Testimonials",
     "/_app",
-    "/_error",
-    "/not-found"
+    "/_error"
   ]
 };self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()

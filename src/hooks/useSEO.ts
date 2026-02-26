@@ -37,14 +37,14 @@ function setLinkTag(rel: string, href: string) {
 
 export function useSEO({ title, description, image }: SEOProps = {}) {
   const { t, lang } = useI18n();
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "/";
 
   useEffect(() => {
     const siteName = t.meta.siteName;
     const pageTitle = title ? `${title} | ${siteName}` : `${siteName} — ${t.meta.siteTagline}`;
     document.title = pageTitle;
 
-    const desc = description || t.meta.siteDescription;
+    const desc = description || t.meta.siteTagline;
     const ogImage = image || DEFAULT_OG_IMAGE;
     const pagePath = pathname.replace(/^\/en/, "") || "/";
     const canonicalUrl = `${SITE_URL}${pagePath}`;

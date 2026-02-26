@@ -35,7 +35,7 @@ export function getLangFromPath(pathname: string): Lang {
 }
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "/";
   const router = useRouter();
   const lang = getLangFromPath(pathname);
   const dir: "ltr" | "rtl" = lang === "ar" ? "rtl" : "ltr";

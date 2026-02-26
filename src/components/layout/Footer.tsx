@@ -9,7 +9,7 @@ import { SiLinkedin, SiInstagram, SiTiktok } from "react-icons/si";
 
 export default function Footer() {
   const { t, dir, localePath } = useI18n();
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "/";
 
   const isHome = pathname === "/" || pathname === "/ar" || pathname === "/en";
   const isEmployers = pathname === "/employers" || pathname === "/ar/employers" || pathname === "/en/employers";
@@ -96,16 +96,16 @@ export default function Footer() {
               {t.footer.readyToGrow}
             </h4>
             <div className="flex flex-col gap-3">
-              <Link href={localePath("/signup")}>
-                <Button className="rounded-full w-full px-6" data-testid="button-footer-start-free">
+              <Button asChild className="rounded-full w-full px-6">
+                <Link href={localePath("/signup")} data-testid="button-footer-start-free">
                   {t.footer.startForFree}
-                </Button>
-              </Link>
-              <Link href={localePath("/book-demo")}>
-                <Button variant="outline" className="rounded-full w-full px-6" data-testid="button-footer-request-demo">
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="rounded-full w-full px-6">
+                <Link href={localePath("/book-demo")} data-testid="button-footer-request-demo">
                   {t.footer.requestDemo}
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

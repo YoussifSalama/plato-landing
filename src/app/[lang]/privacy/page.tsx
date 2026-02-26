@@ -1,2 +1,2 @@
-import Privacy from "@/pages/Privacy";
+import Privacy from "@/page-components/Privacy";
 export default function PrivacyPage() { return <Privacy />; }

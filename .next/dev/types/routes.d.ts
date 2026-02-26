@@ -3,7 +3,7 @@
 
 type AppRoutes = "/[lang]" | "/[lang]/blog" | "/[lang]/blog/[slug]" | "/[lang]/book-demo" | "/[lang]/contact" | "/[lang]/employers" | "/[lang]/faq" | "/[lang]/how-it-works" | "/[lang]/job-seekers" | "/[lang]/login" | "/[lang]/pricing" | "/[lang]/privacy" | "/[lang]/security" | "/[lang]/signup" | "/[lang]/terms" | "/[lang]/testimonials"
 type AppRouteHandlerRoutes = "/api/contact" | "/api/demo-bookings"
-type PageRoutes = "/Blog" | "/BlogPost" | "/BookDemo" | "/Contact" | "/Employers" | "/FAQ" | "/Home" | "/HowItWorks" | "/JobSeekers" | "/Login" | "/Pricing" | "/Privacy" | "/Security" | "/Signup" | "/Terms" | "/Testimonials" | "/not-found"
+type PageRoutes = never
 type LayoutRoutes = "/" | "/[lang]"
 type RedirectRoutes = never
 type RewriteRoutes = "/" | "/blog" | "/blog/[slug]" | "/book-demo" | "/contact" | "/employers" | "/faq" | "/how-it-works" | "/job-seekers" | "/login" | "/pricing" | "/privacy" | "/security" | "/signup" | "/terms" | "/testimonials"
@@ -31,37 +31,20 @@ interface ParamMap {
   "/api/contact": {}
   "/api/demo-bookings": {}
   "/blog": {}
-  "/Blog": {}
   "/blog/[slug]": { "slug": string; }
-  "/BlogPost": {}
   "/book-demo": {}
-  "/BookDemo": {}
   "/contact": {}
-  "/Contact": {}
   "/employers": {}
-  "/Employers": {}
   "/faq": {}
-  "/FAQ": {}
-  "/Home": {}
   "/how-it-works": {}
-  "/HowItWorks": {}
   "/job-seekers": {}
-  "/JobSeekers": {}
   "/login": {}
-  "/Login": {}
-  "/not-found": {}
   "/pricing": {}
-  "/Pricing": {}
   "/privacy": {}
-  "/Privacy": {}
   "/security": {}
-  "/Security": {}
   "/signup": {}
-  "/Signup": {}
   "/terms": {}
-  "/Terms": {}
   "/testimonials": {}
-  "/Testimonials": {}
 }
 
 
