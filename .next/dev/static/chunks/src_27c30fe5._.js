@@ -2294,13 +2294,6 @@ var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.sign
 "use client";
 ;
 const STORAGE_KEY = "plato-theme";
-function getInitialTheme() {
-    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
-    ;
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored === "light" || stored === "dark") return stored;
-    return "dark";
-}
 const ThemeContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])({
     theme: "dark",
     toggleTheme: ()=>{},
@@ -2313,9 +2306,20 @@ const useAppTheme = ()=>{
 _s(useAppTheme, "gDsCjeeItUuvgOWf1v4qoK9RF6k=");
 function ThemeProvider({ children }) {
     _s1();
-    const [theme, setThemeState] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(getInitialTheme);
+    const [theme, setThemeState] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("dark");
+    const [mounted, setMounted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "ThemeProvider.useEffect": ()=>{
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored === "light" || stored === "dark") {
+                setThemeState(stored);
+            }
+            setMounted(true);
+        }
+    }["ThemeProvider.useEffect"], []);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "ThemeProvider.useEffect": ()=>{
+            if (!mounted) return;
             const root = document.documentElement;
             if (theme === "dark") {
                 root.classList.add("dark");
@@ -2325,7 +2329,8 @@ function ThemeProvider({ children }) {
             localStorage.setItem(STORAGE_KEY, theme);
         }
     }["ThemeProvider.useEffect"], [
-        theme
+        theme,
+        mounted
     ]);
     const toggleTheme = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "ThemeProvider.useCallback[toggleTheme]": ()=>{
@@ -2358,11 +2363,11 @@ function ThemeProvider({ children }) {
         children: children
     }, void 0, false, {
         fileName: "[project]/src/lib/theme.tsx",
-        lineNumber: 57,
+        lineNumber: 60,
         columnNumber: 5
     }, this);
 }
-_s1(ThemeProvider, "vmV1Vm8AkjYHtQsTPwbPdo1gpO4=");
+_s1(ThemeProvider, "u8z/Zs4uk7MRFCA2fAmS9P2BxTY=");
 _c = ThemeProvider;
 var _c;
 __turbopack_context__.k.register(_c, "ThemeProvider");
