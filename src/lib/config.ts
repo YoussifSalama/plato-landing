@@ -2,7 +2,7 @@ export const config = {
   employerAppUrl: process.env.NEXT_PUBLIC_EMPLOYER_APP_URL || "https://platohiring.com",
   applicantAppUrl: process.env.NEXT_PUBLIC_APPLICANT_APP_URL || "https://applicant.platohiring.com",
   demoBookingUrl: process.env.NEXT_PUBLIC_DEMO_BOOKING_URL || "",
-  demoEmailFallback: process.env.NEXT_PUBLIC_DEMO_EMAIL_FALLBACK || "hello@platohiring.com",
+  demoEmailFallback: process.env.NEXT_PUBLIC_DEMO_EMAIL_FALLBACK || "Demo@platohiring.com",
   linkedinUrl: process.env.NEXT_PUBLIC_LINKEDIN_URL || "",
   supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL || "",
   supabaseAnonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",

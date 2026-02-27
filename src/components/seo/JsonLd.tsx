@@ -36,9 +36,7 @@ export function OrganizationJsonLd() {
     url: "https://platohiring.com",
     logo: "https://platohiring.com/images/plato-logo.png",
     description: "AI-powered HRM platform that helps companies streamline hiring, analyze CVs in seconds, and conduct intelligent interviews.",
-    sameAs: [
-      "https://www.linkedin.com/company/aere-capital/",
-    ],
+    sameAs: ["https://www.linkedin.com/company/aere-capital/", "https://www.instagram.com/platohiring", "https://www.tiktok.com/@platohiring"],
     contactPoint: {
       "@type": "ContactPoint",
       email: "info@platohiring.com",
@@ -57,6 +55,12 @@ export function WebSiteJsonLd() {
     name: "Plato",
     url: "https://platohiring.com",
     description: "AI-powered recruiting automation platform",
+    inLanguage: ["en", "ar"],
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://platohiring.com/blog?query={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
   };
 
   return <JsonLd data={data} id="jsonld-website" />;

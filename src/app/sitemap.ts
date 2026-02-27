@@ -19,6 +19,20 @@ const SITE_ROUTES = [
 ];
 
 const BASE_URL = "https://platohiring.com";
+const NOW = new Date();
+
+function routePriority(route: string): number {
+  if (route === "/") {
+    return 1.0;
+  }
+  if (route === "/pricing" || route === "/book-demo" || route === "/contact") {
+    return 0.9;
+  }
+  if (route === "/blog") {
+    return 0.8;
+  }
+  return 0.7;
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
@@ -28,6 +42,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     entries.push({
       url: `${BASE_URL}${route}`,
+      lastModified: NOW,
+      changeFrequency: route === "/" ? "weekly" : "monthly",
+      priority: routePriority(route),
       alternates: {
         languages: {
           en: `${BASE_URL}${route}`,
@@ -38,6 +55,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     entries.push({
       url: `${BASE_URL}${arRoute}`,
+      lastModified: NOW,
+      changeFrequency: route === "/" ? "weekly" : "monthly",
+      priority: routePriority(route),
       alternates: {
         languages: {
           en: `${BASE_URL}${route}`,

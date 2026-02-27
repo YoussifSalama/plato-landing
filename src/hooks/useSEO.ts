@@ -6,6 +6,7 @@ interface SEOProps {
   title?: string;
   description?: string;
   image?: string;
+  keywords?: string[];
 }
 
 const DEFAULT_OG_IMAGE = "/images/og-default.png";
@@ -35,7 +36,20 @@ function setLinkTag(rel: string, href: string) {
   }
 }
 
-export function useSEO({ title, description, image }: SEOProps = {}) {
+function setAlternateHrefLang(hrefLang: string, href: string) {
+  let el = document.querySelector(`link[rel="alternate"][hreflang="${hrefLang}"]`) as HTMLLinkElement | null;
+  if (el) {
+    el.href = href;
+  } else {
+    el = document.createElement("link");
+    el.rel = "alternate";
+    el.hreflang = hrefLang;
+    el.href = href;
+    document.head.appendChild(el);
+  }
+}
+
+export function useSEO({ title, description, image, keywords }: SEOProps = {}) {
   const { t, lang } = useI18n();
   const pathname = usePathname() ?? "/";
 
@@ -49,8 +63,13 @@ export function useSEO({ title, description, image }: SEOProps = {}) {
     const pagePath = pathname.replace(/^\/en/, "") || "/";
     const canonicalUrl = `${SITE_URL}${pagePath}`;
     const pageUrl = `${SITE_URL}${pagePath}`;
+    const enPath = pagePath.replace(/^\/ar/, "") || "/";
+    const arPath = pagePath.startsWith("/ar") ? pagePath : `/ar${pagePath === "/" ? "" : pagePath}`;
 
     setMetaTag("name", "description", desc);
+    if (keywords?.length) {
+      setMetaTag("name", "keywords", keywords.join(", "));
+    }
 
     setMetaTag("property", "og:title", pageTitle);
     setMetaTag("property", "og:description", desc);
@@ -65,5 +84,8 @@ export function useSEO({ title, description, image }: SEOProps = {}) {
     setMetaTag("name", "twitter:image", ogImage.startsWith("http") ? ogImage : `${SITE_URL}${ogImage}`);
 
     setLinkTag("canonical", canonicalUrl);
-  }, [title, description, image, t, lang, pathname]);
+    setAlternateHrefLang("en", `${SITE_URL}${enPath}`);
+    setAlternateHrefLang("ar", `${SITE_URL}${arPath}`);
+    setAlternateHrefLang("x-default", `${SITE_URL}${enPath}`);
+  }, [title, description, image, keywords, t, lang, pathname]);
 }

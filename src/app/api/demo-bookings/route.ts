@@ -1,63 +1,70 @@
 import { NextRequest, NextResponse } from "next/server";
 import { storage } from "@/lib/server/storage";
-import { insertDemoBookingSchema } from "@shared/schema";
-import { sendBookingConfirmation, sendBookingNotificationToAdmin } from "@/lib/server/email";
-import { createDemoEvent } from "@/lib/server/calendar";
+import { insertDemoRequestSchema } from "@shared/schema";
+import { sendDemoRequestNotificationToAdmin, sendDemoRequestReceivedToUser } from "@/lib/server/email";
+import { logWithRequestId, makeRequestId } from "@/lib/server/observability";
 
 export async function GET(req: NextRequest) {
   const date = req.nextUrl.searchParams.get("date");
   if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
     return NextResponse.json({ error: "Invalid date format. Use YYYY-MM-DD." }, { status: 400 });
   }
-  const bookings = await storage.getBookingsByDate(date);
-  return NextResponse.json(bookings.map((b) => ({ time: b.bookingTime })));
+  const unavailable = await storage.getUnavailableSlotsByDate(date);
+  return NextResponse.json(unavailable);
 }
 
 export async function POST(req: NextRequest) {
+  const requestId = makeRequestId();
   const body = await req.json();
-  const parsed = insertDemoBookingSchema.safeParse(body);
+  const parsed = insertDemoRequestSchema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ error: "Invalid booking data.", details: parsed.error.flatten() }, { status: 400 });
-  }
-  const bookingDate = new Date(parsed.data.bookingDate + "T00:00:00");
-  const now = new Date();
-  now.setHours(0, 0, 0, 0);
-  if (bookingDate < now) {
-    return NextResponse.json({ error: "Cannot book a date in the past." }, { status: 400 });
-  }
-  const dayOfWeek = bookingDate.getDay();
-  if (dayOfWeek === 5 || dayOfWeek === 6) {
-    return NextResponse.json({ error: "Cannot book on weekends." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid request data.", details: parsed.error.flatten() }, { status: 400 });
   }
 
   try {
-    const booking = await storage.createBooking(parsed.data);
+    const demoRequest = await storage.createDemoRequest(parsed.data);
+    logWithRequestId(requestId, "demo_request.created", { demoRequestId: demoRequest.id });
 
-    const emailData = {
+    const payload = {
       name: parsed.data.name,
       email: parsed.data.email,
-      bookingDate: parsed.data.bookingDate,
-      bookingTime: parsed.data.bookingTime,
-      meetLink: "",
-      eventLink: "",
+      phone: parsed.data.phone,
+      description: parsed.data.description,
+      preferredSlots: parsed.data.preferredSlots,
     };
 
-    try {
-      const calendarResult = await createDemoEvent(parsed.data);
-      emailData.meetLink = calendarResult.meetLink;
-      emailData.eventLink = calendarResult.eventLink;
-    } catch (calErr: any) {
-      console.error("Failed to create Google Calendar event:", calErr.message);
-    }
+    // Persist email jobs for retryable automation.
+    const adminEvent = await storage.createEmailEvent({
+      requestId: demoRequest.id,
+      kind: "new_request_admin",
+      toEmail: process.env.ADMIN_TO_EMAIL || "Demo@platohiring.com",
+      payload,
+    });
+    const userEvent = await storage.createEmailEvent({
+      requestId: demoRequest.id,
+      kind: "request_received_user",
+      toEmail: parsed.data.email,
+      payload: { name: parsed.data.name },
+    });
 
-    sendBookingConfirmation(emailData).catch(() => {});
-    sendBookingNotificationToAdmin(emailData).catch(() => {});
+    // Immediate attempt: mark events to prevent duplicate worker sends.
+    sendDemoRequestNotificationToAdmin(payload)
+      .then(() => storage.markEmailEventSent(adminEvent.id))
+      .catch((error) => storage.markEmailEventFailed(adminEvent.id, error?.message || "Immediate send failed", 2));
 
-    return NextResponse.json({ id: booking.id, date: booking.bookingDate, time: booking.bookingTime }, { status: 201 });
+    sendDemoRequestReceivedToUser({ name: parsed.data.name, email: parsed.data.email })
+      .then(() => storage.markEmailEventSent(userEvent.id))
+      .catch((error) => storage.markEmailEventFailed(userEvent.id, error?.message || "Immediate send failed", 2));
+
+    return NextResponse.json({ id: demoRequest.id, status: demoRequest.status }, { status: 201 });
   } catch (err: any) {
-    if (err.code === "23505") {
-      return NextResponse.json({ error: "This time slot is already booked." }, { status: 409 });
+    if (err?.code === "23505") {
+      const existing = await storage.getDemoRequestByIdempotencyKey(parsed.data.idempotencyKey);
+      if (existing) {
+        return NextResponse.json({ id: existing.id, status: existing.status, deduplicated: true }, { status: 200 });
+      }
     }
-    throw err;
+    logWithRequestId(requestId, "demo_request.create_failed", { error: err?.message || "Unknown error" });
+    return NextResponse.json({ error: "Failed to create demo request." }, { status: 500 });
   }
 }

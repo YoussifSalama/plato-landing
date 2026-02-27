@@ -6,6 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
+    host: "https://platohiring.com",
     sitemap: "https://platohiring.com/sitemap.xml",
   };
 }

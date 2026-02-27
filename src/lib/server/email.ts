@@ -1,9 +1,22 @@
 // SendGrid integration for sending booking confirmation emails
 import sgMail from '@sendgrid/mail';
+import { type DemoEmailKind } from '@shared/schema';
 
 let connectionSettings: any;
+const DEFAULT_CONTACT_TO_EMAIL = 'Info@platohiring.com';
+const DEFAULT_ADMIN_TO_EMAIL = 'Demo@platohiring.com';
+const DEFAULT_FROM_NAME = 'Plato Website';
 
 async function getCredentials() {
+  // Prefer direct env vars for local/dev/prod setups outside Replit.
+  if (process.env.SENDGRID_API_KEY && process.env.SENDGRID_FROM_EMAIL) {
+    return {
+      apiKey: process.env.SENDGRID_API_KEY,
+      email: process.env.SENDGRID_FROM_EMAIL,
+      name: process.env.SENDGRID_FROM_NAME || DEFAULT_FROM_NAME,
+    };
+  }
+
   const hostname = process.env.REPLIT_CONNECTORS_HOSTNAME;
   const xReplitToken = process.env.REPL_IDENTITY
     ? 'repl ' + process.env.REPL_IDENTITY
@@ -28,13 +41,17 @@ async function getCredentials() {
   if (!connectionSettings || (!connectionSettings.settings.api_key || !connectionSettings.settings.from_email)) {
     throw new Error('SendGrid not connected');
   }
-  return { apiKey: connectionSettings.settings.api_key, email: connectionSettings.settings.from_email };
+  return {
+    apiKey: connectionSettings.settings.api_key,
+    email: connectionSettings.settings.from_email,
+    name: process.env.SENDGRID_FROM_NAME || DEFAULT_FROM_NAME,
+  };
 }
 
 async function getUncachableSendGridClient() {
-  const { apiKey, email } = await getCredentials();
+  const { apiKey, email, name } = await getCredentials();
   sgMail.setApiKey(apiKey);
-  return { client: sgMail, fromEmail: email };
+  return { client: sgMail, fromEmail: email, fromName: name };
 }
 
 function formatDate(dateStr: string): string {
@@ -75,13 +92,13 @@ interface BookingEmailData {
 
 const HOST_NAME = 'Plato Team';
 const HOST_TITLE = 'Customer Success';
-const HOST_EMAIL = 'hello@platohiring.com';
+const HOST_EMAIL = 'Demo@platohiring.com';
 const TIMEZONE = 'EET (Egypt Time, UTC+2)';
 const RESCHEDULE_URL = 'https://platohiring.com/book-demo';
 
 export async function sendBookingConfirmation(booking: BookingEmailData) {
   try {
-    const { client, fromEmail } = await getUncachableSendGridClient();
+    const { client, fromEmail, fromName } = await getUncachableSendGridClient();
     const formattedDate = formatDate(booking.bookingDate);
     const dayName = getDayName(booking.bookingDate);
     const firstName = getFirstName(booking.name);
@@ -137,7 +154,7 @@ export async function sendBookingConfirmation(booking: BookingEmailData) {
       to: booking.email,
       from: {
         email: fromEmail,
-        name: 'Plato',
+        name: fromName,
       },
       subject: `Your Plato demo is confirmed — ${dayName}, ${formattedDate}`,
       html: `
@@ -310,13 +327,13 @@ interface ContactFormData {
 
 export async function sendContactFormEmail(data: ContactFormData) {
   try {
-    const { client, fromEmail } = await getUncachableSendGridClient();
+    const { client, fromEmail, fromName } = await getUncachableSendGridClient();
 
     const msg = {
-      to: 'info@platohiring.com',
+      to: process.env.CONTACT_TO_EMAIL || DEFAULT_CONTACT_TO_EMAIL,
       from: {
         email: fromEmail,
-        name: 'Plato Website',
+        name: fromName,
       },
       replyTo: {
         email: data.email,
@@ -406,16 +423,16 @@ export async function sendContactFormEmail(data: ContactFormData) {
 
 export async function sendBookingNotificationToAdmin(booking: BookingEmailData) {
   try {
-    const { client, fromEmail } = await getUncachableSendGridClient();
+    const { client, fromEmail, fromName } = await getUncachableSendGridClient();
     const formattedDate = formatDate(booking.bookingDate);
     const time = booking.bookingTime;
     const meetLink = booking.meetLink || 'Not generated';
 
     const msg = {
-      to: 'hello@platohiring.com',
+      to: process.env.ADMIN_TO_EMAIL || DEFAULT_ADMIN_TO_EMAIL,
       from: {
         email: fromEmail,
-        name: 'Plato Booking System',
+        name: fromName,
       },
       subject: `New Demo Booking — ${escapeHtml(booking.name)} on ${formattedDate} at ${time}`,
       html: `
@@ -438,5 +455,151 @@ export async function sendBookingNotificationToAdmin(booking: BookingEmailData) 
   } catch (error: any) {
     console.error('Failed to send admin notification email:', error?.response?.body || error.message);
     return false;
+  }
+}
+
+interface DemoRequestBase {
+  name: string;
+  email: string;
+}
+
+interface SendDemoRequestAdminPayload extends DemoRequestBase {
+  phone?: string;
+  description?: string;
+  preferredSlots: Array<{ slotDate: string; slotTime: string }>;
+}
+
+interface SendDemoConfirmedPayload extends DemoRequestBase {
+  meetingType?: "slot_based" | "pre_scheduled";
+  slotDate?: string;
+  slotTime?: string;
+  meetingLink: string;
+}
+
+interface SendDemoDeclinedPayload extends DemoRequestBase {
+  declineReason: string;
+  alternativeSlots?: Array<{ slotDate: string; slotTime: string }>;
+}
+
+function renderPreferredSlots(slots: Array<{ slotDate: string; slotTime: string }>): string {
+  if (!slots.length) return "<li>No preferred slots were provided.</li>";
+  return slots
+    .map((slot) => `<li>${escapeHtml(slot.slotDate)} at ${escapeHtml(slot.slotTime)}</li>`)
+    .join("");
+}
+
+export async function sendDemoRequestNotificationToAdmin(data: SendDemoRequestAdminPayload) {
+  const { client, fromEmail, fromName } = await getUncachableSendGridClient();
+  const toEmail = process.env.ADMIN_TO_EMAIL || DEFAULT_ADMIN_TO_EMAIL;
+  await client.send({
+    to: toEmail,
+    from: { email: fromEmail, name: fromName },
+    subject: `New Demo Request — ${escapeHtml(data.name)}`,
+    replyTo: { email: data.email, name: data.name },
+    html: `
+      <h2>New demo request submitted</h2>
+      <p><strong>Name:</strong> ${escapeHtml(data.name)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
+      <p><strong>Phone:</strong> ${escapeHtml(data.phone || "-")}</p>
+      <p><strong>Description:</strong> ${escapeHtml(data.description || "-")}</p>
+      <p><strong>Preferred slots:</strong></p>
+      <ul>${renderPreferredSlots(data.preferredSlots)}</ul>
+    `,
+  });
+}
+
+export async function sendDemoRequestReceivedToUser(data: DemoRequestBase) {
+  const { client, fromEmail, fromName } = await getUncachableSendGridClient();
+  await client.send({
+    to: data.email,
+    from: { email: fromEmail, name: fromName },
+    subject: "We've received your demo request",
+    html: `
+      <p>Hi ${escapeHtml(getFirstName(data.name))},</p>
+      <p>Thanks for requesting a demo with Plato. Our team will review your requested slots and confirm shortly.</p>
+      <p>If you need to update details, reply to this email.</p>
+    `,
+  });
+}
+
+export async function sendDemoConfirmedToUser(data: SendDemoConfirmedPayload) {
+  const { client, fromEmail, fromName } = await getUncachableSendGridClient();
+  const hasSpecificSlot = data.meetingType !== "pre_scheduled" && data.slotDate && data.slotTime;
+  const scheduleLine = hasSpecificSlot
+    ? `<p>Your demo is confirmed for <strong>${escapeHtml(data.slotDate!)} at ${escapeHtml(data.slotTime!)}</strong>.</p>`
+    : "<p>Your demo is confirmed. Please use the meeting link below at the pre-scheduled time shared by the team.</p>";
+  await client.send({
+    to: data.email,
+    from: { email: fromEmail, name: fromName },
+    subject: hasSpecificSlot
+      ? `Demo confirmed for ${escapeHtml(data.slotDate!)} ${escapeHtml(data.slotTime!)}`
+      : "Your demo meeting is confirmed",
+    html: `
+      <p>Hi ${escapeHtml(getFirstName(data.name))},</p>
+      ${scheduleLine}
+      <p>Meeting link: <a href="${escapeHtml(data.meetingLink)}">${escapeHtml(data.meetingLink)}</a></p>
+      <p>See you there!</p>
+    `,
+  });
+}
+
+export async function sendDemoDeclinedToUser(data: SendDemoDeclinedPayload) {
+  const { client, fromEmail, fromName } = await getUncachableSendGridClient();
+  await client.send({
+    to: data.email,
+    from: { email: fromEmail, name: fromName },
+    subject: "Update on your demo request",
+    html: `
+      <p>Hi ${escapeHtml(getFirstName(data.name))},</p>
+      <p>Unfortunately, we couldn’t confirm your requested slot.</p>
+      <p><strong>Reason:</strong> ${escapeHtml(data.declineReason)}</p>
+      ${
+        data.alternativeSlots?.length
+          ? `<p>Alternative slots:</p><ul>${renderPreferredSlots(data.alternativeSlots)}</ul>`
+          : ""
+      }
+      <p>Please reply with your preferred time and we’ll arrange it quickly.</p>
+    `,
+  });
+}
+
+export async function sendEmailByKind(kind: DemoEmailKind, toEmail: string, payload: Record<string, unknown>) {
+  switch (kind) {
+    case "request_received_user":
+      return sendDemoRequestReceivedToUser({
+        name: String(payload.name || ""),
+        email: toEmail,
+      });
+    case "new_request_admin":
+    case "pending_reminder_admin":
+      return sendDemoRequestNotificationToAdmin({
+        name: String(payload.name || "Unknown"),
+        email: String(payload.email || toEmail),
+        phone: payload.phone ? String(payload.phone) : undefined,
+        description: payload.description ? String(payload.description) : undefined,
+        preferredSlots: Array.isArray(payload.preferredSlots)
+          ? payload.preferredSlots as Array<{ slotDate: string; slotTime: string }>
+          : [],
+      });
+    case "request_confirmed_user":
+      return sendDemoConfirmedToUser({
+        name: String(payload.name || ""),
+        email: toEmail,
+        meetingType: payload.meetingType === "pre_scheduled" ? "pre_scheduled" : "slot_based",
+        slotDate: payload.slotDate ? String(payload.slotDate) : undefined,
+        slotTime: payload.slotTime ? String(payload.slotTime) : undefined,
+        meetingLink: String(payload.meetingLink || ""),
+      });
+    case "request_declined_user":
+      return sendDemoDeclinedToUser({
+        name: String(payload.name || ""),
+        email: toEmail,
+        declineReason: String(payload.declineReason || "Not provided"),
+        alternativeSlots: Array.isArray(payload.alternativeSlots)
+          ? payload.alternativeSlots as Array<{ slotDate: string; slotTime: string }>
+          : [],
+      });
+    default:
+      throw new Error(`Unsupported email kind: ${kind}`);
   }
 }

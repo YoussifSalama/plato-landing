@@ -3,24 +3,42 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://platohiring.com"),
-  title: "Plato - Hire faster with end-to-end screening and interview automation",
-  description: "Plato turns resumes into a shortlist you can trust — with outreach, interviews, and structured reports built in.",
+  title: {
+    default: "Plato | AI Hiring & Recruitment Automation Platform",
+    template: "%s",
+  },
+  description: "Plato helps teams automate candidate screening, interviews, and hiring workflows to reduce time-to-hire and improve hiring quality.",
+  keywords: ["AI hiring platform", "recruitment automation", "candidate screening", "structured interviews"],
+  alternates: {
+    canonical: "https://platohiring.com",
+    languages: {
+      en: "https://platohiring.com",
+      ar: "https://platohiring.com/ar",
+      "x-default": "https://platohiring.com",
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: "Plato - Hire faster with screening and interview automation",
-    description: "Plato turns resumes into a shortlist you can trust — with outreach, interviews, and structured reports built in.",
+    title: "Plato | AI Hiring & Recruitment Automation Platform",
+    description: "Plato helps teams automate candidate screening, interviews, and hiring workflows to reduce time-to-hire and improve hiring quality.",
     type: "website",
     siteName: "Plato",
+    locale: "en_US",
+    alternateLocale: ["ar_EG"],
     images: ["/images/og-default.png"],
     url: "https://platohiring.com",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Plato - Hire faster with screening and interview automation",
-    description: "Plato turns resumes into a shortlist you can trust — with outreach, interviews, and structured reports built in.",
+    title: "Plato | AI Hiring & Recruitment Automation Platform",
+    description: "Plato helps teams automate candidate screening, interviews, and hiring workflows to reduce time-to-hire and improve hiring quality.",
     images: ["/images/og-default.png"],
   },
   icons: {
-    icon: "/favicon.png",
+    icon: "/images/plato-icon.png",
   },
 };
 
