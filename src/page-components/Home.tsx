@@ -15,21 +15,21 @@ import ComparisonBar from "@/components/feature-mockups/ComparisonBar";
 import { OrganizationJsonLd, WebSiteJsonLd, FAQPageJsonLd } from "@/components/seo/JsonLd";
 
 const clientLogos = [
-  { src: "/images/logos/accentia.png", alt: "Accentia Middle East" },
-  { src: "/images/logos/implex.png", alt: "Implex" },
-  { src: "/images/logos/aicansell.png", alt: "AiCanSell" },
-  { src: "/images/logos/iaugmentor.png", alt: "iAugmentor" },
-  { src: "/images/logos/skillcreds.png", alt: "SkillCreds" },
-  { src: "/images/logos/neuroespitalia.png", alt: "NeuroEspitalia" },
-  { src: "/images/logos/polygon-pharma.png", alt: "Polygon Pharma" },
-  { src: "/images/logos/grove.png", alt: "Grove" },
-  { src: "/images/logos/melanite.png", alt: "Melanite" },
-  { src: "/images/logos/benchmark.png", alt: "Benchmark Engineering" },
-  { src: "/images/logos/quanta.png", alt: "Quanta" },
-  { src: "/images/logos/eslsca.png", alt: "ESLSCA University" },
-  { src: "/images/logos/misr-cement.png", alt: "Misr Beni Suef Cement" },
-  { src: "/images/logos/venezia.png", alt: "Ceramica Venezia" },
-  { src: "/images/logos/ikon.png", alt: "Ikon Industries" },
+  { src: "/images/logos/accentia.png?v=3", alt: "Accentia Middle East" },
+  { src: "/images/logos/implex.png?v=3", alt: "Implex" },
+  { src: "/images/logos/aicansell.png?v=3", alt: "AiCanSell" },
+  { src: "/images/logos/iaugmentor.png?v=3", alt: "iAugmentor" },
+  { src: "/images/logos/skillcreds.png?v=3", alt: "SkillCreds" },
+  { src: "/images/logos/neuroespitalia.png?v=3", alt: "NeuroEspitalia" },
+  { src: "/images/logos/polygon-pharma.png?v=3", alt: "Polygon Pharma" },
+  { src: "/images/logos/grove.png?v=3", alt: "Grove" },
+  { src: "/images/logos/melanite.png?v=3", alt: "Melanite" },
+  { src: "/images/logos/benchmark.png?v=3", alt: "Benchmark Engineering" },
+  { src: "/images/logos/quanta.png?v=3", alt: "Quanta" },
+  { src: "/images/logos/eslsca.png?v=3", alt: "ESLSCA University" },
+  { src: "/images/logos/misr-cement.png?v=3", alt: "Misr Beni Suef Cement" },
+  { src: "/images/logos/venezia.png?v=3", alt: "Ceramica Venezia" },
+  { src: "/images/logos/ikon.png?v=3", alt: "Ikon Industries" },
 ];
 
 function FAQItem({ question, answer }: { question: string; answer: string }) {
@@ -307,7 +307,7 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-1" style={{ direction: "ltr" }}>
                 <div className="h-8 sm:h-9 overflow-hidden flex-shrink-0" style={{ width: '28px' }}>
-                  <img src="/images/plato-logo.png"
+                  <img src="/images/plato-logo.png?v=3"
                   alt="Plato" className="h-full w-auto max-w-none" />
                 </div>
                 <span className="text-[20px] sm:text-[22px] font-bold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Roc Grotesk', sans-serif" }}>Plato</span>
