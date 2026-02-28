@@ -1,15 +1,15 @@
 module.exports = {
   apps: [
     {
-      name: "plato-web",
-      script: "npm",
-      args: "run start",
+      name: "plato-landing",
+      script: ".next/standalone/server.js",
       env: {
         NODE_ENV: "production",
+        PORT: 3003,
       },
     },
     {
-      name: "plato-worker",
+      name: "plato-landing-worker",
       script: "npm",
       args: "run worker:start",
       env: {

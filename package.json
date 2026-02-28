@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "next dev --webpack -p 3003",
     "build": "next build",
+    "build:standalone": "next build && cp -r public .next/standalone/public && mkdir -p .next/standalone/.next && cp -r .next/static .next/standalone/.next/static",
     "start": "next start -p 3003",
+    "pm2:prod": "pm2 startOrReload ecosystem.config.cjs --env production && pm2 save",
+    "prod:up": "npm run build:standalone && npm run pm2:prod",
+    "prod:fresh": "npm install --legacy-peer-deps && npm run prod:up",
     "check": "tsc",
     "db:push": "drizzle-kit push",
     "worker:dev": "tsx worker/index.ts",
