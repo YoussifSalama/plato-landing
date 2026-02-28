@@ -92,7 +92,7 @@ export default function BookDemo() {
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-border">
                 <div className="flex items-center gap-4">
                   <div className="relative h-14 w-14 flex-shrink-0 rounded-full overflow-hidden shadow-lg bg-white dark:bg-black border border-gray-200 dark:border-gray-700/50 flex items-center justify-center">
-                    <img src="/images/plato-icon.png" alt="Plato" className="h-8 w-8 object-contain" />
+                    <img src="/images/brand/plato-logo.png" alt="Plato" className="h-8 w-8 object-contain" />
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">{p.brandName}</p>
