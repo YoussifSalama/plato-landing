@@ -165,138 +165,78 @@ export async function sendBookingConfirmation(booking: BookingEmailData) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body style="margin:0;padding:0;background-color:#f4f4f5;font-family:Arial,Helvetica,sans-serif;">
-  <span style="display:none;font-size:1px;color:#f4f4f5;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">
-    ${dayName} at ${time} ${TIMEZONE} — 30 min product walkthrough with the Plato team
-  </span>
   <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f5;padding:40px 20px;">
     <tr>
       <td align="center">
         <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
-
           <!-- Header -->
           <tr>
-            <td style="background:linear-gradient(135deg,#0966A8,#1EA0E2);padding:28px 40px;text-align:center;">
-              <h1 style="color:#ffffff;margin:0;font-size:22px;font-weight:700;letter-spacing:-0.5px;">Plato</h1>
+            <td style="background:#0966A8;padding:40px 40px 28px;text-align:center;">
+              <div style="display:inline-block;background:#ffffff;padding:12px;border-radius:12px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+                <img src="https://agency.platohiring.com/brand/plato-logo.png" alt="Plato" style="height:32px;width:32px;display:block;" />
+              </div>
+              <h1 style="color:#ffffff;margin:0 0 4px;font-size:24px;font-weight:700;letter-spacing:-0.5px;">Demo Confirmed!</h1>
+              <p style="color:rgba(255,255,255,0.9);margin:0;font-size:15px;">Your meeting with the Plato team is all set</p>
             </td>
           </tr>
 
           <!-- Body -->
           <tr>
-            <td style="padding:36px 40px 16px;">
-              <p style="color:#111827;margin:0 0 20px;font-size:16px;line-height:1.6;">
-                Hi ${escapeHtml(firstName)},
-              </p>
-              <p style="color:#111827;margin:0 0 24px;font-size:16px;line-height:1.6;">
-                Your Plato demo is confirmed.
-              </p>
+            <td style="padding:40px;">
+              <p style="color:#111827;font-size:16px;margin:0 0 24px;">Hi ${escapeHtml(firstName)},</p>
+              <p style="color:#374151;font-size:15px;line-height:1.6;margin:0 0 24px;">Your Plato demo has been confirmed. We're looking forward to showing you how we can help with your hiring.</p>
 
-              <!-- Meeting Details Card -->
-              <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f0f7ff;border-radius:10px;border:1px solid #d0e3f5;margin-bottom:28px;">
+              <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;margin-bottom:32px;">
                 <tr>
-                  <td style="padding:24px;">
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td style="padding:6px 0;color:#374151;font-size:15px;line-height:1.7;">
-                          <strong>When:</strong> ${dayName}, ${formattedDate} &mdash; ${time} ${TIMEZONE}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding:6px 0;color:#374151;font-size:15px;line-height:1.7;">
-                          <strong>Duration:</strong> 30 minutes
-                        </td>
-                      </tr>
-                      ${meetLinkRow}
-                      <tr>
-                        <td style="padding:6px 0;color:#374151;font-size:15px;line-height:1.7;">
-                          <strong>Host:</strong> ${HOST_NAME}, ${HOST_TITLE}
-                        </td>
-                      </tr>
-                    </table>
+                  <td style="padding:16px 20px;border-bottom:1px solid #e5e7eb;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">WHEN</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">${dayName}, ${formattedDate} — ${time} ${TIMEZONE}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:16px 20px;border-bottom:1px solid #e5e7eb;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">DURATION</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">30 minutes</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:16px 20px;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">HOST</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">${HOST_NAME}, ${HOST_TITLE}</p>
                   </td>
                 </tr>
               </table>
 
-              <!-- Join Meeting CTA -->
-              ${joinButtonHtml}
-
-              <!-- What we'll cover -->
-              <p style="color:#111827;margin:0 0 12px;font-size:15px;font-weight:600;">
-                What we'll cover (30 mins):
-              </p>
-              <table cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
-                <tr>
-                  <td style="padding:4px 0;color:#374151;font-size:14px;line-height:1.7;">
-                    &#8226;&nbsp; A quick walkthrough of Plato (candidate flow, scoring, shortlisting)
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding:4px 0;color:#374151;font-size:14px;line-height:1.7;">
-                    &#8226;&nbsp; How companies use it for volume roles, campus hiring, and tech hiring
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding:4px 0;color:#374151;font-size:14px;line-height:1.7;">
-                    &#8226;&nbsp; Q&amp;A + next steps
-                  </td>
-                </tr>
-              </table>
-
-              <!-- How to prepare -->
-              <p style="color:#111827;margin:0 0 12px;font-size:15px;font-weight:600;">
-                To get the most out of it, feel free to bring:
-              </p>
-              <table cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
-                <tr>
-                  <td style="padding:4px 0;color:#374151;font-size:14px;line-height:1.7;">
-                    1.&nbsp; A job description you're hiring for (or planning to)
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding:4px 0;color:#374151;font-size:14px;line-height:1.7;">
-                    2.&nbsp; Your current hiring workflow (even if it's informal)
-                  </td>
-                </tr>
-              </table>
-
-              <!-- View in Calendar -->
-              ${calendarButtonHtml}
-
-              <!-- Reschedule link -->
-              <table cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:28px;">
+              ${meetLink ? `
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
                 <tr>
                   <td align="center">
-                    <p style="color:#6b7280;font-size:13px;margin:0;">
-                      Need to change the time?
-                      <a href="${RESCHEDULE_URL}" style="color:#0966A8;text-decoration:underline;">Reschedule or cancel</a>
-                    </p>
+                    <a href="${meetLink}" target="_blank" style="display:inline-block;background:#0966A8;color:#ffffff;padding:14px 36px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px;box-shadow:0 2px 4px rgba(9,102,168,0.2);">
+                      Join Google Meet
+                    </a>
                   </td>
                 </tr>
-              </table>
+              </table>` : ''}
 
-              <!-- Sign-off -->
-              <table cellpadding="0" cellspacing="0" style="margin-bottom:8px;border-top:1px solid #e5e7eb;padding-top:24px;">
-                <tr>
-                  <td style="padding-top:24px;">
-                    <p style="color:#374151;font-size:14px;line-height:1.7;margin:0;">
-                      See you soon,<br>
-                      <strong>${HOST_NAME}</strong><br>
-                      <span style="color:#6b7280;">${HOST_TITLE} | Plato</span><br>
-                      <span style="color:#6b7280;">
-                        <a href="mailto:${HOST_EMAIL}" style="color:#0966A8;text-decoration:none;">${HOST_EMAIL}</a>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-              </table>
+              <div style="background:#f8fafc;padding:24px;border-radius:12px;margin-bottom:32px;">
+                <p style="color:#111827;font-size:15px;font-weight:700;margin:0 0 12px;">What we'll cover:</p>
+                <ul style="margin:0;padding-left:18px;color:#374151;font-size:14px;line-height:1.6;">
+                  <li style="margin-bottom:8px;">Quick walkthrough of Plato (candidate flow, scoring, shortlisting)</li>
+                  <li style="margin-bottom:8px;">How companies use it for volume, campus, and tech hiring</li>
+                  <li>Q&A + next steps</li>
+                </ul>
+              </div>
+
+              <p style="color:#6b7280;font-size:13px;text-align:center;margin:0;">
+                Need to change the time? <a href="${RESCHEDULE_URL}" style="color:#0966A8;text-decoration:underline;">Reschedule or cancel</a>
+              </p>
             </td>
           </tr>
 
           <!-- Footer -->
           <tr>
-            <td style="padding:20px 40px;border-top:1px solid #e5e7eb;text-align:center;">
-              <p style="color:#9ca3af;font-size:11px;margin:0;line-height:1.6;">
-                &copy; ${new Date().getFullYear()} Plato. All rights reserved. | AI-Powered Hiring Platform
-              </p>
+            <td style="padding:24px 40px;border-top:1px solid #f1f5f9;text-align:center;">
+              <p style="color:#94a3b8;font-size:12px;margin:0;">&copy; ${new Date().getFullYear()} Plato Hire Agency. All rights reserved.</p>
             </td>
           </tr>
         </table>
@@ -328,7 +268,6 @@ interface ContactFormData {
 export async function sendContactFormEmail(data: ContactFormData) {
   try {
     const { client, fromEmail, fromName } = await getUncachableSendGridClient();
-
     const msg = {
       to: process.env.CONTACT_TO_EMAIL || DEFAULT_CONTACT_TO_EMAIL,
       from: {
@@ -349,59 +288,76 @@ export async function sendContactFormEmail(data: ContactFormData) {
     <tr>
       <td align="center">
         <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+          <!-- Header -->
           <tr>
-            <td style="background:linear-gradient(135deg,#0966A8,#1EA0E2);padding:28px 40px;text-align:center;">
-              <h1 style="color:#ffffff;margin:0;font-size:22px;font-weight:700;">New Contact Form Message</h1>
+            <td style="background:#0966A8;padding:40px 40px 28px;text-align:center;">
+              <div style="display:inline-block;background:#ffffff;padding:12px;border-radius:12px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+                <img src="https://agency.platohiring.com/brand/plato-logo.png" alt="Plato" style="height:32px;width:32px;display:block;" />
+              </div>
+              <h1 style="color:#ffffff;margin:0 0 4px;font-size:24px;font-weight:700;letter-spacing:-0.5px;">New Contact Message</h1>
+              <p style="color:rgba(255,255,255,0.9);margin:0;font-size:15px;">A new message was submitted from the contact page</p>
             </td>
           </tr>
+
+          <!-- Body -->
           <tr>
-            <td style="padding:36px 40px;">
-              <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f0f7ff;border-radius:10px;border:1px solid #d0e3f5;margin-bottom:24px;">
+            <td style="padding:40px;">
+              <p style="color:#111827;font-size:16px;margin:0 0 24px;">Hello Admin,</p>
+              <p style="color:#374151;font-size:15px;line-height:1.6;margin:0 0 24px;">A new contact request has been received with the following details:</p>
+
+              <!-- Details Container -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;margin-bottom:32px;">
                 <tr>
-                  <td style="padding:24px;">
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td style="padding:6px 0;color:#374151;font-size:15px;line-height:1.7;">
-                          <strong>Name:</strong> ${escapeHtml(data.name)}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding:6px 0;color:#374151;font-size:15px;line-height:1.7;">
-                          <strong>Email:</strong> <a href="mailto:${escapeHtml(data.email)}" style="color:#0966A8;text-decoration:none;">${escapeHtml(data.email)}</a>
-                        </td>
-                      </tr>
-                      ${data.phone ? `<tr>
-                        <td style="padding:6px 0;color:#374151;font-size:15px;line-height:1.7;">
-                          <strong>Phone:</strong> ${escapeHtml(data.phone)}
-                        </td>
-                      </tr>` : ''}
-                      ${data.inquiry ? `<tr>
-                        <td style="padding:6px 0;color:#374151;font-size:15px;line-height:1.7;">
-                          <strong>Inquiry Type:</strong> ${escapeHtml(data.inquiry)}
-                        </td>
-                      </tr>` : ''}
-                      ${data.language ? `<tr>
-                        <td style="padding:6px 0;color:#374151;font-size:15px;line-height:1.7;">
-                          <strong>Language:</strong> ${data.language === 'ar' ? 'Arabic' : 'English'}
-                        </td>
-                      </tr>` : ''}
-                    </table>
+                  <td style="padding:16px 20px;border-bottom:1px solid #e5e7eb;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">NAME</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">${escapeHtml(data.name)}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:16px 20px;border-bottom:1px solid #e5e7eb;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">EMAIL</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">${escapeHtml(data.email)}</p>
+                  </td>
+                </tr>
+                ${data.phone ? `
+                <tr>
+                  <td style="padding:16px 20px;border-bottom:1px solid #e5e7eb;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">PHONE</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">${escapeHtml(data.phone)}</p>
+                  </td>
+                </tr>` : ''}
+                ${data.inquiry ? `
+                <tr>
+                  <td style="padding:16px 20px;border-bottom:1px solid #e5e7eb;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">INQUIRY TYPE</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">${escapeHtml(data.inquiry)}</p>
+                  </td>
+                </tr>` : ''}
+                <tr>
+                  <td style="padding:16px 20px;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">MESSAGE</p>
+                    <p style="margin:8px 0 0;font-size:15px;color:#374151;line-height:1.6;white-space:pre-wrap;">${escapeHtml(data.message)}</p>
                   </td>
                 </tr>
               </table>
-              <div style="margin-bottom:24px;">
-                <p style="color:#111827;font-size:15px;font-weight:600;margin:0 0 8px;">Message:</p>
-                <p style="color:#374151;font-size:14px;line-height:1.7;margin:0;white-space:pre-wrap;">${escapeHtml(data.message)}</p>
-              </div>
-              <hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0;">
-              <p style="color:#9ca3af;font-size:12px;margin:0;">
-                You can reply directly to this email to respond to ${escapeHtml(data.name)}.
-              </p>
+
+              <!-- Action -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center">
+                    <a href="mailto:${escapeHtml(data.email)}" style="display:inline-block;background:#0966A8;color:#ffffff;padding:14px 36px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px;box-shadow:0 2px 4px rgba(9,102,168,0.2);">
+                      Reply to Message
+                    </a>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
+
+          <!-- Footer -->
           <tr>
-            <td style="padding:20px 40px;border-top:1px solid #e5e7eb;text-align:center;">
-              <p style="color:#9ca3af;font-size:11px;margin:0;">&copy; ${new Date().getFullYear()} Plato. Contact form submission from platohiring.com</p>
+            <td style="padding:24px 40px;border-top:1px solid #f1f5f9;text-align:center;">
+              <p style="color:#94a3b8;font-size:12px;margin:0;">&copy; ${new Date().getFullYear()} Plato Hire Agency. All rights reserved.</p>
             </td>
           </tr>
         </table>
@@ -436,17 +392,84 @@ export async function sendBookingNotificationToAdmin(booking: BookingEmailData) 
       },
       subject: `New Demo Booking — ${escapeHtml(booking.name)} on ${formattedDate} at ${time}`,
       html: `
-<div style="font-family:Arial,sans-serif;max-width:500px;padding:20px;">
-  <h2 style="color:#0966A8;margin-bottom:16px;">New Demo Booking</h2>
-  <p><strong>Name:</strong> ${escapeHtml(booking.name)}</p>
-  <p><strong>Email:</strong> <a href="mailto:${escapeHtml(booking.email)}">${escapeHtml(booking.email)}</a></p>
-  <p><strong>Date:</strong> ${formattedDate}</p>
-  <p><strong>Time:</strong> ${time} ${TIMEZONE}</p>
-  <p><strong>Duration:</strong> 30 minutes</p>
-  <p><strong>Meeting link:</strong> <a href="${meetLink}">${meetLink}</a></p>
-  <hr style="border:none;border-top:1px solid #e5e7eb;margin:20px 0;">
-  <p style="color:#6b7280;font-size:13px;">This is an automated notification from the Plato booking system.</p>
-</div>`,
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background-color:#f4f4f5;font-family:Arial,Helvetica,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f5;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+          <!-- Header -->
+          <tr>
+            <td style="background:#0966A8;padding:40px 40px 28px;text-align:center;">
+              <div style="display:inline-block;background:#ffffff;padding:12px;border-radius:12px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+                <img src="https://agency.platohiring.com/brand/plato-logo.png" alt="Plato" style="height:32px;width:32px;display:block;" />
+              </div>
+              <h1 style="color:#ffffff;margin:0 0 4px;font-size:24px;font-weight:700;letter-spacing:-0.5px;">New Demo Booking</h1>
+              <p style="color:rgba(255,255,255,0.9);margin:0;font-size:15px;">A demonstration session has been scheduled</p>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:40px;">
+              <p style="color:#111827;font-size:16px;margin:0 0 24px;">Hello Admin,</p>
+              <p style="color:#374151;font-size:15px;line-height:1.6;margin:0 0 24px;">A new demo booking has been received with the following details:</p>
+
+              <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;margin-bottom:32px;">
+                <tr>
+                  <td style="padding:16px 20px;border-bottom:1px solid #e5e7eb;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">BOOKED BY</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">${escapeHtml(booking.name)}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:16px 20px;border-bottom:1px solid #e5e7eb;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">EMAIL</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">${escapeHtml(booking.email)}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:16px 20px;border-bottom:1px solid #e5e7eb;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">DATE & TIME</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">${formattedDate} at ${time} ${TIMEZONE}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:16px 20px;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">GOOGLE MEET LINK</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">
+                      <a href="${meetLink}" style="color:#0966A8;text-decoration:none;">${meetLink}</a>
+                    </p>
+                  </td>
+                </tr>
+              </table>
+
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center">
+                    <a href="mailto:${escapeHtml(booking.email)}" style="display:inline-block;background:#0966A8;color:#ffffff;padding:14px 36px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px;box-shadow:0 2px 4px rgba(9,102,168,0.2);">
+                      Contact Requester
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:24px 40px;border-top:1px solid #f1f5f9;text-align:center;">
+              <p style="color:#94a3b8;font-size:12px;margin:0;">&copy; ${new Date().getFullYear()} Plato Hire Agency. All rights reserved.</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`,
     };
 
     await client.send(msg);
@@ -497,14 +520,85 @@ export async function sendDemoRequestNotificationToAdmin(data: SendDemoRequestAd
     subject: `New Demo Request — ${escapeHtml(data.name)}`,
     replyTo: { email: data.email, name: data.name },
     html: `
-      <h2>New demo request submitted</h2>
-      <p><strong>Name:</strong> ${escapeHtml(data.name)}</p>
-      <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
-      <p><strong>Phone:</strong> ${escapeHtml(data.phone || "-")}</p>
-      <p><strong>Description:</strong> ${escapeHtml(data.description || "-")}</p>
-      <p><strong>Preferred slots:</strong></p>
-      <ul>${renderPreferredSlots(data.preferredSlots)}</ul>
-    `,
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background-color:#f4f4f5;font-family:Arial,Helvetica,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f5;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+          <!-- Header -->
+          <tr>
+            <td style="background:#0966A8;padding:40px 40px 28px;text-align:center;">
+              <div style="display:inline-block;background:#ffffff;padding:12px;border-radius:12px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+                <img src="https://agency.platohiring.com/brand/plato-logo.png" alt="Plato" style="height:32px;width:32px;display:block;" />
+              </div>
+              <h1 style="color:#ffffff;margin:0 0 4px;font-size:24px;font-weight:700;letter-spacing:-0.5px;">New Walkthrough Request 🎉</h1>
+              <p style="color:rgba(255,255,255,0.9);margin:0;font-size:15px;">A new demonstration session has been requested</p>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:40px;">
+              <p style="color:#111827;font-size:16px;margin:0 0 24px;">Hello Admin,</p>
+              <p style="color:#374151;font-size:15px;line-height:1.6;margin:0 0 24px;">A dashboard walkthrough has been requested with the following details:</p>
+
+              <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;margin-bottom:32px;">
+                <tr>
+                  <td style="padding:16px 20px;border-bottom:1px solid #e5e7eb;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">REQUESTED BY</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">${escapeHtml(data.name)} (${escapeHtml(data.email)})</p>
+                  </td>
+                </tr>
+                ${data.phone ? `
+                <tr>
+                  <td style="padding:16px 20px;border-bottom:1px solid #e5e7eb;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">PHONE</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">${escapeHtml(data.phone)}</p>
+                  </td>
+                </tr>` : ''}
+                <tr>
+                  <td style="padding:16px 20px;border-bottom:1px solid #e5e7eb;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">PREFERRED SLOTS</p>
+                    <ul style="margin:8px 0 0;padding-left:18px;font-size:15px;color:#111827;font-weight:700;line-height:1.6;">
+                      ${renderPreferredSlots(data.preferredSlots)}
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:16px 20px;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">ADDITIONAL NOTES</p>
+                    <p style="margin:8px 0 0;font-size:15px;color:#374151;line-height:1.6;">${escapeHtml(data.description || "None provided")}</p>
+                  </td>
+                </tr>
+              </table>
+
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center">
+                    <a href="mailto:${escapeHtml(data.email)}" style="display:inline-block;background:#0966A8;color:#ffffff;padding:14px 36px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px;box-shadow:0 2px 4px rgba(9,102,168,0.2);">
+                      Reply to Request
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:24px 40px;border-top:1px solid #f1f5f9;text-align:center;">
+              <p style="color:#94a3b8;font-size:12px;margin:0;">&copy; ${new Date().getFullYear()} Plato Hire Agency. All rights reserved.</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`,
   });
 }
 
@@ -515,10 +609,50 @@ export async function sendDemoRequestReceivedToUser(data: DemoRequestBase) {
     from: { email: fromEmail, name: fromName },
     subject: "We've received your demo request",
     html: `
-      <p>Hi ${escapeHtml(getFirstName(data.name))},</p>
-      <p>Thanks for requesting a demo with Plato. Our team will review your requested slots and confirm shortly.</p>
-      <p>If you need to update details, reply to this email.</p>
-    `,
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background-color:#f4f4f5;font-family:Arial,Helvetica,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f5;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+          <!-- Header -->
+          <tr>
+            <td style="background:#0966A8;padding:40px 40px 28px;text-align:center;">
+              <div style="display:inline-block;background:#ffffff;padding:12px;border-radius:12px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+                <img src="https://agency.platohiring.com/brand/plato-logo.png" alt="Plato" style="height:32px;width:32px;display:block;" />
+              </div>
+              <h1 style="color:#ffffff;margin:0 0 4px;font-size:24px;font-weight:700;letter-spacing:-0.5px;">Request Received</h1>
+              <p style="color:rgba(255,255,255,0.9);margin:0;font-size:15px;">We've received your demo request</p>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:40px;">
+              <p style="color:#111827;font-size:16px;margin:0 0 24px;">Hi ${escapeHtml(getFirstName(data.name))},</p>
+              <p style="color:#374151;font-size:15px;line-height:1.6;margin:0 0 24px;">
+                Thanks for requesting a demo with Plato. Our team is currently reviewing your requested slots and will get back to you shortly to confirm the best time for our walkthrough.
+              </p>
+              <div style="background:#f8fafc;padding:24px;border-radius:12px;text-align:center;">
+                <p style="color:#64748b;font-size:14px;margin:0;">In the meantime, if you have any questions, just reply to this email.</p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:24px 40px;border-top:1px solid #f1f5f9;text-align:center;">
+              <p style="color:#94a3b8;font-size:12px;margin:0;">&copy; ${new Date().getFullYear()} Plato Hire Agency. All rights reserved.</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`,
   });
 }
 
@@ -535,11 +669,59 @@ export async function sendDemoConfirmedToUser(data: SendDemoConfirmedPayload) {
       ? `Demo confirmed for ${escapeHtml(data.slotDate!)} ${escapeHtml(data.slotTime!)}`
       : "Your demo meeting is confirmed",
     html: `
-      <p>Hi ${escapeHtml(getFirstName(data.name))},</p>
-      ${scheduleLine}
-      <p>Meeting link: <a href="${escapeHtml(data.meetingLink)}">${escapeHtml(data.meetingLink)}</a></p>
-      <p>See you there!</p>
-    `,
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background-color:#f4f4f5;font-family:Arial,Helvetica,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f5;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+          <!-- Header -->
+          <tr>
+            <td style="background:#0966A8;padding:40px 40px 28px;text-align:center;">
+              <div style="display:inline-block;background:#ffffff;padding:12px;border-radius:12px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+                <img src="https://agency.platohiring.com/brand/plato-logo.png" alt="Plato" style="height:32px;width:32px;display:block;" />
+              </div>
+              <h1 style="color:#ffffff;margin:0 0 4px;font-size:24px;font-weight:700;letter-spacing:-0.5px;">Demo Confirmed!</h1>
+              <p style="color:rgba(255,255,255,0.9);margin:0;font-size:15px;">Your walkthrough session is confirmed</p>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:40px;">
+              <p style="color:#111827;font-size:16px;margin:0 0 24px;">Hi ${escapeHtml(getFirstName(data.name))},</p>
+              ${scheduleLine}
+              
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin:32px 0;">
+                <tr>
+                  <td align="center">
+                    <a href="${data.meetingLink}" style="display:inline-block;background:#0966A8;color:#ffffff;padding:14px 36px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px;box-shadow:0 2px 4px rgba(9,102,168,0.2);">
+                      Join Meeting
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="color:#374151;font-size:15px;line-height:1.6;margin:0;text-align:center;">
+                Meeting link: <a href="${escapeHtml(data.meetingLink)}" style="color:#0966A8;">${escapeHtml(data.meetingLink)}</a>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:24px 40px;border-top:1px solid #f1f5f9;text-align:center;">
+              <p style="color:#94a3b8;font-size:12px;margin:0;">&copy; ${new Date().getFullYear()} Plato Hire Agency. All rights reserved.</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`,
   });
 }
 
