@@ -8,8 +8,14 @@ export const metadata: Metadata = {
     default: "Plato | AI Hiring & Recruitment Automation Platform",
     template: "%s",
   },
-  description: "Plato helps teams automate candidate screening, interviews, and hiring workflows to reduce time-to-hire and improve hiring quality.",
-  keywords: ["AI hiring platform", "recruitment automation", "candidate screening", "structured interviews"],
+  description:
+    "Plato helps teams automate candidate screening, interviews, and hiring workflows to reduce time-to-hire and improve hiring quality.",
+  keywords: [
+    "AI hiring platform",
+    "recruitment automation",
+    "candidate screening",
+    "structured interviews",
+  ],
   alternates: {
     canonical: "https://platohiring.com",
     languages: {
@@ -24,7 +30,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Plato | AI Hiring & Recruitment Automation Platform",
-    description: "Plato helps teams automate candidate screening, interviews, and hiring workflows to reduce time-to-hire and improve hiring quality.",
+    description:
+      "Plato helps teams automate candidate screening, interviews, and hiring workflows to reduce time-to-hire and improve hiring quality.",
     type: "website",
     siteName: "Plato",
     locale: "en_US",
@@ -35,7 +42,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Plato | AI Hiring & Recruitment Automation Platform",
-    description: "Plato helps teams automate candidate screening, interviews, and hiring workflows to reduce time-to-hire and improve hiring quality.",
+    description:
+      "Plato helps teams automate candidate screening, interviews, and hiring workflows to reduce time-to-hire and improve hiring quality.",
     images: ["/images/og-default.png"],
   },
   icons: {
@@ -52,27 +60,43 @@ export default function RootLayout({
     <html lang="en" className="dark" suppressHydrationWarning>
       <body suppressHydrationWarning>
 
-        {/* Google Tag */}
+        {/* Google Tag - optimized */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-18050023037"
           strategy="afterInteractive"
         />
+
         <Script id="google-tag" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+
+            function gtag(){
+              dataLayer.push(arguments);
+            }
+
             gtag('js', new Date());
-            gtag('config', 'AW-18050023037');
+
+            gtag('config', 'AW-18050023037', {
+              send_page_view: true
+            });
           `}
         </Script>
 
-        {/* Theme script */}
-        <script
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("plato-theme");if(t==="light"){document.documentElement.classList.remove("dark")}else{document.documentElement.classList.add("dark")}}catch(e){}})();`,
-          }}
-        />
+        {/* Theme script (runs early to prevent flicker) */}
+        <Script id="theme-script" strategy="beforeInteractive">
+          {`
+            (function(){
+              try {
+                var t = localStorage.getItem("plato-theme");
+                if(t === "light"){
+                  document.documentElement.classList.remove("dark");
+                } else {
+                  document.documentElement.classList.add("dark");
+                }
+              } catch(e){}
+            })();
+          `}
+        </Script>
 
         {children}
       </body>
