@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import { apiRequest } from "@/lib/queryClient";
 import { DEMO_TIME_SLOTS, todayAsDateInput } from "@/lib/demo-slots";
-import { Clock, Plus, X } from "lucide-react";
+import { Clock, X } from "lucide-react";
 
 export default function BookDemo() {
   const { t } = useI18n();
@@ -22,7 +22,6 @@ export default function BookDemo() {
   const [description, setDescription] = useState("");
   const [idempotencyKey, setIdempotencyKey] = useState(() => `demo_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`);
   const [selectedDate, setSelectedDate] = useState(todayAsDateInput());
-  const [selectedTime, setSelectedTime] = useState("");
   const [preferredSlots, setPreferredSlots] = useState<Array<{ slotDate: string; slotTime: string }>>([]);
   const [success, setSuccess] = useState(false);
   const [deduplicated, setDeduplicated] = useState(false);
@@ -34,12 +33,34 @@ export default function BookDemo() {
     enabled: Boolean(selectedDate),
   });
 
-  const unavailableSet = useMemo(() => new Set(unavailable.map((s) => s.time)), [unavailable]);
-  const availableSlots = useMemo(() => DEMO_TIME_SLOTS.filter((slot) => !unavailableSet.has(slot)), [unavailableSet]);
+  const unavailableSet = useMemo(() => new Set(unavailable.map((s: { time: string }) => s.time)), [unavailable]);
+
+  const parseTime = (timeStr: string) => {
+    const [time, modifier] = timeStr.split(" ");
+    let [hours, minutes] = time.split(":").map(Number);
+    if (modifier === "PM" && hours !== 12) hours += 12;
+    if (modifier === "AM" && hours === 12) hours = 0;
+    return { hours, minutes };
+  };
+
+  const availableSlots = useMemo(() => {
+    const filtered = DEMO_TIME_SLOTS.filter((slot) => !unavailableSet.has(slot));
+    if (selectedDate === todayAsDateInput()) {
+      const now = new Date();
+      const currentHours = now.getHours();
+      const currentMinutes = now.getMinutes();
+      return filtered.filter((slot) => {
+        const { hours, minutes } = parseTime(slot);
+        return hours > currentHours || (hours === currentHours && minutes > currentMinutes);
+      });
+    }
+    return filtered;
+  }, [unavailableSet, selectedDate]);
 
   const submitMutation = useMutation({
     mutationFn: async () => {
-      const payload = { idempotencyKey, name, email, phone, description, preferredSlots };
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const payload = { idempotencyKey, name, email, phone, description, preferredSlots, timezone };
       const res = await apiRequest("POST", "/api/demo-bookings", payload);
       return res.json();
     },
@@ -52,7 +73,6 @@ export default function BookDemo() {
       setPhone("");
       setDescription("");
       setPreferredSlots([]);
-      setSelectedTime("");
       setIdempotencyKey(`demo_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`);
     },
     onError: (err: Error) => {
@@ -60,17 +80,28 @@ export default function BookDemo() {
     },
   });
 
-  const canAddSlot = selectedDate && selectedTime && preferredSlots.length < 6;
   const canSubmit = name.trim() && email.trim() && preferredSlots.length > 0 && !submitMutation.isPending;
 
-  const addPreferredSlot = () => {
-    if (!canAddSlot) return;
-    if (preferredSlots.some((slot) => slot.slotDate === selectedDate && slot.slotTime === selectedTime)) return;
-    setPreferredSlots((curr) => [...curr, { slotDate: selectedDate, slotTime: selectedTime }]);
+  const isSlotSelected = (slot: string) =>
+    preferredSlots.some((s) => s.slotDate === selectedDate && s.slotTime === slot);
+
+  const toggleSlot = (slot: string) => {
+    if (isSlotSelected(slot)) {
+      removePreferredSlot(selectedDate, slot);
+    } else {
+      if (preferredSlots.length < 6) {
+        setPreferredSlots((curr: Array<{ slotDate: string; slotTime: string }>) => [
+          ...curr,
+          { slotDate: selectedDate, slotTime: slot },
+        ]);
+      }
+    }
   };
 
   const removePreferredSlot = (slotDate: string, slotTime: string) => {
-    setPreferredSlots((curr) => curr.filter((slot) => !(slot.slotDate === slotDate && slot.slotTime === slotTime)));
+    setPreferredSlots((curr: Array<{ slotDate: string; slotTime: string }>) =>
+      curr.filter((slot: { slotDate: string; slotTime: string }) => !(slot.slotDate === slotDate && slot.slotTime === slotTime))
+    );
   };
 
   const handleSubmit = () => {
@@ -153,21 +184,25 @@ export default function BookDemo() {
 
                   <div className="border border-border rounded-xl p-4">
                     <p className="text-sm font-medium mb-3">Select preferred time</p>
-                    <div className="flex flex-wrap gap-2 mb-3">
+                    <div className="flex flex-wrap gap-2">
                       {availableSlots.map((slot) => (
                         <Button
                           key={slot}
-                          variant={selectedTime === slot ? "default" : "outline"}
+                          variant={isSlotSelected(slot) ? "default" : "outline"}
                           size="sm"
-                          onClick={() => setSelectedTime(slot)}
+                          onClick={() => toggleSlot(slot)}
+                          className="transition-all duration-200"
                         >
                           {slot}
+                          {isSlotSelected(slot) && <X className="w-3.5 h-3.5 ms-2 opacity-70" />}
                         </Button>
                       ))}
+                      {availableSlots.length === 0 && (
+                        <p className="text-sm text-muted-foreground italic">
+                          No more slots available for this date.
+                        </p>
+                      )}
                     </div>
-                    <Button type="button" variant="secondary" onClick={addPreferredSlot} disabled={!canAddSlot}>
-                      <Plus className="w-4 h-4 me-1" /> Add preferred slot
-                    </Button>
                   </div>
 
                   <div>
