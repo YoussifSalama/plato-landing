@@ -515,8 +515,8 @@ export const en = {
     plans: {
       intro: {
         name: "Intro",
-        monthlyPrice: "$20",
-        yearlyPrice: "$16",
+        monthlyPrice: "$179",
+        yearlyPrice: "$179",
         description: "For most businesses that want to optimize web queries",
         features: [
           "All limited links",
@@ -528,8 +528,8 @@ export const en = {
       },
       base: {
         name: "Base",
-        monthlyPrice: "$50",
-        yearlyPrice: "$40",
+        monthlyPrice: "$360",
+        yearlyPrice: "$360",
         description: "For most businesses that want to optimize web queries",
         features: [
           "All limited links",
@@ -541,8 +541,8 @@ export const en = {
       },
       pro: {
         name: "Pro",
-        monthlyPrice: "$100",
-        yearlyPrice: "$80",
+        monthlyPrice: "$720",
+        yearlyPrice: "$720",
         description: "For most businesses that want to optimize web queries",
         features: [
           "All limited links",

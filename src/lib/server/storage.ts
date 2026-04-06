@@ -101,6 +101,7 @@ export class MemStorage implements IStorage {
         email: input.email,
         phone: input.phone || null,
         description: input.description || null,
+        timezone: input.timezone || null,
         status: "pending",
       }).returning();
 

@@ -517,8 +517,8 @@ export const ar: typeof en = {
     plans: {
       intro: {
         name: "المبتدئ",
-        monthlyPrice: "$20",
-        yearlyPrice: "$16",
+        monthlyPrice: "$179",
+        yearlyPrice: "$179",
         description: "لمعظم الشركات التي ترغب في تحسين استعلامات الويب",
         features: [
           "جميع الروابط المحدودة",
@@ -530,8 +530,8 @@ export const ar: typeof en = {
       },
       base: {
         name: "الأساسي",
-        monthlyPrice: "$50",
-        yearlyPrice: "$40",
+        monthlyPrice: "$360",
+        yearlyPrice: "$360",
         description: "لمعظم الشركات التي ترغب في تحسين استعلامات الويب",
         features: [
           "جميع الروابط المحدودة",
@@ -543,8 +543,8 @@ export const ar: typeof en = {
       },
       pro: {
         name: "الاحترافي",
-        monthlyPrice: "$100",
-        yearlyPrice: "$80",
+        monthlyPrice: "$720",
+        yearlyPrice: "$720",
         description: "لمعظم الشركات التي ترغب في تحسين استعلامات الويب",
         features: [
           "جميع الروابط المحدودة",
