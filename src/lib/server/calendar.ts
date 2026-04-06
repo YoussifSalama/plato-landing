@@ -47,17 +47,18 @@ export async function createDemoEvent(booking: {
   const startDate = new Date(startDateTime);
   const endDate = new Date(startDate.getTime() + 30 * 60 * 1000);
 
-  const endDateTime = endDate.toISOString().replace(/\.\d+Z$/, '');
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const endDateTime = `${endDate.getFullYear()}-${pad(endDate.getMonth() + 1)}-${pad(endDate.getDate())}T${pad(endDate.getHours())}:${pad(endDate.getMinutes())}:${pad(endDate.getSeconds())}`;
 
   const event = {
     summary: `Plato Demo — ${booking.name}`,
     description: `30-minute product demo with ${booking.name}.\n\nWe'll cover:\n• Candidate flow, scoring, and shortlisting\n• Use cases for volume roles, campus hiring, and tech hiring\n• Q&A and next steps\n\nBooker email: ${booking.email}`,
     start: {
-      dateTime: startDate.toISOString(),
+      dateTime: startDateTime,
       timeZone: timezone,
     },
     end: {
-      dateTime: endDate.toISOString(),
+      dateTime: endDateTime,
       timeZone: timezone,
     },
     attendees: [
