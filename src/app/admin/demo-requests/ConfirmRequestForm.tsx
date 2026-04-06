@@ -9,12 +9,18 @@ interface ConfirmRequestFormProps {
   requestId: string;
   csrfToken: string;
   preferredSlots: Array<{ slotDate: string; slotTime: string }>;
+  name: string;
+  email: string;
+  timezone?: string | null;
 }
 
 export default function ConfirmRequestForm({
   requestId,
   csrfToken,
   preferredSlots,
+  name,
+  email,
+  timezone,
 }: ConfirmRequestFormProps) {
   const initialDate = preferredSlots[0]?.slotDate || todayAsDateInput();
   const [meetingType, setMeetingType] = useState<"slot_based" | "pre_scheduled">("slot_based");
@@ -22,6 +28,7 @@ export default function ConfirmRequestForm({
   const [slotTime, setSlotTime] = useState(preferredSlots[0]?.slotTime || "");
   const [meetingLink, setMeetingLink] = useState("");
   const [loading, setLoading] = useState(false);
+  const [generating, setGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [unavailable, setUnavailable] = useState<string[]>([]);
 
@@ -71,6 +78,26 @@ export default function ConfirmRequestForm({
       setSlotTime(availableSlots[0]);
     }
   }, [availableSlots, slotTime]);
+
+  const handleGenerateLink = async () => {
+    if (!slotDate || !slotTime) return;
+    setGenerating(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/admin/demo-requests/generate-meet-link", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, slotDate, slotTime, timezone }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to generate link.");
+      setMeetingLink(data.meetLink);
+    } catch (err: any) {
+      setError(err?.message || "Failed to generate meeting link.");
+    } finally {
+      setGenerating(false);
+    }
+  };
 
   return (
     <form
@@ -173,15 +200,28 @@ export default function ConfirmRequestForm({
         </div>
       ) : null}
 
-      <div>
+      <div className="space-y-2">
         <label className="text-xs">Meeting link</label>
-        <Input
-          name="meetingLink"
-          placeholder="https://meet.google.com/..."
-          required
-          value={meetingLink}
-          onChange={(e) => setMeetingLink(e.target.value)}
-        />
+        <div className="flex gap-2">
+          <Input
+            name="meetingLink"
+            placeholder="https://meet.google.com/..."
+            required
+            value={meetingLink}
+            onChange={(e) => setMeetingLink(e.target.value)}
+            className="flex-1"
+          />
+          <Button
+            type="button"
+            variant="secondary"
+            size="sm"
+            onClick={handleGenerateLink}
+            disabled={generating || !slotDate || !slotTime}
+            className="whitespace-nowrap"
+          >
+            {generating ? "Generating..." : "Generate Google Meet"}
+          </Button>
+        </div>
       </div>
 
       <Button

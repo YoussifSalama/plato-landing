@@ -155,6 +155,9 @@ export default async function AdminDemoRequestsPage({
                       slotDate: slot.slotDate,
                       slotTime: slot.slotTime,
                     }))}
+                    name={request.name}
+                    email={request.email}
+                    timezone={request.timezone}
                   />
 
                   <DeclineRequestForm requestId={request.id} csrfToken={csrfToken} />

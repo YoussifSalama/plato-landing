@@ -64,6 +64,7 @@ export const demoRequests = pgTable("demo_requests", {
   status: text("status").notNull().default("pending"),
   meetingLink: text("meeting_link"),
   confirmedSlotDateTime: timestamp("confirmed_slot_datetime"),
+  timezone: text("timezone"),
   declineReason: text("decline_reason"),
   reviewedBy: text("reviewed_by"),
   reviewedAt: timestamp("reviewed_at"),
@@ -123,6 +124,7 @@ export const insertDemoRequestSchema = z.object({
   email: z.string().email().max(300),
   phone: z.string().max(40).optional().or(z.literal("")),
   description: z.string().max(4000).optional().or(z.literal("")),
+  timezone: z.string().max(100).optional().or(z.literal("")),
   preferredSlots: z.array(preferredSlotSchema).min(1).max(6),
 });
 
