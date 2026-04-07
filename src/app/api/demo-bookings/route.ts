@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { storage } from "@/lib/server/storage";
 import { insertDemoRequestSchema } from "@shared/schema";
-import { sendDemoRequestNotificationToAdmin, sendDemoRequestReceivedToUser } from "@/lib/server/email";
+import { sendBookingConfirmation, sendDemoRequestNotificationToAdmin } from "@/lib/server/email";
+import { createDemoEvent } from "@/lib/server/calendar";
 import { logWithRequestId, makeRequestId } from "@/lib/server/observability";
 
 export async function GET(req: NextRequest) {
@@ -25,38 +26,69 @@ export async function POST(req: NextRequest) {
     const demoRequest = await storage.createDemoRequest(parsed.data);
     logWithRequestId(requestId, "demo_request.created", { demoRequestId: demoRequest.id });
 
-    const payload = {
+    const slot = parsed.data.preferredSlots[0];
+    const unavailableInDb = await storage.getUnavailableSlotsByDate(slot.slotDate);
+    const isSlotTaken = unavailableInDb.some(s => s.time === slot.slotTime);
+
+    if (isSlotTaken) {
+      await storage.createEmailEvent({
+        requestId: demoRequest.id,
+        kind: "new_request_admin",
+        toEmail: process.env.ADMIN_TO_EMAIL || "Demo@platohiring.com",
+        payload: { ...parsed.data, status: "pending_conflict" },
+      });
+      return NextResponse.json({ id: demoRequest.id, status: "pending" }, { status: 201 });
+    }
+
+    const { meetLink, eventLink } = await createDemoEvent({
       name: parsed.data.name,
       email: parsed.data.email,
-      phone: parsed.data.phone,
-      description: parsed.data.description,
-      preferredSlots: parsed.data.preferredSlots,
+      bookingDate: slot.slotDate,
+      bookingTime: slot.slotTime,
+      timezone: parsed.data.timezone,
+    });
+
+    await storage.confirmDemoRequest({
+      requestId: demoRequest.id,
+      meetingType: "slot_based",
+      slotDate: slot.slotDate,
+      slotTime: slot.slotTime,
+      meetingLink: meetLink,
+      reviewedBy: "System Automation",
+    });
+
+    const emailPayload = {
+      name: parsed.data.name,
+      email: parsed.data.email,
+      bookingDate: slot.slotDate,
+      bookingTime: slot.slotTime,
+      meetLink,
+      eventLink,
     };
 
-    // Persist email jobs for retryable automation.
+    const userEvent = await storage.createEmailEvent({
+      requestId: demoRequest.id,
+      kind: "request_confirmed_user",
+      toEmail: parsed.data.email,
+      payload: emailPayload,
+    });
+
     const adminEvent = await storage.createEmailEvent({
       requestId: demoRequest.id,
       kind: "new_request_admin",
       toEmail: process.env.ADMIN_TO_EMAIL || "Demo@platohiring.com",
-      payload,
-    });
-    const userEvent = await storage.createEmailEvent({
-      requestId: demoRequest.id,
-      kind: "request_received_user",
-      toEmail: parsed.data.email,
-      payload: { name: parsed.data.name },
+      payload: { ...emailPayload, status: "auto_confirmed" },
     });
 
-    // Immediate attempt: mark events to prevent duplicate worker sends.
-    sendDemoRequestNotificationToAdmin(payload)
-      .then(() => storage.markEmailEventSent(adminEvent.id))
-      .catch((error) => storage.markEmailEventFailed(adminEvent.id, error?.message || "Immediate send failed", 2));
-
-    sendDemoRequestReceivedToUser({ name: parsed.data.name, email: parsed.data.email })
+    sendBookingConfirmation(emailPayload)
       .then(() => storage.markEmailEventSent(userEvent.id))
       .catch((error) => storage.markEmailEventFailed(userEvent.id, error?.message || "Immediate send failed", 2));
 
-    return NextResponse.json({ id: demoRequest.id, status: demoRequest.status }, { status: 201 });
+    sendDemoRequestNotificationToAdmin({ ...parsed.data, preferredSlots: parsed.data.preferredSlots })
+      .then(() => storage.markEmailEventSent(adminEvent.id))
+      .catch((error) => storage.markEmailEventFailed(adminEvent.id, error?.message || "Immediate send failed", 2));
+
+    return NextResponse.json({ id: demoRequest.id, status: "confirmed", meetLink }, { status: 201 });
   } catch (err: any) {
     if (err?.code === "23505") {
       const existing = await storage.getDemoRequestByIdempotencyKey(parsed.data.idempotencyKey);

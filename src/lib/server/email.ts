@@ -21,8 +21,8 @@ async function getCredentials() {
   const xReplitToken = process.env.REPL_IDENTITY
     ? 'repl ' + process.env.REPL_IDENTITY
     : process.env.WEB_REPL_RENEWAL
-    ? 'depl ' + process.env.WEB_REPL_RENEWAL
-    : null;
+      ? 'depl ' + process.env.WEB_REPL_RENEWAL
+      : null;
 
   if (!xReplitToken) {
     throw new Error('X-Replit-Token not found for repl/depl');
@@ -88,12 +88,12 @@ interface BookingEmailData {
   bookingTime: string;
   meetLink?: string;
   eventLink?: string;
+  timezone?: string;
 }
 
 const HOST_NAME = 'Plato Team';
 const HOST_TITLE = 'Customer Success';
 const HOST_EMAIL = 'Demo@platohiring.com';
-const TIMEZONE = 'EET (Egypt Time, UTC+2)';
 const RESCHEDULE_URL = 'https://platohiring.com/book-demo';
 
 export async function sendBookingConfirmation(booking: BookingEmailData) {
@@ -190,7 +190,7 @@ export async function sendBookingConfirmation(booking: BookingEmailData) {
                 <tr>
                   <td style="padding:16px 20px;border-bottom:1px solid #e5e7eb;">
                     <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">WHEN</p>
-                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">${dayName}, ${formattedDate} — ${time} ${TIMEZONE}</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">${formattedDate} — ${time}${booking.timezone ? ` (${booking.timezone})` : ''}</p>
                   </td>
                 </tr>
                 <tr>
@@ -735,10 +735,9 @@ export async function sendDemoDeclinedToUser(data: SendDemoDeclinedPayload) {
       <p>Hi ${escapeHtml(getFirstName(data.name))},</p>
       <p>Unfortunately, we couldn’t confirm your requested slot.</p>
       <p><strong>Reason:</strong> ${escapeHtml(data.declineReason)}</p>
-      ${
-        data.alternativeSlots?.length
-          ? `<p>Alternative slots:</p><ul>${renderPreferredSlots(data.alternativeSlots)}</ul>`
-          : ""
+      ${data.alternativeSlots?.length
+        ? `<p>Alternative slots:</p><ul>${renderPreferredSlots(data.alternativeSlots)}</ul>`
+        : ""
       }
       <p>Please reply with your preferred time and we’ll arrange it quickly.</p>
     `,

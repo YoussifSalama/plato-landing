@@ -87,14 +87,9 @@ export default function BookDemo() {
 
   const toggleSlot = (slot: string) => {
     if (isSlotSelected(slot)) {
-      removePreferredSlot(selectedDate, slot);
+      setPreferredSlots([]);
     } else {
-      if (preferredSlots.length < 6) {
-        setPreferredSlots((curr: Array<{ slotDate: string; slotTime: string }>) => [
-          ...curr,
-          { slotDate: selectedDate, slotTime: slot },
-        ]);
-      }
+      setPreferredSlots([{ slotDate: selectedDate, slotTime: slot }]);
     }
   };
 
@@ -206,7 +201,7 @@ export default function BookDemo() {
                   </div>
 
                   <div>
-                    <p className="text-sm font-medium mb-2">Preferred slots ({preferredSlots.length}/6)</p>
+                    <p className="text-sm font-medium mb-2">Selected slot ({preferredSlots.length}/1)</p>
                     <div className="flex flex-wrap gap-2">
                       {preferredSlots.map((slot) => (
                         <span key={`${slot.slotDate}-${slot.slotTime}`} className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 text-sm">
@@ -222,7 +217,7 @@ export default function BookDemo() {
                   {error ? <p className="text-sm text-red-500">{error}</p> : null}
 
                   <Button onClick={handleSubmit} disabled={!canSubmit} className="rounded-full">
-                    {submitMutation.isPending ? "Submitting..." : p.submitButton}
+                    {submitMutation.isPending ? "Booking..." : "Confirm Booking"}
                   </Button>
                 </div>
               )}
