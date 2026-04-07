@@ -84,7 +84,11 @@ export async function POST(req: NextRequest) {
       .then(() => storage.markEmailEventSent(userEvent.id))
       .catch((error) => storage.markEmailEventFailed(userEvent.id, error?.message || "Immediate send failed", 2));
 
-    sendDemoRequestNotificationToAdmin({ ...parsed.data, preferredSlots: parsed.data.preferredSlots })
+    sendDemoRequestNotificationToAdmin({
+      ...parsed.data,
+      preferredSlots: parsed.data.preferredSlots,
+      meetingLink: meetLink,
+    })
       .then(() => storage.markEmailEventSent(adminEvent.id))
       .catch((error) => storage.markEmailEventFailed(adminEvent.id, error?.message || "Immediate send failed", 2));
 

@@ -489,6 +489,7 @@ interface DemoRequestBase {
 interface SendDemoRequestAdminPayload extends DemoRequestBase {
   phone?: string;
   description?: string;
+  meetingLink?: string;
   preferredSlots: Array<{ slotDate: string; slotTime: string }>;
 }
 
@@ -567,6 +568,15 @@ export async function sendDemoRequestNotificationToAdmin(data: SendDemoRequestAd
                     </ul>
                   </td>
                 </tr>
+                ${data.meetingLink ? `
+                <tr>
+                  <td style="padding:16px 20px;border-bottom:1px solid #e5e7eb;">
+                    <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">GOOGLE MEET LINK</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">
+                      <a href="${data.meetingLink}" style="color:#0966A8;text-decoration:none;">${data.meetingLink}</a>
+                    </p>
+                  </td>
+                </tr>` : ''}
                 <tr>
                   <td style="padding:16px 20px;">
                     <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">ADDITIONAL NOTES</p>
