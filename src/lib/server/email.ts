@@ -433,7 +433,7 @@ export async function sendBookingNotificationToAdmin(booking: BookingEmailData) 
                 <tr>
                   <td style="padding:16px 20px;border-bottom:1px solid #e5e7eb;">
                     <p style="margin:0;font-size:11px;color:#6b7280;text-transform:uppercase;font-weight:600;letter-spacing:0.025em;">DATE & TIME</p>
-                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">${formattedDate} at ${time} ${TIMEZONE}</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#111827;font-weight:700;">${formattedDate} at ${time}${booking.timezone ? ` (${booking.timezone})` : ''}</p>
                   </td>
                 </tr>
                 <tr>
